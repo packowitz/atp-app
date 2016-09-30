@@ -1,0 +1,81 @@
+.welcome-page {
+  background-color: $atp-blue;
+  background-image: inherit;
+
+  .logo {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    color: $atp-light-blue;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+
+    img {
+      width: 15vh;
+    }
+  }
+
+  .welcome-text {
+    margin: 0 2rem 2rem 2rem;
+  }
+
+  .footer {
+    margin-bottom: 2vw;
+    color: $atp-light-blue;
+  }
+
+  .scroll-content {
+    display: flex !important;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  ion-slides {
+    height: inherit;
+
+    .slide-zoom {
+      background-color: white;
+      margin-bottom: 8vh;
+    }
+
+    .swiper-pagination-bullet {
+      width: 15px;
+      height: 15px;
+      background-color: white;
+    }
+
+    ion-list {
+      margin-bottom: 0;
+      ion-item {
+        border-bottom: 1px solid #c8c7cc;
+        .item-inner {
+          border-bottom: none;
+        }
+      }
+    }
+
+    .action-items {
+      background-color: $atp-blue;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: column;
+      color: $atp-light;
+      > * {
+        margin-top: 1em;
+      }
+      .login-button {
+        width: 16rem;
+        color: $atp-blue-dark;
+        font-weight: 600;
+        padding-top: 0.25rem;
+        font-size: 1.8rem;
+      }
+    }
+  }
+
+  .flex-grow {
+    flex-grow: 1;
+  }
+}

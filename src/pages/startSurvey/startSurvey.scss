@@ -1,0 +1,40 @@
+.start-survey {
+
+  .picture-container {
+    display: flex;
+    margin: 4vw;
+    justify-content: space-between;
+  }
+
+  .pic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px black solid;
+    width: 44vw;
+    height: 44vw;
+
+    .default-icon {
+      color: #B4B4B4;
+      font-size: 30vw;
+    }
+  }
+
+  ion-range {
+    padding-left: 0;
+  }
+
+  .country {
+    margin-right: 1vw;
+    float: left;
+  }
+
+  .submit-row {
+    display: flex;
+
+    .save-default-text {
+      margin-left: 2vw;
+      white-space: normal;
+    }
+  }
+}

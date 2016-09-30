@@ -1,0 +1,30 @@
+<ion-list>
+    <ion-list-header (click)="expanded=!expanded">
+        <ion-icon name="arrow-dropdown" *ngIf="expanded"></ion-icon>
+        <ion-icon name="arrow-dropright" *ngIf="!expanded"></ion-icon>
+        Personal Data</ion-list-header>
+    <div [ngClass]="expanded ? 'item-expand active' : 'item-expand inactive'">
+        <ion-item>
+            <ion-label>Year of birth:</ion-label>
+            <ion-label *ngIf="!yearOfBirth" class="ion-date-placeholder">(yyyy)</ion-label>
+            <ion-datetime displayFormat="YYYY" pickerFormat="YYYY" min="1900" max="2016" [(ngModel)]="yearString" (ionChange)="yearChanged()" cancelText="" doneText="OK" placeholder="(yyyy)"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label class="flex-space-between">
+                Gender:
+                <span class="buttongroup">
+                    <button ion-button [outline]="male ? null : ''" (click)="male = true">Male</button>
+                    <button ion-button [outline]="(male === false) ? null : ''" (click)="male = false">Female</button>
+                </span>
+            </ion-label>
+        </ion-item>
+        <ion-item (click)="chooseCountry()">
+            <ion-label class="flex-space-between">
+                Country:
+                <span class="country" *ngIf="country"><img src="assets/img/flags/{{country}}.png" class="flag"> {{countryName}}</span>
+                <span *ngIf="!country" class="text-placeholder">please choose</span>
+            </ion-label>
+        </ion-item>
+        <ion-item><button ion-button full [disabled]="dataUnchanged()" (click)="doSubmit()">Save</button></ion-item>
+    </div>
+</ion-list>

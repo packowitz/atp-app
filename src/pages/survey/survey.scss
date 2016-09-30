@@ -1,0 +1,49 @@
+.answer-survey {
+  #survey-content {
+    height: 100%;
+  }
+  .picture-container {
+    width: 100%;
+  }
+
+  .pic {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    &.enabled {
+      border: 2px black solid;
+    }
+    &.disabled {
+      border: 2px #761c19 solid;
+    }
+    &:nth-child(2) {
+      margin-top: 2px;
+    }
+  }
+
+  .bigTitle {
+    width: 100%;
+    text-align: center;
+    margin-top: 40vw;
+    font-size: 2rem;
+    .survey-title {
+      font-size: 1.5em;
+      font-weight: 600;
+    }
+  }
+}
+
+.centered {
+  text-align: center;
+}
+
+.threeButtonToolbar {
+  .btn {
+    width: 31%;
+    display: inline-block;
+    text-align: center;
+  }
+  .abuseBtn ion-icon {
+    color: #761c19;
+  }
+}

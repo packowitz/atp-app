@@ -1,0 +1,18 @@
+<div *ngFor="let survey of surveys" (click)="openSurveyDetails(survey)" class="survey-list-item margin-top-middle">
+    <img [src]="'data:image/jpeg;base64,' + survey.pic1" class="survey-list-img">
+    <div class="survey-item-data">
+        <div class="survey-item-text"><span class="status-circle {{survey.status}}"></span> {{survey.answered}} votes since {{getTimeDiff(survey)}}</div>
+        <div class="survey-item-diagram">
+            <div class="survey-item-diagram-pic1" *ngIf="survey.pic1Count > 0" [style.width]="100 * survey.pic1Count / survey.answered + '%'">
+                <span *ngIf="(100 * survey.pic1Count / survey.answered) >= 10">{{survey.pic1Count}}</span>
+            </div>
+            <div class="survey-item-diagram-noOpinion" *ngIf="survey.noOpinionCount > 0" [style.width]="100 * survey.noOpinionCount / survey.answered + '%'">
+                <span *ngIf="(100 * survey.noOpinionCount / survey.answered) >= 10" class="diagram-text">{{survey.noOpinionCount}}</span>
+            </div>
+            <div class="survey-item-diagram-pic2" *ngIf="survey.pic2Count > 0" [style.width]="100 * survey.pic2Count / survey.answered + '%'">
+                <span *ngIf="(100 * survey.pic2Count / survey.answered) >= 10" class="diagram-text">{{survey.pic2Count}}</span>
+            </div>
+        </div>
+    </div>
+    <img [src]="'data:image/jpeg;base64,' + survey.pic2" class="survey-list-img">
+</div>

@@ -1,0 +1,307 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/v2/theming/
+@import "ionic.globals";
+
+
+// Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass variables found in Ionic's source scss files.
+// To view all the possible Ionic variables, see:
+// http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
+
+$text-color:        #000;
+$background-color:  #fff;
+
+
+// Named Color Variables
+// --------------------------------------------------
+// Named colors makes it easy to reuse colors on various components.
+// It's highly recommended to change the default colors
+// to match your app's branding. Ionic uses a Sass map of
+// colors so you can add, rename and remove colors as needed.
+// The "primary" color is the only required color in the map.
+
+$colors: (
+  primary:    #387ef5,
+  secondary:  #32db64,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222,
+  favorite:   #69BB7B
+);
+
+
+// App Theme
+// --------------------------------------------------
+// Ionic apps can have different themes applied, which can
+// then be future customized. This import comes last
+// so that the above variables are used and Ionic's
+// default are overridden.
+
+@import "ionic.theme.default";
+
+
+// Ionicons
+// --------------------------------------------------
+// The premium icon font for Ionic. For more info, please see:
+// http://ionicframework.com/docs/v2/ionicons/
+
+$ionicons-font-path: "../assets/fonts";
+@import "ionicons";
+
+
+
+$atp-light: #f9f9f9;
+$atp-gold: #d2ce0f;
+$atp-danger: #c70c13;
+$atp-blue-light: #659dd2;
+$atp-blue: #3e85c7;
+$atp-blue-dark: #134c7d;
+$atp-light-blue: #ddefff;
+$atp-grey: #828282;
+$atp-light-grey: #f5f5f5;
+$atp-light-grey2: #d4dde5;
+$atp-light-grey3: #b6c5d3;
+$atp-dark-grey2: #97adc1;
+$atp-placeholder-grey: #acacac;
+$atp-dark-text: #646f79;
+$atp-green-success: #7ed321;
+$atp-red: #d0021b;
+$atp-orange: #ff953a;
+
+
+
+ion-title {
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  &.has-back-arrow {
+    .toolbar-title {
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+}
+
+.popover-content {
+  border: 1px black solid;
+}
+
+.border-radius {
+  border-radius: 10px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-h5 {
+  font-size: 1.2em;
+}
+
+.text-h4 {
+  font-size: 1.4em;
+}
+
+.text-h2 {
+  font-size: 2em;
+}
+
+.small-headline {
+  color: $atp-grey;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.color-grey {
+  color: $atp-grey;
+}
+
+.color-blue {
+  color: $atp-blue;
+}
+
+.color-dark {
+  color: $atp-dark-text;
+}
+
+.color-white {
+  color: white;
+}
+
+.light-background {
+  background-color: $atp-light;
+}
+
+.white-background {
+  background-color: white;
+}
+
+.blue-background {
+  background-color: $atp-blue;
+}
+
+.light-blue-background {
+  background-color: $atp-blue-light;
+}
+
+.item {
+  background-color: inherit;
+}
+
+.text-danger {
+  color: $atp-danger;
+  font-weight: 600;
+}
+
+.text-placeholder {
+  color: $atp-placeholder-grey !important;
+}
+
+.ion-date-placeholder {
+  @extend .text-placeholder;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.no-border {
+  border: 0;
+}
+
+.flag {
+  height: 1.2em;
+  border: 1px black solid;
+}
+
+.float-right {
+  float: right;
+}
+
+.buttongroup {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+
+  button:first-child {
+    border-bottom-left-radius: 0.5em;
+    border-top-left-radius: 0.5em;
+    margin-left: 0;
+  }
+
+  button:last-child {
+    border-bottom-right-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+    margin-right: 0;
+  }
+
+  button {
+    position: relative;
+    float: left;
+    box-shadow: none;
+    margin: 0 -1px;
+    border-radius: 0px;
+  }
+}
+
+
+
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-space-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.flex-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+
+
+
+.margin-small-vertical {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.margin-top-small {
+  margin-top: 8px;
+}
+.margin-top-middle {
+  margin-top: 16px;
+}
+
+.padding-top-middle {
+  padding-top: 24px;
+}
+
+.padding-bottom-middle {
+  padding-bottom: 24px;
+}
+
+.padding-vertical-middle {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.padding-vertical-small-middle {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.padding-horizontal-middle {
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+.padding-horizontal-small {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+.padding-top-small {
+  padding-top: 8px;
+}
+
+.padding-bottom-small {
+  padding-bottom: 8px;
+}
+
+.no-padding-bottom {
+  padding-bottom: 0;
+}
+
+.no-padding-vertical {
+  padding-top: 0;
+  padding-bottom: 0;
+}

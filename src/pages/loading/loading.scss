@@ -1,0 +1,23 @@
+.loading-page {
+  background-color: $atp-blue;
+  background-image: inherit;
+
+  .loading {
+    color: $atp-light;
+    font-size: 1.3em;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    circle {
+      stroke: $atp-light;
+    }
+
+    span {
+      margin-bottom: 16px;
+    }
+  }
+}

@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title class="has-back-arrow">{{feedback.title}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="feedback-details" padding>
+    <ion-card>
+        <ion-card-header class="small-headline no-padding-bottom">
+            <span class="float-right">You wrote {{getTimeDiff(feedback.sendDate)}} ago</span>
+        </ion-card-header>
+        <ion-card-content>
+            {{feedback.message}}
+        </ion-card-content>
+    </ion-card>
+    <ion-card *ngFor="let answer of answers">
+        <ion-card-header class="small-headline no-padding-bottom">
+            <span *ngIf="!answer.adminAnswer" class="float-right">You wrote {{getTimeDiff(answer.sendDate)}} ago</span>
+            <span *ngIf="answer.adminAnswer"><span *ngIf="!answer.readAnswer"><ion-badge danger>NEW</ion-badge> </span>ATP-Team answered {{getTimeDiff(answer.sendDate)}} ago</span>
+        </ion-card-header>
+        <ion-card-content>
+            {{answer.message}}
+        </ion-card-content>
+    </ion-card>
+    <div *ngIf="feedback.status != 'CLOSED'">
+        <div *ngIf="answers.length > 0 && feedback.status == 'ANSWERED'" class="flex-space-around">
+            <button ion-button (click)="closeFeedback()">OK, thanks</button>
+            <button ion-button (click)="editResponse()" [disabled]="newAnswer">Reply again</button>
+        </div>
+        <div *ngIf="newAnswer">
+            <ion-item class="margin-small-vertical">
+                <ion-label floating>Response</ion-label>
+                <ion-textarea [(ngModel)]="newAnswer.message"></ion-textarea>
+            </ion-item>
+            <div class="text-center">
+                <button ion-button (click)="sendAnswer()" [disabled]="!newAnswer.message">Send Response</button>
+            </div>
+        </div>
+        <div *ngIf="answers.length == 0 || feedback.status == 'OPEN'" class="text-center">
+            Thank you for your message.
+        </div>
+    </div>
+    <div *ngIf="feedback.status == 'CLOSED'" class="text-center color-grey">
+        <ion-icon name="lock"></ion-icon> This conversation is closed. Thank you.
+    </div>
+</ion-content>

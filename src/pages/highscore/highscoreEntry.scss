@@ -1,0 +1,33 @@
+.highscore-row:nth-child(odd) .item-inner {
+  background-color: #cfecf9;
+}
+
+.highscore-row:nth-child(even) .item-inner {
+  background-color: #c1dce8;
+}
+
+.highscore-row.itsme .item-inner {
+  background-color: #76de94;
+}
+
+.highscore-entry {
+  display: flex;
+
+  .highscore-name {
+    flex-grow: 1;
+    display: flex;
+  }
+  .highscore-name-element {
+    margin-left: 2vw;
+    min-width: 4vw;
+  }
+
+  .flag {
+    height: 1.2em;
+    border: 1px black solid;
+  }
+
+  .trophy {
+    color: $atp-gold;
+  }
+}

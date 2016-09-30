@@ -1,0 +1,73 @@
+.survey-details {
+  .picture-container {
+    display: flex;
+    margin-bottom: 4vw;
+    justify-content: space-between;
+  }
+
+  .pic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 44vw;
+    height: 44vw;
+
+    &.pic1-img {
+      border: 4px dodgerblue solid;
+    }
+    &.pic2-img {
+      border: 4px darkorange solid;
+    }
+  }
+
+  .survey-item-data {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    &.ACTIVE {
+      background-color: #B7F1B7;
+    }
+    &.FINISHED {
+      background-color: #E0E0DA;
+    }
+    &.ABUSE {
+      background-color: #E45757;
+    }
+
+
+    .survey-item-text {
+      height: 3.5vh;
+      padding: 0 1vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+  }
+
+  .detail-title {
+    font-weight: 600;
+    padding-bottom: 1vh;
+    ion-icon {
+      width: 3vw;
+    }
+  }
+
+  .detail {
+    .detail-label {
+      width: 15vw;
+    }
+    answer-bar {
+      width: 100%;
+    }
+  }
+
+  .flag {
+    height: 1.2em;
+    border: 1px black solid;
+  }
+  .country {
+    margin-right: 1vw;
+    float: left;
+  }
+}
