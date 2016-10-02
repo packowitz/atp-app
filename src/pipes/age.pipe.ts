@@ -17,7 +17,7 @@ export class AgePipe implements PipeTransform {
   public static resolveKey(ageDiff, age) {
     return age;
   }
-  transform(value: Answer[], args: string[]) : AgePipeResult[] {
+  transform(value: Answer[], args?: string[]) : AgePipeResult[] {
     var ages = {};
     let minAge = 100;
     let maxAge = 0;

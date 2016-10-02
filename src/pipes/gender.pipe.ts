@@ -14,7 +14,7 @@ export class GenderPipeResult {
 
 @Pipe({name: 'gender'})
 export class GenderPipe implements PipeTransform {
-  transform(value: Answer[], args: string[]) : GenderPipeResult[] {
+  transform(value: Answer[], args?: string[]) : GenderPipeResult[] {
     var gender = {};
     value.forEach(answer => {
       let sex = answer.male ? 'male' : 'female';

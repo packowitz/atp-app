@@ -14,7 +14,7 @@ export class CountryPipeResult {
 
 @Pipe({name: 'country'})
 export class CountryPipe implements PipeTransform {
-  transform(value: Answer[], args:string[]) : CountryPipeResult[] {
+  transform(value: Answer[], args?: string[]) : CountryPipeResult[] {
     var countries = {};
     value.forEach(answer => {
       let country = answer.country;
