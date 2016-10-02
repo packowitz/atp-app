@@ -1,8 +1,9 @@
-import {NavParams, ViewController, PopoverController} from "ionic-angular/index";
+import {NavParams, PopoverController} from "ionic-angular/index";
 import {Survey} from "../../components/domain/survey.component";
 import {Component} from "@angular/core";
 import {Util} from "../../components/util.component";
 import {SurveyService} from "../../providers/survey.service";
+import {SurveyDetailsMenu} from "../../components/surveyDetailMenu.component";
 
 @Component({
   templateUrl: 'surveyDetails.html'
@@ -48,45 +49,5 @@ export class SurveyDetailsPage {
     let a = this.survey.answers.filter(answer => answer.country == country);
     console.log("found " + a.length + " answers in " + country);
     return a.length > 0;
-  }
-}
-
-@Component({
-  template: `
-    <ion-list style="margin: 0;">
-      <ion-item *ngIf="survey.status != 'FINISHED'" (click)="refresh()">
-        <ion-icon name="refresh" item-left></ion-icon> Refresh
-      </ion-item>
-      <ion-item *ngIf="survey.status != 'ABUSE'" (click)="tweak()">
-        <ion-icon name="share-alt" item-left></ion-icon> Tweak
-      </ion-item>
-      <ion-item class="text-danger" (click)="delete()">
-        <ion-icon name="remove-circle" item-left></ion-icon> Delete
-      </ion-item>
-    </ion-list>
-  `,
-})
-class SurveyDetailsMenu {
-  survey: Survey;
-  callbacks;
-
-  constructor(public navParams: NavParams, public viewController: ViewController) {
-    this.survey = navParams.get('survey');
-    this.callbacks = navParams.get('callbacks')
-  }
-
-  refresh() {
-    this.callbacks.refresh();
-    this.viewController.dismiss();
-  }
-
-  tweak() {
-    this.callbacks.tweak();
-    this.viewController.dismiss();
-  }
-
-  delete() {
-    this.callbacks.delete();
-    this.viewController.dismiss();
   }
 }

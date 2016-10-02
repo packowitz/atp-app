@@ -47,10 +47,10 @@
         <ion-icon name="arrow-dropright" *ngIf="!showStatistics"></ion-icon>
         Detailed Statistics
     </div>
-    <!-- ion-list *ngIf="showStatistics">
+    <ion-list *ngIf="showStatistics">
         <ion-item *ngFor="let country of survey.answers | country">
             <ion-label class="flex-space-between detail">
-                <span class="detail-label"><img src="img/flags/{{country.alpha3}}.png" class="flag"></span>
+                <span class="detail-label"><img src="assets/img/flags/{{country.alpha3}}.png" class="flag"></span>
                 <answer-bar [pic1Count]="country.pic1" [pic2Count]="country.pic2" [noOpinionCount]="country.noOpinion" [totalCount]="country.pic1 + country.pic2 + country.noOpinion"></answer-bar>
             </ion-label>
         </ion-item>
@@ -66,5 +66,5 @@
                 <answer-bar [pic1Count]="age.pic1" [pic2Count]="age.pic2" [noOpinionCount]="age.noOpinion" [totalCount]="age.pic1 + age.pic2 + age.noOpinion"></answer-bar>
             </ion-label>
         </ion-item>
-    </ion-list -->
+    </ion-list>
 </ion-content>

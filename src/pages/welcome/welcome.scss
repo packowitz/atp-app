@@ -50,7 +50,7 @@
       ion-item {
         border-bottom: 1px solid #c8c7cc;
         .item-inner {
-          border-bottom: none;
+          border-bottom: none !important;
         }
       }
     }

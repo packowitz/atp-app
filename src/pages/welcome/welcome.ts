@@ -9,7 +9,6 @@ import {Storage} from "@ionic/storage";
   templateUrl: 'welcome.html'
 })
 export class WelcomePage {
-  showLogin: boolean = false;
   sliderOptions = {pager: true};
   username: string;
   password: string;
@@ -20,11 +19,6 @@ export class WelcomePage {
               public authService: AuthService,
               public storage: Storage) {
     this.deviceHeight = window.innerHeight;
-  }
-
-  toggleShowLogin() {
-    console.log(this.username + " - " + this.password);
-    this.showLogin = !this.showLogin;
   }
 
   startATP() {

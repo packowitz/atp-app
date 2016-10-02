@@ -1,5 +1,4 @@
 import {Component} from "@angular/core";
-import {Splashscreen} from "ionic-native";
 import {NavController, Platform} from "ionic-angular/index";
 import {Model} from "../../components/model.component";
 import {MessagesService} from "../../providers/messages.service";
@@ -32,10 +31,6 @@ export class LoadingPage {
               public platform: Platform,
               public storage: Storage) {
     this.loadDataFromServer();
-  }
-
-  ionViewDidEnter() {
-    Splashscreen.hide();
   }
 
   loadDataFromServer() {

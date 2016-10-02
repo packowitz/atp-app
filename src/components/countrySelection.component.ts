@@ -8,7 +8,7 @@ import {NavParams, AlertController} from "ionic-angular/index";
 <ion-list class="country-selection">
     <ion-list-header>Choose a country</ion-list-header>
     <ion-item *ngFor="let country of countries" (click)="callback(country)">
-        <img src="img/flags/{{country.alpha3}}.png" class="flag">{{country.nameEng}}
+        <img src="assets/img/flags/{{country.alpha3}}.png" class="flag">{{country.nameEng}}
     </ion-item>
 </ion-list>`,
   styles: [`

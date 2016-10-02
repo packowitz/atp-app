@@ -34,6 +34,7 @@ import {CountryPipe} from "../pipes/country.pipe";
 import {AgePipe} from "../pipes/age.pipe";
 import {GenderPipe} from "../pipes/gender.pipe";
 import {NotificationService} from "../providers/notification.service";
+import {SurveyDetailsMenu} from "../components/surveyDetailMenu.component";
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import {NotificationService} from "../providers/notification.service";
     ChooseUsername,
     NotificationSettings,
     PersonalData,
+    SurveyDetailsMenu,
 
     AgePipe,
     CountryPipe,
@@ -87,7 +89,9 @@ import {NotificationService} from "../providers/notification.service";
     SurveyPage,
     SurveyDetailsPage,
     TabsPage,
-    WelcomePage
+    WelcomePage,
+    SurveyDetailsMenu,
+    CountrySelection
   ],
   providers: [
     Model,

@@ -1,11 +1,23 @@
 import {PipeTransform, Pipe} from "@angular/core";
+import {Answer} from "../components/domain/answer.component";
+
+export class AgePipeResult {
+  age: number;
+  pic1: number = 0;
+  pic2: number = 0;
+  noOpinion: number = 0;
+
+  constructor(age: number) {
+    this.age = age;
+  }
+}
 
 @Pipe({name: 'age'})
 export class AgePipe implements PipeTransform {
   public static resolveKey(ageDiff, age) {
     return age;
   }
-  transform(value, args:string[]) : any {
+  transform(value: Answer[], args: string[]) : AgePipeResult[] {
     var ages = {};
     let minAge = 100;
     let maxAge = 0;
@@ -17,7 +29,7 @@ export class AgePipe implements PipeTransform {
 
     value.forEach(answer => {
       let age = AgePipe.resolveKey(ageDiff, answer.age);
-      ages[age] = ages[age] ? ages[age] : {age: age, pic1: 0, pic2: 0, noOpinion: 0};
+      ages[age] = ages[age] ? ages[age] : new AgePipeResult(age);
       if(answer.answer == 1) {
         ages[age].pic1 ++;
       } else if (answer.answer == 2) {
