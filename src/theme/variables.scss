@@ -187,6 +187,10 @@ ion-title {
   float: right;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 .buttongroup {
   position: relative;
   display: inline-block;
@@ -304,4 +308,35 @@ ion-title {
 .no-padding-vertical {
   padding-top: 0;
   padding-bottom: 0;
+}
+
+
+
+.modal-background {
+  @extend .flex-center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgba(0,0,0,0.4);
+
+  .modal-content {
+    min-width: 45vw;
+  }
+}
+
+.croppie-modal {
+  background-color: $atp-light;
+  border: 2px solid black;
+  .croppie-container {
+    padding: 2vw;
+  }
+
+  .modal-buttons {
+    @extend .flex-space-around;
+    margin-top: 2vw;
+    margin-bottom: 4vw;
+  }
 }

@@ -11,6 +11,8 @@ import {CountrySelection} from "../../components/countrySelection.component";
 import {User} from "../../components/domain/user.component";
 import {NotificationService} from "../../providers/notification.service";
 
+declare var Croppie: any;
+
 @Component({
   templateUrl: 'startSurvey.html'
 })
@@ -20,15 +22,15 @@ export class StartSurveyPage {
     sourceType: 1,
     encodingType: 0,
     quality:100,
-    targetWidth: 300,
-    targetHeight: 300,
-    allowEdit: true,
+    allowEdit: false,
     saveToPhotoAlbum: false
   };
   survey: Survey;
   countries: string[];
   ageRange = {lower: 1, upper: 99};
   saveAsDefault: boolean = true;
+  croppie: any;
+  croppieFirst: boolean;
 
   constructor(public platform: Platform,
               public ngZone: NgZone,
@@ -50,15 +52,47 @@ export class StartSurveyPage {
     this.ageRange.upper = user.surveyMaxAge ? user.surveyMaxAge : 99;
   }
 
+  showCroppie(src: string, first: boolean) {
+    this.destroyCroppie();
+    this.croppieFirst = first;
+    let imgWidth = window.innerWidth * 0.8;
+    this.croppie = new Croppie(document.getElementById('new-croppie'), {
+      viewport: {width: 300, height: 300},
+      boundary: {width: imgWidth, height: imgWidth}
+    });
+    this.croppie.bind({url: 'data:image/jpeg;base64,' + src});
+  }
+
+  destroyCroppie() {
+    if(this.croppie) {
+      this.croppie.destroy();
+      this.croppie = null;
+    }
+  }
+
+  saveCroppedPicture() {
+    if(this.croppie) {
+      this.croppie.result({
+        type: 'canvas',
+        size: 'viewport',
+        format: 'jpeg',
+        quality: 0.5
+      }).then(data => {
+        if(this.croppieFirst) {
+          this.survey.pic1 = data.substring(data.indexOf(",") + 1);
+        } else {
+          this.survey.pic2 = data.substring(data.indexOf(",") + 1);
+        }
+        this.destroyCroppie();
+      });
+    }
+  }
+
   doTakePicture(isFirstPic: boolean, source: number) {
     this.cameraOptions.sourceType = source;
     Camera.getPicture(this.cameraOptions).then(data => {
       this.ngZone.run(() => {
-        if(isFirstPic) {
-          this.survey.pic1 = data;
-        } else {
-          this.survey.pic2 = data;
-        }
+        this.showCroppie(data, isFirstPic);
       });
     }, error => {alert(error);});
   }
@@ -91,11 +125,7 @@ export class StartSurveyPage {
   }
 
   chooseDummyPicture(isFirstPic: boolean) {
-    if(isFirstPic) {
-      this.survey.pic1 = RandomImage.getRandomImage();
-    } else {
-      this.survey.pic2 = RandomImage.getRandomImage();
-    }
+    this.showCroppie(RandomImage.getRandomImage(), isFirstPic);
   }
 
   changeGender(event: Event) {

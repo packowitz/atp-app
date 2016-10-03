@@ -41,4 +41,13 @@
             <button ion-button item-right large round [disabled]="!surveyComplete()" (click)="startSurvey()">Start ATP</button>
         </ion-item>
     </ion-list>
+    <div [class.modal-background]="croppie" [class.hidden]="!croppie" (click)="destroyCroppie()">
+        <div class="croppie-modal" (click)="$event.stopPropagation()">
+            <div id="new-croppie"></div>
+            <div class="modal-buttons">
+                <button ion-button small outline (click)="destroyCroppie()">Cancel</button>
+                <button ion-button small (click)="saveCroppedPicture()">Take it</button>
+            </div>
+        </div>
+    </div>
 </ion-content>
