@@ -9,26 +9,26 @@
       position: fixed;
       top: 8vh;
       border: 2px $atp-light-grey2 solid;
-      width: 44vw;
-      height: 44vw;
+      width: 41vw;
+      height: 41vw;
       z-index: 10;
       &:first-child {
-        left: 4vw;
+        left: 6vw;
       }
       &:last-child {
-        right: 4vw;
+        right: 6vw;
       }
     }
   }
   .button-container {
     position: fixed;
-    top: 68vw;
-    left:4vw;
-    width: 92vw;
-    height: 92vw;
+    top: 60vw;
+    left:6vw;
+    width: 88vw;
+    height: 80vw;
 
     .pic-button {
-      width: 44vw;
+      width: 41vw;
       background-color: $atp-light-grey2;
       color: $atp-dark-text;
       text-transform: inherit;
@@ -48,55 +48,5 @@
       width: 100%;
       bottom: 0;
     }
-  }
-}
-
-.answer-survey {
-  #survey-content {
-    height: 100%;
-  }
-  .picture-container {
-    width: 100%;
-  }
-
-  .pic {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    &.enabled {
-      border: 2px black solid;
-    }
-    &.disabled {
-      border: 2px #761c19 solid;
-    }
-    &:nth-child(2) {
-      margin-top: 2px;
-    }
-  }
-
-  .bigTitle {
-    width: 100%;
-    text-align: center;
-    margin-top: 40vw;
-    font-size: 2rem;
-    .survey-title {
-      font-size: 1.5em;
-      font-weight: 600;
-    }
-  }
-}
-
-.centered {
-  text-align: center;
-}
-
-.threeButtonToolbar {
-  .btn {
-    width: 31%;
-    display: inline-block;
-    text-align: center;
-  }
-  .abuseBtn ion-icon {
-    color: #761c19;
   }
 }

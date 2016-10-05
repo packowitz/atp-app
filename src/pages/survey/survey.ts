@@ -19,21 +19,21 @@ import {Model} from "../../components/model.component";
       ])
     ]),
     trigger('pic1State', [
-      state('large', style({top: '68vw', width: '92vw', height: '92vw'})),
+      state('large', style({top: '60vw', width: '88vw', height: '88vw'})),
       transition('* => incomingWithTitle', [
         animate("1.7s 1.5s ease-in-out", keyframes([
-          style({opacity: 0, top: '116vw', left: '50vw', width: '0', height: '0', offset: 0}),
-          style({opacity: 1, top: '68vw', left: '4vw', width: '92vw', height: '92vw', offset: 0.1}),
-          style({opacity: 1, top: '68vw', left: '4vw', width: '92vw', height: '92vw', offset: 0.9}),
-          style({left: '4vw', top: '8vh', width: '44vw', height: '44vw', offset: 1.0})
+          style({opacity: 0, top: '104vw', left: '50vw', width: '0', height: '0', offset: 0}),
+          style({opacity: 1, top: '60vw', left: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
+          style({opacity: 1, top: '60vw', left: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
+          style({left: '6vw', top: '8vh', width: '41vw', height: '41vw', offset: 1.0})
         ]))
       ]),
       transition('* => incoming', [
         animate("1.7s ease-in-out", keyframes([
-          style({opacity: 0, top: '116vw', left: '50vw', width: '0', height: '0', offset: 0}),
-          style({opacity: 1, top: '68vw', left: '4vw', width: '92vw', height: '92vw', offset: 0.1}),
-          style({opacity: 1, top: '68vw', left: '4vw', width: '92vw', height: '92vw', offset: 0.9}),
-          style({left: '4vw', top: '8vh', width: '44vw', height: '44vw', offset: 1.0})
+          style({opacity: 0, top: '104vw', left: '50vw', width: '0', height: '0', offset: 0}),
+          style({opacity: 1, top: '60vw', left: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
+          style({opacity: 1, top: '60vw', left: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
+          style({left: '6vw', top: '8vh', width: '41vw', height: '41vw', offset: 1.0})
         ]))
       ]),
       transition('* => large', [
@@ -45,21 +45,21 @@ import {Model} from "../../components/model.component";
       ])
     ]),
     trigger('pic2State', [
-      state('large', style({top: '68vw', width: '92vw', height: '92vw'})),
+      state('large', style({top: '60vw', width: '88vw', height: '88vw'})),
       transition('* => incomingWithTitle', [
         animate("1.7s 3.5s ease-in-out", keyframes([
-          style({opacity: 0, top: '116vw', right: '50vw', width: '0', height: '0', offset: 0}),
-          style({opacity: 1, top: '68vw', right: '4vw', width: '92vw', height: '92vw', offset: 0.1}),
-          style({opacity: 1, top: '68vw', right: '4vw', width: '92vw', height: '92vw', offset: 0.9}),
-          style({right: '4vw', top: '8vh', width: '44vw', height: '44vw', offset: 1.0})
+          style({opacity: 0, top: '104vw', right: '50vw', width: '0', height: '0', offset: 0}),
+          style({opacity: 1, top: '60vw', right: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
+          style({opacity: 1, top: '60vw', right: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
+          style({right: '6vw', top: '8vh', width: '41vw', height: '41vw', offset: 1.0})
         ]))
       ]),
       transition('* => incoming', [
         animate("1.7s 2s ease-in-out", keyframes([
-          style({opacity: 0, top: '116vw', right: '50vw', width: '0', height: '0', offset: 0}),
-          style({opacity: 1, top: '68vw', right: '4vw', width: '92vw', height: '92vw', offset: 0.1}),
-          style({opacity: 1, top: '68vw', right: '4vw', width: '92vw', height: '92vw', offset: 0.9}),
-          style({right: '4vw', top: '8vh', width: '44vw', height: '44vw', offset: 1.0})
+          style({opacity: 0, top: '104vw', right: '50vw', width: '0', height: '0', offset: 0}),
+          style({opacity: 1, top: '60vw', right: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
+          style({opacity: 1, top: '60vw', right: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
+          style({right: '6vw', top: '8vh', width: '41vw', height: '41vw', offset: 1.0})
         ]))
       ]),
       transition('* => large', [
