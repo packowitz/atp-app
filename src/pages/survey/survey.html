@@ -1,29 +1,25 @@
-<ion-header>
-    <ion-toolbar class="centered">
-        <ion-title *ngIf="!survey">loading survey ...</ion-title>
-        <ion-title *ngIf="survey">{{survey.title ? survey.title : 'no title'}}</ion-title>
-    </ion-toolbar>
-</ion-header>
-
-<ion-content class="answer-survey">
-    <div id="survey-content">
-        <div *ngIf="survey && !showTitle" class="picture-container">
-            <img [src]="'data:image/jpeg;base64,' + survey.pic1" (click)="selectPicture(1)" [width]="picSize" [height]="picSize" class="pic" [class.enabled]="enabled" [class.disabled]="!enabled"/>
-            <img [src]="'data:image/jpeg;base64,' + survey.pic2" (click)="selectPicture(2)" [width]="picSize" [height]="picSize" class="pic" [class.enabled]="enabled" [class.disabled]="!enabled"/>
+<ion-content class="answer-atp light-blue-background">
+    <div *ngIf="survey">
+        <div class="survey-title color-white text-center">
+            <div *ngIf="survey.title" [@titleState]="titleAnimationState" class="text-h4">{{survey.title}}</div>
+            <div *ngIf="!survey.title" class="text-h5">&lt;ATP has no hint&gt;</div>
         </div>
-        <div *ngIf="survey && showTitle" class="bigTitle">
-            <div class="survey-title-lookat">Look at:</div>
-            <div class="survey-title">{{survey.title}}</div>
+        <div class="picture-container">
+            <img [src]="'data:image/jpeg;base64,' + survey.pic1" [@pic1State]="pic1AnimationState" (click)="togglePic1()" class="pic"/>
+            <img [src]="'data:image/jpeg;base64,' + survey.pic2" [@pic2State]="pic2AnimationState" (click)="togglePic2()" class="pic"/>
+        </div>
+        <div class="button-container" [@buttonState]="buttonAnimationState">
+            <div class="flex-space-between">
+                <button ion-button class="pic-button" (click)="selectPicture(1)">Left Picture is better</button>
+                <button ion-button class="pic-button" (click)="selectPicture(2)">Right Picture is better</button>
+            </div>
+            <div>
+                <button ion-button color="light" class="no-opinion-button" (click)="selectPicture(0)">No big difference</button>
+            </div>
+            <div class="flex-space-between button-button-bar">
+                <button ion-button (click)="goHome()"><ion-icon name="home" class="padding-right-small"></ion-icon>Home</button>
+                <button ion-button (click)="reportAbuse()">What I see is not legal</button>
+            </div>
         </div>
     </div>
 </ion-content>
-
-<ion-footer>
-    <ion-toolbar>
-        <div class="threeButtonToolbar">
-            <div class="btn homeBtn" (click)="goHome()"><ion-icon name="home"></ion-icon><br/>Home</div>
-            <div class="btn abuseBtn" (click)="reportAbuse()"><ion-icon name="alert"></ion-icon><br/>Report Abuse</div>
-            <div class="btn skipBtn" (click)="selectPicture(0)"><ion-icon name="redo"></ion-icon><br/>Skip</div>
-        </div>
-    </ion-toolbar>
-</ion-footer>

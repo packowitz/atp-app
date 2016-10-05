@@ -1,51 +1,150 @@
-import {Loading, Tabs, AlertController} from "ionic-angular";
+import {Tabs, AlertController} from "ionic-angular";
 import {SurveyService} from "../../providers/survey.service";
 import {Survey} from "../../components/domain/survey.component";
-import {Messages} from "../../components/messages.component";
-import {Component} from "@angular/core";
+import {Component, trigger, state, style, transition, animate, keyframes} from "@angular/core";
 import {Model} from "../../components/model.component";
-import {NotificationService} from "../../providers/notification.service";
 
 @Component({
-  templateUrl: 'survey.html'
+  templateUrl: 'survey.html',
+  animations: [
+    trigger('titleState', [
+      state('active', style({transform: 'translateY(0)'})),
+      transition('* => active', [
+        animate("1.5s ease-in-out", keyframes([
+          style({opacity: 0, transform: 'translateY(48vh)', offset: 0}),
+          style({opacity: 1, transform: 'translateY(48vh)', offset: 0.15}),
+          style({opacity: 1, transform: 'translateY(48vh)', offset: 0.85}),
+          style({opacity: 1, transform: 'translateY(0)', offset: 1.0})
+        ]))
+      ])
+    ]),
+    trigger('pic1State', [
+      state('large', style({top: '68vw', width: '92vw', height: '92vw'})),
+      transition('* => incomingWithTitle', [
+        animate("1.7s 1.5s ease-in-out", keyframes([
+          style({opacity: 0, top: '116vw', left: '50vw', width: '0', height: '0', offset: 0}),
+          style({opacity: 1, top: '68vw', left: '4vw', width: '92vw', height: '92vw', offset: 0.1}),
+          style({opacity: 1, top: '68vw', left: '4vw', width: '92vw', height: '92vw', offset: 0.9}),
+          style({left: '4vw', top: '8vh', width: '44vw', height: '44vw', offset: 1.0})
+        ]))
+      ]),
+      transition('* => incoming', [
+        animate("1.7s ease-in-out", keyframes([
+          style({opacity: 0, top: '116vw', left: '50vw', width: '0', height: '0', offset: 0}),
+          style({opacity: 1, top: '68vw', left: '4vw', width: '92vw', height: '92vw', offset: 0.1}),
+          style({opacity: 1, top: '68vw', left: '4vw', width: '92vw', height: '92vw', offset: 0.9}),
+          style({left: '4vw', top: '8vh', width: '44vw', height: '44vw', offset: 1.0})
+        ]))
+      ]),
+      transition('* => large', [
+        style({'z-index': 15}),
+        animate('0.2s ease-in-out')
+      ]),
+      transition('large => small', [
+        animate('0.2s ease-in-out')
+      ])
+    ]),
+    trigger('pic2State', [
+      state('large', style({top: '68vw', width: '92vw', height: '92vw'})),
+      transition('* => incomingWithTitle', [
+        animate("1.7s 3.5s ease-in-out", keyframes([
+          style({opacity: 0, top: '116vw', right: '50vw', width: '0', height: '0', offset: 0}),
+          style({opacity: 1, top: '68vw', right: '4vw', width: '92vw', height: '92vw', offset: 0.1}),
+          style({opacity: 1, top: '68vw', right: '4vw', width: '92vw', height: '92vw', offset: 0.9}),
+          style({right: '4vw', top: '8vh', width: '44vw', height: '44vw', offset: 1.0})
+        ]))
+      ]),
+      transition('* => incoming', [
+        animate("1.7s 2s ease-in-out", keyframes([
+          style({opacity: 0, top: '116vw', right: '50vw', width: '0', height: '0', offset: 0}),
+          style({opacity: 1, top: '68vw', right: '4vw', width: '92vw', height: '92vw', offset: 0.1}),
+          style({opacity: 1, top: '68vw', right: '4vw', width: '92vw', height: '92vw', offset: 0.9}),
+          style({right: '4vw', top: '8vh', width: '44vw', height: '44vw', offset: 1.0})
+        ]))
+      ]),
+      transition('* => large', [
+        animate('0.2s ease-in-out')
+      ]),
+      transition('large => small', [
+        animate('0.2s ease-in-out')
+      ])
+    ]),
+    trigger('buttonState', [
+      transition('* => incomingWithTitle', [
+        style({opacity: 0}),
+        animate("0.5s 5.2s", style({opacity: 1}))
+      ]),
+      transition('* => incoming', [
+        style({opacity: 0}),
+        animate("0.5s 3.7s", style({opacity: 1}))
+      ])
+    ])
+  ]
 })
 export class SurveyPage {
-  picSize: number;
   survey: Survey;
-  enabled: boolean = false;
-  showTitle: boolean = false;
-  loading: Loading;
+
+  titleAnimationState: string;
+  pic1AnimationState: string;
+  pic2AnimationState: string;
+  buttonAnimationState: string;
 
   constructor(public surveyService: SurveyService,
               public tabs: Tabs,
-              public notificationService: NotificationService,
               public alertController: AlertController) {
-    this.loadNextSurvey();
+    this.loadSurvey();
   }
 
-  loadNextSurvey() {
-    this.surveyService.getSurveyToAnswer().subscribe(data => {
-      this.showSurvey(data);
-    });
+  loadSurvey() {
+    this.surveyService.getSurveyToAnswer().subscribe(data => this.showSurvey(data));
   }
 
-  ngOnInit() {
-    setTimeout(() => {
-      let maxWidht = window.innerWidth - 10;
-      let maxHeight = (document.getElementById('survey-content').offsetHeight - 2) / 2;
-      this.picSize = Math.min(maxWidht, maxHeight);
-      console.log("picSize=" + this.picSize + " maxWidth=" + maxWidht + " maxHeight=" + maxHeight);
-    }, 200);
+  selectPicture(picNr: number) {
+    this.surveyService.postResult(this.survey, picNr).subscribe(data => this.showSurvey(data));
   }
 
   showSurvey(survey: Survey) {
-    this.survey = survey;
-    if(survey.title) {
-      this.showTitle = true;
-      setTimeout(() => this.showTitle = false, 1500);
+    this.survey = null;
+    this.titleAnimationState = null;
+    this.pic1AnimationState = null;
+    this.pic2AnimationState = null;
+    this.buttonAnimationState = null;
+
+    setTimeout(() => {
+      this.survey = survey;
+      if(this.survey.title) {
+        this.titleAnimationState = "active";
+        this.pic1AnimationState = "incomingWithTitle";
+        this.pic2AnimationState = "incomingWithTitle";
+        this.buttonAnimationState = "incomingWithTitle";
+      } else {
+        this.pic1AnimationState = "incoming";
+        this.pic2AnimationState = "incoming";
+        this.buttonAnimationState = "incoming";
+      }
+    }, 10);
+  }
+
+  togglePic1() {
+    if(this.pic1AnimationState == 'large') {
+      this.pic1AnimationState = 'small';
+    } else {
+      if(this.pic2AnimationState == 'large') {
+        this.pic2AnimationState = 'small';
+      }
+      this.pic1AnimationState = 'large';
     }
-    this.enabled = false;
-    setTimeout(() => this.enabled = true, survey.title? 3500 : 2000);
+  }
+
+  togglePic2() {
+    if(this.pic2AnimationState == 'large') {
+      this.pic2AnimationState = 'small';
+    } else {
+      if(this.pic1AnimationState == 'large') {
+        this.pic1AnimationState = 'small';
+      }
+      this.pic2AnimationState = 'large';
+    }
   }
 
   goHome() {
@@ -61,18 +160,5 @@ export class SurveyPage {
         {text: 'Report Abuse', handler: () => this.selectPicture(3)}
       ]
     }).present();
-  }
-
-  selectPicture(picNr: number) {
-    if(this.enabled) {
-      this.surveyService.postResult(this.survey, picNr).subscribe(data => {
-        this.showSurvey(data);
-      });
-    } else {
-      this.notificationService.showToast({
-        message: Messages.getTooFastMsg(),
-        duration: 1000
-      });
-    }
   }
 }

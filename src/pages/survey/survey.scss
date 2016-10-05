@@ -1,3 +1,56 @@
+.answer-atp {
+  .survey-title {
+    background-color: $atp-blue;
+    height: 8vh;
+    padding-top: 2.5vh;
+  }
+  .picture-container {
+    .pic {
+      position: fixed;
+      top: 8vh;
+      border: 2px $atp-light-grey2 solid;
+      width: 44vw;
+      height: 44vw;
+      z-index: 10;
+      &:first-child {
+        left: 4vw;
+      }
+      &:last-child {
+        right: 4vw;
+      }
+    }
+  }
+  .button-container {
+    position: fixed;
+    top: 68vw;
+    left:4vw;
+    width: 92vw;
+    height: 92vw;
+
+    .pic-button {
+      width: 44vw;
+      background-color: $atp-light-grey2;
+      color: $atp-dark-text;
+      text-transform: inherit;
+      &.activated {
+        background-color: $atp-light-grey3;
+      }
+    }
+    .no-opinion-button {
+      color: $atp-dark-text;
+      text-transform: inherit;
+      margin-top: 4vh;
+      width: 99%;
+    }
+
+    .button-button-bar {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+    }
+  }
+}
+
 .answer-survey {
   #survey-content {
     height: 100%;
