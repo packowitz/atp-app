@@ -6,7 +6,7 @@
   }
   .picture-container {
     .pic {
-      position: fixed;
+      position: absolute;
       top: 8vh;
       border: 2px $atp-light-grey2 solid;
       width: 41vw;
@@ -21,7 +21,7 @@
     }
   }
   .button-container {
-    position: fixed;
+    position: absolute;
     top: 60vw;
     left:6vw;
     width: 88vw;
@@ -32,6 +32,7 @@
       background-color: $atp-light-grey2;
       color: $atp-dark-text;
       text-transform: inherit;
+      white-space: normal;
       &.activated {
         background-color: $atp-light-grey3;
       }
@@ -43,10 +44,10 @@
       width: 99%;
     }
 
-    .button-button-bar {
+    .button-bottom-bar {
       position: absolute;
       width: 100%;
-      bottom: 0;
+      bottom: 3em;
     }
   }
 }
