@@ -1,7 +1,6 @@
 import {Platform, Tabs, ActionSheetController, PopoverController} from "ionic-angular";
 import {NgZone} from "@angular/core";
-import {CameraOptions} from "ionic-native/dist/plugins/camera";
-import {Camera} from "ionic-native";
+import {Camera, CameraOptions} from "ionic-native";
 import {Survey} from "../../components/domain/survey.component";
 import {Model} from "../../components/model.component";
 import {SurveyService} from "../../providers/survey.service";
@@ -165,16 +164,16 @@ export class StartSurveyPage {
   public startSurvey() {
     this.survey.minAge = this.ageRange.lower;
     this.survey.maxAge = this.ageRange.upper;
-    this.survey.country = "";
+    this.survey.countries = "";
     if(this.countries.length > 0) {
       this.countries.forEach(c => {
-        if(this.survey.country != "") {
-          this.survey.country += ",";
+        if(this.survey.countries != "") {
+          this.survey.countries += ",";
         }
-        this.survey.country += c;
+        this.survey.countries += c;
       });
     } else {
-      this.survey.country = "ALL";
+      this.survey.countries = "ALL";
     }
     this.surveyService.postSurvey(this.survey, "NUMBER100", this.saveAsDefault).subscribe(resp => {
       console.log("ATP started");

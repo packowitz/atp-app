@@ -18,8 +18,8 @@ export class SurveyDetailsPage {
               public surveyService: SurveyService,
               public popoverController: PopoverController) {
     this.survey = navParams.get('survey');
-    if(this.survey.country != 'ALL') {
-      this.countries = this.survey.country.split(",");
+    if(this.survey.countries != 'ALL') {
+      this.countries = this.survey.countries.split(",");
     } else {
       this.countries = [];
     }

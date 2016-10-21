@@ -8,7 +8,7 @@ export class Survey {
   pic2: string;
   minAge: number;
   maxAge: number;
-  country: string;
+  countries: string;
   male: boolean;
   female: boolean;
   answered: number;

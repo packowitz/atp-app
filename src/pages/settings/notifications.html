@@ -3,7 +3,7 @@
         <ion-icon name="arrow-dropdown" *ngIf="expanded"></ion-icon>
         <ion-icon name="arrow-dropright" *ngIf="!expanded"></ion-icon>
         Push Notification Settings</ion-list-header>
-    <div [ngClass]="expanded ? 'item-expand active' : 'item-expand inactive'">
+    <div *ngIf="expanded">
         <ion-item>
             <ion-label>Push Notifications <span *ngIf="enabled">enabled</span><span *ngIf="!enabled">disabled</span></ion-label>
             <ion-toggle [(ngModel)]="enabled"></ion-toggle>

@@ -3,7 +3,7 @@
         <ion-icon name="arrow-dropdown" *ngIf="expanded"></ion-icon>
         <ion-icon name="arrow-dropright" *ngIf="!expanded"></ion-icon>
         Personal Data</ion-list-header>
-    <div [ngClass]="expanded ? 'item-expand active' : 'item-expand inactive'">
+    <div *ngIf="expanded">
         <ion-item>
             <ion-label>Year of birth:</ion-label>
             <ion-label *ngIf="!yearOfBirth" class="ion-date-placeholder">(yyyy)</ion-label>

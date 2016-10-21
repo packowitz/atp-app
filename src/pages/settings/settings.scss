@@ -15,27 +15,4 @@
     font-weight: 600;
     float: right;
   }
-
-  /* CORE */
-  .item-expand {
-    position: relative;
-    width: 100%;
-    max-height: 0;
-    transition: max-height 0.1s ease-out;
-    overflow: hidden;
-  }
-
-  .item-expand.inactive:after {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 15px;
-    width: 100%;
-    display: block;
-  }
-
-  .item-expand.active {
-    max-height: 200px;
-    transition: max-height 0.3s ease-out;
-  }
 }

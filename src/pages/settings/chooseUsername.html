@@ -3,18 +3,18 @@
         <ion-icon name="arrow-dropdown" *ngIf="newUsernameExpanded"></ion-icon>
         <ion-icon name="arrow-dropright" *ngIf="!newUsernameExpanded"></ion-icon>
         Username & Password</ion-list-header>
-    <div [ngClass]="newUsernameExpanded ? 'item-expand active' : 'item-expand inactive'">
+    <div *ngIf="newUsernameExpanded">
         <ion-item>
             <ion-label floating>Username</ion-label>
-            <ion-input type="text" [ngModel]="newUsername"></ion-input>
+            <ion-input type="text" [(ngModel)]="newUsername"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label floating>Password</ion-label>
-            <ion-input type="password" [ngModel]="newPassword"></ion-input>
+            <ion-input type="password" [(ngModel)]="newPassword"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label floating>Repeat Password</ion-label>
-            <ion-input type="password" [ngModel]="newPasswordRepeat"></ion-input>
+            <ion-input type="password" [(ngModel)]="newPasswordRepeat"></ion-input>
         </ion-item>
         <ion-item><button ion-button full [disabled]="!valid()" (click)="doSubmit()">Save</button></ion-item>
     </div>
