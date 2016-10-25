@@ -27,7 +27,7 @@ export class Model {
   constructor(public platform: Platform,
               public storage: Storage) {
     if(platform.is("cordova") || platform.is("android") || platform.is("ios")) {
-      Model.server = "http://atp-lb.341c5252.svc.dockerapp.io";
+      Model.server = "http://api.askthepeople.io";
     }
     this.storage.get('readAnnouncements').then(data => this.readAnnouncements = data);
   }
