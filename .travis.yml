@@ -14,3 +14,4 @@ script:
 
 after_success:
   - ionic login --email $IONIC_EMAIL --password $IONIC_PASS
+  - ionic upload
