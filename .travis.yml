@@ -7,10 +7,11 @@ cache:
   - node_modules
 
 before_script:
-  - npm install -g ionic
+  - npm install -g ionic cordova
 
 script:
   - ionic build
 
 after_success:
+  - ionic login --email $IONIC_EMAIL --password $IONIC_PASS
   - ionic upload
