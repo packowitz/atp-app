@@ -91,7 +91,8 @@ import {SurveyDetailsMenu} from "../components/surveyDetailMenu.component";
     TabsPage,
     WelcomePage,
     SurveyDetailsMenu,
-    CountrySelection
+    CountrySelection,
+    ChooseFeedbackType
   ],
   providers: [
     Model,
