@@ -9,7 +9,7 @@ import {Model} from "../../components/model.component";
 @Component({
   template: `<ion-tabs selectedIndex="2">
     <ion-tab tabIcon="chatbubbles" [root]="feedbackPage" [tabBadge]="(model.unreadFeedback + model.unreadAnnouncements) > 0 ? (model.unreadFeedback + model.unreadAnnouncements) : ''" tabBadgeStyle="danger"></ion-tab>
-    <ion-tab tabIcon="cart" [root]="purchasePage"></ion-tab>
+    <ion-tab tabIcon="cart" [root]="purchasePage" [tabBadge]="model.claimableAchievements > 0 ? model.claimableAchievements : ''" tabBadgeStyle="danger"></ion-tab>
     <ion-tab tabIcon="home" [root]="mainPage"></ion-tab>
     <ion-tab tabIcon="list-box" [root]="mySurveysPage"></ion-tab>
     <ion-tab tabTitle="ATP" [root]="startSurveyPage"></ion-tab>

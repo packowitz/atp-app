@@ -35,6 +35,7 @@ import {AgePipe} from "../pipes/age.pipe";
 import {GenderPipe} from "../pipes/gender.pipe";
 import {NotificationService} from "../providers/notification.service";
 import {SurveyDetailsMenu} from "../components/surveyDetailMenu.component";
+import {AchievementService} from "../providers/achievement.service";
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import {SurveyDetailsMenu} from "../components/surveyDetailMenu.component";
   ],
   providers: [
     Model,
+    AchievementService,
     AtpHttp,
     AuthService,
     CountryService,

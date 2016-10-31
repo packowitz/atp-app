@@ -226,6 +226,12 @@ ion-title {
   align-items: center;
 }
 
+.flex-left-strech {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
 .flex-space-around {
   display: flex;
   justify-content: space-around;
@@ -248,6 +254,10 @@ ion-title {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+
+.flex-grow {
+  flex-grow: 1;
 }
 
 
@@ -342,5 +352,18 @@ ion-title {
     @extend .flex-space-around;
     margin-top: 2vw;
     margin-bottom: 4vw;
+  }
+}
+
+.atp-list {
+  ion-item:nth-child(even) {
+    background-color: $atp-blue;
+  }
+  ion-item:nth-child(odd) {
+    background-color: $atp-blue-light;
+  }
+  ion-item {
+    border-bottom: none !important;
+    border-top: none !important;
   }
 }

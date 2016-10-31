@@ -5,6 +5,7 @@ import {Feedback} from "./domain/feedback.component";
 import {Survey} from "./domain/survey.component";
 import {Announcement} from "./domain/announcement.component";
 import {Storage} from "@ionic/storage";
+import {Achievement} from "./domain/achievement.component";
 
 @Injectable()
 export class Model {
@@ -22,6 +23,13 @@ export class Model {
   public unreadFeedback: number = 0;
   public announcements: Announcement[] = [];
   public unreadAnnouncements: number = 0;
+  public achievements: Achievement[] = [];
+  public claimableAchievements: number = 0;
+  public achievement_active: Achievement;
+  public achievement_username: Achievement;
+  public achievement_creator: Achievement;
+  public achievement_answerer: Achievement;
+  public achievement_reliable: Achievement;
   readAnnouncements: string;
 
   constructor(public platform: Platform,
@@ -61,5 +69,27 @@ export class Model {
 
   isUserDataCompleteToAnswerATP(): boolean {
     return this.user.male != null && this.user.country != null && this.user.yearOfBirth != null;
+  }
+
+  setAchievements(achievements: Achievement[]) {
+    this.achievements = achievements;
+    let claimable = 0;
+    this.achievements.forEach(a => {
+      if(a.claimed < a.achieved) {
+        claimable ++;
+      }
+      if(a.type == 'ACTIVE_USER') {
+        this.achievement_active = a;
+      } else if(a.type == 'CHOOSE_USERNAME') {
+        this.achievement_username = a;
+      } else if(a.type == 'ATP_CREATOR') {
+        this.achievement_creator = a;
+      } else if(a.type == 'ATP_ANSWERER') {
+        this.achievement_answerer = a;
+      } else if(a.type == 'RELIABLE_USER') {
+        this.achievement_reliable = a;
+      }
+    });
+    this.claimableAchievements = claimable;
   }
 }

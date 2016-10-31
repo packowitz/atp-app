@@ -1,9 +1,51 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>Purchase</ion-title>
-    </ion-navbar>
+  <ion-navbar>
+    <ion-title>Purchase</ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content>
-    
+  <div padding class="no-padding-vertical">
+    <ion-segment [(ngModel)]="selection">
+      <ion-segment-button value="shop">Shop</ion-segment-button>
+      <ion-segment-button value="achievements">Achievements</ion-segment-button>
+    </ion-segment>
+  </div>
+  <div [ngSwitch]="selection">
+    <ion-list *ngSwitchCase="'shop'">
+      <ion-item>This is the Shop where you can enter voucher codes and buy in-app stuff</ion-item>
+    </ion-list>
+    <ion-list no-lines *ngSwitchCase="'achievements'" class="atp-list">
+      <ion-item>
+        <div class="flex-left-strech color-white">
+          <img src="assets/img/achievements_{{model.achievement_active.claimed}}.png" class="achievement-img">
+          <div class="flex-grow achievement-text">
+            <div class="achievement-title">Activity Reward</div>
+            <div class="achievement-description">Free pax every day! Log in and get 50 pax reward.</div>
+          </div>
+          <span *ngIf="model.achievement_active.claimed == 0" class="flex-center">
+            <button ion-button color="secondary" (click)="claimAchievementReward(model.achievement_active)">claim</button>
+          </span>
+          <span *ngIf="model.achievement_active.claimed > 0" class="flex-center">
+            claimed
+          </span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="flex-left-strech color-white">
+          <img src="assets/img/achievements_{{model.achievement_username.claimed}}.png" class="achievement-img">
+          <div class="flex-grow achievement-text">
+            <div class="achievement-title">Personalize Reward</div>
+            <div class="achievement-description">Get 500 pax for securing your ATP account with a username and password.</div>
+          </div>
+          <span *ngIf="model.achievement_username.claimed == 0" class="flex-center">
+            <button ion-button color="secondary" (click)="claimAchievementReward(model.achievement_username)">claim</button>
+          </span>
+          <span *ngIf="model.achievement_username.claimed > 0" class="flex-center">
+            claimed
+          </span>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

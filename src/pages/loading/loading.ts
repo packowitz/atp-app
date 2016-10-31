@@ -8,6 +8,7 @@ import {AuthService} from "../../providers/auth.service";
 import {TabsPage} from "../tabs/tabsPage";
 import {WelcomePage} from "../welcome/welcome";
 import {Storage} from "@ionic/storage";
+import {AchievementService} from "../../providers/achievement.service";
 
 declare var FirebasePlugin: any;
 
@@ -20,6 +21,7 @@ export class LoadingPage {
   loadedLast3Surveys: boolean = false;
   loadedUnreadFeedback: boolean = false;
   loadedAnnouncements: boolean = false;
+  loadedAchievements: boolean = false;
   registeredNotifications: boolean = false;
 
   constructor(public nav: NavController,
@@ -27,6 +29,7 @@ export class LoadingPage {
               public surveyService: SurveyService,
               public countryService: CountryService,
               public feedbackService: MessagesService,
+              public achievementService: AchievementService,
               public model: Model,
               public platform: Platform,
               public storage: Storage) {
@@ -44,6 +47,8 @@ export class LoadingPage {
       this.loadFeedback();
     } else if(!this.loadedAnnouncements) {
       this.loadAnnouncements();
+    } else if(!this.loadedAchievements) {
+      this.loadAchievements();
     } else if(!this.registeredNotifications) {
       this.registerNotification();
     } else {
@@ -117,6 +122,17 @@ export class LoadingPage {
         this.model.recalcUnreadMessages();
         console.log("Loaded " + this.model.announcements.length + " announcements");
         this.loadedAnnouncements = true;
+        this.loadDataFromServer();
+      }
+    );
+  }
+
+  public loadAchievements() {
+    this.achievementService.getAchievements().subscribe(
+      data => {
+        this.model.setAchievements(data);
+        console.log("Loaded " + this.model.achievements.length + " achievements");
+        this.loadedAchievements = true;
         this.loadDataFromServer();
       }
     );
