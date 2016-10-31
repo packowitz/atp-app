@@ -23,10 +23,10 @@
             <div class="achievement-title">Activity Reward</div>
             <div class="achievement-description">Free pax every day! Log in and get 50 pax reward.</div>
           </div>
-          <span *ngIf="model.achievement_active.claimed == 0" class="flex-center">
-            <button ion-button color="secondary" (click)="claimAchievementReward(model.achievement_active)">claim</button>
+          <span *ngIf="model.achievement_active.claimed < model.achievement_active.achieved" class="flex-center">
+            <button ion-button color="secondary" (click)="claimAchievementReward(model.achievement_active)" class="claim-button">50 <img src="assets/img/diamond-white.png"></button>
           </span>
-          <span *ngIf="model.achievement_active.claimed > 0" class="flex-center">
+          <span *ngIf="model.achievement_active.claimed == 3" class="flex-center">
             claimed
           </span>
         </div>
@@ -38,10 +38,79 @@
             <div class="achievement-title">Personalize Reward</div>
             <div class="achievement-description">Get 500 pax for securing your ATP account with a username and password.</div>
           </div>
-          <span *ngIf="model.achievement_username.claimed == 0" class="flex-center">
-            <button ion-button color="secondary" (click)="claimAchievementReward(model.achievement_username)">claim</button>
+          <span *ngIf="model.achievement_username.achieved == 0" class="flex-center">
+            settings
+          </span>
+          <span *ngIf="model.achievement_username.claimed < model.achievement_username.achieved" class="flex-center">
+            <button ion-button color="secondary" (click)="claimAchievementReward(model.achievement_username)" class="claim-button">500 <img src="assets/img/diamond-white.png"></button>
           </span>
           <span *ngIf="model.achievement_username.claimed > 0" class="flex-center">
+            claimed
+          </span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="flex-left-strech color-white">
+          <img src="assets/img/achievements_{{model.achievement_creator.claimed}}.png" class="achievement-img">
+          <div class="flex-grow achievement-text">
+            <div class="achievement-title">Creation Reward</div>
+            <div class="achievement-description">
+              Create {{model.achievement_creator.claimed == 0 ? '3' : model.achievement_creator.claimed == 1 ? '10' : '50'}} ATPs and get {{model.achievement_creator.claimed == 0 ? '500' : model.achievement_creator.claimed == 1 ? '1000' : '2000'}} pax reward.
+            </div>
+          </div>
+          <span *ngIf="model.achievement_creator.claimed == model.achievement_creator.achieved && model.achievement_creator.claimed < 3" class="flex-center">
+            {{model.user.surveysStarted}} / {{model.achievement_creator.claimed == 0 ? '3' : model.achievement_creator.claimed == 1 ? '10' : '50'}}
+          </span>
+          <span *ngIf="model.achievement_creator.claimed < model.achievement_creator.achieved" class="flex-center">
+            <button ion-button color="secondary" (click)="claimAchievementReward(model.achievement_creator)" class="claim-button">
+              {{model.achievement_creator.claimed == 0 ? '500' : model.achievement_creator.claimed == 1 ? '1000' : '2000'}} <img src="assets/img/diamond-white.png">
+            </button>
+          </span>
+          <span *ngIf="model.achievement_creator.claimed == 3" class="flex-center">
+            claimed
+          </span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="flex-left-strech color-white">
+          <img src="assets/img/achievements_{{model.achievement_answerer.claimed}}.png" class="achievement-img">
+          <div class="flex-grow achievement-text">
+            <div class="achievement-title">Answering Reward</div>
+            <div class="achievement-description">
+              Answer {{model.achievement_answerer.claimed == 0 ? '50' : model.achievement_answerer.claimed == 1 ? '500' : '5000'}} ATPs and get {{model.achievement_answerer.claimed == 0 ? '250' : model.achievement_answerer.claimed == 1 ? '500' : '1000'}} pax reward.
+            </div>
+          </div>
+          <span *ngIf="model.achievement_answerer.claimed == model.achievement_answerer.achieved && model.achievement_answerer.claimed < 3" class="flex-center">
+            {{model.user.surveysAnswered}} / {{model.achievement_answerer.claimed == 0 ? '50' : model.achievement_answerer.claimed == 1 ? '500' : '5000'}}
+          </span>
+          <span *ngIf="model.achievement_answerer.claimed < model.achievement_answerer.achieved" class="flex-center">
+            <button ion-button color="secondary" (click)="claimAchievementReward(model.achievement_answerer)" class="claim-button">
+              {{model.achievement_answerer.claimed == 0 ? '250' : model.achievement_answerer.claimed == 1 ? '500' : '1000'}} <img src="assets/img/diamond-white.png">
+            </button>
+          </span>
+          <span *ngIf="model.achievement_answerer.claimed == 3" class="flex-center">
+            claimed
+          </span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="flex-left-strech color-white">
+          <img src="assets/img/achievements_{{model.achievement_reliable.claimed}}.png" class="achievement-img">
+          <div class="flex-grow achievement-text">
+            <div class="achievement-title">Reliable Reward</div>
+            <div class="achievement-description">
+              Answer ATPs seriously and get a better reliable rating to receive pax rewards.
+            </div>
+          </div>
+          <span *ngIf="model.achievement_reliable.claimed == model.achievement_reliable.achieved && model.achievement_reliable.claimed < 3" class="flex-center">
+            ?? / ??
+          </span>
+          <span *ngIf="model.achievement_reliable.claimed < model.achievement_reliable.achieved" class="flex-center">
+            <button ion-button color="secondary" (click)="claimAchievementReward(model.achievement_reliable)" class="claim-button">
+              {{model.achievement_reliable.claimed == 0 ? '250' : model.achievement_reliable.claimed == 1 ? '500' : '1000'}} <img src="assets/img/diamond-white.png">
+            </button>
+          </span>
+          <span *ngIf="model.achievement_reliable.claimed == 3" class="flex-center">
             claimed
           </span>
         </div>
