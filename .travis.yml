@@ -6,12 +6,19 @@ cache:
   directories:
   - node_modules
 
+services:
+  - docker
+
 before_install:
   - npm install -g ionic cordova
 
 script:
+  - rm -rf www/
   - ionic build
+  - docker build -t pacworx/app-test .
 
 after_success:
   - ionic login --email $IONIC_EMAIL --password $IONIC_PASS
   - ionic upload
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USER" -p="$DOCKER_PASS"
+  - docker push pacworx/app-test
