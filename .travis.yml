@@ -10,7 +10,6 @@ before_install:
   - npm install -g ionic cordova
 
 script:
-  - rm -rf www/
   - ionic build
 
 after_success:
