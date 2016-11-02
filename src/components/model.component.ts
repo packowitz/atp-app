@@ -92,4 +92,18 @@ export class Model {
     });
     this.claimableAchievements = claimable;
   }
+
+  needReloadAchievements(): boolean {
+    if((this.achievement_username.achieved == 0 && this.user.username)
+      || (this.achievement_creator.achieved == 0 && this.user.surveysStarted >=3)
+      || (this.achievement_creator.achieved == 1 && this.user.surveysStarted >= 10)
+      || (this.achievement_creator.achieved == 2 && this.user.surveysStarted >= 50)
+      || (this.achievement_answerer.achieved == 0 && this.user.surveysAnswered >= 50)
+      || (this.achievement_answerer.achieved == 1 && this.user.surveysAnswered >= 500)
+      || (this.achievement_answerer.achieved == 2 && this.user.surveysAnswered >= 5000)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

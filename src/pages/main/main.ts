@@ -5,6 +5,7 @@ import {SurveyService} from "../../providers/survey.service";
 import {SettingsPage} from "../settings/settings";
 import {HighscorePage} from "../highscore/highscore";
 import {Component} from "@angular/core";
+import {AchievementService} from "../../providers/achievement.service";
 
 @Component({
   templateUrl: 'main.html'
@@ -17,11 +18,15 @@ export class MainPage {
               public nav: NavController,
               public surveyService: SurveyService,
               public tabs: Tabs,
-              public alertController: AlertController) {
+              public alertController: AlertController,
+              public achievementService: AchievementService) {
   }
 
   ionViewDidEnter() {
     this.updateLast3Surveys();
+    if(this.model.needReloadAchievements()) {
+      this.achievementService.getAchievements().subscribe(data => this.model.setAchievements(data));
+    }
   }
 
   updateLast3Surveys () {

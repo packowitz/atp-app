@@ -10,10 +10,10 @@ export class NotificationService {
   }
 
   showLoading(message: string) {
-    if(this.loading) {
-      //noinspection TypeScriptUnresolvedFunction
-      this.dismissLoading().then(() => this.showLoading(message));
-    }
+    // if(this.loading) {
+    //   //noinspection TypeScriptUnresolvedFunction
+    //   this.dismissLoading().then(() => this.showLoading(message));
+    // }
     this.loading = this.loadingController.create({
       content: message,
       spinner: 'dots'
@@ -32,14 +32,14 @@ export class NotificationService {
   }
 
   showToast(options: any) {
-    if(this.loading) {
-      //noinspection TypeScriptUnresolvedFunction
-      this.dismissLoading().then(() => this.showToast(options));
-    }
-    if(this.toast) {
-      //noinspection TypeScriptUnresolvedFunction
-      this.dismissToast().then(() => this.showToast(options));
-    }
+    // if(this.loading) {
+    //   //noinspection TypeScriptUnresolvedFunction
+    //   this.dismissLoading().then(() => this.showToast(options));
+    // }
+    // if(this.toast) {
+    //   //noinspection TypeScriptUnresolvedFunction
+    //   this.dismissToast().then(() => this.showToast(options));
+    // }
     this.toast = this.toastController.create(options);
     this.toast.present();
   }

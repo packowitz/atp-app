@@ -38,8 +38,8 @@
             <div class="achievement-title">Personalize Reward</div>
             <div class="achievement-description">Get 500 pax for securing your ATP account with a username and password.</div>
           </div>
-          <span *ngIf="model.achievement_username.achieved == 0" class="flex-center">
-            settings
+          <span *ngIf="model.achievement_username.achieved == 0" class="flex-center fake-link" (click)="openSettingsPage()">
+            Settings
           </span>
           <span *ngIf="model.achievement_username.claimed < model.achievement_username.achieved" class="flex-center">
             <button ion-button color="secondary" (click)="claimAchievementReward(model.achievement_username)" class="claim-button">500 <img src="assets/img/diamond-white.png"></button>

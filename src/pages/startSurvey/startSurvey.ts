@@ -196,7 +196,7 @@ export class StartSurveyPage {
       }
       this.notificationService.showToast({
         message: 'ATP started',
-        duration: 5000,
+        duration: 3000,
         showCloseButton: true,
         closeButtonText: 'OK'
       });
