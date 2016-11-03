@@ -19,6 +19,8 @@ export class Model {
   public user: User;
   public token: string;
   public last3surveys: Survey[] = [];
+  public surveyList: Survey[];
+  public surveyArchivedList: Survey[];
   public feedback: Feedback[] = [];
   public unreadFeedback: number = 0;
   public announcements: Announcement[] = [];
@@ -104,6 +106,48 @@ export class Model {
       return true;
     } else {
       return false;
+    }
+  }
+
+  surveyDeleted(survey: Survey) {
+    let idx = -1;
+    this.last3surveys.forEach((s, i) => {
+      if(s.id == survey.id) {
+        idx = i;
+      }
+    });
+    if(idx != -1) {
+      console.log("remove from last3surveys " + idx);
+      this.last3surveys.splice(idx, 1);
+    } else {
+      console.log(this.last3surveys);
+    }
+    if(this.surveyList) {
+      idx = -1;
+      this.surveyList.forEach((s, i) => {
+        if(s.id == survey.id) {
+          idx = i;
+        }
+      });
+      if(idx != -1) {
+        console.log("remove from surveyList " + idx);
+        this.surveyList.splice(idx, 1);
+      } else {
+        console.log(this.surveyList);
+      }
+    } else {
+      console.log("surveyList is null");
+    }
+    if(this.surveyArchivedList) {
+      idx = -1;
+      this.surveyArchivedList.forEach((s, i) => {
+        if(s.id == survey.id) {
+          idx = i;
+        }
+      });
+      if(idx != -1) {
+        this.surveyArchivedList.splice(idx, 1);
+      }
     }
   }
 }

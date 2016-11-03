@@ -78,6 +78,18 @@ export class AtpHttp {
       .map(data => this.handleData(data));
   }
 
+  doDelete(uri: string, loadingMessage: string): Observable<any> {
+    this.notificationService.showLoading(loadingMessage);
+    let headers: Headers = new Headers();
+    if(this.model.token) {
+      headers.append('Authorization', 'Bearer ' + this.model.token);
+      return this.http.delete(Model.server + uri, {headers: headers})
+        .timeout(AtpHttp.timeout, new Error('timeout exceeded'))
+        .retryWhen(data => this.retryWhen(data, () => this.doDelete(uri, loadingMessage)))
+        .map(() => this.notificationService.dismissLoading());
+    }
+  }
+
   public handleData(data): Observable<any> {
     this.notificationService.dismissLoading();
     let response = data.json();

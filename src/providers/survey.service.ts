@@ -59,4 +59,8 @@ export class SurveyService {
       survey.answers = data.answers;
     });
   }
+
+  deleteSurvey(survey: Survey): Observable<any> {
+    return this.atpHttp.doDelete("/app/survey/" + survey.id, "Deleting ATP");
+  }
 }

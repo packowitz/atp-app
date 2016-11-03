@@ -194,6 +194,9 @@ export class StartSurveyPage {
       if(this.model.last3surveys.length > 3) {
         this.model.last3surveys.pop();
       }
+      if(this.model.surveyList) {
+        this.model.surveyList.unshift(resp);
+      }
       this.notificationService.showToast({
         message: 'ATP started',
         duration: 3000,

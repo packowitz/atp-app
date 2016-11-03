@@ -14,7 +14,9 @@ export class MySurveysPage {
   archivedLoaded: boolean = false;
   archivedSurveys: Survey[];
 
-  constructor(public tabs: Tabs, public surveyService: SurveyService) {}
+  constructor(public tabs: Tabs,
+              public model: Model,
+              public surveyService: SurveyService) {}
 
   ionViewDidEnter() {
     if(!this.currentLoaded) {
@@ -32,13 +34,13 @@ export class MySurveysPage {
 
   loadCurrentSurveys() {
     this.surveyService.getCurrentSurveyList().subscribe(surveys => {
-      this.currentSurveys = surveys;
+      this.model.surveyList = surveys;
       this.currentLoaded = true;
     });
   }
 
   updateCurrentSurveys() {
-    this.currentSurveys.forEach(survey => {
+    this.model.surveyList.forEach(survey => {
       if(survey.status != 'FINISHED') {
         this.surveyService.updateSurvey(survey);
       }
@@ -47,7 +49,7 @@ export class MySurveysPage {
 
   loadArchivedSurveys() {
     this.surveyService.getArchivedSurveyList().subscribe(surveys => {
-      this.archivedSurveys = surveys;
+      this.model.surveyArchivedList = surveys;
       this.archivedLoaded = true;
     });
   }

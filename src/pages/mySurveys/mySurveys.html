@@ -14,17 +14,17 @@
     <div [ngSwitch]="selection">
         <ion-list *ngSwitchCase="'current'" padding class="no-padding-vertical">
             <ion-item *ngIf="!currentLoaded" class="text-center"><ion-spinner name="bubbles"></ion-spinner></ion-item>
-            <survey-list [surveys]="currentSurveys" *ngIf="currentLoaded && currentSurveys.length > 0"></survey-list>
+            <survey-list [surveys]="model.surveyList" *ngIf="currentLoaded && model.surveyList.length > 0"></survey-list>
             <ion-item *ngIf="currentLoaded" class="text-center">
                 <button ion-button large (click)="gotoStartSurvey()" class="border-radius">Start new ATP</button>
             </ion-item>
         </ion-list>
         <ion-list *ngSwitchCase="'archived'" padding class="no-padding-vertical">
             <ion-item *ngIf="!archivedLoaded" class="text-center"><ion-spinner name="bubbles"></ion-spinner></ion-item>
-            <ion-item *ngIf="archivedLoaded && archivedSurveys.length == 0" class="text-center">
+            <ion-item *ngIf="archivedLoaded && model.surveyArchivedList.length == 0" class="text-center">
                 You don't have any archived ATPs.
             </ion-item>
-            <survey-list [surveys]="archivedSurveys" *ngIf="archivedLoaded && archivedSurveys.length > 0"></survey-list>
+            <survey-list [surveys]="model.surveyArchivedList" *ngIf="archivedLoaded && model.surveyArchivedList.length > 0"></survey-list>
         </ion-list>
     </div>
 </ion-content>
