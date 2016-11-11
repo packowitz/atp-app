@@ -14,7 +14,7 @@ before_install:
 
 script:
   - rm -rf www/
-  - ionic build
+  - npm run ionic:build
   - docker build -t pacworx/app-test .
 
 after_success:
