@@ -22,3 +22,6 @@ after_success:
   - ionic upload
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USER" -p="$DOCKER_PASS"
   - docker push pacworx/app-test
+
+notifications:
+  slack: noodle-app:M2sZGPNSvxzvLD4XkaUF4oGI
