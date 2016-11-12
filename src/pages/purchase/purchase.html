@@ -12,7 +12,13 @@
 <ion-content>
   <div [ngSwitch]="selection">
     <ion-list *ngSwitchCase="'shop'">
-      <ion-item>This is the Shop where you can enter voucher codes and buy in-app stuff</ion-item>
+      <ion-item>
+        <ion-label floating>Enter coupon code</ion-label>
+        <ion-input type="text" [(ngModel)]="couponCode"></ion-input>
+      </ion-item>
+      <ion-item>
+        <button ion-button full small [disabled]="!couponCode || couponCode.length < 8 || couponCode > 25" (click)="redeemCoupon()">Redeem coupon</button>
+      </ion-item>
     </ion-list>
     <ion-list no-lines *ngSwitchCase="'achievements'" class="atp-list light-blue-background">
       <ion-item>

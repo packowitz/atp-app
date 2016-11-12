@@ -36,6 +36,7 @@ import {GenderPipe} from "../pipes/gender.pipe";
 import {NotificationService} from "../providers/notification.service";
 import {SurveyDetailsMenu} from "../components/surveyDetailMenu.component";
 import {AchievementService} from "../providers/achievement.service";
+import {CouponService} from "../providers/coupon.service";
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import {AchievementService} from "../providers/achievement.service";
     AtpHttp,
     AuthService,
     CountryService,
+    CouponService,
     HighscoreService,
     MessagesService,
     NotificationService,
