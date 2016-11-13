@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-segment [(ngModel)]="selection">
+    <ion-segment [(ngModel)]="selection" (ionChange)="loadArchived()">
       <ion-segment-button value="current">
         Current ATPs
       </ion-segment-button>
@@ -26,7 +26,7 @@
     </ion-list>
     <ion-list *ngSwitchCase="'archived'" padding class="no-padding-vertical">
       <ion-item *ngIf="!archivedLoaded" class="text-center"><ion-spinner name="bubbles"></ion-spinner></ion-item>
-      <ion-item *ngIf="archivedLoaded && model.surveyArchivedList.length == 0" class="text-center">
+      <ion-item *ngIf="archivedLoaded && model.surveyArchivedList.length < 1" class="text-center">
         You don't have any archived ATPs.
       </ion-item>
       <survey-list [surveys]="model.surveyArchivedList" *ngIf="archivedLoaded && model.surveyArchivedList.length > 0"></survey-list>

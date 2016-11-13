@@ -11,9 +11,7 @@ import {Model} from "../../components/model.component";
 export class MySurveysPage {
   selection: string = "current";
   currentLoaded: boolean = false;
-  currentSurveys: Survey[];
   archivedLoaded: boolean = false;
-  archivedSurveys: Survey[];
 
   constructor(public tabs: Tabs,
               public model: Model,
@@ -27,7 +25,7 @@ export class MySurveysPage {
     }
   }
 
-  ionChange() {
+  loadArchived() {
     if(!this.archivedLoaded) {
       this.loadArchivedSurveys();
     }
