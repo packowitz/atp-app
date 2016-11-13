@@ -24,4 +24,4 @@ after_success:
   - docker push pacworx/app-test
 
 notifications:
-  slack: noodle-app:M2sZGPNSvxzvLD4XkaUF4oGI
+  slack: pacworx:M2sZGPNSvxzvLD4XkaUF4oGI

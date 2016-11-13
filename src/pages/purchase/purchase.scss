@@ -27,18 +27,16 @@ purchase-page {
       margin-left: 2px;
     }
   }
-
-  ion-header {
-    .header-md::after {
-      background-image: none;
-    }
-
-    .toolbar-md {
-      padding: 0;
-    }
+  
+  .header-md::after {
+    background-image: none;
   }
 
-    .segment-md .segment-button {
-      font-size: 1.4rem;
-    }
+  .toolbar-md {
+    padding: 0;
+  }
+
+  .segment-md .segment-button {
+    font-size: 1.4rem;
+  }
 }

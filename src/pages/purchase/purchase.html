@@ -13,7 +13,7 @@
 
 <ion-content>
   <div [ngSwitch]="selection">
-    <ion-list *ngSwitchCase="'shop'">
+    <ion-list *ngSwitchCase="'shop'" no-lines>
       <ion-item>
         <ion-label floating>Enter coupon code</ion-label>
         <ion-input type="text" [(ngModel)]="couponCode"></ion-input>
