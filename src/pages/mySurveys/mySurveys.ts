@@ -5,6 +5,7 @@ import {Tabs} from "ionic-angular/index";
 import {Model} from "../../components/model.component";
 
 @Component({
+  selector: 'my-surveys-page',
   templateUrl: 'mySurveys.html'
 })
 export class MySurveysPage {
