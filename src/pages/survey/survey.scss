@@ -1,13 +1,13 @@
-.answer-atp {
+survey {
   .survey-title {
-    background-color: $atp-blue;
+    color: white;
     height: 8vh;
     padding-top: 2.5vh;
   }
   .picture-container {
     .pic {
       position: absolute;
-      top: 8vh;
+      top: 20vh;
       border: 2px $atp-light-grey2 solid;
       width: 41vw;
       height: 41vw;
@@ -22,7 +22,7 @@
   }
   .button-container {
     position: absolute;
-    top: 60vw;
+    top: 80vw;
     left:6vw;
     width: 88vw;
     height: 80vw;
@@ -42,12 +42,6 @@
       text-transform: inherit;
       margin-top: 4vh;
       width: 99%;
-    }
-
-    .button-bottom-bar {
-      position: absolute;
-      width: 100%;
-      bottom: 3em;
     }
   }
 }

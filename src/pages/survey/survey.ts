@@ -1,11 +1,11 @@
-import {Tabs, AlertController} from "ionic-angular";
+import {AlertController} from "ionic-angular";
 import {SurveyService} from "../../providers/survey.service";
 import {Survey} from "../../components/domain/survey.component";
 import {Component, trigger, state, style, transition, animate, keyframes} from "@angular/core";
-import {Model} from "../../components/model.component";
 
 @Component({
   templateUrl: 'survey.html',
+  selector: 'survey',
   animations: [
     trigger('titleState', [
       state('active', style({transform: 'translateY(0)'})),
@@ -25,7 +25,7 @@ import {Model} from "../../components/model.component";
           style({opacity: 0, top: '104vw', left: '50vw', width: '0', height: '0', offset: 0}),
           style({opacity: 1, top: '60vw', left: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
           style({opacity: 1, top: '60vw', left: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
-          style({left: '6vw', top: '8vh', width: '41vw', height: '41vw', offset: 1.0})
+          style({left: '6vw', top: '20vh', width: '41vw', height: '41vw', offset: 1.0})
         ]))
       ]),
       transition('* => incoming', [
@@ -33,7 +33,7 @@ import {Model} from "../../components/model.component";
           style({opacity: 0, top: '104vw', left: '50vw', width: '0', height: '0', offset: 0}),
           style({opacity: 1, top: '60vw', left: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
           style({opacity: 1, top: '60vw', left: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
-          style({left: '6vw', top: '8vh', width: '41vw', height: '41vw', offset: 1.0})
+          style({left: '6vw', top: '20vh', width: '41vw', height: '41vw', offset: 1.0})
         ]))
       ]),
       transition('* => large', [
@@ -51,7 +51,7 @@ import {Model} from "../../components/model.component";
           style({opacity: 0, top: '104vw', right: '50vw', width: '0', height: '0', offset: 0}),
           style({opacity: 1, top: '60vw', right: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
           style({opacity: 1, top: '60vw', right: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
-          style({right: '6vw', top: '8vh', width: '41vw', height: '41vw', offset: 1.0})
+          style({right: '6vw', top: '20vh', width: '41vw', height: '41vw', offset: 1.0})
         ]))
       ]),
       transition('* => incoming', [
@@ -59,7 +59,7 @@ import {Model} from "../../components/model.component";
           style({opacity: 0, top: '104vw', right: '50vw', width: '0', height: '0', offset: 0}),
           style({opacity: 1, top: '60vw', right: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
           style({opacity: 1, top: '60vw', right: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
-          style({right: '6vw', top: '8vh', width: '41vw', height: '41vw', offset: 1.0})
+          style({right: '6vw', top: '20vh', width: '41vw', height: '41vw', offset: 1.0})
         ]))
       ]),
       transition('* => large', [
@@ -90,7 +90,6 @@ export class SurveyPage {
   buttonAnimationState: string;
 
   constructor(public surveyService: SurveyService,
-              public tabs: Tabs,
               public alertController: AlertController) {
     this.loadSurvey();
   }
@@ -126,10 +125,10 @@ export class SurveyPage {
   }
 
   togglePic1() {
-    if(this.pic1AnimationState == 'large') {
+    if (this.pic1AnimationState == 'large') {
       this.pic1AnimationState = 'small';
     } else {
-      if(this.pic2AnimationState == 'large') {
+      if (this.pic2AnimationState == 'large') {
         this.pic2AnimationState = 'small';
       }
       this.pic1AnimationState = 'large';
@@ -137,24 +136,20 @@ export class SurveyPage {
   }
 
   togglePic2() {
-    if(this.pic2AnimationState == 'large') {
+    if (this.pic2AnimationState == 'large') {
       this.pic2AnimationState = 'small';
     } else {
-      if(this.pic1AnimationState == 'large') {
+      if (this.pic1AnimationState == 'large') {
         this.pic1AnimationState = 'small';
       }
       this.pic2AnimationState = 'large';
     }
   }
 
-  goHome() {
-    this.tabs.select(Model.MainTab);
-  }
-
   reportAbuse() {
     this.alertController.create({
       title: 'Report Abuse',
-      message: "Abuse means that you think that these pictures show <strong>illegal</strong> or <strong>illegitimate</strong> content.<br/>If you just don't have a meaning on these picture then please press 'skip'.",
+      message: "Abuse means that you think that these pictures show <strong>illegal</strong> or <strong>offensive</strong> content.<br/>If you don't think this is illegal or offensive, please tap 'Cancel'.",
       buttons: [
         {text: 'Cancel'},
         {text: 'Report Abuse', handler: () => this.selectPicture(3)}
