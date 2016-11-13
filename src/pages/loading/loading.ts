@@ -10,7 +10,11 @@ import {WelcomePage} from "../welcome/welcome";
 import {Storage} from "@ionic/storage";
 import {AchievementService} from "../../providers/achievement.service";
 
-declare var FirebasePlugin: any;
+
+/**
+ * Loading component
+ * Specifies where to navigate to and resolves user
+ */
 
 @Component({
   templateUrl: 'loading.html'
@@ -71,9 +75,9 @@ export class LoadingPage {
       this.loadedUser = true;
       this.loadDataFromServer();
     } else {
-      this.storage.get('token').then(token => {
-        if(token) {
-          this.resolveUser(token);
+      this.storage.get('atpToken').then(atpToken => {
+        if (atpToken ) {
+          this.resolveUser(atpToken);
         } else {
           this.nav.setRoot(WelcomePage);
         }

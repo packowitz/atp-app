@@ -5,6 +5,11 @@ import {AuthService} from "../../providers/auth.service";
 import {LoadingPage} from "../loading/loading";
 import {Storage} from "@ionic/storage";
 
+/**
+ * Welcome page
+ * Registers or logins in user and issues a token for API authentication
+ */
+
 @Component({
   templateUrl: 'welcome.html'
 })
@@ -26,7 +31,7 @@ export class WelcomePage {
       data => {
         this.model.token = data.token;
         this.model.user = data.user;
-        this.storage.set('token', data.token).then(() => this.nav.setRoot(LoadingPage));
+        this.storage.set('atpToken', data.token).then(() => this.nav.setRoot(LoadingPage));
       }
     );
   }
@@ -35,12 +40,11 @@ export class WelcomePage {
     this.authService.login(this.username, this.password).subscribe(data => {
       this.model.token = data.token;
       this.model.user = data.user;
-      this.storage.set('token', data.token).then(() => this.nav.setRoot(LoadingPage));
+      this.storage.set('atpToken', data.token).then(() => this.nav.setRoot(LoadingPage));
     });
   }
 
   forgotPassword() {
     window.open("https://atp-pacworx.rhcloud.com/atp.html", "_system");
   }
-
 }
