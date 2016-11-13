@@ -19,7 +19,7 @@ import {Component, trigger, state, style, transition, animate, keyframes} from "
       ])
     ]),
     trigger('pic1State', [
-      state('large', style({top: '60vw', width: '88vw', height: '88vw'})),
+      state('large', style({'z-index': 15, top: '60vw', width: '88vw', height: '88vw'})),
       transition('* => incomingWithTitle', [
         animate("1.7s 1.5s ease-in-out", keyframes([
           style({opacity: 0, top: '104vw', left: '50vw', width: '0', height: '0', offset: 0}),
@@ -45,7 +45,7 @@ import {Component, trigger, state, style, transition, animate, keyframes} from "
       ])
     ]),
     trigger('pic2State', [
-      state('large', style({top: '60vw', width: '88vw', height: '88vw'})),
+      state('large', style({'z-index': 15, top: '60vw', width: '88vw', height: '88vw'})),
       transition('* => incomingWithTitle', [
         animate("1.7s 3.5s ease-in-out", keyframes([
           style({opacity: 0, top: '104vw', right: '50vw', width: '0', height: '0', offset: 0}),
@@ -63,6 +63,7 @@ import {Component, trigger, state, style, transition, animate, keyframes} from "
         ]))
       ]),
       transition('* => large', [
+        style({'z-index': 15}),
         animate('0.2s ease-in-out')
       ]),
       transition('large => small', [
