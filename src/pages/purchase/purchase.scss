@@ -1,28 +1,40 @@
-.achievement-img {
-  height: 10vw;
-  width: 10vw;
-}
+purchase-page {
+  .achievement-img {
+    height: 10vw;
+    width: 10vw;
+  }
 
-.achievement-text {
-  margin-left: 8px;
-  margin-right: 8px;
-  white-space: normal;
-}
+  .achievement-text {
+    margin-left: 8px;
+    margin-right: 8px;
+    white-space: normal;
+  }
 
-.achievement-title {
-  font-size: 1.6rem;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
+  .achievement-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
 
-.achievement-description {
-  font-size: 1.2rem
-}
+  .achievement-description {
+    font-size: 1.2rem
+  }
 
-.claim-button {
-  width: 70px;
-  img {
-    height: 1.4rem;
-    margin-left: 2px;
+  .claim-button {
+    width: 70px;
+    img {
+      height: 1.4rem;
+      margin-left: 2px;
+    }
+  }
+
+  ion-header {
+    .header-md::after {
+      background-image: none;
+    }
+
+    .toolbar-md {
+      padding: 0;
+    }
   }
 }

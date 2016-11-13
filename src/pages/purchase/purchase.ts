@@ -8,10 +8,11 @@ import {CouponService} from "../../providers/coupon.service";
 import {NotificationService} from "../../providers/notification.service";
 
 @Component({
-  templateUrl: 'purchase.html'
+  templateUrl: 'purchase.html',
+  selector: 'purchase-page'
 })
 export class PurchasePage {
-  selection: string;
+  selection: string = 'achievements';
   couponCode: string;
 
   constructor(public model: Model,
