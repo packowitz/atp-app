@@ -7,7 +7,7 @@ survey {
   .picture-container {
     .pic {
       position: absolute;
-      top: 20vh;
+      top: 15vh;
       border: 2px $atp-light-grey2 solid;
       width: 41vw;
       height: 41vw;
@@ -40,7 +40,7 @@ survey {
     .no-opinion-button {
       color: $atp-dark-text;
       text-transform: inherit;
-      margin-top: 35vh;
+      margin-top: 25vh;
       width: 99%;
     }
   }

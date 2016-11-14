@@ -25,7 +25,7 @@ import {Component, trigger, state, style, transition, animate, keyframes} from "
           style({opacity: 0, top: '104vw', left: '50vw', width: '0', height: '0', offset: 0}),
           style({opacity: 1, top: '60vw', left: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
           style({opacity: 1, top: '60vw', left: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
-          style({left: '6vw', top: '20vh', width: '41vw', height: '41vw', offset: 1.0})
+          style({left: '6vw', top: '15vh', width: '41vw', height: '41vw', offset: 1.0})
         ]))
       ]),
       transition('* => incoming', [
@@ -33,7 +33,7 @@ import {Component, trigger, state, style, transition, animate, keyframes} from "
           style({opacity: 0, top: '104vw', left: '50vw', width: '0', height: '0', offset: 0}),
           style({opacity: 1, top: '60vw', left: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
           style({opacity: 1, top: '60vw', left: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
-          style({left: '6vw', top: '20vh', width: '41vw', height: '41vw', offset: 1.0})
+          style({left: '6vw', top: '15vh', width: '41vw', height: '41vw', offset: 1.0})
         ]))
       ]),
       transition('* => large', [
@@ -51,7 +51,7 @@ import {Component, trigger, state, style, transition, animate, keyframes} from "
           style({opacity: 0, top: '104vw', right: '50vw', width: '0', height: '0', offset: 0}),
           style({opacity: 1, top: '60vw', right: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
           style({opacity: 1, top: '60vw', right: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
-          style({right: '6vw', top: '20vh', width: '41vw', height: '41vw', offset: 1.0})
+          style({right: '6vw', top: '15vh', width: '41vw', height: '41vw', offset: 1.0})
         ]))
       ]),
       transition('* => incoming', [
@@ -59,7 +59,7 @@ import {Component, trigger, state, style, transition, animate, keyframes} from "
           style({opacity: 0, top: '104vw', right: '50vw', width: '0', height: '0', offset: 0}),
           style({opacity: 1, top: '60vw', right: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
           style({opacity: 1, top: '60vw', right: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
-          style({right: '6vw', top: '20vh', width: '41vw', height: '41vw', offset: 1.0})
+          style({right: '6vw', top: '15vh', width: '41vw', height: '41vw', offset: 1.0})
         ]))
       ]),
       transition('* => large', [
