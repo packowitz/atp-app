@@ -3,7 +3,7 @@
         <ion-icon name="arrow-dropdown" *ngIf="newUsernameExpanded"></ion-icon>
         <ion-icon name="arrow-dropright" *ngIf="!newUsernameExpanded"></ion-icon>
         Username & Password</ion-list-header>
-    <div *ngIf="newUsernameExpanded">
+  <div [ngClass]="newUsernameExpanded ? 'item-expand active' : 'item-expand inactive'">
         <ion-item>
             <ion-label floating>Username</ion-label>
             <ion-input type="text" [(ngModel)]="newUsername"></ion-input>

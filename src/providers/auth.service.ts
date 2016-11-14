@@ -32,7 +32,7 @@ export class AuthService {
 
   postNotification(enabled: boolean, soundEnabled: boolean, vibrationEnabled: boolean): Observable<User> {
     let data: any = {enabled: enabled, soundEnabled: soundEnabled, vibrationEnabled: vibrationEnabled};
-    return this.atpHttp.doPost("/app/user/notifications", data, "Sending settings");
+    return this.atpHttp.doPostBackground("/app/user/notifications", data);
   }
 
   postPersonalData(yearOfBirth: number, male: boolean, country: string): Observable<User> {

@@ -10,7 +10,7 @@ export class NotificationSettings {
   enabled: boolean;
   soundEnabled: boolean;
   vibrationEnabled: boolean;
-  expanded: boolean = false;
+  expanded: boolean = true;
 
   constructor(public model: Model,
               public authService: AuthService) {

@@ -16,7 +16,7 @@ import {CountrySelection} from "../../components/countrySelection.component";
     }`]
 })
 export class PersonalData {
-  expanded: boolean;
+  expanded: boolean = true;
   yearOfBirth: number;
   yearString: string;
   male: boolean;
@@ -27,7 +27,6 @@ export class PersonalData {
               public countryService: CountryService,
               public authService: AuthService,
               public popoverController: PopoverController) {
-    this.expanded = !this.model.isUserDataCompleteToAnswerATP();
     this.yearOfBirth = model.user.yearOfBirth;
     if(this.yearOfBirth) {
       this.yearString = String(this.yearOfBirth);

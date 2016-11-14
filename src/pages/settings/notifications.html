@@ -1,21 +1,20 @@
 <ion-list>
-    <ion-list-header (click)="expanded=!expanded">
-        <ion-icon name="arrow-dropdown" *ngIf="expanded"></ion-icon>
-        <ion-icon name="arrow-dropright" *ngIf="!expanded"></ion-icon>
-        Push Notification Settings</ion-list-header>
-    <div *ngIf="expanded">
-        <ion-item>
-            <ion-label>Push Notifications <span *ngIf="enabled">enabled</span><span *ngIf="!enabled">disabled</span></ion-label>
-            <ion-toggle [(ngModel)]="enabled"></ion-toggle>
-        </ion-item>
-        <ion-item>
-            <ion-label>Sound <span *ngIf="soundEnabled">enabled</span><span *ngIf="!soundEnabled">disabled</span></ion-label>
-            <ion-toggle [(ngModel)]="soundEnabled"></ion-toggle>
-        </ion-item>
-        <ion-item>
-            <ion-label>Vibration <span *ngIf="vibrationEnabled">enabled</span><span *ngIf="!vibrationEnabled">disabled</span></ion-label>
-            <ion-toggle [(ngModel)]="vibrationEnabled"></ion-toggle>
-        </ion-item>
-        <ion-item><button ion-button full [disabled]="dataUnchanged()" (click)="doSubmit()">Save</button></ion-item>
-    </div>
+  <ion-list-header (click)="expanded=!expanded">
+    <ion-icon name="arrow-dropdown" *ngIf="expanded"></ion-icon>
+    <ion-icon name="arrow-dropright" *ngIf="!expanded"></ion-icon>
+    Push Notification Settings</ion-list-header>
+  <div [ngClass]="expanded ? 'item-expand active' : 'item-expand inactive'">
+    <ion-item>
+      <ion-label>Push Notifications <span *ngIf="enabled">enabled</span><span *ngIf="!enabled">disabled</span></ion-label>
+      <ion-toggle [(ngModel)]="enabled" (ionChange)="doSubmit()"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Sound <span *ngIf="soundEnabled">enabled</span><span *ngIf="!soundEnabled">disabled</span></ion-label>
+      <ion-toggle [(ngModel)]="soundEnabled" (ionChange)="doSubmit()"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Vibration <span *ngIf="vibrationEnabled">enabled</span><span *ngIf="!vibrationEnabled">disabled</span></ion-label>
+      <ion-toggle [(ngModel)]="vibrationEnabled" (ionChange)="doSubmit()"></ion-toggle>
+    </ion-item>
+  </div>
 </ion-list>
