@@ -7,7 +7,8 @@ import {WelcomePage} from "../pages/welcome/welcome";
 import 'rxjs/Rx';
 import {Model} from "../components/model.component";
 import {SettingsPage} from "../pages/settings/settings";
-import {FeedbackPage} from "../pages/messages/messages";
+import {FeedbackPage} from "../pages/feedback/feedback.page";
+import {HighscorePage} from "../pages/highscore/highscore";
 
 /**
  * Main app controller.
@@ -39,6 +40,11 @@ export class AtpApp {
   // Show feedback page
   showFeedbackPage() {
     let modal = this.modalCtrl.create(FeedbackPage);
+    modal.present();
+  }
+
+  showHighscorePage() {
+    let modal = this.modalCtrl.create(HighscorePage);
     modal.present();
   }
 

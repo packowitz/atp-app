@@ -1,4 +1,4 @@
-import {NavController, Tabs, AlertController} from "ionic-angular";
+import {NavController, Tabs, AlertController, ModalController} from "ionic-angular";
 import {Model} from "../../components/model.component";
 import {SurveyPage} from "../survey/survey";
 import {SurveyService} from "../../providers/survey.service";
@@ -19,6 +19,7 @@ export class MainPage {
               public surveyService: SurveyService,
               public tabs: Tabs,
               public alertController: AlertController,
+              public modalCtrl: ModalController,
               public achievementService: AchievementService) {
   }
 
@@ -57,7 +58,8 @@ export class MainPage {
   }
 
   openHighscorePage() {
-    this.nav.push(HighscorePage);
+    let modal = this.modalCtrl.create(HighscorePage);
+    modal.present();
   }
 
   openMySurveysPage() {

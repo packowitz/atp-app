@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {HighscoreService} from "../../providers/highscore.service";
 import {HighscoreUser} from "../../providers/domain/highscoreUser";
+import {ViewController, NavParams} from "ionic-angular";
 
 @Component({
   templateUrl: 'highscore.html'
@@ -18,7 +19,14 @@ export class HighscorePage {
   totalGlobalLoaded: boolean = false;
   totalLocalLoaded: boolean = false;
 
-  constructor(public highscoreService: HighscoreService) {}
+  constructor(public highscoreService: HighscoreService,
+              public viewCtrl: ViewController,
+              public navParams: NavParams) {
+  }
+  // Close modal
+  close() {
+    this.viewCtrl.dismiss();
+  }
 
   ionViewDidEnter() {
     this.loadHighscoreWeekGlobal();

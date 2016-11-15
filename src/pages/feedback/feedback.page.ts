@@ -8,7 +8,7 @@ import {Util} from "../../components/util.component";
 import {FeedbackDetailsPage} from "./feedbackDetails";
 
 @Component({
-  templateUrl: 'messages.html'
+  templateUrl: 'feedback.page.html'
 })
 export class FeedbackPage {
   selection: string;

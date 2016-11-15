@@ -33,9 +33,13 @@
         ATP
       </ion-list-header>
       <ion-item-group>
+        <!-- Highscore buttons -->
+        <button ion-item menuClose (click)="showHighscorePage()">
+          <ion-icon item-left color="atp-gold" name="trophy"></ion-icon>Highscores</button>
+
         <!-- Feedback portal buttons -->
-        <button ion-item menuClose *ngIf="modal.token"
-                (click)="showFeedbackPage()" [disabled]="!modal.token">
+            <button ion-item menuClose *ngIf="modal.token"
+                    (click)="showFeedbackPage()" [disabled]="!modal.token">
           <ion-icon item-left color="atp-blue" name="book"></ion-icon>Feedback portal</button>
         <button ion-item menuClose><ion-icon item-left name="information-circle" color="atp-placeholder-grey"></ion-icon>About</button>
         <button ion-item menuClose (click)="showSettings()"><ion-icon item-left name="settings"></ion-icon>Settings</button>
