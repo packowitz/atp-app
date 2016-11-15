@@ -10,10 +10,10 @@ import {Achievement} from "../providers/domain/achievement";
 @Injectable()
 export class Model {
   public static server: string = "http://localhost:8080";
-  public static MainTab = 1;
-  public static PurchaseTab = 2;
-  public static StartSurveyTab = 3;
-  public static MySurveysTab = 4;
+  public static MainTab = 0;
+  public static PurchaseTab = 1;
+  public static StartSurveyTab = 2;
+  public static MySurveysTab = 3;
   public loading: Loading;
   public user: User;
   public token: string;
