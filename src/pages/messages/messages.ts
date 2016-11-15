@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, PopoverController} from "ionic-angular/index";
+import {NavController, PopoverController, ViewController} from "ionic-angular/index";
 import {ChooseFeedbackType} from "./chooseFeedbackType";
 import {Feedback} from "../../providers/domain/feedback";
 import {Model} from "../../components/model.component";
@@ -17,7 +17,8 @@ export class FeedbackPage {
   constructor(public nav: NavController,
               public model: Model,
               public feedbackService: MessagesService,
-              public popoverController: PopoverController) {
+              public popoverController: PopoverController,
+              public viewCtrl: ViewController) {
     this.selection = this.model.unreadAnnouncements > 0 ? 'announcements' : 'feedback';
     setTimeout(() => this.model.markAnnouncementAsRead(), 1000);
   }
@@ -47,5 +48,10 @@ export class FeedbackPage {
         this.model.feedback.unshift(feedback);
       }
     );
+  }
+
+  // Modal close
+  close() {
+    this.viewCtrl.dismiss();
   }
 }

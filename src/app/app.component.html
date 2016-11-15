@@ -1,0 +1,48 @@
+<ion-menu side="right" persistent="true" [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="outer-content">
+    <ion-list>
+      <ion-list-header>
+        Me
+      </ion-list-header>
+      <ion-item-group>
+
+        <!-- My data -->
+        <button ion-item menuClose *ngIf="modal.token"
+                (click)="showSettings()" >
+          <ion-icon item-left name="person" color="atp-blue-light"></ion-icon>My info
+        </button>
+
+        <!-- Login/logout options -->
+        <button ion-item menuClose *ngIf="!modal.token"
+                (click)="loginPage()" >
+          <ion-icon item-left name="log-in"></ion-icon>Log in
+        </button>
+        <button ion-item menuClose *ngIf="modal.token"
+                (click)="logout()" [disabled]="!modal.token">
+          <ion-icon item-left color="danger" name="log-out"></ion-icon>Log out</button>
+      </ion-item-group>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        ATP
+      </ion-list-header>
+      <ion-item-group>
+        <!-- Feedback portal buttons -->
+        <button ion-item menuClose *ngIf="modal.token"
+                (click)="showFeedbackPage()" [disabled]="!modal.token">
+          <ion-icon item-left color="atp-blue" name="book"></ion-icon>Feedback portal</button>
+        <button ion-item menuClose><ion-icon item-left name="information-circle" color="atp-placeholder-grey"></ion-icon>About</button>
+        <button ion-item menuClose (click)="showSettings()"><ion-icon item-left name="settings"></ion-icon>Settings</button>
+      </ion-item-group>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<!-- main navigation -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

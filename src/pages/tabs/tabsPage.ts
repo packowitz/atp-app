@@ -3,7 +3,6 @@ import {StartSurveyPage} from "../startSurvey/startSurvey";
 import {MySurveysPage} from "../mySurveys/mySurveys";
 import {MainPage} from "../main/main";
 import {PurchasePage} from "../purchase/purchase";
-import {FeedbackPage} from "../messages/messages";
 import {Model} from "../../components/model.component";
 
 @Component({
