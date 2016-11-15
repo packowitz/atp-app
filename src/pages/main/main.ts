@@ -60,10 +60,6 @@ export class MainPage {
     this.nav.push(HighscorePage);
   }
 
-  openFeedbackPage() {
-    this.tabs.select(Model.FeedbackTab);
-  }
-
   openMySurveysPage() {
     this.tabs.select(Model.MySurveysTab);
   }

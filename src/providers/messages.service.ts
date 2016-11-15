@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Rx";
-import {Feedback} from "../components/domain/feedback.component";
-import {FeedbackAnswer} from "../components/domain/feedbackAnswer.component";
-import {Announcement} from "../components/domain/announcement.component";
+import {Feedback} from "./domain/feedback";
+import {FeedbackAnswer} from "./domain/feedbackAnswer";
+import {Announcement} from "./domain/annoucement";
 import {AtpHttp} from "./atpHttp.service";
 
 export class FeedbackAnswerResponse {

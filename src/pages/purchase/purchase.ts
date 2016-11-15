@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {Model} from "../../components/model.component";
-import {Achievement} from "../../components/domain/achievement.component";
+import {Achievement} from "../../providers/domain/achievement";
 import {AchievementService} from "../../providers/achievement.service";
 import {SettingsPage} from "../settings/settings";
 import {NavController, AlertController} from "ionic-angular";

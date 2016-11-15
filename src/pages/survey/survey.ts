@@ -1,6 +1,6 @@
 import {AlertController} from "ionic-angular";
 import {SurveyService} from "../../providers/survey.service";
-import {Survey} from "../../components/domain/survey.component";
+import {Survey} from "../../providers/domain/survey";
 import {Component, trigger, state, style, transition, animate, keyframes} from "@angular/core";
 
 @Component({

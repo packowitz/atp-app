@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {NavController, PopoverController} from "ionic-angular/index";
 import {ChooseFeedbackType} from "./chooseFeedbackType";
-import {Feedback} from "../../components/domain/feedback.component";
+import {Feedback} from "../../providers/domain/feedback";
 import {Model} from "../../components/model.component";
 import {MessagesService} from "../../providers/messages.service";
 import {Util} from "../../components/util.component";

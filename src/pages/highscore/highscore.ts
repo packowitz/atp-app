@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {HighscoreService} from "../../providers/highscore.service";
-import {HighscoreUser} from "../../components/domain/highscoreUser.component";
+import {HighscoreUser} from "../../providers/domain/highscoreUser";
 
 @Component({
   templateUrl: 'highscore.html'

@@ -1,13 +1,13 @@
 import {Platform, Tabs, ActionSheetController, PopoverController} from "ionic-angular";
 import {NgZone} from "@angular/core";
 import {Camera, CameraOptions} from "ionic-native";
-import {Survey} from "../../components/domain/survey.component";
+import {Survey} from "../../providers/domain/survey";
 import {Model} from "../../components/model.component";
 import {SurveyService} from "../../providers/survey.service";
 import {RandomImage} from "../../components/randomImage.component";
 import {Component} from "@angular/core";
 import {CountrySelection} from "../../components/countrySelection.component";
-import {User} from "../../components/domain/user.component";
+import {User} from "../../providers/domain/user";
 import {NotificationService} from "../../providers/notification.service";
 
 declare var Croppie: any;

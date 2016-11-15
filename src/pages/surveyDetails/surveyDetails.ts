@@ -1,5 +1,5 @@
 import {NavParams, PopoverController, AlertController, NavController} from "ionic-angular/index";
-import {Survey} from "../../components/domain/survey.component";
+import {Survey} from "../../providers/domain/survey";
 import {Component} from "@angular/core";
 import {Util} from "../../components/util.component";
 import {SurveyService} from "../../providers/survey.service";

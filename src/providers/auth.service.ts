@@ -1,4 +1,4 @@
-import {User} from "../components/domain/user.component";
+import {User} from "./domain/user";
 import {Observable} from "rxjs/Observable";
 import {Injectable} from "@angular/core";
 import {Model} from "../components/model.component";

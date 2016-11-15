@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core";
-import {HighscoreUser} from "../../components/domain/highscoreUser.component";
+import {HighscoreUser} from "../../providers/domain/highscoreUser";
 @Component({
   selector: 'highscore-entry',
   template: `<ion-item *ngFor="let hs of highscore; let i = index" class="highscore-row" [class.itsme]="hs.itsme">

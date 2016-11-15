@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
-import {Survey} from "../components/domain/survey.component";
+import {Survey} from "./domain/survey";
 import {Observable} from "rxjs/Observable";
-import {Messages} from "../components/messages.component";
+import {Messages} from "../components/messages";
 import {AtpHttp} from "./atpHttp.service";
 
 @Injectable()

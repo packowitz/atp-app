@@ -1,20 +1,19 @@
-import {User} from "./domain/user.component";
+import {User} from "../providers/domain/user";
 import {Platform, Loading} from "ionic-angular";
 import {Injectable} from "@angular/core";
-import {Feedback} from "./domain/feedback.component";
-import {Survey} from "./domain/survey.component";
-import {Announcement} from "./domain/announcement.component";
+import {Feedback} from "../providers/domain/feedback";
+import {Survey} from "../providers/domain/survey";
+import {Announcement} from "../providers/domain/annoucement";
 import {Storage} from "@ionic/storage";
-import {Achievement} from "./domain/achievement.component";
+import {Achievement} from "../providers/domain/achievement";
 
 @Injectable()
 export class Model {
   public static server: string = "http://localhost:8080";
-  public static FeedbackTab = 0;
-  public static PurchaseTab = 1;
-  public static MainTab = 2;
-  public static MySurveysTab = 3;
-  public static StartSurveyTab = 4;
+  public static MainTab = 1;
+  public static PurchaseTab = 2;
+  public static StartSurveyTab = 3;
+  public static MySurveysTab = 4;
   public loading: Loading;
   public user: User;
   public token: string;

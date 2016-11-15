@@ -1,4 +1,4 @@
-import {Answer} from "./answer.component";
+import {Answer} from "./answer";
 
 export class Survey {
   id: number;
@@ -17,6 +17,6 @@ export class Survey {
   pic2Count: number;
   abuseCount: number;
   startedDate: string;
-  
+
   answers: Answer[];
 }

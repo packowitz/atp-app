@@ -3,7 +3,7 @@ import {Model} from "../components/model.component";
 import {AlertController} from "ionic-angular";
 import {NotificationService} from "./notification.service";
 import {Headers, Http} from "@angular/http";
-import {User} from "../components/domain/user.component";
+import {User} from "./domain/user";
 import {Observable} from "rxjs";
 
 export class RedeemResponse {

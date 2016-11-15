@@ -1,5 +1,5 @@
 import {PipeTransform, Pipe} from "@angular/core";
-import {Answer} from "../components/domain/answer.component";
+import {Answer} from "../providers/domain/answer";
 
 export class CountryPipeResult {
   alpha3: string;

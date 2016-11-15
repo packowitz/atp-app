@@ -1,4 +1,4 @@
-import {Country} from "../components/domain/country.component";
+import {Country} from "./domain/country";
 import {Observable} from "rxjs/Observable";
 import {Injectable} from "@angular/core";
 import {AtpHttp} from "./atpHttp.service";

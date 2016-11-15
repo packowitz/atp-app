@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HighscoreUser} from "../components/domain/highscoreUser.component";
+import {HighscoreUser} from "./domain/highscoreUser";
 import {Observable} from "rxjs/Rx";
 import {AtpHttp} from "./atpHttp.service";
 

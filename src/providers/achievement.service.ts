@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {AtpHttp} from "./atpHttp.service";
 import {Observable} from "rxjs";
-import {Achievement} from "../components/domain/achievement.component";
+import {Achievement} from "./domain/achievement";
 import {Model} from "../components/model.component";
 
 @Injectable()

@@ -1,8 +1,8 @@
 import {Component} from "@angular/core";
 import {NavParams} from "ionic-angular/index";
-import {Feedback} from "../../components/domain/feedback.component";
+import {Feedback} from "../../providers/domain/feedback";
 import {MessagesService} from "../../providers/messages.service";
-import {FeedbackAnswer} from "../../components/domain/feedbackAnswer.component";
+import {FeedbackAnswer} from "../../providers/domain/feedbackAnswer";
 import {Model} from "../../components/model.component";
 import {Util} from "../../components/util.component";
 @Component({
