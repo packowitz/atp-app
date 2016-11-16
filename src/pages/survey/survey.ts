@@ -19,20 +19,20 @@ import {Component, trigger, state, style, transition, animate, keyframes} from "
       ])
     ]),
     trigger('pic1State', [
-      state('large', style({'z-index': 15, top: '60vw', width: '88vw', height: '88vw'})),
+      state('large', style({'z-index': 15, top: '15vh', width: '88vw', height: '88vw'})),
       transition('* => incomingWithTitle', [
         animate("1.7s 1.5s ease-in-out", keyframes([
-          style({opacity: 0, top: '104vw', left: '50vw', width: '0', height: '0', offset: 0}),
-          style({opacity: 1, top: '60vw', left: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
-          style({opacity: 1, top: '60vw', left: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
+          style({opacity: 0, top: '50vh', left: '50vw', width: '0', height: '0', offset: 0}),
+          style({opacity: 1, top: '15vh', left: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
+          style({opacity: 1, top: '15vh', left: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
           style({left: '6vw', top: '15vh', width: '41vw', height: '41vw', offset: 1.0})
         ]))
       ]),
       transition('* => incoming', [
-        animate("1.7s ease-in-out", keyframes([
-          style({opacity: 0, top: '104vw', left: '50vw', width: '0', height: '0', offset: 0}),
-          style({opacity: 1, top: '60vw', left: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
-          style({opacity: 1, top: '60vw', left: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
+        animate("1.7s 0.2s ease-in-out", keyframes([
+          style({opacity: 0, top: '50vh', left: '50vw', width: '0', height: '0', offset: 0}),
+          style({opacity: 1, top: '15vh', left: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
+          style({opacity: 1, top: '15vh', left: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
           style({left: '6vw', top: '15vh', width: '41vw', height: '41vw', offset: 1.0})
         ]))
       ]),
@@ -45,20 +45,20 @@ import {Component, trigger, state, style, transition, animate, keyframes} from "
       ])
     ]),
     trigger('pic2State', [
-      state('large', style({'z-index': 15, top: '60vw', width: '88vw', height: '88vw'})),
+      state('large', style({'z-index': 15, top: '15vh', width: '88vw', height: '88vw'})),
       transition('* => incomingWithTitle', [
-        animate("1.7s 3.5s ease-in-out", keyframes([
-          style({opacity: 0, top: '104vw', right: '50vw', width: '0', height: '0', offset: 0}),
-          style({opacity: 1, top: '60vw', right: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
-          style({opacity: 1, top: '60vw', right: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
+        animate("1.7s 3.4s ease-in-out", keyframes([
+          style({opacity: 0, top: '50vh', right: '50vw', width: '0', height: '0', offset: 0}),
+          style({opacity: 1, top: '15vh', right: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
+          style({opacity: 1, top: '15vh', right: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
           style({right: '6vw', top: '15vh', width: '41vw', height: '41vw', offset: 1.0})
         ]))
       ]),
       transition('* => incoming', [
-        animate("1.7s 2s ease-in-out", keyframes([
-          style({opacity: 0, top: '104vw', right: '50vw', width: '0', height: '0', offset: 0}),
-          style({opacity: 1, top: '60vw', right: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
-          style({opacity: 1, top: '60vw', right: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
+        animate("1.7s 2.1s ease-in-out", keyframes([
+          style({opacity: 0, top: '50vh', right: '50vw', width: '0', height: '0', offset: 0}),
+          style({opacity: 1, top: '15vh', right: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
+          style({opacity: 1, top: '15vh', right: '6vw', width: '88vw', height: '88vw', offset: 0.9}),
           style({right: '6vw', top: '15vh', width: '41vw', height: '41vw', offset: 1.0})
         ]))
       ]),
@@ -73,11 +73,11 @@ import {Component, trigger, state, style, transition, animate, keyframes} from "
     trigger('buttonState', [
       transition('* => incomingWithTitle', [
         style({opacity: 0}),
-        animate("0.5s 5.2s", style({opacity: 1}))
+        animate("0.5s 5.1s", style({opacity: 1}))
       ]),
       transition('* => incoming', [
         style({opacity: 0}),
-        animate("0.5s 3.7s", style({opacity: 1}))
+        animate("0.5s 3.8s", style({opacity: 1}))
       ])
     ])
   ]
