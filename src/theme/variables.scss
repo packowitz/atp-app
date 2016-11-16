@@ -68,6 +68,7 @@ $atp-grey: #828282;
 $atp-light-grey: #f5f5f5;
 $atp-light-grey2: #d4dde5;
 $atp-light-grey3: #b6c5d3;
+$atp-light-grey4: #dedede;
 $atp-dark-grey2: #97adc1;
 $atp-placeholder-grey: #acacac;
 $atp-dark-text: #646f79;
@@ -193,7 +194,7 @@ ion-title {
 }
 
 .hidden {
-  visibility: hidden;
+  display: none;
 }
 
 .buttongroup {
@@ -280,12 +281,27 @@ ion-title {
   margin-top: 16px;
 }
 
+.margin-right-small {
+  margin-right: 8px;
+}
+.margin-right-middle {
+  margin-right: 16px;
+}
+
 .padding-top-middle {
   padding-top: 24px;
 }
 
+.padding-right-middle {
+  padding-right: 24px;
+}
+
 .padding-bottom-middle {
   padding-bottom: 24px;
+}
+
+.padding-left-middle {
+  padding-left: 24px;
 }
 
 .padding-vertical-middle {
@@ -312,6 +328,10 @@ ion-title {
   padding-right: 8px;
 }
 
+.padding-left-small {
+  padding-left: 8px;
+}
+
 .padding-top-small {
   padding-top: 8px;
 }
@@ -322,6 +342,10 @@ ion-title {
 
 .no-padding-bottom {
   padding-bottom: 0;
+}
+
+.no-padding-top {
+  padding-top: 0 !important;
 }
 
 .no-padding-vertical {

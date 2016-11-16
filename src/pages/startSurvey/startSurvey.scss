@@ -1,5 +1,27 @@
 .start-survey {
 
+  .title {
+    font-size: 2rem;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  .item-no-lower-border {
+    .item-inner {
+      border-bottom: none;
+    }
+  }
+
+  .stacked-title {
+    font-size: 1.6rem !important;
+    color: black !important;
+  }
+
+  .picture-title {
+    margin: 4vw;
+    font-size: 1.6rem;
+  }
+
   .picture-container {
     display: flex;
     margin: 4vw;
@@ -10,7 +32,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px black solid;
+    border: 1px $atp-light-grey4 solid;
     width: 44vw;
     height: 44vw;
 
@@ -20,8 +42,8 @@
     }
   }
 
-  ion-range {
-    padding-left: 0;
+  .countries {
+    margin-top: 6px;
   }
 
   .country {
@@ -29,12 +51,16 @@
     float: left;
   }
 
-  .submit-row {
-    display: flex;
+}
 
-    .save-default-text {
-      margin-left: 2vw;
-      white-space: normal;
+.submit-row {
+  padding: 16px;
+  border-top: 1px $atp-light-grey4 solid;
+
+  .start-survey-button {
+    background-color: $atp-blue-dark;
+    &.activated {
+      background-color: $atp-blue;
     }
   }
 }

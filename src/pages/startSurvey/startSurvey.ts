@@ -152,7 +152,8 @@ export class StartSurveyPage {
     event.preventDefault();
   }
 
-  addCountry() {
+  addCountry(event: Event) {
+    event.preventDefault();
     let countrySelection = this.popoverController.create(CountrySelection, {callback: country => {
       if(this.countries.indexOf(country.alpha3) == -1) {
         this.countries.push(country.alpha3);
