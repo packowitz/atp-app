@@ -44,6 +44,15 @@
       <span class="padding-left-small"> save settings as default</span>
     </div>
   </ion-item>
+  <ion-item class="title item-no-lower-border">
+    <span>How many people you want to ask?</span>
+  </ion-item>
+  <ion-item>
+    {{surveyType.name}} ({{surveyType.answers}} people)
+    <a href="" (click)="changeSurveyType($event)" item-right>
+      change
+    </a>
+  </ion-item>
   <ion-item>
     <ion-label stacked primary class="stacked-title">Tell the people where to look at (optional):</ion-label>
     <ion-input type="text" maxLength="25" [(ngModel)]="survey.title"
@@ -64,7 +73,9 @@
     </div>
   </div>
   <div class="submit-row">
-    <button ion-button full [disabled]="!surveyComplete()" (click)="startSurvey()" class="start-survey-button">Start ATP</button>
+    <button ion-button full [disabled]="!surveyComplete()" (click)="startSurvey()" class="start-survey-button">
+      Start ATP ({{surveyType.costs}} <img src="assets/img/diamond-white.png" class="diamond-icon">)
+    </button>
   </div>
   <div [class.modal-background]="croppie" [class.hidden]="!croppie" (click)="destroyCroppie()">
     <div class="croppie-modal" (click)="$event.stopPropagation()">

@@ -9,6 +9,7 @@ import {Component} from "@angular/core";
 import {CountrySelection} from "../../components/countrySelection.component";
 import {User} from "../../providers/domain/user";
 import {NotificationService} from "../../providers/notification.service";
+import {SurveyType} from "../../providers/domain/surveyType";
 
 declare var Croppie: any;
 
@@ -25,6 +26,7 @@ export class StartSurveyPage {
     saveToPhotoAlbum: false
   };
   survey: Survey;
+  surveyType: SurveyType;
   countries: string[];
   ageRange = {lower: 1, upper: 99};
   saveAsDefault: boolean = true;
@@ -43,6 +45,7 @@ export class StartSurveyPage {
   }
 
   createEmptySurvey(user: User) {
+    this.surveyType = this.model.surveyTypes[0];
     this.survey = new Survey();
     this.countries = user.surveyCountry && user.surveyCountry != 'ALL' ? user.surveyCountry.split(",") : user.country ? [user.country] : [];
     this.survey.male = user.surveyMale !== false;
@@ -171,8 +174,22 @@ export class StartSurveyPage {
     }
   }
 
+  changeSurveyType(event: Event) {
+    event.preventDefault();
+    for(let i=0; i < this.model.surveyTypes.length; i++) {
+      if(this.model.surveyTypes[i].key == this.surveyType.key) {
+        let nextIdx = i + 1;
+        if(this.model.surveyTypes.length == nextIdx) {
+          nextIdx = 0;
+        }
+        this.surveyType = this.model.surveyTypes[nextIdx];
+        return;
+      }
+    }
+  }
+
   surveyComplete(): boolean {
-    return this.survey.pic1 != null && this.survey.pic2 != null;
+    return this.survey.pic1 != null && this.survey.pic2 != null && this.model.user.credits >= this.surveyType.costs;
   }
 
   public startSurvey() {
@@ -189,7 +206,7 @@ export class StartSurveyPage {
     } else {
       this.survey.countries = "ALL";
     }
-    this.surveyService.postSurvey(this.survey, "NUMBER100", this.saveAsDefault).subscribe(resp => {
+    this.surveyService.postSurvey(this.survey, this.surveyType.key, this.saveAsDefault).subscribe(resp => {
       console.log("ATP started");
       this.model.last3surveys.unshift(resp);
       if(this.model.last3surveys.length > 3) {

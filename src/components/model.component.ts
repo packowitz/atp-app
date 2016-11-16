@@ -6,6 +6,7 @@ import {Survey} from "../providers/domain/survey";
 import {Announcement} from "../providers/domain/annoucement";
 import {Storage} from "@ionic/storage";
 import {Achievement} from "../providers/domain/achievement";
+import {SurveyType} from "../providers/domain/surveyType";
 
 @Injectable()
 export class Model {
@@ -20,6 +21,7 @@ export class Model {
   public last3surveys: Survey[] = [];
   public surveyList: Survey[];
   public surveyArchivedList: Survey[];
+  public surveyTypes: SurveyType[];
   public feedback: Feedback[] = [];
   public unreadFeedback: number = 0;
   public announcements: Announcement[] = [];
@@ -39,6 +41,12 @@ export class Model {
       Model.server = "http://api.askthepeople.io";
     }
     this.storage.get('readAnnouncements').then(data => this.readAnnouncements = data);
+
+    this.surveyTypes = [
+      {key: 'NUMBER100', name: 'Quick Check', answers: 100, costs: 1000},
+      {key: 'NUMBER300', name: 'Reliable Check', answers: 300, costs: 2900},
+      {key: 'NUMBER1000', name: 'Research Check', answers: 1000, costs: 9000}
+    ];
   }
 
   public recalcUnreadMessages() {
