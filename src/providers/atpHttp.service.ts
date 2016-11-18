@@ -105,14 +105,14 @@ export class AtpHttp {
     return error.switchMap(err => Observable.create(observer => {
       //noinspection TypeScriptUnresolvedFunction
       this.notificationService.dismissLoading().then(() => {
-        let title: string, message: string, buttons: any[] = [{text: 'Retry'}];
+        let title: string, buttons: any[] = [{text: 'Retry'}];
         if(err.status == 401) {
           title = 'Authentication Error';
           buttons.unshift({
             text: 'Reset account',
             handler: () => {
               this.model.token = null;
-              this.storage.remove('token').then(() => window.location.reload());
+              this.storage.remove('atpToken').then(() => window.location.reload());
             }
           });
         } else if(err.status == 500) {
@@ -125,9 +125,12 @@ export class AtpHttp {
           title = 'Unknown Error';
         }
 
+        // Handle error body
+        let errorBody = JSON.parse(err._body) ? JSON.parse(err._body) : null;
+
         let alert: Alert = this.alertController.create({
           title: title,
-          message: error.json().message ? error.json().message : "There is a problem with your account! Retry or reset your account.",
+          message: errorBody.message ? errorBody.message : "There is a problem with your account! Retry or reset your account.",
           buttons: buttons
         });
 
