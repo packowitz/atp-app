@@ -108,7 +108,6 @@ export class AtpHttp {
         let title: string, message: string, buttons: any[] = [{text: 'Retry'}];
         if(err.status == 401) {
           title = 'Authentication Error';
-          message = 'There is a problem with your account! Retry or reset your account.';
           buttons.unshift({
             text: 'Reset account',
             handler: () => {
@@ -118,18 +117,20 @@ export class AtpHttp {
           });
         } else if(err.status == 500) {
           title = 'Server Error';
-          message = 'Uuups, something unexpected happen. Please try again.';
         } else if(err.status == 404) {
-          title = 'Unknown method';
-          message = 'You tried to call something that does not exist. What are you doing?';
+          title = 'Resource not found';
         } else if(err.status == 403 || !err.status) {
           title = 'Server not reachable';
-          message = "ATP server didn't answer. Please try again.";
         } else {
           title = 'Unknown Error';
-          message = 'Server returned with error ' + err.status + '. Please try again.';
         }
-        let alert: Alert = this.alertController.create({title: title, message: message, buttons: buttons});
+
+        let alert: Alert = this.alertController.create({
+          title: title,
+          message: error.json().message ? error.json().message : "There is a problem with your account! Retry or reset your account.",
+          buttons: buttons
+        });
+
         alert.onDidDismiss(() => observer.next(retry()));
         alert.present();
       });
