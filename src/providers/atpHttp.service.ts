@@ -125,12 +125,12 @@ export class AtpHttp {
           title = 'Unknown Error';
         }
 
-        // Handle error body
+        // Set error body
         let errorBody = JSON.parse(err._body) ? JSON.parse(err._body) : null;
 
         let alert: Alert = this.alertController.create({
           title: title,
-          message: errorBody.message ? errorBody.message : "There is a problem with your account! Retry or reset your account.",
+          message: errorBody ? errorBody.message : "There is a problem with your account! Retry or reset your account.",
           buttons: buttons
         });
 

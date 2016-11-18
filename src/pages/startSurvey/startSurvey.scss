@@ -1,9 +1,10 @@
 .start-survey {
 
-  .title {
-    font-size: 2rem;
+  ion-list-header {
     margin-top: 16px;
     margin-bottom: 8px;
+    font-size: 2rem;
+    font-weight: 600;
   }
 
   .item-no-lower-border {

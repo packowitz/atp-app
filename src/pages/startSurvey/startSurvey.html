@@ -5,78 +5,87 @@
 </ion-header>
 
 <ion-content class="start-survey">
-  <ion-item class="title item-no-lower-border">
-    <span>Which people you want to ask?</span>
-  </ion-item>
-  <ion-item>
-    Gender:
-    <a href="" (click)="changeGender($event)" item-right>
-      <span *ngIf="survey.male && !survey.female">male only</span>
-      <span *ngIf="!survey.male && survey.female">female only</span>
-      <span *ngIf="survey.male && survey.female">male and female</span>
-    </a>
-  </ion-item>
-  <ion-item class="item-no-lower-border">
-    Age:
-    <span item-right class="age-range">
+  <ion-list no-lines>
+    <ion-list-header no-lines>
+      What is your target audience?
+    </ion-list-header>
+    <ion-item>
+      Gender:
+      <a href="" (click)="changeGender($event)" item-right>
+        <span *ngIf="survey.male && !survey.female">male only</span>
+        <span *ngIf="!survey.male && survey.female">female only</span>
+        <span *ngIf="survey.male && survey.female">any</span>
+      </a>
+    </ion-item>
+    <ion-item class="item-no-lower-border">
+      Age:
+      <span item-right class="age-range">
       {{ageRange.lower}} - {{ageRange.upper}} years
     </span>
-  </ion-item>
-  <ion-item>
-    <ion-range dualKnobs="true" min="1" max="99" [(ngModel)]="ageRange" class="no-padding-top"></ion-range>
-  </ion-item>
-  <ion-item>
-    Countries:
-    <span class="text-placeholder" *ngIf="countries.length > 0">(click on flag to remove country)</span>
-    <span class="text-placeholder" *ngIf="countries.length == 0" item-right>no restriction</span>
-    <a href="" *ngIf="countries.length < 20" (click)="addCountry($event)" item-right>
-      Add
-    </a>
-    <div class="countries">
+    </ion-item>
+    <ion-item>
+      <ion-range dualKnobs="true" min="1" max="99" [(ngModel)]="ageRange" class="no-padding-top"></ion-range>
+    </ion-item>
+    <ion-item>
+      Countries:
+      <span class="text-placeholder" *ngIf="countries.length > 0">(click on flag to remove country)</span>
+      <span class="text-placeholder" *ngIf="countries.length == 0" item-right>no restriction</span>
+      <a href="" *ngIf="countries.length < 20" (click)="addCountry($event)" item-right>
+        Add
+      </a>
+      <div class="countries">
       <span class="country" *ngFor="let country of countries" (click)="removeCountry(country)"><img
         src="assets/img/flags/{{country}}.png" class="flag"></span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="flex-left" (click)="saveAsDefault = !saveAsDefault">
+        <ion-icon name="square-outline" *ngIf="!saveAsDefault"></ion-icon>
+        <ion-icon name="checkbox-outline" *ngIf="saveAsDefault"></ion-icon>
+        <span class="padding-left-small"> save settings as default</span>
+      </div>
+    </ion-item>
+  </ion-list>
+  <ion-list no-lines>
+    <ion-list-header no-lines>
+      Range of study
+    </ion-list-header>
+    <ion-item>
+      {{surveyType.name}} ({{surveyType.answers}} people)
+      <a href="" (click)="changeSurveyType($event)" item-right>
+        change
+      </a>
+    </ion-item>
+  </ion-list>
+  <ion-list no-lines>
+    <ion-list-header no-lines>
+      Add pictures:
+    </ion-list-header>
+
+    <div class="picture-container">
+      <img [src]="'data:image/jpeg;base64,' + survey.pic1" *ngIf="survey.pic1" (click)="choosePicture(true)" class="pic"/>
+      <div *ngIf="!survey.pic1" (click)="choosePicture(true)" class="pic light-background">
+        <ion-icon name="images" class="default-icon"></ion-icon>
+      </div>
+      <img [src]="'data:image/jpeg;base64,' + survey.pic2" *ngIf="survey.pic2" (click)="choosePicture(false)"
+           class="pic"/>
+      <div *ngIf="!survey.pic2" (click)="choosePicture(false)" class="pic light-background">
+        <ion-icon name="images" class="default-icon"></ion-icon>
+      </div>
     </div>
-  </ion-item>
-  <ion-item>
-    <div class="flex-left" (click)="saveAsDefault = !saveAsDefault">
-      <ion-icon name="square-outline" *ngIf="!saveAsDefault"></ion-icon>
-      <ion-icon name="checkbox-outline" *ngIf="saveAsDefault"></ion-icon>
-      <span class="padding-left-small"> save settings as default</span>
-    </div>
-  </ion-item>
-  <ion-item class="title item-no-lower-border">
-    <span>How many people you want to ask?</span>
-  </ion-item>
-  <ion-item>
-    {{surveyType.name}} ({{surveyType.answers}} people)
-    <a href="" (click)="changeSurveyType($event)" item-right>
-      change
-    </a>
-  </ion-item>
-  <ion-item>
-    <ion-label stacked primary class="stacked-title">Tell the people where to look at (optional):</ion-label>
-    <ion-input type="text" maxLength="25" [(ngModel)]="survey.title"
-               placeholder="keep it short and precise"></ion-input>
-  </ion-item>
-  <div class="picture-title">
-    Please choose your pictures:
-  </div>
-  <div class="picture-container">
-    <img [src]="'data:image/jpeg;base64,' + survey.pic1" *ngIf="survey.pic1" (click)="choosePicture(true)" class="pic"/>
-    <div *ngIf="!survey.pic1" (click)="choosePicture(true)" class="pic light-background">
-      <ion-icon name="images" class="default-icon"></ion-icon>
-    </div>
-    <img [src]="'data:image/jpeg;base64,' + survey.pic2" *ngIf="survey.pic2" (click)="choosePicture(false)"
-         class="pic"/>
-    <div *ngIf="!survey.pic2" (click)="choosePicture(false)" class="pic light-background">
-      <ion-icon name="images" class="default-icon"></ion-icon>
-    </div>
-  </div>
+    <ion-item>
+      <ion-label stacked primary class="stacked-title">Short description (optional):</ion-label>
+      <ion-input type="text" maxLength="25" [(ngModel)]="survey.title"
+                 placeholder="Example: Best looking?"></ion-input>
+    </ion-item>
+  </ion-list>
+
   <div class="submit-row">
     <button ion-button full [disabled]="!surveyComplete()" (click)="startSurvey()" class="start-survey-button">
       Start ATP ({{surveyType.costs}} <img src="assets/img/diamond-white.png" class="diamond-icon">)
     </button>
   </div>
+
   <div [class.modal-background]="croppie" [class.hidden]="!croppie" (click)="destroyCroppie()">
     <div class="croppie-modal" (click)="$event.stopPropagation()">
       <div id="new-croppie"></div>
