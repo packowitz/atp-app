@@ -1,10 +1,7 @@
 <ion-header>
   <ion-navbar color="atp-blue">
-    <div *ngIf="survey">
-      <div class="survey-title color-white text-center">
-        <div *ngIf="survey.title" [@titleState]="titleAnimationState" class="text-h4">{{survey.title}}</div>
-        <div *ngIf="!survey.title" class="text-h5">&lt;ATP has no hint&gt;</div>
-      </div>
+    <div class="color-white text-center">
+      <div class="text-h5">Please choose</div>
     </div>
     <ion-buttons end>
       <button ion-button icon-only (click)="reportAbuse()" color="light-danger">
@@ -15,17 +12,17 @@
 </ion-header>
 <ion-content class="light-blue-background">
   <div *ngIf="survey">
-    <div class="picture-container">
-      <img [src]="'data:image/jpeg;base64,' + survey.pic1" [@pic1State]="pic1AnimationState" (click)="togglePic1()" class="pic"/>
-      <img [src]="'data:image/jpeg;base64,' + survey.pic2" [@pic2State]="pic2AnimationState" (click)="togglePic2()" class="pic"/>
+    <div class="survey-title color-white text-center">
+      <div *ngIf="survey.title" [@titleState]="titleAnimationState" class="text-h4">{{survey.title}}</div>
     </div>
-    <div class="button-container" [@buttonState]="buttonAnimationState">
+    <div class="picture-container">
+      <img [src]="'data:image/jpeg;base64,' + survey.pic1" [@pic1State]="pic1AnimationState" (click)="selectPicture(1)" class="pic"/>
+      <img [src]="'data:image/jpeg;base64,' + survey.pic2" [@pic2State]="pic2AnimationState" (click)="selectPicture(2)" class="pic"/>
+    </div>
+    <div class="button-container" [@buttonState]="buttonAnimationState" (@buttonState.done)="animationDone()">
       <div class="flex-space-between">
-        <button ion-button class="pic-button" (click)="selectPicture(1)">Left</button>
-        <button ion-button class="pic-button" (click)="selectPicture(2)">Right</button>
-      </div>
-      <div>
-        <button ion-button color="light" class="no-opinion-button" (click)="selectPicture(0)">No big difference</button>
+        <button ion-button class="option-button" (click)="selectPicture(0)">? I don't know ?</button>
+        <button ion-button class="option-button" (click)="selectPicture(0)">No big difference</button>
       </div>
     </div>
   </div>

@@ -4,8 +4,7 @@ survey {
   }
   .survey-title {
     color: white;
-    height: 8vh;
-    padding-top: 2.5vh;
+    padding-top: 4.5vh;
   }
   .picture-container {
     .pic {
@@ -28,9 +27,8 @@ survey {
     top: 80vw;
     left:6vw;
     width: 88vw;
-    height: 80vw;
 
-    .pic-button {
+    .option-button {
       width: 41vw;
       background-color: $atp-light-grey2;
       color: $atp-dark-text;
@@ -39,12 +37,6 @@ survey {
       &.activated {
         background-color: $atp-light-grey3;
       }
-    }
-    .no-opinion-button {
-      color: $atp-dark-text;
-      text-transform: inherit;
-      margin-top: 25vh;
-      width: 99%;
     }
   }
 }

@@ -11,9 +11,9 @@ import {Component, trigger, state, style, transition, animate, keyframes} from "
       state('active', style({transform: 'translateY(0)'})),
       transition('* => active', [
         animate("1.5s ease-in-out", keyframes([
-          style({opacity: 0, transform: 'translateY(48vh)', offset: 0}),
-          style({opacity: 1, transform: 'translateY(48vh)', offset: 0.15}),
-          style({opacity: 1, transform: 'translateY(48vh)', offset: 0.85}),
+          style({opacity: 0, transform: 'translateY(40vh)', offset: 0}),
+          style({opacity: 1, transform: 'translateY(40vh)', offset: 0.15}),
+          style({opacity: 1, transform: 'translateY(40vh)', offset: 0.85}),
           style({opacity: 1, transform: 'translateY(0)', offset: 1.0})
         ]))
       ])
@@ -89,6 +89,7 @@ export class SurveyPage {
   pic1AnimationState: string;
   pic2AnimationState: string;
   buttonAnimationState: string;
+  animationOver: boolean;
 
   constructor(public surveyService: SurveyService,
               public alertController: AlertController) {
@@ -100,11 +101,14 @@ export class SurveyPage {
   }
 
   selectPicture(picNr: number) {
-    this.surveyService.postResult(this.survey, picNr).subscribe(data => this.showSurvey(data));
+    if(this.animationOver) {
+      this.surveyService.postResult(this.survey, picNr).subscribe(data => this.showSurvey(data));
+    }
   }
 
   showSurvey(survey: Survey) {
     this.survey = null;
+    this.animationOver = false;
     this.titleAnimationState = null;
     this.pic1AnimationState = null;
     this.pic2AnimationState = null;
@@ -123,6 +127,12 @@ export class SurveyPage {
         this.buttonAnimationState = "incoming";
       }
     }, 10);
+  }
+
+  animationDone() {
+    if(this.buttonAnimationState != null) {
+      this.animationOver = true;
+    }
   }
 
   togglePic1() {
