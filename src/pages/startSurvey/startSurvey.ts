@@ -10,6 +10,7 @@ import {CountrySelection} from "../../components/countrySelection.component";
 import {User} from "../../providers/domain/user";
 import {NotificationService} from "../../providers/notification.service";
 import {SurveyType} from "../../providers/domain/surveyType";
+import {Messages} from "../../components/messages";
 
 declare var Croppie: any;
 
@@ -30,6 +31,7 @@ export class StartSurveyPage {
   countries: string[];
   ageRange = {lower: 1, upper: 99};
   saveAsDefault: boolean = true;
+  exampleText: string;
   croppie: any;
   croppieFirst: boolean;
 
@@ -46,6 +48,7 @@ export class StartSurveyPage {
 
   createEmptySurvey(user: User) {
     this.surveyType = this.model.surveyTypes[0];
+    this.exampleText = Messages.getStartAtpExampleMsg();
     this.survey = new Survey();
     this.countries = user.surveyCountry && user.surveyCountry != 'ALL' ? user.surveyCountry.split(",") : user.country ? [user.country] : [];
     this.survey.male = user.surveyMale !== false;

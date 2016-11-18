@@ -143,6 +143,10 @@ ion-title {
   color: white;
 }
 
+.color-red {
+  color: $atp-red;
+}
+
 .light-background {
   background-color: $atp-light;
 }
@@ -286,6 +290,10 @@ ion-title {
 }
 .margin-right-middle {
   margin-right: 16px;
+}
+
+.no-margin-top {
+  margin-top: 0;
 }
 
 .padding-top-middle {

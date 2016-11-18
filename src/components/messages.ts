@@ -1,12 +1,4 @@
 export class Messages {
-  public static tooFastMsg: Array<string> = [
-    "Not too hasty, my friend!",
-    "Take some time to choose!"
-  ];
-  public static getTooFastMsg(): string {
-    return Messages.tooFastMsg[Math.floor(Math.random() * Messages.tooFastMsg.length)];
-  }
-
   public static answeredMsg: Array<string> = [
     "Thank you for your answer",
     "Good choice, mate",
@@ -22,5 +14,17 @@ export class Messages {
   ];
   public static getAnsweredMsg(): string {
     return Messages.answeredMsg[Math.floor(Math.random() * Messages.answeredMsg.length)];
+  }
+
+  public static startAtpExampleMsg: Array<string> = [
+    "haircut",
+    "best looking",
+    "color",
+    "shape",
+    "tastes better?",
+    "funnier"
+  ];
+  public static getStartAtpExampleMsg(): string {
+    return Messages.startAtpExampleMsg[Math.floor(Math.random() * Messages.startAtpExampleMsg.length)];
   }
 }

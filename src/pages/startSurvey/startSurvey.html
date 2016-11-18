@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content class="start-survey">
-  <ion-list no-lines>
+  <ion-list>
     <ion-list-header no-lines>
       What is your target audience?
     </ion-list-header>
@@ -46,18 +46,8 @@
       </div>
     </ion-item>
   </ion-list>
-  <ion-list no-lines>
-    <ion-list-header no-lines>
-      Range of study
-    </ion-list-header>
-    <ion-item>
-      {{surveyType.name}} ({{surveyType.answers}} people)
-      <a href="" (click)="changeSurveyType($event)" item-right>
-        change
-      </a>
-    </ion-item>
-  </ion-list>
-  <ion-list no-lines>
+
+  <ion-list>
     <ion-list-header no-lines>
       Add pictures:
     </ion-list-header>
@@ -76,7 +66,22 @@
     <ion-item>
       <ion-label stacked primary class="stacked-title">Short description (optional):</ion-label>
       <ion-input type="text" maxLength="25" [(ngModel)]="survey.title"
-                 placeholder="Example: Best looking?"></ion-input>
+                 placeholder="Example: {{exampleText}}"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list no-lines>
+    <ion-list-header no-lines>
+      ATP-Range:
+    </ion-list-header>
+    <ion-item>
+      {{surveyType.name}} ({{surveyType.answers}} people)
+      <a href="" (click)="changeSurveyType($event)" item-right>
+        change
+      </a>
+    </ion-item>
+    <ion-item *ngIf="model.user.credits < surveyType.costs">
+      <i item-right class="color-red no-margin-top">You don't have enough pax for this ATP-Range!</i>
     </ion-item>
   </ion-list>
 
