@@ -3,9 +3,19 @@ survey {
     overflow: inherit;
   }
   .survey-title {
-    color: white;
     padding-top: 4.5vh;
+    margin-left: 6vw;
+    margin-right: 6vw;
   }
+  .enlarge-icons {
+    padding-top: 2vh;
+    margin-left: 6vw;
+    margin-right: 6vw;
+    .fa {
+      font-size: 2.4rem;
+    }
+  }
+
   .picture-container {
     .pic {
       position: absolute;
@@ -37,6 +47,28 @@ survey {
       &.activated {
         background-color: $atp-light-grey3;
       }
+    }
+  }
+  .slider-container {
+    position: absolute;
+    top: 15vh;
+    width: 88vw;
+    margin-left: 6vw;
+    margin-right: 6vw;
+
+    .pic {
+      width: 88vw;
+      height: 88vw;
+      border: 2px $atp-light-grey2 solid;
+    }
+
+    .slide-zoom {
+      margin-bottom: 6vh;
+    }
+    .swiper-pagination-bullet {
+      width: 15px;
+      height: 15px;
+      background-color: white;
     }
   }
 }

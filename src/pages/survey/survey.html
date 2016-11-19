@@ -12,17 +12,36 @@
 </ion-header>
 <ion-content class="light-blue-background">
   <div *ngIf="survey">
-    <div class="survey-title color-white text-center">
-      <div *ngIf="survey.title" [@titleState]="titleAnimationState" class="text-h4">{{survey.title}}</div>
+    <div class="survey-title color-white flex-space-between">
+      <div [@titleState]="titleAnimationState" class="text-h4 text-center flex-grow">{{survey.title ? survey.title : '&nbsp;'}}</div>
     </div>
-    <div class="picture-container">
-      <img [src]="'data:image/jpeg;base64,' + survey.pic1" [@pic1State]="pic1AnimationState" (click)="selectPicture(1)" class="pic"/>
-      <img [src]="'data:image/jpeg;base64,' + survey.pic2" [@pic2State]="pic2AnimationState" (click)="selectPicture(2)" class="pic"/>
+    <div class="enlarge-icons color-white flex-space-between">
+      <i class="fa" [class.fa-search-plus]="!showSlider" [class.fa-search-minus]="showSlider" [@buttonState]="buttonAnimationState" (click)="toggleSlider(1)"></i>
+      <i class="fa" [class.fa-search-plus]="!showSlider" [class.fa-search-minus]="showSlider" [@buttonState]="buttonAnimationState" (click)="toggleSlider(2)"></i>
     </div>
-    <div class="button-container" [@buttonState]="buttonAnimationState" (@buttonState.done)="animationDone()">
-      <div class="flex-center">
-        <button ion-button class="option-button" (click)="selectPicture(0)">I don't know</button>
+    <div *ngIf="!showSlider">
+      <div class="picture-container">
+        <img [src]="'data:image/jpeg;base64,' + survey.pic1" [@pic1State]="pic1AnimationState" (click)="selectPicture(1)" class="pic"/>
+        <img [src]="'data:image/jpeg;base64,' + survey.pic2" [@pic2State]="pic2AnimationState" (click)="selectPicture(2)" class="pic"/>
       </div>
+      <div class="button-container" [@buttonState]="buttonAnimationState" (@buttonState.done)="animationDone()">
+        <div class="flex-center">
+          <button ion-button class="option-button" (click)="selectPicture(0)">I don't know</button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="showSlider" class="slider-container">
+      <ion-slides [options]="sliderOptions">
+        <ion-slide>
+          <img [src]="'data:image/jpeg;base64,' + survey.pic1" [@pic1State]="pic1AnimationState" (click)="selectPicture(1)" class="pic"/>
+        </ion-slide>
+        <ion-slide>
+          <img [src]="'data:image/jpeg;base64,' + survey.pic2" [@pic2State]="pic2AnimationState" (click)="selectPicture(2)" class="pic"/>
+        </ion-slide>
+        <ion-slide>
+          Here will be an image for I don't know. Coming soon, my friend.
+        </ion-slide>
+      </ion-slides>
     </div>
   </div>
 </ion-content>

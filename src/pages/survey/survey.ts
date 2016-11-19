@@ -90,6 +90,8 @@ export class SurveyPage {
   pic2AnimationState: string;
   buttonAnimationState: string;
   animationOver: boolean;
+  showSlider: boolean;
+  sliderOptions = {pager: true, loop: true};
 
   constructor(public surveyService: SurveyService,
               public alertController: AlertController) {
@@ -109,6 +111,7 @@ export class SurveyPage {
   showSurvey(survey: Survey) {
     this.survey = null;
     this.animationOver = false;
+    this.showSlider = false;
     this.titleAnimationState = null;
     this.pic1AnimationState = null;
     this.pic2AnimationState = null;
@@ -132,7 +135,17 @@ export class SurveyPage {
   animationDone() {
     if(this.buttonAnimationState != null) {
       this.animationOver = true;
+
+      this.titleAnimationState = null;
+      this.pic1AnimationState = null;
+      this.pic2AnimationState = null;
+      this.buttonAnimationState = null;
     }
+  }
+
+  toggleSlider(picNumber: number) {
+    //TODO: when showing slider, slide to the pic given in picNumber
+    this.showSlider = !this.showSlider;
   }
 
   togglePic1() {
