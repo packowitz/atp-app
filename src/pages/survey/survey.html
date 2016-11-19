@@ -20,9 +20,8 @@
       <img [src]="'data:image/jpeg;base64,' + survey.pic2" [@pic2State]="pic2AnimationState" (click)="selectPicture(2)" class="pic"/>
     </div>
     <div class="button-container" [@buttonState]="buttonAnimationState" (@buttonState.done)="animationDone()">
-      <div class="flex-space-between">
-        <button ion-button class="option-button" (click)="selectPicture(0)">? I don't know ?</button>
-        <button ion-button class="option-button" (click)="selectPicture(0)">No big difference</button>
+      <div class="flex-center">
+        <button ion-button class="option-button" (click)="selectPicture(0)">I don't know</button>
       </div>
     </div>
   </div>
