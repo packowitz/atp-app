@@ -39,9 +39,10 @@
           <img [src]="'data:image/jpeg;base64,' + survey.pic2" [@pic2State]="pic2AnimationState" class="pic"/>
         </ion-slide>
         <ion-slide>
-          Here will be an image for I don't know. Coming soon, my friend.
+          <img src="assets/img/i-dont-know-{{iDontKnowImageIndex}}.png" class="pic">
         </ion-slide>
       </ion-slides>
+      <div class="help-text">swipe to change picture | tap to choose</div>
     </div>
   </div>
 </ion-content>

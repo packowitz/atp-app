@@ -19,7 +19,6 @@ import {Component, trigger, state, style, transition, animate, keyframes, ViewCh
       ])
     ]),
     trigger('pic1State', [
-      state('large', style({'z-index': 15, top: '15vh', width: '88vw', height: '88vw'})),
       transition('* => incomingWithTitle', [
         animate("1.7s 1.5s ease-in-out", keyframes([
           style({opacity: 0, top: '50vh', left: '50vw', width: '0', height: '0', offset: 0}),
@@ -36,16 +35,8 @@ import {Component, trigger, state, style, transition, animate, keyframes, ViewCh
           style({left: '6vw', top: '15vh', width: '41vw', height: '41vw', offset: 1.0})
         ]))
       ]),
-      transition('* => large', [
-        style({'z-index': 15}),
-        animate('0.2s ease-in-out')
-      ]),
-      transition('large => small', [
-        animate('0.2s ease-in-out')
-      ])
     ]),
     trigger('pic2State', [
-      state('large', style({'z-index': 15, top: '15vh', width: '88vw', height: '88vw'})),
       transition('* => incomingWithTitle', [
         animate("1.7s 3.4s ease-in-out", keyframes([
           style({opacity: 0, top: '50vh', right: '50vw', width: '0', height: '0', offset: 0}),
@@ -62,13 +53,6 @@ import {Component, trigger, state, style, transition, animate, keyframes, ViewCh
           style({right: '6vw', top: '15vh', width: '41vw', height: '41vw', offset: 1.0})
         ]))
       ]),
-      transition('* => large', [
-        style({'z-index': 15}),
-        animate('0.2s ease-in-out')
-      ]),
-      transition('large => small', [
-        animate('0.2s ease-in-out')
-      ])
     ]),
     trigger('buttonState', [
       transition('* => incomingWithTitle', [
@@ -93,6 +77,7 @@ export class SurveyPage {
   animationOver: boolean;
   showSlider: boolean;
   sliderOptions = {pager: true, loop: true};
+  iDontKnowImageIndex: number;
 
   constructor(public surveyService: SurveyService,
               public alertController: AlertController) {
@@ -116,27 +101,21 @@ export class SurveyPage {
   }
 
   showSurvey(survey: Survey) {
-    this.survey = null;
     this.animationOver = false;
     this.showSlider = false;
-    this.titleAnimationState = null;
-    this.pic1AnimationState = null;
-    this.pic2AnimationState = null;
-    this.buttonAnimationState = null;
+    this.iDontKnowImageIndex = Math.floor(Math.random() * 3);
 
-    setTimeout(() => {
-      this.survey = survey;
-      if(this.survey.title) {
-        this.titleAnimationState = "active";
-        this.pic1AnimationState = "incomingWithTitle";
-        this.pic2AnimationState = "incomingWithTitle";
-        this.buttonAnimationState = "incomingWithTitle";
-      } else {
-        this.pic1AnimationState = "incoming";
-        this.pic2AnimationState = "incoming";
-        this.buttonAnimationState = "incoming";
-      }
-    }, 10);
+    this.survey = survey;
+    if(this.survey.title) {
+      this.titleAnimationState = "active";
+      this.pic1AnimationState = "incomingWithTitle";
+      this.pic2AnimationState = "incomingWithTitle";
+      this.buttonAnimationState = "incomingWithTitle";
+    } else {
+      this.pic1AnimationState = "incoming";
+      this.pic2AnimationState = "incoming";
+      this.buttonAnimationState = "incoming";
+    }
   }
 
   animationDone() {
@@ -153,28 +132,6 @@ export class SurveyPage {
   toggleSlider(picNumber: number) {
     //TODO: when showing slider, slide to the pic given in picNumber
     this.showSlider = !this.showSlider;
-  }
-
-  togglePic1() {
-    if (this.pic1AnimationState == 'large') {
-      this.pic1AnimationState = 'small';
-    } else {
-      if (this.pic2AnimationState == 'large') {
-        this.pic2AnimationState = 'small';
-      }
-      this.pic1AnimationState = 'large';
-    }
-  }
-
-  togglePic2() {
-    if (this.pic2AnimationState == 'large') {
-      this.pic2AnimationState = 'small';
-    } else {
-      if (this.pic1AnimationState == 'large') {
-        this.pic1AnimationState = 'small';
-      }
-      this.pic2AnimationState = 'large';
-    }
   }
 
   reportAbuse() {

@@ -8,7 +8,10 @@ survey {
     margin-right: 6vw;
   }
   .enlarge-icons {
-    padding-top: 2vh;
+    position: absolute;
+    top: 10vh;
+    height: 5vh;
+    width: 88vw;
     margin-left: 6vw;
     margin-right: 6vw;
     .fa {
@@ -63,12 +66,17 @@ survey {
     }
 
     .slide-zoom {
-      margin-bottom: 6vh;
+      margin-bottom: 8vh;
     }
     .swiper-pagination-bullet {
       width: 15px;
       height: 15px;
       background-color: white;
+    }
+    .help-text {
+      color: #cccccc;
+      text-align: center;
+      font-style: italic;
     }
   }
 }
