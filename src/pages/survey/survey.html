@@ -31,12 +31,12 @@
       </div>
     </div>
     <div *ngIf="showSlider" class="slider-container">
-      <ion-slides [options]="sliderOptions">
+      <ion-slides [options]="sliderOptions" #pictureSlider (click)="slideClick()">
         <ion-slide>
-          <img [src]="'data:image/jpeg;base64,' + survey.pic1" [@pic1State]="pic1AnimationState" (click)="selectPicture(1)" class="pic"/>
+          <img [src]="'data:image/jpeg;base64,' + survey.pic1" [@pic1State]="pic1AnimationState" class="pic"/>
         </ion-slide>
         <ion-slide>
-          <img [src]="'data:image/jpeg;base64,' + survey.pic2" [@pic2State]="pic2AnimationState" (click)="selectPicture(2)" class="pic"/>
+          <img [src]="'data:image/jpeg;base64,' + survey.pic2" [@pic2State]="pic2AnimationState" class="pic"/>
         </ion-slide>
         <ion-slide>
           Here will be an image for I don't know. Coming soon, my friend.

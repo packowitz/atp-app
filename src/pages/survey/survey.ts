@@ -1,7 +1,7 @@
-import {AlertController} from "ionic-angular";
+import {AlertController, Slides} from "ionic-angular";
 import {SurveyService} from "../../providers/survey.service";
 import {Survey} from "../../providers/domain/survey";
-import {Component, trigger, state, style, transition, animate, keyframes} from "@angular/core";
+import {Component, trigger, state, style, transition, animate, keyframes, ViewChild} from "@angular/core";
 
 @Component({
   templateUrl: 'survey.html',
@@ -84,6 +84,7 @@ import {Component, trigger, state, style, transition, animate, keyframes} from "
 })
 export class SurveyPage {
   survey: Survey;
+  @ViewChild('pictureSlider') slider: Slides;
 
   titleAnimationState: string;
   pic1AnimationState: string;
@@ -106,6 +107,12 @@ export class SurveyPage {
     if(this.animationOver) {
       this.surveyService.postResult(this.survey, picNr).subscribe(data => this.showSurvey(data));
     }
+  }
+
+  slideClick() {
+    //with looping pic1 can be 1 or 4 and idk-pic 3 or 0
+    let idx = this.slider.getActiveIndex() % 3;
+    this.selectPicture(idx);
   }
 
   showSurvey(survey: Survey) {
