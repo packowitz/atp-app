@@ -140,7 +140,7 @@ export class SurveyPage {
       message: "Abuse means that you think that these pictures show <strong>illegal</strong> or <strong>offensive</strong> content.<br/>If you don't think this is illegal or offensive, please tap 'Cancel'.",
       buttons: [
         {text: 'Cancel'},
-        {text: 'Report Abuse', handler: () => this.selectPicture(3)}
+        {text: 'Report Abuse', handler: () => this.selectPicture(-1)}
       ]
     }).present();
   }
