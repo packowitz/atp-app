@@ -5,6 +5,7 @@ import {Model} from "../components/model.component";
 import {NotificationService} from "./notification.service";
 import {AlertController, Alert} from "ionic-angular";
 import {Storage} from "@ionic/storage";
+import {LocalStorage} from "./localStorage.component";
 
 @Injectable()
 export class AtpHttp {
@@ -12,6 +13,7 @@ export class AtpHttp {
 
   constructor(public http: Http,
               public model: Model,
+              public localStorage: LocalStorage,
               public notificationService: NotificationService,
               public alertController: AlertController,
               public storage: Storage) {
@@ -20,8 +22,8 @@ export class AtpHttp {
   doGet(uri: string, loadingMessage: string): Observable<any> {
     this.notificationService.showLoading(loadingMessage);
     let headers: Headers = new Headers();
-    if(this.model.token) {
-      headers.append('Authorization', 'Bearer ' + this.model.token);
+    if(this.localStorage.getToken()) {
+      headers.append('Authorization', 'Bearer ' + this.localStorage.getToken());
     }
     return this.http.get(Model.server + uri, {headers: headers})
       .timeout(AtpHttp.timeout, new Error('timeout exceeded'))
@@ -31,8 +33,8 @@ export class AtpHttp {
 
   doGetBackground(uri: string): Observable<any> {
     let headers: Headers = new Headers();
-    if(this.model.token) {
-      headers.append('Authorization', 'Bearer ' + this.model.token);
+    if(this.localStorage.getToken()) {
+      headers.append('Authorization', 'Bearer ' + this.localStorage.getToken());
     }
     return this.http.get(Model.server + uri, {headers: headers})
       .timeout(AtpHttp.timeout, new Error('timeout exceeded'))
@@ -43,8 +45,8 @@ export class AtpHttp {
   doPost(uri: string, body: any, loadingMessage: string): Observable<any> {
     this.notificationService.showLoading(loadingMessage);
     let headers: Headers = new Headers();
-    if(this.model.token) {
-      headers.append('Authorization', 'Bearer ' + this.model.token);
+    if(this.localStorage.getToken()) {
+      headers.append('Authorization', 'Bearer ' + this.localStorage.getToken());
     }
     headers.append('Content-Type', 'application/json');
     return this.http.post(Model.server + uri, body ? JSON.stringify(body) : null, {headers: headers})
@@ -55,8 +57,8 @@ export class AtpHttp {
 
   doPostBackground(uri: string, body: any): Observable<any> {
     let headers: Headers = new Headers();
-    if(this.model.token) {
-      headers.append('Authorization', 'Bearer ' + this.model.token);
+    if(this.localStorage.getToken()) {
+      headers.append('Authorization', 'Bearer ' + this.localStorage.getToken());
     }
     headers.append('Content-Type', 'application/json');
     return this.http.post(Model.server + uri, body ? JSON.stringify(body) : null, {headers: headers})
@@ -68,8 +70,8 @@ export class AtpHttp {
   doPut(uri: string, body: any, loadingMessage: string): Observable<any> {
     this.notificationService.showLoading(loadingMessage);
     let headers: Headers = new Headers();
-    if(this.model.token) {
-      headers.append('Authorization', 'Bearer ' + this.model.token);
+    if(this.localStorage.getToken()) {
+      headers.append('Authorization', 'Bearer ' + this.localStorage.getToken());
     }
     headers.append('Content-Type', 'application/json');
     return this.http.put(Model.server + uri, body ? JSON.stringify(body) : null, {headers: headers})
@@ -81,13 +83,13 @@ export class AtpHttp {
   doDelete(uri: string, loadingMessage: string): Observable<any> {
     this.notificationService.showLoading(loadingMessage);
     let headers: Headers = new Headers();
-    if(this.model.token) {
-      headers.append('Authorization', 'Bearer ' + this.model.token);
-      return this.http.delete(Model.server + uri, {headers: headers})
-        .timeout(AtpHttp.timeout, new Error('timeout exceeded'))
-        .retryWhen(data => this.retryWhen(data, () => this.doDelete(uri, loadingMessage)))
-        .map(() => this.notificationService.dismissLoading());
+    if(this.localStorage.getToken()) {
+      headers.append('Authorization', 'Bearer ' + this.localStorage.getToken());
     }
+    return this.http.delete(Model.server + uri, {headers: headers})
+      .timeout(AtpHttp.timeout, new Error('timeout exceeded'))
+      .retryWhen(data => this.retryWhen(data, () => this.doDelete(uri, loadingMessage)))
+      .map(() => this.notificationService.dismissLoading());
   }
 
   public handleData(data): Observable<any> {
@@ -111,8 +113,8 @@ export class AtpHttp {
           buttons.unshift({
             text: 'Reset account',
             handler: () => {
-              this.model.token = null;
-              this.storage.remove('atpToken').then(() => window.location.reload());
+              this.localStorage.clearStorage();
+              window.location.reload();
             }
           });
         } else if(err.status == 500) {

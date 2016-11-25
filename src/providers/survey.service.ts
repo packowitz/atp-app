@@ -4,6 +4,11 @@ import {Observable} from "rxjs/Observable";
 import {Messages} from "../components/messages";
 import {AtpHttp} from "./atpHttp.service";
 
+export class SurveyListWithTimestamp {
+  data: Survey[];
+  timestamp: number;
+}
+
 @Injectable()
 export class SurveyService {
 
@@ -25,6 +30,10 @@ export class SurveyService {
     };
     let loadingMessage: string = result == 3 ? "reporting abuse" : Messages.getAnsweredMsg();
     return this.atpHttp.doPost("/app/survey/result", resultObj, loadingMessage);
+  }
+
+  getMySurveysBackground(): Observable<SurveyListWithTimestamp> {
+    return this.atpHttp.doGetBackground("/app/survey/list");
   }
 
   getLast3Surveys(): Observable<Survey[]> {

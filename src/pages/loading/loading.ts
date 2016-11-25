@@ -7,8 +7,8 @@ import {SurveyService} from "../../providers/survey.service";
 import {AuthService} from "../../providers/auth.service";
 import {TabsPage} from "../tabs/tabsPage";
 import {WelcomePage} from "../welcome/welcome";
-import {Storage} from "@ionic/storage";
 import {AchievementService} from "../../providers/achievement.service";
+import {LocalStorage} from "../../providers/localStorage.component";
 
 
 /**
@@ -23,6 +23,7 @@ export class LoadingPage {
   loadedCountries: boolean = false;
   loadedUser: boolean = false;
   loadedLast3Surveys: boolean = false;
+  loadedMySurveys: boolean = false;
   loadedUnreadFeedback: boolean = false;
   loadedAnnouncements: boolean = false;
   loadedAchievements: boolean = false;
@@ -36,7 +37,7 @@ export class LoadingPage {
               public achievementService: AchievementService,
               public model: Model,
               public platform: Platform,
-              public storage: Storage) {
+              public localStorage: LocalStorage) {
     this.loadDataFromServer();
   }
 
@@ -45,6 +46,8 @@ export class LoadingPage {
       this.loadCountries();
     } else if(!this.loadedUser) {
       this.loadUser();
+    } else if(!this.loadedMySurveys) {
+      this.loadOrUpdateMySurveys();
     } else if(!this.loadedLast3Surveys) {
       this.loadLast3Surveys();
     } else if(!this.loadedUnreadFeedback) {
@@ -71,22 +74,20 @@ export class LoadingPage {
   }
 
   loadUser() {
-    if(this.model.user && this.model.token) {
+    if(this.model.user && this.localStorage.getToken()) {
       this.loadedUser = true;
       this.loadDataFromServer();
     } else {
-      this.storage.get('atpToken').then(atpToken => {
-        if (atpToken ) {
-          this.resolveUser(atpToken);
-        } else {
-          this.nav.setRoot(WelcomePage);
-        }
-      });
+      if(this.localStorage.getToken()) {
+        this.resolveUser();
+      } else {
+        this.nav.setRoot(WelcomePage);
+      }
     }
   }
 
-  public resolveUser(token: string) {
-    this.authService.getUserByToken(token).subscribe(
+  public resolveUser() {
+    this.authService.getUser().subscribe(
       data => {
         console.log("Loaded user data");
         this.model.user = data;
@@ -105,6 +106,11 @@ export class LoadingPage {
         this.loadDataFromServer();
       }
     );
+  }
+
+  public loadOrUpdateMySurveys() {
+    this.loadedMySurveys = true;
+    this.loadDataFromServer();
   }
 
   public loadFeedback() {

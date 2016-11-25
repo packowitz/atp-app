@@ -17,7 +17,6 @@ export class Model {
   public static MySurveysTab = 3;
   public loading: Loading;
   public user: User;
-  public token: string;
   public last3surveys: Survey[] = [];
   public surveyList: Survey[];
   public surveyArchivedList: Survey[];

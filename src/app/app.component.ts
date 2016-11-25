@@ -25,7 +25,7 @@ export class AtpApp {
   constructor(public platform: Platform,
               public storage: Storage,
               public modalCtrl: ModalController,
-              public modal: Model) {
+              public model: Model) {
     platform.ready().then(() => {
       StatusBar.styleDefault();
     });
@@ -52,12 +52,5 @@ export class AtpApp {
   loginPage() {
     // Just set root to login page
     this.rootPage = LoadingPage;
-  }
-
-  // Remove token and send to welcome page
-  logout() {
-    // Remove token and set root
-    this.storage.remove("atpToken");
-    this.rootPage = WelcomePage;
   }
 }

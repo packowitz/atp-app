@@ -37,6 +37,7 @@ import {NotificationService} from "../providers/notification.service";
 import {SurveyDetailsMenu} from "../components/surveyDetailMenu.component";
 import {AchievementService} from "../providers/achievement.service";
 import {CouponService} from "../providers/coupon.service";
+import {LocalStorage} from "../providers/localStorage.component";
 
 @NgModule({
   declarations: [
@@ -104,6 +105,7 @@ import {CouponService} from "../providers/coupon.service";
     CountryService,
     CouponService,
     HighscoreService,
+    LocalStorage,
     MessagesService,
     NotificationService,
     SurveyService,

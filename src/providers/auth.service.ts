@@ -21,8 +21,7 @@ export class AuthService {
     return this.atpHttp.doPost("/auth/login", {username: username, password: password}, "Logging in");
   }
 
-  getUserByToken(token: string): Observable<User> {
-    this.model.token = token;
+  getUser(): Observable<User> {
     return this.atpHttp.doGetBackground("/app/user");
   }
 

@@ -1,9 +1,9 @@
 import {Component} from "@angular/core";
-import {NavController} from "ionic-angular";
+import {NavController, MenuController} from "ionic-angular";
 import {Model} from "../../components/model.component";
 import {AuthService} from "../../providers/auth.service";
 import {LoadingPage} from "../loading/loading";
-import {Storage} from "@ionic/storage";
+import {LocalStorage} from "../../providers/localStorage.component";
 
 /**
  * Welcome page
@@ -20,27 +20,29 @@ export class WelcomePage {
   deviceHeight: number = 100;
 
   constructor(public nav: NavController,
+              public menu: MenuController,
               public model: Model,
               public authService: AuthService,
-              public storage: Storage) {
+              public localStorage: LocalStorage) {
     this.deviceHeight = window.innerHeight;
+    this.menu.swipeEnable(false);
   }
 
   startATP() {
     this.authService.registerNewUser().subscribe(
       data => {
-        this.model.token = data.token;
         this.model.user = data.user;
-        this.storage.set('atpToken', data.token).then(() => this.nav.setRoot(LoadingPage));
+        this.localStorage.setToken(data.token);
+        this.nav.setRoot(LoadingPage);
       }
     );
   }
 
   login() {
     this.authService.login(this.username, this.password).subscribe(data => {
-      this.model.token = data.token;
       this.model.user = data.user;
-      this.storage.set('atpToken', data.token).then(() => this.nav.setRoot(LoadingPage));
+      this.localStorage.setToken(data.token);
+      this.nav.setRoot(LoadingPage);
     });
   }
 
