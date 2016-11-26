@@ -42,7 +42,7 @@
   </div>
 
   <!-- Announcements -->
-  <div class="padding-horizontal-small" *ngIf="model.announcements > 0">
+  <div class="padding-horizontal-small" *ngIf="model.announcements.length > 0">
     <div class="text-center color-white margin-top-middle">Latest announcements</div>
     <ion-card *ngFor="let announcement of model.announcements">
       <ion-card-header class="small-headline no-padding-bottom">
