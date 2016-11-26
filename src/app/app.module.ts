@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
-import {IonicApp, IonicModule} from 'ionic-angular';
+import {NgModule, ErrorHandler} from '@angular/core';
+import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {AtpApp} from './app.component';
 import {HighscorePage} from "../pages/highscore/highscore";
 import {LoadingPage} from "../pages/loading/loading";
@@ -107,7 +107,8 @@ import {CouponService} from "../providers/coupon.service";
     MessagesService,
     NotificationService,
     SurveyService,
-    Storage
+    Storage,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}
