@@ -3,7 +3,7 @@ import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {AtpApp} from './app.component';
 import {HighscorePage} from "../pages/highscore/highscore";
 import {LoadingPage} from "../pages/loading/loading";
-import {MainPage} from "../pages/main/main";
+import {HomePage} from "../pages/home/home";
 import {FeedbackPage} from "../pages/feedback/feedback.page";
 import {FeedbackDetailsPage} from "../pages/feedback/feedbackDetails";
 import {MySurveysPage} from "../pages/mySurveys/mySurveys";
@@ -43,7 +43,7 @@ import {CouponService} from "../providers/coupon.service";
     AtpApp,
     HighscorePage,
     LoadingPage,
-    MainPage,
+    HomePage,
     FeedbackPage,
     FeedbackDetailsPage,
     MySurveysPage,
@@ -81,7 +81,7 @@ import {CouponService} from "../providers/coupon.service";
     AtpApp,
     HighscorePage,
     LoadingPage,
-    MainPage,
+    HomePage,
     FeedbackPage,
     FeedbackDetailsPage,
     MySurveysPage,

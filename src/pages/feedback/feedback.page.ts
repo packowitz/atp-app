@@ -11,7 +11,6 @@ import {FeedbackDetailsPage} from "./feedbackDetails";
   templateUrl: 'feedback.page.html'
 })
 export class FeedbackPage {
-  selection: string;
   newFeedback: Feedback = new Feedback();
 
   constructor(public nav: NavController,
@@ -19,8 +18,6 @@ export class FeedbackPage {
               public feedbackService: MessagesService,
               public popoverController: PopoverController,
               public viewCtrl: ViewController) {
-    this.selection = this.model.unreadAnnouncements > 0 ? 'announcements' : 'feedback';
-    setTimeout(() => this.model.markAnnouncementAsRead(), 1000);
   }
 
   startGiveFeedback() {

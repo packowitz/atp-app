@@ -8,9 +8,9 @@ import {Component} from "@angular/core";
 import {AchievementService} from "../../providers/achievement.service";
 
 @Component({
-  templateUrl: 'main.html'
+  templateUrl: 'home.html'
 })
-export class MainPage {
+export class HomePage {
 
   currentYear: number = new Date().getFullYear();
 
@@ -21,6 +21,7 @@ export class MainPage {
               public alertController: AlertController,
               public modalCtrl: ModalController,
               public achievementService: AchievementService) {
+    setTimeout(() => this.model.markAnnouncementAsRead(), 1000);
   }
 
   ionViewDidEnter() {
