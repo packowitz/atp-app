@@ -6,6 +6,7 @@ import {SettingsPage} from "../settings/settings";
 import {HighscorePage} from "../highscore/highscore";
 import {Component} from "@angular/core";
 import {AchievementService} from "../../providers/achievement.service";
+import {Util} from "../../components/util.component";
 
 @Component({
   templateUrl: 'home.html'
@@ -82,6 +83,10 @@ export class HomePage {
         ]
       }).present();
     }
+  }
+
+  getTimeDiff(date: string) {
+    return Util.getTimeDiff(date);
   }
 
   openStartSurveyPage() {
