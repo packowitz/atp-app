@@ -38,7 +38,8 @@ export class LoadingPage {
               public model: Model,
               public platform: Platform,
               public localStorage: LocalStorage) {
-    this.loadDataFromServer();
+    //give it a little time to finish constructor
+    setTimeout(() => this.loadDataFromServer(), 50);
   }
 
   loadDataFromServer() {
@@ -109,8 +110,36 @@ export class LoadingPage {
   }
 
   public loadOrUpdateMySurveys() {
-    this.loadedMySurveys = true;
-    this.loadDataFromServer();
+    if(this.localStorage.getUpdateTimestamp()) {
+      this.surveyService.getUpdatesForMySurveysSince(this.localStorage.getUpdateTimestamp()).subscribe(
+        data => {
+          let unknownSurveys: number[] = this.localStorage.updateMySurveys(data);
+          console.log("Updated " + data.data.length + " surveys");
+          if(unknownSurveys.length > 0) {
+            this.surveyService.getMySurveysByIds(unknownSurveys).subscribe(
+              data => {
+                this.localStorage.addSurveys(data);
+                console.log("Loaded " + data.length + " new surveys");
+                this.loadedMySurveys = true;
+                this.loadDataFromServer();
+              }
+            );
+          } else {
+            this.loadedMySurveys = true;
+            this.loadDataFromServer();
+          }
+        }
+      );
+    } else {
+      this.surveyService.getMySurveysBackground().subscribe(
+        data => {
+          this.localStorage.setMySurveys(data);
+          console.log("Loaded " + data.data.length + " surveys");
+          this.loadedMySurveys = true;
+          this.loadDataFromServer();
+        }
+      );
+    }
   }
 
   public loadFeedback() {

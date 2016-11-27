@@ -4,7 +4,8 @@ export class Survey {
   id: number;
   status: string;
   title: string;
-  group_id: number;
+  groupId: number;
+  multiPicture: boolean;
   pic1: string;
   pic1_id: number;
   pic2: string;

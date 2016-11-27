@@ -36,6 +36,15 @@ export class SurveyService {
     return this.atpHttp.doGetBackground("/app/survey/list");
   }
 
+  getUpdatesForMySurveysSince(timestamp: number): Observable<SurveyListWithTimestamp> {
+    return this.atpHttp.doGetBackground("/app/survey/updates/since/" + timestamp);
+  }
+
+  getMySurveysByIds(ids: number[]): Observable<Survey[]> {
+    let idString = ids.join(',');
+    return this.atpHttp.doGetBackground("/app/survey/list/byids/" + idString);
+  }
+
   getLast3Surveys(): Observable<Survey[]> {
     return this.atpHttp.doGetBackground("/app/survey/list3");
   }

@@ -3,7 +3,6 @@ import {Platform, ModalController} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {Storage} from "@ionic/storage";
 import {LoadingPage} from "../pages/loading/loading";
-import {WelcomePage} from "../pages/welcome/welcome";
 import 'rxjs/Rx';
 import {Model} from "../components/model.component";
 import {SettingsPage} from "../pages/settings/settings";
