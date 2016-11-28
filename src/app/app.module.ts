@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {IonicApp, IonicModule} from 'ionic-angular';
+import {NgModule, ErrorHandler} from '@angular/core';
+import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {AtpApp} from './app.component';
 import {HighscorePage} from "../pages/highscore/highscore";
 import {LoadingPage} from "../pages/loading/loading";
-import {MainPage} from "../pages/main/main";
+import {HomePage} from "../pages/home/home";
 import {FeedbackPage} from "../pages/feedback/feedback.page";
 import {FeedbackDetailsPage} from "../pages/feedback/feedbackDetails";
 import {MySurveysPage} from "../pages/mySurveys/mySurveys";
@@ -45,7 +45,7 @@ import {SurveyOverviewBar} from "../components/surveyOverviewBar.component";
     AtpApp,
     HighscorePage,
     LoadingPage,
-    MainPage,
+    HomePage,
     FeedbackPage,
     FeedbackDetailsPage,
     MySurveysPage,
@@ -84,7 +84,7 @@ import {SurveyOverviewBar} from "../components/surveyOverviewBar.component";
     AtpApp,
     HighscorePage,
     LoadingPage,
-    MainPage,
+    HomePage,
     FeedbackPage,
     FeedbackDetailsPage,
     MySurveysPage,
@@ -111,7 +111,8 @@ import {SurveyOverviewBar} from "../components/surveyOverviewBar.component";
     MessagesService,
     NotificationService,
     SurveyService,
-    Storage
+    Storage,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

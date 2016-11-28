@@ -6,12 +6,13 @@ import {SettingsPage} from "../settings/settings";
 import {HighscorePage} from "../highscore/highscore";
 import {Component} from "@angular/core";
 import {AchievementService} from "../../providers/achievement.service";
+import {Util} from "../../components/util.component";
 import {LocalStorage} from "../../providers/localStorage.component";
 
 @Component({
-  templateUrl: 'main.html'
+  templateUrl: 'home.html'
 })
-export class MainPage {
+export class HomePage {
 
   currentYear: number = new Date().getFullYear();
 
@@ -23,6 +24,10 @@ export class MainPage {
               public alertController: AlertController,
               public modalCtrl: ModalController,
               public achievementService: AchievementService) {
+    setTimeout(() => {
+      this.model.markAnnouncementAsRead();
+      this.model.recalcUnreadMessages();
+    }, 1000);
   }
 
   ionViewDidEnter() {
@@ -72,6 +77,10 @@ export class MainPage {
         ]
       }).present();
     }
+  }
+
+  getTimeDiff(date: string) {
+    return Util.getTimeDiff(date);
   }
 
   openStartSurveyPage() {

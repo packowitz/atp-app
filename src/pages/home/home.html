@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title class="title-line">
+      <img src="assets/img/icon.png" class="title-logo">
+      <span class="toolbar-text">Ask The People</span>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="main-page">
+  <div class="white-background padding-bottom-middle padding-top-small text-h5">
+    <div class="flex-space-between padding-horizontal-middle color-dark">
+      <span *ngIf="!model.user.username">You are not registered <ion-icon name="help-circle" (click)="showAnonymousAlert()"></ion-icon></span>
+      <span *ngIf="model.user.username">{{model.user.username}}</span>
+      <span *ngIf="model.user.male"><ion-icon name="man"></ion-icon></span>
+      <span *ngIf="model.user.male === false"><ion-icon name="woman"></ion-icon></span>
+      <span *ngIf="model.user.yearOfBirth">{{currentYear - model.user.yearOfBirth}} years</span>
+      <span *ngIf="model.user.country"><img src="assets/img/flags/{{model.user.country}}.png" class="flag"></span>
+    </div>
+    <div class="flex-space-around padding-top-middle">
+      <img src="assets/img/trophy.png" class="trophy-image" (click)="openHighscorePage()">
+    </div>
+    <div class="text-center padding-top-middle color-dark">
+      <span *ngIf="model.user.surveysStarted == 0">Start your first ATP <span class="color-blue" (click)="openStartSurveyPage()">here</span></span>
+      <span *ngIf="model.user.surveysStarted == 1">You started <strong>1</strong> ATP</span>
+      <span *ngIf="model.user.surveysStarted > 1">You started <strong>{{model.user.surveysStarted}}</strong> ATPs</span>
+    </div>
+    <div class="text-center padding-top-small color-dark">
+      <span *ngIf="model.user.surveysAnswered == 0">Start answering ATPs <span class="color-blue" (click)="openSurveyPage()">here</span></span>
+      <span *ngIf="model.user.surveysAnswered == 1">You answered <strong>1</strong> ATP</span>
+      <span *ngIf="model.user.surveysAnswered > 1">You answered <strong>{{model.user.surveysAnswered}}</strong> ATPs</span>
+    </div>
+    <div class="text-center padding-top-middle">
+      <button ion-button class="survey-button" (click)="openSurveyPage()">Answer ATPs</button>
+    </div>
+    <div class="text-center padding-top-small">
+      <span class="color-blue" (click)="openStartSurveyPage()">Start new ATP</span>
+    </div>
+  </div>
+
+  <!-- Announcements -->
+  <div class="padding-horizontal-small" *ngIf="model.announcements.length > 0">
+    <div class="text-center color-white margin-top-middle">Latest announcements</div>
+    <ion-card *ngFor="let announcement of model.announcements">
+      <ion-card-header class="small-headline no-padding-bottom">
+        {{getTimeDiff(announcement.sendDate)}} ago
+      </ion-card-header>
+      <ion-card-content>
+        {{announcement.message}}
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Pax section -->
+  <div class="blue-background padding-top-middle color-white" (click)="openPurchasePage()">
+    <div class="flex-center text-h2">
+      <span>{{model.user.credits}}</span><img src="assets/img/diamond-white.png" class="diamond-icon">
+    </div>
+    <div class="text-center text-h4 padding-vertical-small-middle">
+      Purchase more
+    </div>
+    <div class="text-center padding-bottom-middle text-sub">
+      You need pax to start an ATP and<br/>you earn pax by answering ATPs.
+    </div>
+  </div>
+
+  <!-- Latest ATPs -->
+  <div>
+    <div class="padding-horizontal-small" *ngIf="model.last3surveys.length > 0">
+      <div class="text-center color-white margin-top-middle">My latest {{model.last3surveys.length}} ATPs</div>
+      <survey-list [surveys]="model.last3surveys"></survey-list>
+      <div class="text-center color-white text-h5 padding-top-small" (click)="openMySurveysPage()">Show all my ATPs</div>
+    </div>
+    <div class="text-center color-white padding-top-middle padding-bottom-small">&copy; 2016 Pacworx</div>
+  </div>
+</ion-content>

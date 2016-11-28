@@ -3,65 +3,46 @@
     <ion-title>Feedback Portal</ion-title>
     <ion-buttons left>
       <button ion-button icon-only (click)="close()">
-        <ion-icon  name="close"></ion-icon>
+        <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="feedback-page">
-  <div padding class="no-padding-vertical">
-    <ion-segment [(ngModel)]="selection" padding>
-      <ion-segment-button value="feedback">Feedback <ion-badge *ngIf="model.unreadFeedback > 0">{{model.unreadFeedback}}</ion-badge></ion-segment-button>
-      <ion-segment-button value="announcements">Announcements <ion-badge *ngIf="model.unreadAnnouncements > 0">{{model.unreadAnnouncements}}</ion-badge></ion-segment-button>
-    </ion-segment>
-  </div>
-  <div [ngSwitch]="selection">
-    <ion-list *ngSwitchCase="'feedback'">
-      <ion-item *ngFor="let feedback of model.feedback" (click)="showFeedbackDetails(feedback)">
-        <div class="small-headline">{{getTimeDiff(feedback.lastActionDate)}} ago</div>
-        <div *ngIf="feedback.unreadAnswers > 0"><span *ngIf="feedback.status == 'CLOSED'" class="color-grey"><ion-icon name="lock"></ion-icon> </span><strong>{{feedback.title}}</strong> <ion-badge danger>{{feedback.unreadAnswers}}</ion-badge></div>
-        <div *ngIf="feedback.unreadAnswers == 0"><span *ngIf="feedback.status == 'CLOSED'" class="color-grey"><ion-icon name="lock"></ion-icon> </span>{{feedback.title}}</div>
-        <ion-icon item-right ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
-      </ion-item>
-      <p *ngIf="model.feedback.length == 0" padding-top>
-        Let us know about your experience with ATP
-      </p>
-      <button ion-button block (click)="startGiveFeedback()" *ngIf="!newFeedback.type">Give us Feedback</button>
-      <ion-item *ngIf="newFeedback.type">&nbsp;</ion-item>
-      <ion-item (click)="startGiveFeedback()" *ngIf="newFeedback.type">
-        <ion-label>
-          <strong>Give us Feedback about:  </strong>
-          <span *ngIf="newFeedback.type == 'IMPROVEMENT'">Improvement</span>
-          <span *ngIf="newFeedback.type == 'BUG_REPORT'">Report a Bug</span>
-          <span *ngIf="newFeedback.type == 'MESSAGE_SUGGESTION'">Suggest a Message</span>
-          <span *ngIf="newFeedback.type == 'KUDOS'">Thank you</span>
-          <span *ngIf="newFeedback.type == 'OTHER'">Something else</span>
-          <ion-icon ios="ios-arrow-down" md="ios-arrow-down"></ion-icon>
-        </ion-label>
-      </ion-item>
-      <ion-item *ngIf="newFeedback.type">
-        <ion-label floating>Subject</ion-label>
-        <ion-input type="text" maxLength="50" [(ngModel)]="newFeedback.title"></ion-input>
-      </ion-item>
-      <ion-item *ngIf="newFeedback.type">
-        <ion-label floating>Message</ion-label>
-        <ion-textarea [(ngModel)]="newFeedback.message" maxlength="255"></ion-textarea>
-      </ion-item>
-      <ion-item class="text-center" *ngIf="newFeedback.type">
-        <button ion-button large [disabled]="!newFeedback.title || !newFeedback.message" (click)="sendFeedback()">Send Feedback</button>
-      </ion-item>
-    </ion-list>
-    <ion-list *ngSwitchCase="'announcements'">
-      <ion-card *ngFor="let announcement of model.announcements">
-        <ion-card-header class="small-headline no-padding-bottom">
-          {{getTimeDiff(announcement.sendDate)}} ago
-        </ion-card-header>
-        <ion-card-content>
-          {{announcement.message}}
-        </ion-card-content>
-      </ion-card>
-    </ion-list>
-  </div>
-
+  <ion-list>
+    <ion-item *ngFor="let feedback of model.feedback" (click)="showFeedbackDetails(feedback)">
+      <div class="small-headline">{{getTimeDiff(feedback.lastActionDate)}} ago</div>
+      <div *ngIf="feedback.unreadAnswers > 0"><span *ngIf="feedback.status == 'CLOSED'" class="color-grey"><ion-icon name="lock"></ion-icon> </span><strong>{{feedback.title}}</strong> <ion-badge danger>{{feedback.unreadAnswers}}</ion-badge></div>
+      <div *ngIf="feedback.unreadAnswers == 0"><span *ngIf="feedback.status == 'CLOSED'" class="color-grey"><ion-icon name="lock"></ion-icon> </span>{{feedback.title}}</div>
+      <ion-icon item-right ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
+    </ion-item>
+    <p *ngIf="model.feedback.length == 0" padding-top>
+      Let us know about your experience with ATP
+    </p>
+    <button ion-button block (click)="startGiveFeedback()" *ngIf="!newFeedback.type">Give us Feedback</button>
+    <ion-item *ngIf="newFeedback.type">&nbsp;</ion-item>
+    <ion-item (click)="startGiveFeedback()" *ngIf="newFeedback.type">
+      <ion-label>
+        <strong>Give us Feedback about:  </strong>
+        <span *ngIf="newFeedback.type == 'IMPROVEMENT'">Improvement</span>
+        <span *ngIf="newFeedback.type == 'BUG_REPORT'">Report a Bug</span>
+        <span *ngIf="newFeedback.type == 'MESSAGE_SUGGESTION'">Suggest a Message</span>
+        <span *ngIf="newFeedback.type == 'KUDOS'">Thank you</span>
+        <span *ngIf="newFeedback.type == 'OTHER'">Something else</span>
+        <ion-icon ios="ios-arrow-down" md="ios-arrow-down"></ion-icon>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="newFeedback.type">
+      <ion-label floating>Subject</ion-label>
+      <ion-input type="text" maxLength="50" [(ngModel)]="newFeedback.title"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="newFeedback.type">
+      <ion-label floating>Message</ion-label>
+      <ion-textarea [(ngModel)]="newFeedback.message" maxlength="255"></ion-textarea>
+    </ion-item>
+    <ion-item class="text-center" *ngIf="newFeedback.type">
+      <button ion-button large [disabled]="!newFeedback.title || !newFeedback.message" (click)="sendFeedback()">Send Feedback</button>
+    </ion-item>
+  </ion-list>
 </ion-content>
