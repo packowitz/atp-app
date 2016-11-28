@@ -7,7 +7,7 @@
 <ion-content>
   <ion-list padding class="no-padding-vertical">
     <survey-overview-bar *ngFor="let survey of localStorage.surveys" [survey]="survey"></survey-overview-bar>
-    <ion-item no-lines *ngIf="currentLoaded">
+    <ion-item no-lines>
       <button ion-button icon-right clear item-right (click)="gotoStartSurvey()">
         New ATP
         <ion-icon name="add">
