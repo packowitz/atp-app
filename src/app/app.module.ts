@@ -16,7 +16,6 @@ import {WelcomePage} from "../pages/welcome/welcome";
 import {AnswerBarComponent} from "../components/answerbar.component";
 import {CountrySelection} from "../components/countrySelection.component";
 import {Model} from "../components/model.component";
-import {SurveyListComponent} from "../components/surveyList.component";
 import {HighscoreEntry} from "../pages/highscore/highscoreEntry";
 import {ChooseFeedbackType} from "../pages/feedback/chooseFeedbackType";
 import {ChooseUsername} from "../pages/settings/chooseUsername.component";
@@ -59,7 +58,6 @@ import {SurveyOverviewBar} from "../components/surveyOverviewBar.component";
 
     AnswerBarComponent,
     CountrySelection,
-    SurveyListComponent,
     SurveyOverviewBar,
     HighscoreEntry,
     ChooseFeedbackType,
