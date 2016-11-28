@@ -38,6 +38,7 @@ import {AchievementService} from "../providers/achievement.service";
 import {CouponService} from "../providers/coupon.service";
 import {LocalStorage} from "../providers/localStorage.component";
 import {SurveyOverviewBar} from "../components/surveyOverviewBar.component";
+import {LoadingState} from "../pages/loading/loadingState.component";
 
 @NgModule({
   declarations: [
@@ -105,6 +106,7 @@ import {SurveyOverviewBar} from "../components/surveyOverviewBar.component";
     CountryService,
     CouponService,
     HighscoreService,
+    LoadingState,
     LocalStorage,
     MessagesService,
     NotificationService,

@@ -28,11 +28,8 @@ export class WelcomePage {
     this.menu.swipeEnable(false);
   }
 
-  ionViewDidEnter() {
-    this.localStorage.clearStorage();
-  }
-
   startATP() {
+    this.localStorage.clearStorage();
     this.authService.registerNewUser().subscribe(
       data => {
         this.model.user = data.user;
@@ -43,6 +40,7 @@ export class WelcomePage {
   }
 
   login() {
+    this.localStorage.clearStorage();
     this.authService.login(this.username, this.password).subscribe(data => {
       this.model.user = data.user;
       this.localStorage.setToken(data.token);

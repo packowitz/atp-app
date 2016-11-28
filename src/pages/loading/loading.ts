@@ -9,6 +9,7 @@ import {TabsPage} from "../tabs/tabsPage";
 import {WelcomePage} from "../welcome/welcome";
 import {AchievementService} from "../../providers/achievement.service";
 import {LocalStorage} from "../../providers/localStorage.component";
+import {LoadingState} from "./loadingState.component";
 
 
 /**
@@ -20,15 +21,9 @@ import {LocalStorage} from "../../providers/localStorage.component";
   templateUrl: 'loading.html'
 })
 export class LoadingPage {
-  loadedCountries: boolean = false;
-  loadedUser: boolean = false;
-  loadedMySurveys: boolean = false;
-  loadedUnreadFeedback: boolean = false;
-  loadedAnnouncements: boolean = false;
-  loadedAchievements: boolean = false;
-  registeredNotifications: boolean = false;
 
-  constructor(public nav: NavController,
+  constructor(public state: LoadingState,
+              public nav: NavController,
               public authService: AuthService,
               public surveyService: SurveyService,
               public countryService: CountryService,
@@ -37,34 +32,43 @@ export class LoadingPage {
               public model: Model,
               public platform: Platform,
               public localStorage: LocalStorage) {
-    this.localStorage.loadData().then(() => this.loadDataFromServer());
+    this.loadDataFromServer();
   }
 
   loadDataFromServer() {
-    if(!this.loadedCountries) {
+    if(!this.state.loadedLocalStorage) {
+      this.loadLocalStorage();
+    } else if(!this.state.loadedCountries) {
       this.loadCountries();
-    } else if(!this.loadedUser) {
+    } else if(!this.state.loadedUser) {
       this.loadUser();
-    } else if(!this.loadedMySurveys) {
+    } else if(!this.state.loadedMySurveys) {
       this.loadOrUpdateMySurveys();
-    } else if(!this.loadedUnreadFeedback) {
+    } else if(!this.state.loadedUnreadFeedback) {
       this.loadFeedback();
-    } else if(!this.loadedAnnouncements) {
+    } else if(!this.state.loadedAnnouncements) {
       this.loadAnnouncements();
-    } else if(!this.loadedAchievements) {
+    } else if(!this.state.loadedAchievements) {
       this.loadAchievements();
-    } else if(!this.registeredNotifications) {
+    } else if(!this.state.registeredNotifications) {
       this.registerNotification();
     } else {
       this.nav.setRoot(TabsPage);
     }
   }
 
+  loadLocalStorage() {
+    this.localStorage.loadData().then(() => {
+      this.state.loadedLocalStorage = true;
+      this.loadDataFromServer()
+    });
+  }
+
   loadCountries() {
     this.countryService.getCountries().subscribe(
       countries => {
         console.log("loaded " + countries.length + " countries");
-        this.loadedCountries = true;
+        this.state.loadedCountries = true;
         this.loadDataFromServer();
       }
     );
@@ -72,7 +76,7 @@ export class LoadingPage {
 
   loadUser() {
     if(this.model.user && this.localStorage.getToken()) {
-      this.loadedUser = true;
+      this.state.loadedUser = true;
       this.loadDataFromServer();
     } else {
       if(this.localStorage.getToken()) {
@@ -88,7 +92,7 @@ export class LoadingPage {
       data => {
         console.log("Loaded user data");
         this.model.user = data;
-        this.loadedUser = true;
+        this.state.loadedUser = true;
         this.loadDataFromServer();
       }
     );
@@ -97,14 +101,14 @@ export class LoadingPage {
   public loadOrUpdateMySurveys() {
     if(this.localStorage.getUpdateTimestamp()) {
       //update always happen when viewing main-page
-      this.loadedMySurveys = true;
+      this.state.loadedMySurveys = true;
       this.loadDataFromServer();
     } else {
       this.surveyService.getMySurveysBackground().subscribe(
         data => {
           this.localStorage.setMySurveys(data);
           console.log("Loaded " + data.data.length + " surveys");
-          this.loadedMySurveys = true;
+          this.state.loadedMySurveys = true;
           this.loadDataFromServer();
         }
       );
@@ -117,7 +121,7 @@ export class LoadingPage {
         this.model.feedback = data;
         this.model.recalcUnreadMessages();
         console.log("Loaded " + this.model.feedback.length + " feedback");
-        this.loadedUnreadFeedback = true;
+        this.state.loadedUnreadFeedback = true;
         this.loadDataFromServer();
       }
     );
@@ -129,7 +133,7 @@ export class LoadingPage {
         this.model.announcements = data;
         this.model.recalcUnreadMessages();
         console.log("Loaded " + this.model.announcements.length + " announcements");
-        this.loadedAnnouncements = true;
+        this.state.loadedAnnouncements = true;
         this.loadDataFromServer();
       }
     );
@@ -140,7 +144,7 @@ export class LoadingPage {
       data => {
         this.model.setAchievements(data);
         console.log("Loaded " + this.model.achievements.length + " achievements");
-        this.loadedAchievements = true;
+        this.state.loadedAchievements = true;
         this.loadDataFromServer();
       }
     );
@@ -168,7 +172,7 @@ export class LoadingPage {
     //     console.error(e);
     //   }
     // }
-    this.registeredNotifications = true;
+    this.state.registeredNotifications = true;
     this.loadDataFromServer();
   }
 }
