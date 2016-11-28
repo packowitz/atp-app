@@ -6,6 +6,7 @@ import {SurveyService} from "../../providers/survey.service";
 import {SurveyDetailsMenu} from "../../components/surveyDetailMenu.component";
 import {Model} from "../../components/model.component";
 import {NotificationService} from "../../providers/notification.service";
+import {LocalStorage} from "../../providers/localStorage.component";
 
 @Component({
   templateUrl: 'surveyDetails.html'
@@ -22,6 +23,7 @@ export class SurveyDetailsPage {
               public alertController: AlertController,
               public nav: NavController,
               public model: Model,
+              public localStorage: LocalStorage,
               public notificationService: NotificationService) {
     this.survey = navParams.get('survey');
     if(this.survey.countries != 'ALL') {
@@ -48,7 +50,7 @@ export class SurveyDetailsPage {
                 text: 'Delete',
                 handler: () => {
                   this.surveyService.deleteSurvey(this.survey).subscribe(() => {
-                    this.model.surveyDeleted(this.survey);
+                    this.localStorage.deleteSurvey(this.survey);
                     this.notificationService.showToast({
                       message: 'ATP deleted',
                       duration: 3000,

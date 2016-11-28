@@ -6,6 +6,7 @@ import {SettingsPage} from "../settings/settings";
 import {HighscorePage} from "../highscore/highscore";
 import {Component} from "@angular/core";
 import {AchievementService} from "../../providers/achievement.service";
+import {LocalStorage} from "../../providers/localStorage.component";
 
 @Component({
   templateUrl: 'main.html'
@@ -15,6 +16,7 @@ export class MainPage {
   currentYear: number = new Date().getFullYear();
 
   constructor(public model: Model,
+              public localStorage: LocalStorage,
               public nav: NavController,
               public surveyService: SurveyService,
               public tabs: Tabs,
@@ -24,18 +26,10 @@ export class MainPage {
   }
 
   ionViewDidEnter() {
-    this.updateLast3Surveys();
+    this.surveyService.updateMySurveys();
     if(this.model.needReloadAchievements()) {
       this.achievementService.getAchievements().subscribe(data => this.model.setAchievements(data));
     }
-  }
-
-  updateLast3Surveys () {
-    this.model.last3surveys.forEach(survey => {
-      if(survey.status != 'FINISHED') {
-        this.surveyService.updateSurvey(survey);
-      }
-    });
   }
 
   showAnonymousAlert() {

@@ -1,0 +1,22 @@
+<div (click)="openSurveyDetails()" class="survey-list-item margin-top-middle" *ngIf="!survey.multiPicture">
+  <img [src]="'data:image/jpeg;base64,' + survey.surveys[0].pic1" class="survey-list-img">
+  <div class="survey-item-data">
+    <div class="survey-item-text"><span class="status-circle {{survey.surveys[0].status}}"></span> {{survey.surveys[0].answered}} votes since {{getTimeDiff()}}</div>
+    <div class="survey-item-diagram">
+      <div class="survey-item-diagram-pic1" *ngIf="survey.surveys[0].pic1Count > 0" [style.width]="100 * survey.surveys[0].pic1Count / survey.surveys[0].answered + '%'">
+        <span *ngIf="(100 * survey.surveys[0].pic1Count / survey.surveys[0].answered) >= 10">{{survey.surveys[0].pic1Count}}</span>
+      </div>
+      <div class="survey-item-diagram-noOpinion" *ngIf="survey.surveys[0].noOpinionCount > 0" [style.width]="100 * survey.surveys[0].noOpinionCount / survey.surveys[0].answered + '%'">
+        <span *ngIf="(100 * survey.surveys[0].noOpinionCount / survey.surveys[0].answered) >= 10" class="diagram-text">{{survey.surveys[0].noOpinionCount}}</span>
+      </div>
+      <div class="survey-item-diagram-pic2" *ngIf="survey.surveys[0].pic2Count > 0" [style.width]="100 * survey.surveys[0].pic2Count / survey.surveys[0].answered + '%'">
+        <span *ngIf="(100 * survey.surveys[0].pic2Count / survey.surveys[0].answered) >= 10" class="diagram-text">{{survey.surveys[0].pic2Count}}</span>
+      </div>
+    </div>
+  </div>
+  <img [src]="'data:image/jpeg;base64,' + survey.surveys[0].pic2" class="survey-list-img">
+</div>
+
+<div (click)="openSurveyDetails()" class="survey-list-item margin-top-middle" *ngIf="survey.multiPicture">
+  this is a multipicture ATP
+</div>

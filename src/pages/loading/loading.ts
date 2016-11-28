@@ -22,7 +22,6 @@ import {LocalStorage} from "../../providers/localStorage.component";
 export class LoadingPage {
   loadedCountries: boolean = false;
   loadedUser: boolean = false;
-  loadedLast3Surveys: boolean = false;
   loadedMySurveys: boolean = false;
   loadedUnreadFeedback: boolean = false;
   loadedAnnouncements: boolean = false;
@@ -38,8 +37,7 @@ export class LoadingPage {
               public model: Model,
               public platform: Platform,
               public localStorage: LocalStorage) {
-    //give it a little time to finish constructor
-    setTimeout(() => this.loadDataFromServer(), 50);
+    this.localStorage.loadData().then(() => this.loadDataFromServer());
   }
 
   loadDataFromServer() {
@@ -49,8 +47,6 @@ export class LoadingPage {
       this.loadUser();
     } else if(!this.loadedMySurveys) {
       this.loadOrUpdateMySurveys();
-    } else if(!this.loadedLast3Surveys) {
-      this.loadLast3Surveys();
     } else if(!this.loadedUnreadFeedback) {
       this.loadFeedback();
     } else if(!this.loadedAnnouncements) {
@@ -98,38 +94,11 @@ export class LoadingPage {
     );
   }
 
-  public loadLast3Surveys() {
-    this.surveyService.getLast3Surveys().subscribe(
-      data => {
-        this.model.last3surveys = data;
-        console.log("Loaded " + this.model.last3surveys.length + " last surveys");
-        this.loadedLast3Surveys = true;
-        this.loadDataFromServer();
-      }
-    );
-  }
-
   public loadOrUpdateMySurveys() {
     if(this.localStorage.getUpdateTimestamp()) {
-      this.surveyService.getUpdatesForMySurveysSince(this.localStorage.getUpdateTimestamp()).subscribe(
-        data => {
-          let unknownSurveys: number[] = this.localStorage.updateMySurveys(data);
-          console.log("Updated " + data.data.length + " surveys");
-          if(unknownSurveys.length > 0) {
-            this.surveyService.getMySurveysByIds(unknownSurveys).subscribe(
-              data => {
-                this.localStorage.addSurveys(data);
-                console.log("Loaded " + data.length + " new surveys");
-                this.loadedMySurveys = true;
-                this.loadDataFromServer();
-              }
-            );
-          } else {
-            this.loadedMySurveys = true;
-            this.loadDataFromServer();
-          }
-        }
-      );
+      //update always happen when viewing main-page
+      this.loadedMySurveys = true;
+      this.loadDataFromServer();
     } else {
       this.surveyService.getMySurveysBackground().subscribe(
         data => {

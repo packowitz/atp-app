@@ -28,6 +28,10 @@ export class WelcomePage {
     this.menu.swipeEnable(false);
   }
 
+  ionViewDidEnter() {
+    this.localStorage.clearStorage();
+  }
+
   startATP() {
     this.authService.registerNewUser().subscribe(
       data => {

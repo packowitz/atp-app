@@ -38,6 +38,7 @@ import {SurveyDetailsMenu} from "../components/surveyDetailMenu.component";
 import {AchievementService} from "../providers/achievement.service";
 import {CouponService} from "../providers/coupon.service";
 import {LocalStorage} from "../providers/localStorage.component";
+import {SurveyOverviewBar} from "../components/surveyOverviewBar.component";
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import {LocalStorage} from "../providers/localStorage.component";
     AnswerBarComponent,
     CountrySelection,
     SurveyListComponent,
+    SurveyOverviewBar,
     HighscoreEntry,
     ChooseFeedbackType,
     ChooseUsername,

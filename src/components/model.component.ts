@@ -1,8 +1,7 @@
 import {User} from "../providers/domain/user";
-import {Platform, Loading} from "ionic-angular";
+import {Platform} from "ionic-angular";
 import {Injectable} from "@angular/core";
 import {Feedback} from "../providers/domain/feedback";
-import {Survey} from "../providers/domain/survey";
 import {Announcement} from "../providers/domain/annoucement";
 import {Storage} from "@ionic/storage";
 import {Achievement} from "../providers/domain/achievement";
@@ -15,11 +14,7 @@ export class Model {
   public static PurchaseTab = 1;
   public static StartSurveyTab = 2;
   public static MySurveysTab = 3;
-  public loading: Loading;
   public user: User;
-  public last3surveys: Survey[] = [];
-  public surveyList: Survey[];
-  public surveyArchivedList: Survey[];
   public surveyTypes: SurveyType[];
   public feedback: Feedback[] = [];
   public unreadFeedback: number = 0;
@@ -112,48 +107,6 @@ export class Model {
       return true;
     } else {
       return false;
-    }
-  }
-
-  surveyDeleted(survey: Survey) {
-    let idx = -1;
-    this.last3surveys.forEach((s, i) => {
-      if(s.id == survey.id) {
-        idx = i;
-      }
-    });
-    if(idx != -1) {
-      console.log("remove from last3surveys " + idx);
-      this.last3surveys.splice(idx, 1);
-    } else {
-      console.log(this.last3surveys);
-    }
-    if(this.surveyList) {
-      idx = -1;
-      this.surveyList.forEach((s, i) => {
-        if(s.id == survey.id) {
-          idx = i;
-        }
-      });
-      if(idx != -1) {
-        console.log("remove from surveyList " + idx);
-        this.surveyList.splice(idx, 1);
-      } else {
-        console.log(this.surveyList);
-      }
-    } else {
-      console.log("surveyList is null");
-    }
-    if(this.surveyArchivedList) {
-      idx = -1;
-      this.surveyArchivedList.forEach((s, i) => {
-        if(s.id == survey.id) {
-          idx = i;
-        }
-      });
-      if(idx != -1) {
-        this.surveyArchivedList.splice(idx, 1);
-      }
     }
   }
 }

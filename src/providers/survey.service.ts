@@ -3,6 +3,7 @@ import {Survey} from "./domain/survey";
 import {Observable} from "rxjs/Observable";
 import {Messages} from "../components/messages";
 import {AtpHttp} from "./atpHttp.service";
+import {LocalStorage} from "./localStorage.component";
 
 export class SurveyListWithTimestamp {
   data: Survey[];
@@ -12,7 +13,7 @@ export class SurveyListWithTimestamp {
 @Injectable()
 export class SurveyService {
 
-  constructor(public atpHttp: AtpHttp) {}
+  constructor(public atpHttp: AtpHttp, public localStorage: LocalStorage) {}
 
   postSurvey(survey: Survey, type: string, saveAsDefault: boolean): Observable<Survey> {
     let request = {survey: survey, type: type, saveAsDefault: saveAsDefault};
@@ -40,31 +41,26 @@ export class SurveyService {
     return this.atpHttp.doGetBackground("/app/survey/updates/since/" + timestamp);
   }
 
+  updateMySurveys() {
+    this.getUpdatesForMySurveysSince(this.localStorage.getUpdateTimestamp()).subscribe(
+      data => {
+        let unknownSurveys: number[] = this.localStorage.updateMySurveys(data);
+        console.log("Updated " + data.data.length + " surveys");
+        if(unknownSurveys.length > 0) {
+          this.getMySurveysByIds(unknownSurveys).subscribe(
+            data => {
+              this.localStorage.addSurveys(data);
+              console.log("Loaded " + data.length + " new surveys");
+            }
+          );
+        }
+      }
+    );
+  }
+
   getMySurveysByIds(ids: number[]): Observable<Survey[]> {
     let idString = ids.join(',');
     return this.atpHttp.doGetBackground("/app/survey/list/byids/" + idString);
-  }
-
-  getLast3Surveys(): Observable<Survey[]> {
-    return this.atpHttp.doGetBackground("/app/survey/list3");
-  }
-
-  getCurrentSurveyList(): Observable<Survey[]> {
-    return this.atpHttp.doGetBackground("/app/survey/list/current");
-  }
-
-  getArchivedSurveyList(): Observable<Survey[]> {
-    return this.atpHttp.doGetBackground("/app/survey/list/archived");
-  }
-
-  updateSurvey(survey: Survey) {
-    this.atpHttp.doGetBackground("/app/survey/update/" + survey.id).subscribe(data => {
-      survey.status = data.status;
-      survey.answered = data.answered;
-      survey.noOpinionCount = data.noOpinionCount;
-      survey.pic1Count = data.pic1Count;
-      survey.pic2Count = data.pic2Count;
-    });
   }
 
   loadSurveyDetails(survey: Survey) {

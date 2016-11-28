@@ -24,7 +24,22 @@ export class LocalStorage {
     storage.get(this.prefix + 'surveys').then(data => this.surveys = data ? data : []);
   }
 
+  loadData(): Promise<any> {
+    return this.storage.get(this.prefix + 'token').then(data => {
+      this.token = data;
+      return this.storage.get(this.prefix + 'updateTimestamp').then(data => {
+        this.updateTimestamp = data;
+        return this.storage.get(this.prefix + 'surveys').then(data => {
+          this.surveys = data ? data : [];
+        });
+      });
+    });
+  }
+
   clearStorage() {
+    this.token = null;
+    this.updateTimestamp = null;
+    this.surveys = [];
     this.storage.clear();
   }
 
@@ -72,6 +87,18 @@ export class LocalStorage {
       }
     } else {
       this.updateSurveyOfMeta(alreadyExists, survey);
+    }
+  }
+
+  deleteSurvey(survey: Survey) {
+    let idx = -1;
+    this.surveys.forEach((s, i) => {
+      if(s.ids.indexOf(survey.id) != -1) {
+        idx = i;
+      }
+    });
+    if(idx != -1) {
+      this.surveys.splice(idx, 1);
     }
   }
 

@@ -1,35 +1,18 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-segment [(ngModel)]="selection" (ionChange)="loadArchived()">
-      <ion-segment-button value="current">
-        Current ATPs
-      </ion-segment-button>
-      <ion-segment-button value="archived">
-        Archived ATPs
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
+  <ion-navbar>
+    <ion-title>My ATPs</ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <div [ngSwitch]="selection">
-    <ion-list *ngSwitchCase="'current'" padding class="no-padding-vertical">
-      <ion-item *ngIf="!currentLoaded" class="text-center"><ion-spinner name="bubbles"></ion-spinner></ion-item>
-      <survey-list [surveys]="model.surveyList" *ngIf="currentLoaded && model.surveyList.length > 0"></survey-list>
-      <ion-item no-lines *ngIf="currentLoaded">
-        <button ion-button icon-right clear item-right (click)="gotoStartSurvey()">
-          New ATP
-          <ion-icon name="add">
-          </ion-icon>
-        </button>
-      </ion-item>
-    </ion-list>
-    <ion-list *ngSwitchCase="'archived'" padding class="no-padding-vertical">
-      <ion-item *ngIf="!archivedLoaded" class="text-center"><ion-spinner name="bubbles"></ion-spinner></ion-item>
-      <ion-item *ngIf="archivedLoaded && model.surveyArchivedList.length < 1" class="text-center">
-        You don't have any archived ATPs.
-      </ion-item>
-      <survey-list [surveys]="model.surveyArchivedList" *ngIf="archivedLoaded && model.surveyArchivedList.length > 0"></survey-list>
-    </ion-list>
-  </div>
+  <ion-list padding class="no-padding-vertical">
+    <survey-overview-bar *ngFor="let survey of localStorage.surveys" [survey]="survey"></survey-overview-bar>
+    <ion-item no-lines *ngIf="currentLoaded">
+      <button ion-button icon-right clear item-right (click)="gotoStartSurvey()">
+        New ATP
+        <ion-icon name="add">
+        </ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
 </ion-content>

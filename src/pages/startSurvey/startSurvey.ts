@@ -11,6 +11,7 @@ import {User} from "../../providers/domain/user";
 import {NotificationService} from "../../providers/notification.service";
 import {SurveyType} from "../../providers/domain/surveyType";
 import {Messages} from "../../components/messages";
+import {LocalStorage} from "../../providers/localStorage.component";
 
 declare var Croppie: any;
 
@@ -38,6 +39,7 @@ export class StartSurveyPage {
   constructor(public platform: Platform,
               public ngZone: NgZone,
               public model: Model,
+              public localStorage: LocalStorage,
               public surveyService: SurveyService,
               public tabs: Tabs,
               public actionSheetController: ActionSheetController,
@@ -211,13 +213,7 @@ export class StartSurveyPage {
     }
     this.surveyService.postSurvey(this.survey, this.surveyType.key, this.saveAsDefault).subscribe(resp => {
       console.log("ATP started");
-      this.model.last3surveys.unshift(resp);
-      if(this.model.last3surveys.length > 3) {
-        this.model.last3surveys.pop();
-      }
-      if(this.model.surveyList) {
-        this.model.surveyList.unshift(resp);
-      }
+      this.localStorage.addSurvey(resp);
       this.notificationService.showToast({
         message: 'ATP started',
         duration: 3000,
