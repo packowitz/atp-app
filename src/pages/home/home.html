@@ -69,9 +69,11 @@
 
   <!-- Latest ATPs -->
   <div>
-    <div class="padding-horizontal-small" *ngIf="model.last3surveys.length > 0">
-      <div class="text-center color-white margin-top-middle">My latest {{model.last3surveys.length}} ATPs</div>
-      <survey-list [surveys]="model.last3surveys"></survey-list>
+    <div class="padding-horizontal-small" *ngIf="localStorage.surveys.length > 0">
+      <div class="text-center color-white margin-top-middle">My latest {{localStorage.surveys.length > 3 ? '3' : localStorage.surveys.length}} ATPs</div>
+      <div *ngFor="let survey of localStorage.surveys; let idx = index">
+        <survey-overview-bar [survey]="survey" *ngIf="idx < 3"></survey-overview-bar>
+      </div>
       <div class="text-center color-white text-h5 padding-top-small" (click)="openMySurveysPage()">Show all my ATPs</div>
     </div>
     <div class="text-center color-white padding-top-middle padding-bottom-small">&copy; 2016 Pacworx</div>
