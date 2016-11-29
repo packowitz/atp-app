@@ -4,11 +4,11 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="light-blue-background">
   <ion-list padding class="no-padding-vertical">
     <survey-overview-bar *ngFor="let survey of localStorage.surveys" [survey]="survey"></survey-overview-bar>
-    <ion-item no-lines>
-      <button ion-button icon-right clear item-right (click)="gotoStartSurvey()">
+    <ion-item no-lines class="light-blue-background">
+      <button ion-button icon-right clear item-right (click)="gotoStartSurvey()" color="white">
         New ATP
         <ion-icon name="add">
         </ion-icon>

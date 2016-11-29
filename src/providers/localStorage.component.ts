@@ -190,6 +190,7 @@ export class LocalStorage {
           pic2.votesNoOpinion += survey.noOpinionCount;
           pic2.votesInvolved += survey.answered;
         });
+        meta.pictures.sort((pic1, pic2) => pic2.votesFor - pic1.votesFor);
         meta.dirtyFlag = false;
       }
     });

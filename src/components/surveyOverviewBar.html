@@ -17,6 +17,14 @@
   <img [src]="'data:image/jpeg;base64,' + survey.surveys[0].pic2" class="survey-list-img">
 </div>
 
-<div (click)="openSurveyDetails()" class="survey-list-item margin-top-middle" *ngIf="survey.multiPicture">
-  this is a multipicture ATP
+<div (click)="openSurveyDetails()" class="multi-picture-item margin-top-middle" *ngIf="survey.multiPicture">
+  <div class="flex-center padding-vertical-small">
+    <span class="status-circle {{survey.status}}"></span> {{survey.answered}} votes since {{getTimeDiff()}}
+  </div>
+  <div class="pictures">
+    <span *ngFor="let picture of survey.pictures" class="multi-pictures">
+      <img [src]="'data:image/jpeg;base64,' + picture.picture" class="survey-list-img">
+      <div class="flex-center">{{picture.votesFor}}</div>
+    </span>
+  </div>
 </div>

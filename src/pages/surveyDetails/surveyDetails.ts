@@ -31,7 +31,9 @@ export class SurveyDetailsPage {
     } else {
       this.countries = [];
     }
-    surveyService.loadSurveyDetails(this.survey);
+    if(!this.survey.answers || this.survey.answered != this.survey.answers.length) {
+      surveyService.loadSurveyDetails(this.survey);
+    }
   }
 
   showOptions(event: Event) {

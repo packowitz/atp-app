@@ -15,21 +15,6 @@
       justify-content: center;
       align-items: center;
     }
-    .status-circle {
-      width: 1em;
-      height: 1em;
-      border-radius: 100%;
-      margin-right: 4px;
-      &.ACTIVE {
-        background-color: $atp-green-success;
-      }
-      &.FINISHED {
-        background-color: $atp-red;
-      }
-      &.ABUSE {
-        background-color: $atp-orange;
-      }
-    }
     .survey-item-diagram {
       height: 3rem;
       background-color: white;
@@ -65,9 +50,48 @@
       }
     }
   }
+}
 
-  .survey-list-img {
-    width: 10vh;
-    height: 10vh;
+.multi-picture-item {
+  background-color: $atp-light-grey2;
+  border: 2px $atp-light-grey2 solid;
+  color: $atp-dark-text;
+  .pictures {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow-x: auto;
+
+    .multi-pictures:not(:first-child) {
+      margin-left: 2vw;
+    }
+
+    .multi-pictures {
+      min-width: 10vh;
+      max-width: 10vh;
+      width: 10vh;
+    }
+  }
+}
+
+.survey-list-img {
+  width: 10vh;
+  height: 10vh;
+}
+
+.status-circle {
+  width: 1em;
+  height: 1em;
+  border-radius: 100%;
+  margin-right: 4px;
+  &.ACTIVE {
+    background-color: $atp-green-success;
+  }
+  &.FINISHED {
+    background-color: $atp-red;
+  }
+  &.ABUSE {
+    background-color: $atp-orange;
   }
 }

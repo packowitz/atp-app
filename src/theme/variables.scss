@@ -33,7 +33,8 @@ $colors: (
   atp-blue-light: #659dd2,
   atp-placeholder-grey: #acacac,
   atp-gold: #e8e61b,
-  light-danger: #ff9f2c
+  light-danger: #ff9f2c,
+  white: #ffffff
 );
 
 
@@ -320,6 +321,11 @@ ion-title {
 .padding-vertical-small-middle {
   padding-top: 16px;
   padding-bottom: 16px;
+}
+
+.padding-vertical-small {
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .padding-horizontal-middle {
