@@ -39,6 +39,7 @@ import {CouponService} from "../providers/coupon.service";
 import {LocalStorage} from "../providers/localStorage.component";
 import {SurveyOverviewBar} from "../components/surveyOverviewBar.component";
 import {LoadingState} from "../pages/loading/loadingState.component";
+import {MultiPictureSurveyDetailsPage} from "../pages/surveyDetails/multiPictureSurveyDetails";
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {LoadingState} from "../pages/loading/loadingState.component";
     HomePage,
     FeedbackPage,
     FeedbackDetailsPage,
+    MultiPictureSurveyDetailsPage,
     MySurveysPage,
     PurchasePage,
     SettingsPage,
@@ -92,6 +94,7 @@ import {LoadingState} from "../pages/loading/loadingState.component";
     StartSurveyPage,
     SurveyPage,
     SurveyDetailsPage,
+    MultiPictureSurveyDetailsPage,
     TabsPage,
     WelcomePage,
     SurveyDetailsMenu,

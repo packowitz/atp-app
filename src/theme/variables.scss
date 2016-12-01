@@ -414,3 +414,21 @@ ion-title {
 .fake-link {
   text-decoration: underline;
 }
+
+
+.status-circle {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border-radius: 100%;
+  margin-right: 4px;
+  &.ACTIVE {
+    background-color: $atp-green-success;
+  }
+  &.FINISHED {
+    background-color: $atp-red;
+  }
+  &.ABUSE {
+    background-color: $atp-orange;
+  }
+}

@@ -3,6 +3,7 @@ import {NavController} from "ionic-angular/index";
 import {SurveyDetailsPage} from "../pages/surveyDetails/surveyDetails";
 import {Util} from "./util.component";
 import {MetaSurvey} from "../providers/domain/surveyMeta";
+import {MultiPictureSurveyDetailsPage} from "../pages/surveyDetails/multiPictureSurveyDetails";
 
 @Component({
   selector: 'survey-overview-bar',
@@ -21,7 +22,7 @@ export class SurveyOverviewBar {
 
   openSurveyDetails() {
     if(this.survey.multiPicture) {
-      console.log("going to multipicture details page... soon");
+      this.nav.push(MultiPictureSurveyDetailsPage, {multiPictureSurvey: this.survey});
     } else {
       this.nav.push(SurveyDetailsPage, {survey: this.survey.surveys[0]});
     }

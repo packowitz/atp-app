@@ -1,0 +1,55 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Survey Details</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="showOptions($event)">
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="multi-picture-survey-details" padding>
+    <ion-list>
+      <ion-item>
+        <span class="status-circle {{meta.status}}"></span> {{meta.answered}} votes since {{getTimeDiff()}}
+      </ion-item>
+      <ion-item><strong>Title:</strong> <span [class.text-placeholder]="!meta.title">{{meta.title ? meta.title : 'no title'}}</span></ion-item>
+        <ion-item>
+            <div class="flex-space-between">
+                <span>
+                    <strong>Age:</strong> {{meta.minAge}} - {{meta.maxAge}}
+                </span>
+                <span>
+                    <strong>Gender:</strong> <span *ngIf="meta.male">male</span><span *ngIf="meta.male && meta.female"> and </span><span *ngIf="meta.female">female</span>
+                </span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <strong item-left>Countries:</strong>
+            <span class="text-placeholder" *ngIf="countries.length == 0">no restriction</span>
+            <span class="country" *ngFor="let country of countries"><img src="assets/img/flags/{{country}}.png" class="flag"></span>
+        </ion-item>
+    </ion-list>
+  <ion-list *ngFor="let picture of meta.pictures">
+    <ion-item>
+      <div class="survey-list-item">
+        <img [src]="'data:image/jpeg;base64,' + picture.picture" class="survey-list-img">
+        <div class="survey-item-data">
+          <div class="survey-item-text text-placeholder">{{picture.votesInvolved}} votes</div>
+          <div class="survey-item-diagram">
+            <div class="survey-item-diagram-pic1" *ngIf="picture.votesFor > 0" [style.width]="100 * picture.votesFor / picture.votesInvolved + '%'">
+              <span *ngIf="(100 * picture.votesFor / picture.votesInvolved) >= 10">{{picture.votesFor}}</span>
+            </div>
+            <div class="survey-item-diagram-noOpinion" *ngIf="picture.votesNoOpinion > 0" [style.width]="100 * picture.votesNoOpinion / picture.votesInvolved + '%'">
+              <span *ngIf="(100 * picture.votesNoOpinion / picture.votesInvolved) >= 10" class="diagram-text">{{picture.votesNoOpinion}}</span>
+            </div>
+            <div class="survey-item-diagram-pic2" *ngIf="picture.votesAgainst > 0" [style.width]="100 * picture.votesAgainst / picture.votesInvolved + '%'">
+              <span *ngIf="(100 * picture.votesAgainst / picture.votesInvolved) >= 10" class="diagram-text">{{picture.votesAgainst}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

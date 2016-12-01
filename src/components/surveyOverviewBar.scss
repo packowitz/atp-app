@@ -79,19 +79,3 @@
   width: 10vh;
   height: 10vh;
 }
-
-.status-circle {
-  width: 1em;
-  height: 1em;
-  border-radius: 100%;
-  margin-right: 4px;
-  &.ACTIVE {
-    background-color: $atp-green-success;
-  }
-  &.FINISHED {
-    background-color: $atp-red;
-  }
-  &.ABUSE {
-    background-color: $atp-orange;
-  }
-}
