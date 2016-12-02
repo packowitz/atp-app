@@ -7,9 +7,13 @@
   }
 
   .sub-survey {
+    &.no-margin {
+      ion-label {
+        margin-bottom: 0;
+      }
+    }
     ion-label {
-      margin-top: 0;
-      margin-bottom: 0;
+      margin-top: 2px;
     }
   }
 }

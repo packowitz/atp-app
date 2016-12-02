@@ -41,8 +41,8 @@
       </single-survey-bar>
     </ion-item>
     <div *ngIf="isShowDetails(picture)">
-      <div *ngFor="let survey of meta.surveys">
-        <ion-item *ngIf="survey.pic1_id == picture.pictureId || survey.pic2_id == picture.pictureId" class="sub-survey">
+      <div *ngFor="let survey of meta.surveys; let lastItem = last">
+        <ion-item *ngIf="survey.pic1_id == picture.pictureId || survey.pic2_id == picture.pictureId" class="sub-survey" [class.no-margin]="!lastItem">
           <single-survey-bar [surveyId]="survey.id"
                              [status]="survey.status"
                              [answered]="survey.answered"
