@@ -40,6 +40,7 @@ import {LocalStorage} from "../providers/localStorage.component";
 import {SurveyOverviewBar} from "../components/surveyOverviewBar.component";
 import {LoadingState} from "../pages/loading/loadingState.component";
 import {MultiPictureSurveyDetailsPage} from "../pages/surveyDetails/multiPictureSurveyDetails";
+import {SingleSurveyBar} from "../components/singleSurveyBar.component";
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import {MultiPictureSurveyDetailsPage} from "../pages/surveyDetails/multiPicture
 
     AnswerBarComponent,
     CountrySelection,
+    SingleSurveyBar,
     SurveyOverviewBar,
     HighscoreEntry,
     ChooseFeedbackType,

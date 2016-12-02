@@ -129,6 +129,11 @@ export class LocalStorage {
     return metaSurvey ? metaSurvey : null;
   }
 
+  public getSurveyById(id: number): Survey {
+    let meta = this.getMetaBySurveyId(id);
+    return meta ? meta.surveys.find(survey => survey.id == id) : null;
+  }
+
   addSurveyToMeta(meta: MetaSurvey, survey: Survey) {
     meta.ids.push(survey.id);
     meta.surveys.push(survey);

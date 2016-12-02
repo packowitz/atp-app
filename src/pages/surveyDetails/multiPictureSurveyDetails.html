@@ -31,25 +31,28 @@
             <span class="country" *ngFor="let country of countries"><img src="assets/img/flags/{{country}}.png" class="flag"></span>
         </ion-item>
     </ion-list>
-  <ion-list *ngFor="let picture of meta.pictures">
-    <ion-item>
-      <div class="survey-list-item">
-        <img [src]="'data:image/jpeg;base64,' + picture.picture" class="survey-list-img">
-        <div class="survey-item-data">
-          <div class="survey-item-text text-placeholder">{{picture.votesInvolved}} votes</div>
-          <div class="survey-item-diagram">
-            <div class="survey-item-diagram-pic1" *ngIf="picture.votesFor > 0" [style.width]="100 * picture.votesFor / picture.votesInvolved + '%'">
-              <span *ngIf="(100 * picture.votesFor / picture.votesInvolved) >= 10">{{picture.votesFor}}</span>
-            </div>
-            <div class="survey-item-diagram-noOpinion" *ngIf="picture.votesNoOpinion > 0" [style.width]="100 * picture.votesNoOpinion / picture.votesInvolved + '%'">
-              <span *ngIf="(100 * picture.votesNoOpinion / picture.votesInvolved) >= 10" class="diagram-text">{{picture.votesNoOpinion}}</span>
-            </div>
-            <div class="survey-item-diagram-pic2" *ngIf="picture.votesAgainst > 0" [style.width]="100 * picture.votesAgainst / picture.votesInvolved + '%'">
-              <span *ngIf="(100 * picture.votesAgainst / picture.votesInvolved) >= 10" class="diagram-text">{{picture.votesAgainst}}</span>
-            </div>
-          </div>
-        </div>
-      </div>
+  <ion-list *ngFor="let picture of meta.pictures" no-lines>
+    <ion-item (click)="toggleShowDetails(picture)">
+      <single-survey-bar [answered]="picture.votesInvolved"
+                         [leftPic]="picture.picture"
+                         [leftPicCount]="picture.votesFor"
+                         [rightPicCount]="picture.votesAgainst"
+                         [noOpinionCount]="picture.votesNoOpinion">
+      </single-survey-bar>
     </ion-item>
+    <div *ngIf="isShowDetails(picture)">
+      <div *ngFor="let survey of meta.surveys">
+        <ion-item *ngIf="survey.pic1_id == picture.pictureId || survey.pic2_id == picture.pictureId" class="sub-survey">
+          <single-survey-bar [surveyId]="survey.id"
+                             [status]="survey.status"
+                             [answered]="survey.answered"
+                             [rightPic]="survey.pic1_id == picture.pictureId ? survey.pic2 : survey.pic1"
+                             [leftPicCount]="survey.pic1_id == picture.pictureId ? survey.pic1Count : survey.pic2Count"
+                             [rightPicCount]="survey.pic1_id == picture.pictureId ? survey.pic2Count : survey.pic1Count"
+                             [noOpinionCount]="survey.noOpinionCount">
+          </single-survey-bar>
+        </ion-item>
+      </div>
+    </div>
   </ion-list>
 </ion-content>

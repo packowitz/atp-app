@@ -6,7 +6,7 @@ import {SurveyDetailsMenu} from "../../components/surveyDetailMenu.component";
 import {Model} from "../../components/model.component";
 import {NotificationService} from "../../providers/notification.service";
 import {LocalStorage} from "../../providers/localStorage.component";
-import {MetaSurvey} from "../../providers/domain/surveyMeta";
+import {MetaSurvey, SurveyPicture} from "../../providers/domain/surveyMeta";
 
 @Component({
   templateUrl: 'multiPictureSurveyDetails.html'
@@ -14,6 +14,8 @@ import {MetaSurvey} from "../../providers/domain/surveyMeta";
 export class MultiPictureSurveyDetailsPage {
   meta: MetaSurvey;
   countries: string[];
+
+  pictureDetailIds: number[] = [];
 
   constructor(public navParams: NavParams,
               public surveyService: SurveyService,
@@ -33,12 +35,10 @@ export class MultiPictureSurveyDetailsPage {
 
   showOptions(event: Event) {
     let popover = this.popoverController.create(SurveyDetailsMenu, {
-      survey: this.meta,
+      showRefresh: this.meta.status != 'FINISHED',
+      showDelete: true,
       callbacks: {
         refresh: () => {
-        },
-        tweak: () => {
-          alert("You can start an ATP with the same pictures but different criterias. Will come later.");
         },
         delete: () => {
         }
@@ -48,6 +48,19 @@ export class MultiPictureSurveyDetailsPage {
     popover.present({
       ev: event
     });
+  }
+
+  toggleShowDetails(picture: SurveyPicture) {
+    let idx = this.pictureDetailIds.indexOf(picture.pictureId);
+    if(idx == -1) {
+      this.pictureDetailIds.push(picture.pictureId);
+    } else {
+      this.pictureDetailIds.splice(idx, 1);
+    }
+  }
+
+  isShowDetails(picture: SurveyPicture): boolean {
+    return this.pictureDetailIds.indexOf(picture.pictureId) != -1;
   }
 
   getTimeDiff() {

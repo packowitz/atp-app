@@ -5,25 +5,29 @@ import {Component} from "@angular/core";
 @Component({
   template: `
     <ion-list style="margin: 0;">
-      <ion-item *ngIf="survey.status != 'FINISHED'" (click)="refresh()">
+      <ion-item *ngIf="showRefresh" (click)="refresh()">
         <ion-icon name="refresh" item-left></ion-icon> Refresh
       </ion-item>
-      <ion-item *ngIf="survey.status != 'ABUSE'" (click)="tweak()">
+      <ion-item *ngIf="showTweak" (click)="tweak()">
         <ion-icon name="share-alt" item-left></ion-icon> Tweak
       </ion-item>
-      <ion-item class="text-danger" (click)="delete()">
+      <ion-item *ngIf="showDelete" class="text-danger" (click)="delete()">
         <ion-icon name="remove-circle" item-left></ion-icon> Delete
       </ion-item>
     </ion-list>
   `,
 })
 export class SurveyDetailsMenu {
-  survey: Survey;
+  showRefresh: boolean = false;
+  showTweak: boolean = false;
+  showDelete: boolean = false;
   callbacks;
 
   constructor(public navParams: NavParams, public viewController: ViewController) {
-    this.survey = navParams.get('survey');
-    this.callbacks = navParams.get('callbacks')
+    this.showRefresh = navParams.get('showRefresh');
+    this.showTweak = navParams.get('showTweak');
+    this.showDelete = navParams.get('showDelete');
+    this.callbacks = navParams.get('callbacks');
   }
 
   refresh() {

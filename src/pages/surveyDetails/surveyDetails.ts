@@ -25,7 +25,8 @@ export class SurveyDetailsPage {
               public model: Model,
               public localStorage: LocalStorage,
               public notificationService: NotificationService) {
-    this.survey = navParams.get('survey');
+    let surveyId = navParams.get('surveyId');
+    this.survey = localStorage.getSurveyById(surveyId);
     if(this.survey.countries != 'ALL') {
       this.countries = this.survey.countries.split(",");
     } else {
@@ -38,7 +39,9 @@ export class SurveyDetailsPage {
 
   showOptions(event: Event) {
     let popover = this.popoverController.create(SurveyDetailsMenu, {
-      survey: this.survey,
+      showRefresh: this.survey.status != 'FINISHED',
+      showTweak: this.survey.status != 'ABUSED',
+      showDelete: !this.survey.multiPicture,
       callbacks: {
         refresh: () => {this.surveyService.loadSurveyDetails(this.survey)},
         tweak: () => {alert("You can start an ATP with the same pictures but different criterias. Will come later.");},

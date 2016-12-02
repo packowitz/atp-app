@@ -1,0 +1,18 @@
+<div (click)="openSurveyDetails()" class="survey-list-item">
+  <img *ngIf="leftPic" [src]="'data:image/jpeg;base64,' + leftPic" class="survey-list-img">
+  <div class="survey-item-data">
+    <div class="survey-item-text"><span *ngIf="status" class="status-circle {{status}}"></span> {{answered}} votes<span *ngIf="startedDate"> since {{getTimeDiff()}}</span></div>
+    <div class="survey-item-diagram">
+      <div class="survey-item-diagram-pic1" *ngIf="leftPicCount > 0" [style.width]="100 * leftPicCount / answered + '%'">
+        <span *ngIf="(100 * leftPicCount / answered) >= 10">{{leftPicCount}}</span>
+      </div>
+      <div class="survey-item-diagram-noOpinion" *ngIf="noOpinionCount > 0" [style.width]="100 * noOpinionCount / answered + '%'">
+        <span *ngIf="(100 * noOpinionCount / answered) >= 10" class="diagram-text">{{noOpinionCount}}</span>
+      </div>
+      <div class="survey-item-diagram-pic2" *ngIf="rightPicCount > 0" [style.width]="100 * rightPicCount / answered + '%'">
+        <span *ngIf="(100 * rightPicCount / answered) >= 10" class="diagram-text">{{rightPicCount}}</span>
+      </div>
+    </div>
+  </div>
+  <img *ngIf="rightPic" [src]="'data:image/jpeg;base64,' + rightPic" class="survey-list-img">
+</div>
