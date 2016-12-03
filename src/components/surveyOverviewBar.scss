@@ -3,6 +3,7 @@
   background-color: $atp-light-grey2;
   border: 2px $atp-light-grey2 solid;
   color: $atp-dark-text;
+  min-height: 10vh;
 
   .survey-item-data {
     flex-grow: 1;

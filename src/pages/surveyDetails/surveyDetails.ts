@@ -14,7 +14,6 @@ import {LocalStorage} from "../../providers/localStorage.component";
 export class SurveyDetailsPage {
   survey: Survey;
   countries: string[];
-  showSummary: boolean = true;
   showStatistics: boolean = false;
 
   constructor(public navParams: NavParams,

@@ -10,61 +10,85 @@
 </ion-header>
 
 <ion-content class="survey-details" padding>
-    <div class="picture-container">
-        <img [src]="'data:image/jpeg;base64,' + survey.pic1" class="pic pic1-img"/>
-        <img [src]="'data:image/jpeg;base64,' + survey.pic2" class="pic pic2-img"/>
-    </div>
-    <div class="detail-title" (click)="showSummary=!showSummary">
-        <ion-icon name="arrow-dropdown" *ngIf="showSummary"></ion-icon>
-        <ion-icon name="arrow-dropright" *ngIf="!showSummary"></ion-icon>
-        Summary
-    </div>
-    <div class="survey-item-data" [ngClass]="survey.status" *ngIf="showSummary">
-        <div class="survey-item-text"><span>{{getTimeDiff()}} ago</span><span>{{survey.answered}} votes</span><span>{{survey.status}}</span></div>
-        <answer-bar [pic1Count]="survey.pic1Count" [pic2Count]="survey.pic2Count" [noOpinionCount]="survey.noOpinionCount" [totalCount]="survey.answered"></answer-bar>
-    </div>
-    <ion-list *ngIf="showSummary">
-        <ion-item *ngIf="survey.title"><strong>Title:</strong> {{survey.title}}</ion-item>
-        <ion-item>
-            <div class="flex-space-between">
-                <span>
-                    <strong>Age:</strong> {{survey.minAge}} - {{survey.maxAge}}
-                </span>
-                <span>
-                    <strong>Gender:</strong> <span *ngIf="survey.male">male</span><span *ngIf="survey.male && survey.female"> and </span><span *ngIf="survey.female">female</span>
-                </span>
-            </div>
-        </ion-item>
-        <ion-item>
-            <strong item-left>Countries:</strong>
-            <span class="text-placeholder" *ngIf="countries.length == 0">no restriction</span>
-            <span class="country" *ngFor="let country of countries"><img src="assets/img/flags/{{country}}.png" class="flag"></span>
-        </ion-item>
-    </ion-list>
+  <div class="picture-container">
+    <img [src]="'data:image/jpeg;base64,' + survey.pic1" class="pic pic1-img"/>
+    <img [src]="'data:image/jpeg;base64,' + survey.pic2" class="pic pic2-img"/>
+  </div>
 
-    <div class="detail-title" *ngIf="survey.answers && survey.answers.length > 0" (click)="showStatistics=!showStatistics">
+  <ion-list>
+    <ion-item no-lines>
+      <strong>Summary</strong>
+    </ion-item>
+    <ion-item no-lines>
+      <single-survey-bar [startedDate]="survey.startedDate"
+                         [status]="survey.status"
+                         [answered]="survey.answered"
+                         [leftPicCount]="survey.pic1Count"
+                         [rightPicCount]="survey.pic2Count"
+                         [noOpinionCount]="survey.noOpinionCount">
+      </single-survey-bar>
+    </ion-item>
+    <ion-item><strong>Title:</strong> <span [class.text-placeholder]="!survey.title">{{survey.title ? survey.title : 'no title'}}</span></ion-item>
+    <ion-item>
+      <div class="flex-space-between">
+        <span>
+            <strong>Age:</strong> {{survey.minAge}} - {{survey.maxAge}}
+        </span>
+        <span>
+          <strong>Gender:</strong>
+          <span *ngIf="survey.male">male</span>
+          <span *ngIf="survey.male && survey.female"> and </span>
+          <span *ngIf="survey.female">female</span>
+        </span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <strong item-left>Countries:</strong>
+      <span class="text-placeholder" *ngIf="countries.length == 0">no restriction</span>
+      <span class="country" *ngFor="let country of countries"><img src="assets/img/flags/{{country}}.png" class="flag"></span>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="survey.answers && survey.answers.length > 0">
+    <ion-item>
+      <div class="detail-title" (click)="showStatistics=!showStatistics">
         <ion-icon name="arrow-dropdown" *ngIf="showStatistics"></ion-icon>
         <ion-icon name="arrow-dropright" *ngIf="!showStatistics"></ion-icon>
         Detailed Statistics
+      </div>
+    </ion-item>
+    <div *ngIf="showStatistics">
+
+      <ion-item *ngFor="let country of survey.answers | country">
+        <ion-label class="flex-space-between detail">
+          <span class="detail-label"><img src="assets/img/flags/{{country.alpha3}}.png" class="flag"></span>
+          <single-survey-bar [answered]="country.pic1 + country.pic2 + country.noOpinion"
+                             [leftPicCount]="country.pic1"
+                             [rightPicCount]="country.pic2"
+                             [noOpinionCount]="country.noOpinion">
+          </single-survey-bar>
+        </ion-label>
+      </ion-item>
+      <ion-item *ngFor="let gender of survey.answers | gender">
+        <ion-label class="flex-space-between detail">
+          <ion-icon [name]="gender.gender" class="detail-label"></ion-icon>
+          <single-survey-bar [answered]="gender.pic1 + gender.pic2 + gender.noOpinion"
+                             [leftPicCount]="gender.pic1"
+                             [rightPicCount]="gender.pic2"
+                             [noOpinionCount]="gender.noOpinion">
+          </single-survey-bar>
+        </ion-label>
+      </ion-item>
+      <ion-item *ngFor="let age of survey.answers | age">
+        <ion-label class="flex-space-between detail">
+          <span class="detail-label">{{age.age}}</span>
+          <single-survey-bar [answered]="age.pic1 + age.pic2 + age.noOpinion"
+                             [leftPicCount]="age.pic1"
+                             [rightPicCount]="age.pic2"
+                             [noOpinionCount]="age.noOpinion">
+          </single-survey-bar>
+        </ion-label>
+      </ion-item>
     </div>
-    <ion-list *ngIf="showStatistics">
-        <ion-item *ngFor="let country of survey.answers | country">
-            <ion-label class="flex-space-between detail">
-                <span class="detail-label"><img src="assets/img/flags/{{country.alpha3}}.png" class="flag"></span>
-                <answer-bar [pic1Count]="country.pic1" [pic2Count]="country.pic2" [noOpinionCount]="country.noOpinion" [totalCount]="country.pic1 + country.pic2 + country.noOpinion"></answer-bar>
-            </ion-label>
-        </ion-item>
-        <ion-item *ngFor="let gender of survey.answers | gender">
-            <ion-label class="flex-space-between detail">
-                <ion-icon [name]="gender.gender" class="detail-label"></ion-icon>
-                <answer-bar [pic1Count]="gender.pic1" [pic2Count]="gender.pic2" [noOpinionCount]="gender.noOpinion" [totalCount]="gender.pic1 + gender.pic2 + gender.noOpinion"></answer-bar>
-            </ion-label>
-        </ion-item>
-        <ion-item *ngFor="let age of survey.answers | age">
-            <ion-label class="flex-space-between detail">
-                <span class="detail-label">{{age.age}}</span>
-                <answer-bar [pic1Count]="age.pic1" [pic2Count]="age.pic2" [noOpinionCount]="age.noOpinion" [totalCount]="age.pic1 + age.pic2 + age.noOpinion"></answer-bar>
-            </ion-label>
-        </ion-item>
-    </ion-list>
+  </ion-list>
 </ion-content>

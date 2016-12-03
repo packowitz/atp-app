@@ -1,4 +1,6 @@
 .survey-details {
+  background-color: $atp-light-grey2;
+
   .picture-container {
     display: flex;
     margin-bottom: 4vw;
@@ -6,48 +8,13 @@
   }
 
   .pic {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 44vw;
     height: 44vw;
-
-    &.pic1-img {
-      border: 4px dodgerblue solid;
-    }
-    &.pic2-img {
-      border: 4px darkorange solid;
-    }
-  }
-
-  .survey-item-data {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    &.ACTIVE {
-      background-color: #B7F1B7;
-    }
-    &.FINISHED {
-      background-color: #E0E0DA;
-    }
-    &.ABUSE {
-      background-color: #E45757;
-    }
-
-
-    .survey-item-text {
-      height: 3.5vh;
-      padding: 0 1vw;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
+    border: 2px $atp-dark-grey2 solid;
   }
 
   .detail-title {
     font-weight: 600;
-    padding-bottom: 1vh;
     ion-icon {
       width: 3vw;
     }
@@ -57,7 +24,7 @@
     .detail-label {
       width: 15vw;
     }
-    answer-bar {
+    single-survey-bar {
       width: 100%;
     }
   }

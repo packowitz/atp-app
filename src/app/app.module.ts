@@ -13,7 +13,6 @@ import {SurveyPage} from "../pages/survey/survey";
 import {SurveyDetailsPage} from "../pages/surveyDetails/surveyDetails";
 import {TabsPage} from "../pages/tabs/tabsPage";
 import {WelcomePage} from "../pages/welcome/welcome";
-import {AnswerBarComponent} from "../components/answerbar.component";
 import {CountrySelection} from "../components/countrySelection.component";
 import {Model} from "../components/model.component";
 import {HighscoreEntry} from "../pages/highscore/highscoreEntry";
@@ -61,7 +60,6 @@ import {SurveyContainsPicturePipe} from "../pipes/surveyContainsPicture";
     TabsPage,
     WelcomePage,
 
-    AnswerBarComponent,
     CountrySelection,
     SingleSurveyBar,
     SurveyOverviewBar,
