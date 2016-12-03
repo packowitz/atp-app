@@ -41,6 +41,7 @@ import {SurveyOverviewBar} from "../components/surveyOverviewBar.component";
 import {LoadingState} from "../pages/loading/loadingState.component";
 import {MultiPictureSurveyDetailsPage} from "../pages/surveyDetails/multiPictureSurveyDetails";
 import {SingleSurveyBar} from "../components/singleSurveyBar.component";
+import {SurveyContainsPicturePipe} from "../pipes/surveyContainsPicture";
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import {SingleSurveyBar} from "../components/singleSurveyBar.component";
 
     AgePipe,
     CountryPipe,
-    GenderPipe
+    GenderPipe,
+    SurveyContainsPicturePipe
   ],
   imports: [
     IonicModule.forRoot(AtpApp, {
