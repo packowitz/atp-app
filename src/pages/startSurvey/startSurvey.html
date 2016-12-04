@@ -42,18 +42,18 @@
 
   <ion-list>
     <ion-list-header no-lines>
-      Add pictures:
+      Add 2-5 pictures:
+      <a href="" *ngIf="pictures.length < 5" (click)="choosePicture($event)" item-right>
+         Add picture
+      </a>
     </ion-list-header>
 
     <div class="picture-container">
-      <img [src]="'data:image/jpeg;base64,' + survey.pic1" *ngIf="survey.pic1" (click)="choosePicture(true)" class="pic"/>
-      <div *ngIf="!survey.pic1" (click)="choosePicture(true)" class="pic light-background">
-        <ion-icon name="images" class="default-icon"></ion-icon>
-      </div>
-      <img [src]="'data:image/jpeg;base64,' + survey.pic2" *ngIf="survey.pic2" (click)="choosePicture(false)"
-           class="pic"/>
-      <div *ngIf="!survey.pic2" (click)="choosePicture(false)" class="pic light-background">
-        <ion-icon name="images" class="default-icon"></ion-icon>
+      <div *ngFor="let pic of pictures; let idx = index" class="pic">
+        <img [src]="'data:image/jpeg;base64,' + pic"/>
+        <div class="remove" (click)="deletePicture(idx)">
+          <i class="fa fa-times"></i>
+        </div>
       </div>
     </div>
     <ion-item>
@@ -67,6 +67,9 @@
     <ion-list-header no-lines>
       ATP-Range:
     </ion-list-header>
+    <ion-item *ngIf="pictures.length > 2">
+      {{pictures.length}} pictures lead to {{numberOfSurveys}} ATPs.
+    </ion-item>
     <ion-item>
       {{surveyType.name}} ({{surveyType.answers}} people)
       <a href="" (click)="changeSurveyType($event)" item-right>
@@ -80,7 +83,7 @@
 
   <div class="submit-row">
     <button ion-button full [disabled]="!surveyComplete()" (click)="startSurvey()" class="start-survey-button">
-      Start ATP ({{surveyType.costs}} <img src="assets/img/diamond-white.png" class="diamond-icon">)
+      Start ATP ({{numberOfSurveys * surveyType.costs}} <img src="assets/img/diamond-white.png" class="diamond-icon">)
     </button>
   </div>
 

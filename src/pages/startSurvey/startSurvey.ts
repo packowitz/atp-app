@@ -34,7 +34,7 @@ export class StartSurveyPage {
   exampleText: string;
   pictures: string[];
   croppie: any;
-  croppieFirst: boolean;
+  numberOfSurveys: number;
 
   constructor(public platform: Platform,
               public ngZone: NgZone,
@@ -52,6 +52,7 @@ export class StartSurveyPage {
     this.surveyType = this.model.surveyTypes[0];
     this.exampleText = Messages.getStartAtpExampleMsg();
     this.pictures = [];
+    this.numberOfSurveys = 1;
     this.survey = new Survey();
     let lastSettings: SurveySettings = this.localStorage.getLastSurveySettings();
     this.countries = lastSettings ? lastSettings.countries : [];
@@ -61,9 +62,8 @@ export class StartSurveyPage {
     this.ageRange.upper = lastSettings ? lastSettings.maxAge : 99;
   }
 
-  showCroppie(src: string, first: boolean) {
+  showCroppie(src: string) {
     this.destroyCroppie();
-    this.croppieFirst = first;
     let imgWidth = window.innerWidth * 0.8;
     this.croppie = new Croppie(document.getElementById('new-croppie'), {
       viewport: {width: 300, height: 300},
@@ -88,11 +88,8 @@ export class StartSurveyPage {
         format: 'jpeg',
         quality: 0.5
       }).then(data => {
-        if(this.croppieFirst) {
-          this.survey.pic1 = data.substring(data.indexOf(",") + 1);
-        } else {
-          this.survey.pic2 = data.substring(data.indexOf(",") + 1);
-        }
+        this.pictures.push(data.substring(data.indexOf(",") + 1));
+        this.recalculateNumberOfSurveys();
         this.destroyCroppie();
       });
     }
@@ -110,16 +107,17 @@ export class StartSurveyPage {
     }
   }
 
-  doTakePicture(isFirstPic: boolean, source: number) {
+  doTakePicture(source: number) {
     this.cameraOptions.sourceType = source;
     Camera.getPicture(this.cameraOptions).then(data => {
       this.ngZone.run(() => {
-        this.showCroppie(data, isFirstPic);
+        this.showCroppie(data);
       });
     }, error => {alert(error);});
   }
 
-  choosePicture(isFirstPic: boolean) {
+  choosePicture(event: Event) {
+    event.preventDefault();
     this.actionSheetController.create({
       title: 'Choose action',
       cssClass: 'action-sheets-basic-page',
@@ -127,27 +125,41 @@ export class StartSurveyPage {
         text: 'Camera',
         icon: this.platform.is('ios') ? null : 'camera',
         handler: () => {
-          this.doTakePicture(isFirstPic, 1);
+          this.doTakePicture(1);
         }
       }, {
         text: 'Gallery',
         icon: this.platform.is('ios') ? null : 'image',
         handler: () => {
-          this.doTakePicture(isFirstPic, 0);
+          this.doTakePicture(0);
         }
       }, {
         text: 'Dummy for Test',
         icon: this.platform.is('ios') ? null : 'bug',
         handler: () => {
-          this.chooseDummyPicture(isFirstPic);
+          this.chooseDummyPicture();
         }
       }
       ]
     }).present();
   }
 
-  chooseDummyPicture(isFirstPic: boolean) {
-    this.showCroppie(RandomImage.getRandomImage(), isFirstPic);
+  chooseDummyPicture() {
+    this.showCroppie(RandomImage.getRandomImage());
+  }
+
+  deletePicture(index: number) {
+    console.log("delete " + index);
+    this.pictures.splice(index, 1);
+    this.recalculateNumberOfSurveys();
+  }
+
+  recalculateNumberOfSurveys() {
+    if(this.pictures.length <= 2) {
+      this.numberOfSurveys = 1;
+    } else {
+      this.numberOfSurveys = (this.pictures.length * (this.pictures.length - 1)) / 2;
+    }
   }
 
   changeGender(event: Event) {
@@ -196,7 +208,7 @@ export class StartSurveyPage {
   }
 
   surveyComplete(): boolean {
-    return this.survey.pic1 != null && this.survey.pic2 != null && this.model.user.credits >= this.surveyType.costs;
+    return this.pictures.length >= 2 && this.model.user.credits >= (this.numberOfSurveys * this.surveyType.costs);
   }
 
   public startSurvey() {
@@ -222,7 +234,6 @@ export class StartSurveyPage {
     } else {
       this.survey.countries = "ALL";
     }
-    this.pictures = [this.survey.pic1, this.survey.pic2];
     this.surveyService.postSurvey(this.survey, this.surveyType.key, this.pictures).subscribe(resp => {
       console.log("ATP started");
       this.localStorage.addSurveys(resp);

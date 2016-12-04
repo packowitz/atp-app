@@ -5,6 +5,10 @@
     margin-bottom: 8px;
     font-size: 2rem;
     font-weight: 600;
+    a {
+      font-size: 1.6rem;
+      font-weight: normal;
+    }
   }
 
   .item-no-lower-border {
@@ -19,27 +23,41 @@
   }
 
   .picture-title {
-    margin: 4vw;
+    margin: 4vw 4vw 0 4vw;
     font-size: 1.6rem;
   }
 
   .picture-container {
+    margin: 0 4vw;
     display: flex;
-    margin: 4vw;
+    align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   .pic {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px $atp-light-grey4 solid;
+    position: relative;
+    margin-top: 4vw;
+    border: 2px $atp-dark-grey2 solid;
     width: 44vw;
     height: 44vw;
 
-    .default-icon {
-      color: #B4B4B4;
-      font-size: 30vw;
+    img {
+      width: 44vw;
+      height: 44vw;
+    }
+
+    .remove {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 5vw;
+      height: 5vw;
+      background-color: white;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 
