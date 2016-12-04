@@ -4,6 +4,7 @@ import {Survey} from "./domain/survey";
 import {SurveyListWithTimestamp} from "./survey.service";
 import {Storage} from "@ionic/storage";
 import {MetaSurvey, SurveyPicture} from "./domain/surveyMeta";
+import {SurveySettings} from "../components/surveySettings";
 
 @Injectable()
 export class LocalStorage {
@@ -13,15 +14,14 @@ export class LocalStorage {
   updateTimestamp: number;
   surveys: MetaSurvey[];
 
+  lastSurveySettings: SurveySettings;
+
   constructor(public platform: Platform, public storage: Storage) {
     if(platform.is("cordova") || platform.is("android") || platform.is("ios")) {
       this.prefix = "atp-app-";
     } else {
       this.prefix = "atp-app-dev-";
     }
-    storage.get(this.prefix + 'token').then(data => this.token = data);
-    storage.get(this.prefix + 'updateTimestamp').then(data => this.updateTimestamp = data);
-    storage.get(this.prefix + 'surveys').then(data => this.surveys = data ? data : []);
   }
 
   loadData(): Promise<any> {
@@ -31,6 +31,9 @@ export class LocalStorage {
         this.updateTimestamp = data;
         return this.storage.get(this.prefix + 'surveys').then(data => {
           this.surveys = data ? data : [];
+          return this.storage.get(this.prefix + 'lastSurveySettings').then(data => {
+            this.lastSurveySettings = data;
+          });
         });
       });
     });
@@ -50,6 +53,15 @@ export class LocalStorage {
   public setToken(token: string) {
     this.token = token;
     this.storage.set(this.prefix + 'token', this.token);
+  }
+
+  public getLastSurveySettings(): SurveySettings {
+    return this.lastSurveySettings;
+  }
+
+  public setLastSurveySettings(settings: SurveySettings) {
+    this.lastSurveySettings = settings;
+    this.storage.set(this.prefix + 'lastSurveySettings', this.lastSurveySettings);
   }
 
   public getUpdateTimestamp() {
@@ -80,14 +92,19 @@ export class LocalStorage {
         if(meta) {
           this.addSurveyToMeta(meta, survey);
         } else {
-          this.surveys.push(new MetaSurvey(survey));
+          this.addAsMetaSurvey(survey);
         }
       } else {
-        this.surveys.push(new MetaSurvey(survey))
+        this.addAsMetaSurvey(survey);
       }
     } else {
       this.updateSurveyOfMeta(alreadyExists, survey);
     }
+  }
+
+  addAsMetaSurvey(survey: Survey) {
+    this.surveys.push(new MetaSurvey(survey));
+    this.surveys.sort((survey1, survey2) => survey1.startedDate < survey2.startedDate ? 1 : -1);
   }
 
   deleteSurvey(survey: Survey) {

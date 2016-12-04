@@ -1,5 +1,4 @@
 import {ViewController, NavParams} from "ionic-angular";
-import {Survey} from "../providers/domain/survey";
 import {Component} from "@angular/core";
 
 @Component({

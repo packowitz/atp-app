@@ -15,8 +15,8 @@ export class SurveyService {
 
   constructor(public atpHttp: AtpHttp, public localStorage: LocalStorage) {}
 
-  postSurvey(survey: Survey, type: string, saveAsDefault: boolean): Observable<Survey> {
-    let request = {survey: survey, type: type, saveAsDefault: saveAsDefault};
+  postSurvey(survey: Survey, type: string): Observable<Survey> {
+    let request = {survey: survey, type: type};
     return this.atpHttp.doPost("/app/survey/private", request, "Starting ATP");
   }
 

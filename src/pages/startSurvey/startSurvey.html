@@ -38,13 +38,6 @@
         src="assets/img/flags/{{country}}.png" class="flag"></span>
       </div>
     </ion-item>
-    <ion-item>
-      <div class="flex-left" (click)="saveAsDefault = !saveAsDefault">
-        <ion-icon name="square-outline" *ngIf="!saveAsDefault"></ion-icon>
-        <ion-icon name="checkbox-outline" *ngIf="saveAsDefault"></ion-icon>
-        <span class="padding-left-small"> save settings as default</span>
-      </div>
-    </ion-item>
   </ion-list>
 
   <ion-list>

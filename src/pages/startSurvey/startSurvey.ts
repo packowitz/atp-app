@@ -12,6 +12,7 @@ import {NotificationService} from "../../providers/notification.service";
 import {SurveyType} from "../../providers/domain/surveyType";
 import {Messages} from "../../components/messages";
 import {LocalStorage} from "../../providers/localStorage.component";
+import {SurveySettings} from "../../components/surveySettings";
 
 declare var Croppie: any;
 
@@ -31,7 +32,6 @@ export class StartSurveyPage {
   surveyType: SurveyType;
   countries: string[];
   ageRange = {lower: 1, upper: 99};
-  saveAsDefault: boolean = true;
   exampleText: string;
   croppie: any;
   croppieFirst: boolean;
@@ -52,11 +52,12 @@ export class StartSurveyPage {
     this.surveyType = this.model.surveyTypes[0];
     this.exampleText = Messages.getStartAtpExampleMsg();
     this.survey = new Survey();
-    this.countries = user.surveyCountry && user.surveyCountry != 'ALL' ? user.surveyCountry.split(",") : user.country ? [user.country] : [];
-    this.survey.male = user.surveyMale !== false;
-    this.survey.female = user.surveyFemale !== false;
-    this.ageRange.lower = user.surveyMinAge ? user.surveyMinAge : 1;
-    this.ageRange.upper = user.surveyMaxAge ? user.surveyMaxAge : 99;
+    let lastSettings: SurveySettings = this.localStorage.getLastSurveySettings();
+    this.countries = lastSettings ? lastSettings.countries : [];
+    this.survey.male = lastSettings ? lastSettings.male : true;
+    this.survey.female = lastSettings ? lastSettings.female : true;
+    this.ageRange.lower = lastSettings ? lastSettings.minAge : 1;
+    this.ageRange.upper = lastSettings ? lastSettings.maxAge : 99;
   }
 
   showCroppie(src: string, first: boolean) {
@@ -198,6 +199,15 @@ export class StartSurveyPage {
   }
 
   public startSurvey() {
+    //store settings in local storage as default for next survey
+    let settings: SurveySettings = new SurveySettings();
+    settings.countries = this.countries;
+    settings.male = this.survey.male;
+    settings.female = this.survey.female;
+    settings.minAge = this.ageRange.lower;
+    settings.maxAge = this.ageRange.upper;
+    this.localStorage.setLastSurveySettings(settings);
+
     this.survey.minAge = this.ageRange.lower;
     this.survey.maxAge = this.ageRange.upper;
     this.survey.countries = "";
@@ -211,9 +221,9 @@ export class StartSurveyPage {
     } else {
       this.survey.countries = "ALL";
     }
-    this.surveyService.postSurvey(this.survey, this.surveyType.key, this.saveAsDefault).subscribe(resp => {
+    this.surveyService.postSurvey(this.survey, this.surveyType.key).subscribe(resp => {
       console.log("ATP started");
-      this.localStorage.addSurvey(resp);
+      this.localStorage.addAsMetaSurvey(resp);
       this.notificationService.showToast({
         message: 'ATP started',
         duration: 3000,
