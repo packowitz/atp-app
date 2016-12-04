@@ -1,8 +1,7 @@
 .start-survey {
+  background-color: $atp-light-grey2;
 
-  ion-list-header {
-    margin-top: 16px;
-    margin-bottom: 8px;
+  .list-header {
     font-size: 2rem;
     font-weight: 600;
     a {
@@ -28,23 +27,24 @@
   }
 
   .picture-container {
-    margin: 0 4vw;
+    padding: 0 4vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    background-color: white;
   }
 
   .pic {
     position: relative;
     margin-top: 4vw;
     border: 2px $atp-dark-grey2 solid;
-    width: 44vw;
-    height: 44vw;
+    width: 40vw;
+    height: 40vw;
 
     img {
-      width: 44vw;
-      height: 44vw;
+      width: 100%;
+      height: 100%;
     }
 
     .remove {

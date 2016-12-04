@@ -1,4 +1,4 @@
-import {Platform, Tabs, ActionSheetController, PopoverController} from "ionic-angular";
+import {Platform, Tabs, ActionSheetController, PopoverController, AlertController} from "ionic-angular";
 import {NgZone} from "@angular/core";
 import {Camera, CameraOptions} from "ionic-native";
 import {Survey} from "../../providers/domain/survey";
@@ -44,7 +44,8 @@ export class StartSurveyPage {
               public tabs: Tabs,
               public actionSheetController: ActionSheetController,
               public popoverController: PopoverController,
-              public notificationService: NotificationService) {
+              public notificationService: NotificationService,
+              public alertController: AlertController) {
     this.createEmptySurvey();
   }
 
@@ -205,6 +206,16 @@ export class StartSurveyPage {
         return;
       }
     }
+  }
+
+  showMultiPictureHint() {
+    this.alertController.create({
+      title: '2+ pictures',
+      message: 'If you choose more than 2 pictures then this will lead to an ATP for each combination.',
+      buttons: [
+        {text: 'OK'}
+      ]
+    }).present();
   }
 
   surveyComplete(): boolean {

@@ -4,11 +4,11 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="start-survey">
+<ion-content class="start-survey" padding>
   <ion-list>
-    <ion-list-header no-lines>
+    <ion-item class="list-header" no-lines>
       What is your target audience?
-    </ion-list-header>
+    </ion-item>
     <ion-item>
       Gender:
       <a href="" (click)="changeGender($event)" item-right>
@@ -41,12 +41,12 @@
   </ion-list>
 
   <ion-list>
-    <ion-list-header no-lines>
+    <ion-item class="list-header" no-lines>
       Add 2-5 pictures:
       <a href="" *ngIf="pictures.length < 5" (click)="choosePicture($event)" item-right>
          Add picture
       </a>
-    </ion-list-header>
+    </ion-item>
 
     <div class="picture-container">
       <div *ngFor="let pic of pictures; let idx = index" class="pic">
@@ -64,11 +64,11 @@
   </ion-list>
 
   <ion-list no-lines>
-    <ion-list-header no-lines>
+    <ion-item class="list-header" no-lines>
       ATP-Range:
-    </ion-list-header>
+    </ion-item>
     <ion-item *ngIf="pictures.length > 2">
-      {{pictures.length}} pictures lead to {{numberOfSurveys}} ATPs.
+      {{pictures.length}} pictures lead to {{numberOfSurveys}} ATPs. <i class="fa fa-question-circle" (click)="showMultiPictureHint()"></i>
     </ion-item>
     <ion-item>
       {{surveyType.name}} ({{surveyType.answers}} people)
