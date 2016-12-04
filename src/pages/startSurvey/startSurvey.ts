@@ -7,7 +7,6 @@ import {SurveyService} from "../../providers/survey.service";
 import {RandomImage} from "../../components/randomImage.component";
 import {Component} from "@angular/core";
 import {CountrySelection} from "../../components/countrySelection.component";
-import {User} from "../../providers/domain/user";
 import {NotificationService} from "../../providers/notification.service";
 import {SurveyType} from "../../providers/domain/surveyType";
 import {Messages} from "../../components/messages";
@@ -45,10 +44,10 @@ export class StartSurveyPage {
               public actionSheetController: ActionSheetController,
               public popoverController: PopoverController,
               public notificationService: NotificationService) {
-    this.createEmptySurvey(model.user);
+    this.createEmptySurvey();
   }
 
-  createEmptySurvey(user: User) {
+  createEmptySurvey() {
     this.surveyType = this.model.surveyTypes[0];
     this.exampleText = Messages.getStartAtpExampleMsg();
     this.survey = new Survey();
@@ -230,7 +229,7 @@ export class StartSurveyPage {
         showCloseButton: true,
         closeButtonText: 'OK'
       });
-      this.createEmptySurvey(this.model.user);
+      this.createEmptySurvey();
       this.tabs.select(Model.MainTab);
     });
   }
