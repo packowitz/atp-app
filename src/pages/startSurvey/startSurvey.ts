@@ -32,6 +32,7 @@ export class StartSurveyPage {
   countries: string[];
   ageRange = {lower: 1, upper: 99};
   exampleText: string;
+  pictures: string[];
   croppie: any;
   croppieFirst: boolean;
 
@@ -50,6 +51,7 @@ export class StartSurveyPage {
   createEmptySurvey() {
     this.surveyType = this.model.surveyTypes[0];
     this.exampleText = Messages.getStartAtpExampleMsg();
+    this.pictures = [];
     this.survey = new Survey();
     let lastSettings: SurveySettings = this.localStorage.getLastSurveySettings();
     this.countries = lastSettings ? lastSettings.countries : [];
@@ -220,9 +222,10 @@ export class StartSurveyPage {
     } else {
       this.survey.countries = "ALL";
     }
-    this.surveyService.postSurvey(this.survey, this.surveyType.key).subscribe(resp => {
+    this.pictures = [this.survey.pic1, this.survey.pic2];
+    this.surveyService.postSurvey(this.survey, this.surveyType.key, this.pictures).subscribe(resp => {
       console.log("ATP started");
-      this.localStorage.addAsMetaSurvey(resp);
+      this.localStorage.addSurveys(resp);
       this.notificationService.showToast({
         message: 'ATP started',
         duration: 3000,
