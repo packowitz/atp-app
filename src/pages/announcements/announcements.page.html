@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Announcements</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="announcements-page grey-background">
+  <ion-list>
+    <ion-card *ngFor="let announcement of model.announcements">
+      <ion-card-header class="no-padding-bottom">
+        <div class="small-headline">{{getTimeDiff(announcement.sendDate)}} ago</div>
+        <div class="text-center">{{announcement.title}}</div>
+      </ion-card-header>
+      <ion-card-content>
+        {{announcement.message}}
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

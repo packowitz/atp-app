@@ -19,7 +19,6 @@ export class Model {
   public feedback: Feedback[] = [];
   public unreadFeedback: number = 0;
   public announcements: Announcement[] = [];
-  public unreadAnnouncements: number = 0;
   public achievements: Achievement[] = [];
   public claimableAchievements: number = 0;
   public achievement_active: Achievement;
@@ -28,13 +27,14 @@ export class Model {
   public achievement_answerer: Achievement;
   public achievement_reliable: Achievement;
   readAnnouncements: string;
+  unreadAnnouncements: number = 0;
 
   constructor(public platform: Platform,
               public storage: Storage) {
     if(platform.is("cordova") || platform.is("android") || platform.is("ios")) {
       Model.server = "http://api.askthepeople.io";
     }
-    this.storage.get('readAnnouncements').then(data => this.readAnnouncements = data);
+    this.storage.get('readAnnouncements').then(data => this.readAnnouncements = data ? data : '|');
 
     this.surveyTypes = [
       {key: 'NUMBER100', name: 'Quick Check', answers: 100, costs: 1000},
@@ -45,29 +45,32 @@ export class Model {
 
   public recalcUnreadMessages() {
     let unreadFeedback = 0;
-    let unreadAnnouncements = 0;
     this.feedback.forEach(feedback => unreadFeedback += feedback.unreadAnswers);
-    this.announcements.forEach(announcement => {
-      if(!this.readAnnouncements || this.readAnnouncements.indexOf('|' + announcement.id + '|') == -1) {
-        unreadAnnouncements ++;
-      }
-    });
     this.unreadFeedback = unreadFeedback;
+  }
+
+  public recalcUnreadAnnouncements() {
+    let unreadAnnouncements = 0;
+    this.announcements.forEach(announcement => unreadAnnouncements += announcement.read ? 0 : 1);
     this.unreadAnnouncements = unreadAnnouncements;
   }
 
-  public markAnnouncementAsRead() {
+  public markAnnouncementAsRead(announcement: Announcement) {
     if(!this.readAnnouncements) {
       this.readAnnouncements = '|';
     }
-    this.announcements.forEach(
-      announcement => {
-        if(this.readAnnouncements.indexOf('|' + announcement.id + '|') == -1) {
-          this.readAnnouncements += announcement.id + '|'
-        }
-      }
-    );
+    this.readAnnouncements += announcement.id + '|';
+    announcement.read = true;
+    this.recalcUnreadAnnouncements();
     this.storage.set('readAnnouncements', this.readAnnouncements).then(() => this.recalcUnreadMessages());
+  }
+
+  public setAnnouncements(announcements: Announcement[]) {
+    if(announcements && announcements.length > 0) {
+      announcements.forEach(announcement => announcement.read = this.readAnnouncements.indexOf('|' + announcement.id + '|') != -1);
+      this.announcements = announcements;
+    }
+    this.recalcUnreadAnnouncements();
   }
 
   isUserDataCompleteToAnswerATP(): boolean {

@@ -11,10 +11,7 @@
         {{model.user.username ? model.user.username : 'Me'}}
       </ion-list-header>
       <ion-item-group>
-        <!-- My data -->
-        <button ion-item menuClose (click)="showSettings()" >
-          <ion-icon item-left name="person" color="atp-blue-light"></ion-icon>My info
-        </button>
+        <button ion-item menuClose (click)="showSettings()" ><ion-icon item-left name="person" color="atp-blue-light"></ion-icon>My info</button>
       </ion-item-group>
     </ion-list>
     <ion-list>
@@ -22,15 +19,13 @@
         ATP
       </ion-list-header>
       <ion-item-group>
-        <!-- Highscore buttons -->
-        <button ion-item menuClose (click)="showHighscorePage()">
-          <ion-icon item-left color="atp-gold" name="trophy"></ion-icon>Highscores</button>
+        <button ion-item menuClose (click)="showAnnouncements()"><ion-icon item-left name="megaphone"></ion-icon>Announcements</button>
+        <button ion-item menuClose (click)="showHighscorePage()"><ion-icon item-left color="atp-gold" name="trophy"></ion-icon>Highscores</button>
 
         <!-- Feedback portal buttons -->
-            <button ion-item menuClose (click)="showFeedbackPage()">
-          <ion-icon item-left color="atp-blue" name="book"></ion-icon>Feedback portal</button>
-        <button ion-item menuClose><ion-icon item-left name="information-circle" color="atp-placeholder-grey"></ion-icon>About</button>
+        <button ion-item menuClose (click)="showFeedbackPage()"><ion-icon item-left color="atp-blue" name="book"></ion-icon>Feedback portal</button>
         <button ion-item menuClose (click)="showSettings()"><ion-icon item-left name="settings"></ion-icon>Settings</button>
+        <button ion-item menuClose><ion-icon item-left name="information-circle" color="atp-placeholder-grey"></ion-icon>About</button>
       </ion-item-group>
     </ion-list>
   </ion-content>

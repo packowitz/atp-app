@@ -130,8 +130,7 @@ export class LoadingPage {
   public loadAnnouncements() {
     this.feedbackService.loadAnnouncements().subscribe(
       data => {
-        this.model.announcements = data;
-        this.model.recalcUnreadMessages();
+        this.model.setAnnouncements(data);
         console.log("Loaded " + this.model.announcements.length + " announcements");
         this.state.loadedAnnouncements = true;
         this.loadDataFromServer();

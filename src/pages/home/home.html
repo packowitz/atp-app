@@ -42,16 +42,19 @@
   </div>
 
   <!-- Announcements -->
-  <div class="padding-horizontal-small" *ngIf="model.announcements.length > 0">
+  <div class="padding-horizontal-small" *ngIf="model.unreadAnnouncements > 0">
     <div class="text-center color-white margin-top-middle">Latest announcements</div>
-    <ion-card *ngFor="let announcement of model.announcements">
-      <ion-card-header class="small-headline no-padding-bottom">
-        {{getTimeDiff(announcement.sendDate)}} ago
-      </ion-card-header>
-      <ion-card-content>
-        {{announcement.message}}
-      </ion-card-content>
-    </ion-card>
+    <div *ngFor="let announcement of model.announcements">
+      <ion-card *ngIf="!announcement.read">
+        <ion-card-header class="no-padding-bottom">
+          <div class="small-headline flex-space-between">{{getTimeDiff(announcement.sendDate)}} ago<ion-icon name="close" (click)="model.markAnnouncementAsRead(announcement)"></ion-icon></div>
+          <div class="text-center">{{announcement.title}}</div>
+        </ion-card-header>
+        <ion-card-content>
+          {{announcement.message}}
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 
   <!-- Pax section -->

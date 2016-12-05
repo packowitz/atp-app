@@ -41,9 +41,11 @@ import {LoadingState} from "../pages/loading/loadingState.component";
 import {MultiPictureSurveyDetailsPage} from "../pages/surveyDetails/multiPictureSurveyDetails";
 import {SingleSurveyBar} from "../components/singleSurveyBar.component";
 import {SurveyContainsPicturePipe} from "../pipes/surveyContainsPicture";
+import {AnnouncementsPage} from "../pages/announcements/announcements.page";
 
 @NgModule({
   declarations: [
+    AnnouncementsPage,
     AtpApp,
     HighscorePage,
     LoadingPage,
@@ -84,6 +86,7 @@ import {SurveyContainsPicturePipe} from "../pipes/surveyContainsPicture";
   ],
   bootstrap: [IonicApp],
   entryComponents: [
+    AnnouncementsPage,
     AtpApp,
     HighscorePage,
     LoadingPage,

@@ -24,10 +24,6 @@ export class HomePage {
               public alertController: AlertController,
               public modalCtrl: ModalController,
               public achievementService: AchievementService) {
-    setTimeout(() => {
-      this.model.markAnnouncementAsRead();
-      this.model.recalcUnreadMessages();
-    }, 1000);
   }
 
   ionViewDidEnter() {

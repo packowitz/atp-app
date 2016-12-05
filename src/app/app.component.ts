@@ -8,6 +8,7 @@ import {Model} from "../components/model.component";
 import {SettingsPage} from "../pages/settings/settings";
 import {FeedbackPage} from "../pages/feedback/feedback.page";
 import {HighscorePage} from "../pages/highscore/highscore";
+import {AnnouncementsPage} from "../pages/announcements/announcements.page";
 
 /**
  * Main app controller.
@@ -30,26 +31,19 @@ export class AtpApp {
     });
   }
 
-  // Show app settings
   showSettings() {
-    let modal = this.modalCtrl.create(SettingsPage);
-    modal.present();
+    this.modalCtrl.create(SettingsPage).present();
   }
 
-  // Show feedback page
   showFeedbackPage() {
-    let modal = this.modalCtrl.create(FeedbackPage);
-    modal.present();
+    this.modalCtrl.create(FeedbackPage).present();
   }
 
   showHighscorePage() {
-    let modal = this.modalCtrl.create(HighscorePage);
-    modal.present();
+    this.modalCtrl.create(HighscorePage).present();
   }
 
-  // Remove token and send to welcome page
-  loginPage() {
-    // Just set root to login page
-    this.rootPage = LoadingPage;
+  showAnnouncements() {
+    this.modalCtrl.create(AnnouncementsPage).present();
   }
 }
