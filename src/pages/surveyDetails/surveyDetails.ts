@@ -39,11 +39,9 @@ export class SurveyDetailsPage {
   showOptions(event: Event) {
     let popover = this.popoverController.create(SurveyDetailsMenu, {
       showRefresh: this.survey.status != 'FINISHED',
-      showTweak: this.survey.status != 'ABUSED',
       showDelete: !this.survey.multiPicture,
       callbacks: {
         refresh: () => {this.surveyService.loadSurveyDetails(this.survey)},
-        tweak: () => {alert("You can start an ATP with the same pictures but different criterias. Will come later.");},
         delete: () => {
           this.alertController.create({
             title: 'Delete this ATP?',

@@ -119,6 +119,18 @@ export class LocalStorage {
     }
   }
 
+  deleteSurveyByGroupId(groupId: number) {
+    let idx = -1;
+    this.surveys.forEach((s, i) => {
+      if(s.groupId == groupId) {
+        idx = i;
+      }
+    });
+    if(idx != -1) {
+      this.surveys.splice(idx, 1);
+    }
+  }
+
   public updateMySurveys(data: SurveyListWithTimestamp): number[] {
     let unknownSurveys: number[] = [];
     this.updateTimestamp = data.timestamp;

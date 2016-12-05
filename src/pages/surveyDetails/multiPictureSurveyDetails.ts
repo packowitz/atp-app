@@ -39,8 +39,31 @@ export class MultiPictureSurveyDetailsPage {
       showDelete: true,
       callbacks: {
         refresh: () => {
+          this.surveyService.updateMySurveys("updating your ATPs");
         },
         delete: () => {
+          this.alertController.create({
+            title: 'Delete this series of ATP?',
+            message: 'Are you sure to delete this ATP? This action is permanent. This is ATP depending on multiple ATPs. All of them are getting deleted.',
+            buttons: [
+              {text: 'Cancel'},
+              {
+                text: 'Delete',
+                handler: () => {
+                  this.surveyService.deleteSurveyGroup(this.meta).subscribe(() => {
+                    this.localStorage.deleteSurveyByGroupId(this.meta.groupId);
+                    this.notificationService.showToast({
+                      message: 'ATPs deleted',
+                      duration: 3000,
+                      showCloseButton: true,
+                      closeButtonText: 'OK'
+                    });
+                    this.nav.pop();
+                  });
+                }
+              }
+            ]
+          }).present();
         }
       }
     });

@@ -4,6 +4,7 @@ import {Observable} from "rxjs/Observable";
 import {Messages} from "../components/messages";
 import {AtpHttp} from "./atpHttp.service";
 import {LocalStorage} from "./localStorage.component";
+import {MetaSurvey} from "./domain/surveyMeta";
 
 export class SurveyListWithTimestamp {
   data: Survey[];
@@ -37,12 +38,16 @@ export class SurveyService {
     return this.atpHttp.doGetBackground("/app/survey/list");
   }
 
-  getUpdatesForMySurveysSince(timestamp: number): Observable<SurveyListWithTimestamp> {
-    return this.atpHttp.doGetBackground("/app/survey/updates/since/" + timestamp);
+  getUpdatesForMySurveysSince(timestamp: number, message?: string): Observable<SurveyListWithTimestamp> {
+    if(message) {
+      return this.atpHttp.doGet("/app/survey/updates/since/" + timestamp, message);
+    } else {
+      return this.atpHttp.doGetBackground("/app/survey/updates/since/" + timestamp);
+    }
   }
 
-  updateMySurveys() {
-    this.getUpdatesForMySurveysSince(this.localStorage.getUpdateTimestamp()).subscribe(
+  updateMySurveys(message?: string) {
+    this.getUpdatesForMySurveysSince(this.localStorage.getUpdateTimestamp(), message).subscribe(
       data => {
         let unknownSurveys: number[] = this.localStorage.updateMySurveys(data);
         console.log("Updated " + data.data.length + " surveys");
@@ -76,5 +81,9 @@ export class SurveyService {
 
   deleteSurvey(survey: Survey): Observable<any> {
     return this.atpHttp.doDelete("/app/survey/" + survey.id, "Deleting ATP");
+  }
+
+  deleteSurveyGroup(meta: MetaSurvey): Observable<any> {
+    return this.atpHttp.doDelete("/app/survey/group/" + meta.groupId, "Deleting ATP");
   }
 }
