@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>About</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon  name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="about-page">
+  <div class="logo">
+    <img src="assets/img/icon.png">
+    <div>ATP beta</div>
+  </div>
+  <ion-list no-lines>
+    <ion-list-header no-lines (click)="aboutExpand=!aboutExpand">
+      <ion-icon name="arrow-dropdown" *ngIf="aboutExpand"></ion-icon>
+      <ion-icon name="arrow-dropright" *ngIf="!aboutExpand"></ion-icon>
+      About ATP
+    </ion-list-header>
+    <div [ngClass]="aboutExpand ? 'item-expand active' : 'item-expand inactive'">
+      <ion-item>
+        ATP was created by two programmers eager to create their own business in their spare time.
+        They started writing their own applications and soon joined together; creating the company
+        Pacworx and delivering ATP as their first mobile app.
+      </ion-item>
+      <ion-item>
+        ATP is an open-source project, if you're interested in how it is built or want to contribute, check out our GitHub repo here: <a href="https://github.com/packowitz/atp-app">github.com/packowitz/atp-app</a>
+      </ion-item>
+    </div>
+  </ion-list>
+
+  <ion-list no-lines>
+    <ion-list-header no-lines (click)="legalExpand=!legalExpand">
+      <ion-icon name="arrow-dropdown" *ngIf="legalExpand"></ion-icon>
+      <ion-icon name="arrow-dropright" *ngIf="!legalExpand"></ion-icon>
+      Legal use
+    </ion-list-header>
+    <div [ngClass]="legalExpand ? 'item-expand active' : 'item-expand inactive'">
+      <ion-item>
+        By using ATP you agree to our <a>terms and conditions</a>.
+      </ion-item>
+    </div>
+  </ion-list>
+</ion-content>
+

@@ -42,6 +42,7 @@ import {SingleSurveyBar} from "../components/singleSurveyBar.component";
 import {SurveyContainsPicturePipe} from "../pipes/surveyContainsPicture";
 import {AnnouncementsPage} from "../pages/announcements/announcements.page";
 import {PersonalDataPage} from "../pages/personalData/personalData.page";
+import {AboutPage} from "../pages/about/about.page";
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import {PersonalDataPage} from "../pages/personalData/personalData.page";
     SurveyDetailsPage,
     TabsPage,
     WelcomePage,
+    AboutPage,
 
     CountrySelection,
     SingleSurveyBar,
@@ -103,6 +105,8 @@ import {PersonalDataPage} from "../pages/personalData/personalData.page";
     MultiPictureSurveyDetailsPage,
     TabsPage,
     WelcomePage,
+    AboutPage,
+
     SurveyDetailsMenu,
     CountrySelection,
     ChooseFeedbackType

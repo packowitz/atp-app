@@ -1,4 +1,4 @@
-.settings-page {
+.about-page {
   ion-list-header {
     font-size: 2rem;
     font-weight: 600;
@@ -6,16 +6,22 @@
     ion-icon {
       width: 3vw;
     }
+
   }
 
-  .item-input ion-label, .item-select ion-label, .item-datetime ion-label {
-    color: inherit;
-  }
+  ion-label  { white-space: normal }
 
-  .error-label {
-    color: red;
-    font-weight: 600;
-    float: right;
+  .logo {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    color: $atp-light-blue;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+
+    img {
+      width: 15vh;
+    }
   }
 
   /* Accordion item expand */
