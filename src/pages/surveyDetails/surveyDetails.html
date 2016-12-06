@@ -52,8 +52,8 @@
   <ion-list *ngIf="survey.answers && survey.answers.length > 0">
     <ion-item>
       <div class="detail-title" (click)="showStatistics=!showStatistics">
-        <ion-icon name="arrow-dropdown" *ngIf="showStatistics"></ion-icon>
-        <ion-icon name="arrow-dropright" *ngIf="!showStatistics"></ion-icon>
+        <i class="fa fa-chevron-down" *ngIf="showStatistics"></i>
+        <i class="fa fa-chevron-right" *ngIf="!showStatistics"></i>
         Detailed Statistics
       </div>
     </ion-item>

@@ -15,8 +15,12 @@
 
   .detail-title {
     font-weight: 600;
-    ion-icon {
-      width: 3vw;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    i {
+      font-size: 1.2rem;
+      width: 4vw;
     }
   }
 
