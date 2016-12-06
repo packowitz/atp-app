@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Personal Data</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="personal-data-page grey-background" padding>
+  <ion-list>
+    <ion-item no-lines="">
+      <strong>My Data</strong>
+    </ion-item>
+    <ion-item>
+      <ion-label class="color-black">Year of birth:</ion-label>
+      <ion-label *ngIf="!yearOfBirth" class="ion-date-placeholder">(yyyy)</ion-label>
+      <ion-datetime displayFormat="YYYY" pickerFormat="YYYY" [min]="minYear" [max]="maxYear" [(ngModel)]="yearString" (ionChange)="yearChanged()" cancelText="" doneText="OK" placeholder="(yyyy)"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label class="flex-space-between">
+        Gender:
+        <span class="buttongroup">
+          <button ion-button small [outline]="male ? null : ''" (click)="male = true">Male</button>
+          <button ion-button small [outline]="(male === false) ? null : ''" (click)="male = false">Female</button>
+        </span>
+      </ion-label>
+    </ion-item>
+    <ion-item (click)="chooseCountry()">
+      <ion-label class="flex-space-between">
+        Country:
+        <span class="flex-center" *ngIf="country"><img src="assets/img/flags/{{country.alpha3}}.png" class="flag margin-right-small"> {{country.nameEng}}</span>
+        <span *ngIf="!country" class="text-placeholder">please choose</span>
+      </ion-label>
+    </ion-item>
+    <ion-item><button ion-button full [disabled]="personalDataUnchanged()" (click)="submitPersonalData()">Save</button></ion-item>
+  </ion-list>
+</ion-content>

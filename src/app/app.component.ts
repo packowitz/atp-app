@@ -9,6 +9,7 @@ import {SettingsPage} from "../pages/settings/settings";
 import {FeedbackPage} from "../pages/feedback/feedback.page";
 import {HighscorePage} from "../pages/highscore/highscore";
 import {AnnouncementsPage} from "../pages/announcements/announcements.page";
+import {PersonalDataPage} from "../pages/personalData/personalData.page";
 
 /**
  * Main app controller.
@@ -33,6 +34,10 @@ export class AtpApp {
 
   showSettings() {
     this.modalCtrl.create(SettingsPage).present();
+  }
+
+  showPersonalData() {
+    this.modalCtrl.create(PersonalDataPage).present();
   }
 
   showFeedbackPage() {
