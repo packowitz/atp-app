@@ -4,7 +4,7 @@ import {Injectable} from "@angular/core";
 import {Feedback} from "../providers/domain/feedback";
 import {Announcement} from "../providers/domain/annoucement";
 import {Storage} from "@ionic/storage";
-import {Achievement} from "../providers/domain/achievement";
+import {Reward} from "../providers/domain/reward";
 import {SurveyType} from "../providers/domain/surveyType";
 
 @Injectable()
@@ -19,13 +19,13 @@ export class Model {
   public feedback: Feedback[] = [];
   public unreadFeedback: number = 0;
   public announcements: Announcement[] = [];
-  public achievements: Achievement[] = [];
-  public claimableAchievements: number = 0;
-  public achievement_active: Achievement;
-  public achievement_username: Achievement;
-  public achievement_creator: Achievement;
-  public achievement_answerer: Achievement;
-  public achievement_reliable: Achievement;
+  public rewards: Reward[] = [];
+  public claimableRewards: number = 0;
+  public reward_active: Reward;
+  public reward_username: Reward;
+  public reward_creator: Reward;
+  public reward_answerer: Reward;
+  public reward_reliable: Reward;
   readAnnouncements: string;
   unreadAnnouncements: number = 0;
 
@@ -77,36 +77,36 @@ export class Model {
     return this.user.male != null && this.user.country != null && this.user.yearOfBirth != null;
   }
 
-  setAchievements(achievements: Achievement[]) {
-    this.achievements = achievements;
+  setRewards(rewards: Reward[]) {
+    this.rewards = rewards;
     let claimable = 0;
-    this.achievements.forEach(a => {
+    this.rewards.forEach(a => {
       if(a.claimed < a.achieved) {
         claimable ++;
       }
       if(a.type == 'ACTIVE_USER') {
-        this.achievement_active = a;
+        this.reward_active = a;
       } else if(a.type == 'CHOOSE_USERNAME') {
-        this.achievement_username = a;
+        this.reward_username = a;
       } else if(a.type == 'ATP_CREATOR') {
-        this.achievement_creator = a;
+        this.reward_creator = a;
       } else if(a.type == 'ATP_ANSWERER') {
-        this.achievement_answerer = a;
+        this.reward_answerer = a;
       } else if(a.type == 'RELIABLE_USER') {
-        this.achievement_reliable = a;
+        this.reward_reliable = a;
       }
     });
-    this.claimableAchievements = claimable;
+    this.claimableRewards = claimable;
   }
 
-  needReloadAchievements(): boolean {
-    if((this.achievement_username.achieved == 0 && this.user.username)
-      || (this.achievement_creator.achieved == 0 && this.user.surveysStarted >=3)
-      || (this.achievement_creator.achieved == 1 && this.user.surveysStarted >= 10)
-      || (this.achievement_creator.achieved == 2 && this.user.surveysStarted >= 50)
-      || (this.achievement_answerer.achieved == 0 && this.user.surveysAnswered >= 50)
-      || (this.achievement_answerer.achieved == 1 && this.user.surveysAnswered >= 500)
-      || (this.achievement_answerer.achieved == 2 && this.user.surveysAnswered >= 5000)) {
+  needReloadRewards(): boolean {
+    if((this.reward_username.achieved == 0 && this.user.username)
+      || (this.reward_creator.achieved == 0 && this.user.surveysStarted >=3)
+      || (this.reward_creator.achieved == 1 && this.user.surveysStarted >= 10)
+      || (this.reward_creator.achieved == 2 && this.user.surveysStarted >= 50)
+      || (this.reward_answerer.achieved == 0 && this.user.surveysAnswered >= 50)
+      || (this.reward_answerer.achieved == 1 && this.user.surveysAnswered >= 500)
+      || (this.reward_answerer.achieved == 2 && this.user.surveysAnswered >= 5000)) {
       return true;
     } else {
       return false;

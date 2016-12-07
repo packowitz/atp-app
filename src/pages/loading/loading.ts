@@ -7,7 +7,7 @@ import {SurveyService} from "../../providers/survey.service";
 import {AuthService} from "../../providers/auth.service";
 import {TabsPage} from "../tabs/tabsPage";
 import {WelcomePage} from "../welcome/welcome";
-import {AchievementService} from "../../providers/achievement.service";
+import {RewardService} from "../../providers/reward.service";
 import {LocalStorage} from "../../providers/localStorage.component";
 import {LoadingState} from "./loadingState.component";
 
@@ -28,7 +28,7 @@ export class LoadingPage {
               public surveyService: SurveyService,
               public countryService: CountryService,
               public feedbackService: MessagesService,
-              public achievementService: AchievementService,
+              public rewardService: RewardService,
               public model: Model,
               public platform: Platform,
               public localStorage: LocalStorage) {
@@ -48,8 +48,8 @@ export class LoadingPage {
       this.loadFeedback();
     } else if(!this.state.loadedAnnouncements) {
       this.loadAnnouncements();
-    } else if(!this.state.loadedAchievements) {
-      this.loadAchievements();
+    } else if(!this.state.loadedRewards) {
+      this.loadRewards();
     } else if(!this.state.registeredNotifications) {
       this.registerNotification();
     } else {
@@ -138,12 +138,12 @@ export class LoadingPage {
     );
   }
 
-  public loadAchievements() {
-    this.achievementService.getAchievements().subscribe(
+  public loadRewards() {
+    this.rewardService.getRewards().subscribe(
       data => {
-        this.model.setAchievements(data);
-        console.log("Loaded " + this.model.achievements.length + " achievements");
-        this.state.loadedAchievements = true;
+        this.model.setRewards(data);
+        console.log("Loaded " + this.model.rewards.length + " rewards");
+        this.state.loadedRewards = true;
         this.loadDataFromServer();
       }
     );

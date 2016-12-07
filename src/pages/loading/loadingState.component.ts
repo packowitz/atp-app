@@ -8,6 +8,6 @@ export class LoadingState {
   loadedMySurveys: boolean = false;
   loadedUnreadFeedback: boolean = false;
   loadedAnnouncements: boolean = false;
-  loadedAchievements: boolean = false;
+  loadedRewards: boolean = false;
   registeredNotifications: boolean = false;
 }

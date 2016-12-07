@@ -1,15 +1,15 @@
 import {Injectable} from "@angular/core";
 import {AtpHttp} from "./atpHttp.service";
 import {Observable} from "rxjs";
-import {Achievement} from "./domain/achievement";
+import {Reward} from "./domain/reward";
 import {Model} from "../components/model.component";
 
 @Injectable()
-export class AchievementService {
+export class RewardService {
 
     constructor(public atpHttp: AtpHttp, public model: Model) {}
 
-    getAchievements(): Observable<Achievement[]> {
+    getRewards(): Observable<Reward[]> {
         return this.atpHttp.doGetBackground("/app/achievement/list");
     }
 
@@ -17,7 +17,7 @@ export class AchievementService {
       this.atpHttp.doPost("/app/achievement/claim/" + type, {}, "claiming reward").subscribe(
         data => {
           this.model.user = data.user;
-          this.model.setAchievements(data.achievements);
+          this.model.setRewards(data.achievements);
         }
       );
     }
