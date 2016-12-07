@@ -18,7 +18,6 @@ import {Model} from "../components/model.component";
 import {HighscoreEntry} from "../pages/highscore/highscoreEntry";
 import {ChooseFeedbackType} from "../pages/feedback/chooseFeedbackType";
 import {ChooseUsername} from "../pages/settings/chooseUsername.component";
-import {NotificationSettings} from "../pages/settings/notifications.component";
 import {AtpHttp} from "../providers/atpHttp.service";
 import {AuthService} from "../providers/auth.service";
 import {CountryService} from "../providers/country.service";
@@ -71,7 +70,6 @@ import {AboutPage} from "../pages/about/about.page";
     HighscoreEntry,
     ChooseFeedbackType,
     ChooseUsername,
-    NotificationSettings,
     SurveyDetailsMenu,
 
     AgePipe,
