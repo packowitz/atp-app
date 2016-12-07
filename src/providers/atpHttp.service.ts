@@ -107,36 +107,36 @@ export class AtpHttp {
     return error.switchMap(err => Observable.create(observer => {
       //noinspection TypeScriptUnresolvedFunction
       this.notificationService.dismissLoading().then(() => {
-        let title: string, buttons: any[] = [{text: 'Retry'}];
-        if(err.status == 401) {
-          title = 'Authentication Error';
-          buttons.unshift({
-            text: 'Reset account',
-            handler: () => {
-              this.localStorage.clearStorage();
-              window.location.reload();
-            }
-          });
-        } else if(err.status == 500) {
-          title = 'Server Error';
-        } else if(err.status == 404) {
-          title = 'Resource not found';
-        } else if(err.status == 403 || !err.status) {
-          title = 'Server not reachable';
-        } else {
-          title = 'Unknown Error';
+        let title: string, message: string, buttons: any[] = [];
+
+        let retryBtn = {text: 'Retry', handler: () => observer.next(retry())};
+        let resetAccountBtn = {
+          text: 'Reset account',
+          handler: () => {
+            this.localStorage.clearStorage();
+            window.location.reload();
+          }
+        };
+        let closeBtn = {text: 'OK'};
+        let homeBtn = {text: 'home',handler: () => window.location.reload()}
+
+        let body = JSON.parse(err._body);
+        if(body) {
+          title = body.title;
+          message = body.message;
+          if(body.showRetryBtn) {buttons.push(retryBtn)}
+          if(body.showResetAccountBtn) {buttons.push(resetAccountBtn)}
+          if(body.showCloseBtn) {buttons.push(closeBtn)}
+          if(body.showHomeBtn) {buttons.push(homeBtn)}
         }
 
-        // Set error body
-        let errorBody = JSON.parse(err._body) ? JSON.parse(err._body) : null;
-
         let alert: Alert = this.alertController.create({
-          title: title,
-          message: errorBody ? errorBody.message : "There is a problem with your account! Retry or reset your account.",
-          buttons: buttons
+          title: title ? title : "Error",
+          message: message ? message : "An unknown Error occured.",
+          buttons: buttons.length > 0 ? buttons : [closeBtn],
+          enableBackdropDismiss: false
         });
 
-        alert.onDidDismiss(() => observer.next(retry()));
         alert.present();
       });
     }));
