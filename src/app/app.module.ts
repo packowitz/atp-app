@@ -31,7 +31,7 @@ import {AgePipe} from "../pipes/age.pipe";
 import {GenderPipe} from "../pipes/gender.pipe";
 import {NotificationService} from "../providers/notification.service";
 import {SurveyDetailsMenu} from "../components/surveyDetailMenu.component";
-import {AchievementService} from "../providers/achievement.service";
+import {RewardService} from "../providers/reward.service";
 import {CouponService} from "../providers/coupon.service";
 import {LocalStorage} from "../providers/localStorage.component";
 import {SurveyOverviewBar} from "../components/surveyOverviewBar.component";
@@ -111,7 +111,7 @@ import {AboutPage} from "../pages/about/about.page";
   ],
   providers: [
     Model,
-    AchievementService,
+    RewardService,
     AtpHttp,
     AuthService,
     CountryService,

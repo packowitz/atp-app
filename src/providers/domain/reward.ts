@@ -1,4 +1,4 @@
-export class Achievement {
+export class Reward {
     type: string;
     achieved: number;
     claimed: number;

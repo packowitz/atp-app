@@ -8,7 +8,7 @@ import {Model} from "../../components/model.component";
 @Component({
   template: `<ion-tabs selectedIndex="0">
     <ion-tab tabIcon="home" [root]="homePage"></ion-tab>
-    <ion-tab tabIcon="cart" [root]="purchasePage" [tabBadge]="model.claimableAchievements > 0 ? model.claimableAchievements : ''" tabBadgeStyle="danger"></ion-tab>
+    <ion-tab tabIcon="cart" [root]="purchasePage" [tabBadge]="model.claimableRewards > 0 ? model.claimableRewards : ''" tabBadgeStyle="danger"></ion-tab>
     <ion-tab tabTitle="ATP" [root]="startSurveyPage"></ion-tab>
     <ion-tab tabIcon="list-box" [root]="mySurveysPage"></ion-tab>
 </ion-tabs>`

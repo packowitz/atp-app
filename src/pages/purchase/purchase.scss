@@ -1,22 +1,22 @@
 purchase-page {
-  .achievement-img {
+  .reward-img {
     height: 10vw;
     width: 10vw;
   }
 
-  .achievement-text {
+  .reward-text {
     margin-left: 8px;
     margin-right: 8px;
     white-space: normal;
   }
 
-  .achievement-title {
+  .reward-title {
     font-size: 1.6rem;
     font-weight: 600;
     margin-bottom: 4px;
   }
 
-  .achievement-description {
+  .reward-description {
     font-size: 1.2rem
   }
 
@@ -27,7 +27,7 @@ purchase-page {
       margin-left: 2px;
     }
   }
-  
+
   .header-md::after {
     background-image: none;
   }

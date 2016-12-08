@@ -5,7 +5,7 @@ import {SurveyService} from "../../providers/survey.service";
 import {SettingsPage} from "../settings/settings";
 import {HighscorePage} from "../highscore/highscore";
 import {Component} from "@angular/core";
-import {AchievementService} from "../../providers/achievement.service";
+import {RewardService} from "../../providers/reward.service";
 import {Util} from "../../components/util.component";
 import {LocalStorage} from "../../providers/localStorage.component";
 
@@ -23,13 +23,13 @@ export class HomePage {
               public tabs: Tabs,
               public alertController: AlertController,
               public modalCtrl: ModalController,
-              public achievementService: AchievementService) {
+              public rewardService: RewardService) {
   }
 
   ionViewDidEnter() {
     this.surveyService.updateMySurveys();
-    if(this.model.needReloadAchievements()) {
-      this.achievementService.getAchievements().subscribe(data => this.model.setAchievements(data));
+    if(this.model.needReloadRewards()) {
+      this.rewardService.getRewards().subscribe(data => this.model.setRewards(data));
     }
   }
 

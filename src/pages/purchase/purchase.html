@@ -4,8 +4,8 @@
         <ion-segment-button value="shop">
           Shop
         </ion-segment-button>
-        <ion-segment-button value="achievements">
-          Achievements
+        <ion-segment-button value="rewards">
+          Rewards
         </ion-segment-button>
       </ion-segment>
   </ion-toolbar>
@@ -22,102 +22,102 @@
         <button ion-button full small [disabled]="!couponCode || couponCode.length < 8 || couponCode > 25" (click)="redeemCoupon()">Redeem coupon</button>
       </ion-item>
     </ion-list>
-    <ion-list no-lines *ngSwitchCase="'achievements'" class="atp-list light-blue-background">
+    <ion-list no-lines *ngSwitchCase="'rewards'" class="atp-list light-blue-background">
       <ion-item>
         <div class="flex-left-strech color-white">
-          <img src="assets/img/achievements-{{model.achievement_active.claimed}}.png" class="achievement-img">
-          <div class="flex-grow achievement-text">
-            <div class="achievement-title">Activity Reward</div>
-            <div class="achievement-description">Free pax every day! Log in and get 50 pax reward.</div>
+          <img src="assets/img/rewards-{{model.reward_active.claimed}}.png" class="reward-img">
+          <div class="flex-grow reward-text">
+            <div class="reward-title">Activity Reward</div>
+            <div class="reward-description">Free pax every day! Log in and get 50 pax reward.</div>
           </div>
-          <span *ngIf="model.achievement_active.claimed < model.achievement_active.achieved" class="flex-center">
-            <button ion-button color="secondary" (click)="claimAchievementReward(model.achievement_active)" class="claim-button">50 <img src="assets/img/diamond-white.png"></button>
+          <span *ngIf="model.reward_active.claimed < model.reward_active.achieved" class="flex-center">
+            <button ion-button color="secondary" (click)="claimReward(model.reward_active)" class="claim-button">50 <img src="assets/img/diamond-white.png"></button>
           </span>
-          <span *ngIf="model.achievement_active.claimed == 3" class="flex-center">
+          <span *ngIf="model.reward_active.claimed == 3" class="flex-center">
             claimed
           </span>
         </div>
       </ion-item>
       <ion-item>
         <div class="flex-left-strech color-white">
-          <img src="assets/img/achievements-{{model.achievement_username.claimed}}.png" class="achievement-img">
-          <div class="flex-grow achievement-text">
-            <div class="achievement-title">Personalize Reward</div>
-            <div class="achievement-description">Get 500 pax for securing your ATP account with a username and password.</div>
+          <img src="assets/img/rewards-{{model.reward_username.claimed}}.png" class="reward-img">
+          <div class="flex-grow reward-text">
+            <div class="reward-title">Personalize Reward</div>
+            <div class="reward-description">Get 500 pax for securing your ATP account with a username and password.</div>
           </div>
-          <span *ngIf="model.achievement_username.achieved == 0" class="flex-center fake-link" (click)="openSettingsPage()">
+          <span *ngIf="model.reward_username.achieved == 0" class="flex-center fake-link" (click)="openSettingsPage()">
             Settings
           </span>
-          <span *ngIf="model.achievement_username.claimed < model.achievement_username.achieved" class="flex-center">
-            <button ion-button color="secondary" (click)="claimAchievementReward(model.achievement_username)" class="claim-button">500 <img src="assets/img/diamond-white.png"></button>
+          <span *ngIf="model.reward_username.claimed < model.reward_username.achieved" class="flex-center">
+            <button ion-button color="secondary" (click)="claimReward(model.reward_username)" class="claim-button">500 <img src="assets/img/diamond-white.png"></button>
           </span>
-          <span *ngIf="model.achievement_username.claimed > 0" class="flex-center">
+          <span *ngIf="model.reward_username.claimed > 0" class="flex-center">
             claimed
           </span>
         </div>
       </ion-item>
       <ion-item>
         <div class="flex-left-strech color-white">
-          <img src="assets/img/achievements-{{model.achievement_creator.claimed}}.png" class="achievement-img">
-          <div class="flex-grow achievement-text">
-            <div class="achievement-title">Creation Reward</div>
-            <div class="achievement-description">
-              Create {{model.achievement_creator.claimed == 0 ? '3' : model.achievement_creator.claimed == 1 ? '10' : '50'}} ATPs and get {{model.achievement_creator.claimed == 0 ? '500' : model.achievement_creator.claimed == 1 ? '1000' : '2000'}} pax reward.
+          <img src="assets/img/rewards-{{model.reward_creator.claimed}}.png" class="reward-img">
+          <div class="flex-grow reward-text">
+            <div class="reward-title">Creation Reward</div>
+            <div class="reward-description">
+              Create {{model.reward_creator.claimed == 0 ? '3' : model.reward_creator.claimed == 1 ? '10' : '50'}} ATPs and get {{model.reward_creator.claimed == 0 ? '500' : model.reward_creator.claimed == 1 ? '1000' : '2000'}} pax reward.
             </div>
           </div>
-          <span *ngIf="model.achievement_creator.claimed == model.achievement_creator.achieved && model.achievement_creator.claimed < 3" class="flex-center">
-            {{model.user.surveysStarted}} / {{model.achievement_creator.claimed == 0 ? '3' : model.achievement_creator.claimed == 1 ? '10' : '50'}}
+          <span *ngIf="model.reward_creator.claimed == model.reward_creator.achieved && model.reward_creator.claimed < 3" class="flex-center">
+            {{model.user.surveysStarted}} / {{model.reward_creator.claimed == 0 ? '3' : model.reward_creator.claimed == 1 ? '10' : '50'}}
           </span>
-          <span *ngIf="model.achievement_creator.claimed < model.achievement_creator.achieved" class="flex-center">
-            <button ion-button color="secondary" (click)="claimAchievementReward(model.achievement_creator)" class="claim-button">
-              {{model.achievement_creator.claimed == 0 ? '500' : model.achievement_creator.claimed == 1 ? '1000' : '2000'}} <img src="assets/img/diamond-white.png">
+          <span *ngIf="model.reward_creator.claimed < model.reward_creator.achieved" class="flex-center">
+            <button ion-button color="secondary" (click)="claimReward(model.reward_creator)" class="claim-button">
+              {{model.reward_creator.claimed == 0 ? '500' : model.reward_creator.claimed == 1 ? '1000' : '2000'}} <img src="assets/img/diamond-white.png">
             </button>
           </span>
-          <span *ngIf="model.achievement_creator.claimed == 3" class="flex-center">
+          <span *ngIf="model.reward_creator.claimed == 3" class="flex-center">
             claimed
           </span>
         </div>
       </ion-item>
       <ion-item>
         <div class="flex-left-strech color-white">
-          <img src="assets/img/achievements-{{model.achievement_answerer.claimed}}.png" class="achievement-img">
-          <div class="flex-grow achievement-text">
-            <div class="achievement-title">Answering Reward</div>
-            <div class="achievement-description">
-              Answer {{model.achievement_answerer.claimed == 0 ? '50' : model.achievement_answerer.claimed == 1 ? '500' : '5000'}} ATPs and get {{model.achievement_answerer.claimed == 0 ? '250' : model.achievement_answerer.claimed == 1 ? '500' : '1000'}} pax reward.
+          <img src="assets/img/rewards-{{model.reward_answerer.claimed}}.png" class="reward-img">
+          <div class="flex-grow reward-text">
+            <div class="reward-title">Answering Reward</div>
+            <div class="reward-description">
+              Answer {{model.reward_answerer.claimed == 0 ? '50' : model.reward_answerer.claimed == 1 ? '500' : '5000'}} ATPs and get {{model.reward_answerer.claimed == 0 ? '250' : model.reward_answerer.claimed == 1 ? '500' : '1000'}} pax reward.
             </div>
           </div>
-          <span *ngIf="model.achievement_answerer.claimed == model.achievement_answerer.achieved && model.achievement_answerer.claimed < 3" class="flex-center">
-            {{model.user.surveysAnswered}} / {{model.achievement_answerer.claimed == 0 ? '50' : model.achievement_answerer.claimed == 1 ? '500' : '5000'}}
+          <span *ngIf="model.reward_answerer.claimed == model.reward_answerer.achieved && model.reward_answerer.claimed < 3" class="flex-center">
+            {{model.user.surveysAnswered}} / {{model.reward_answerer.claimed == 0 ? '50' : model.reward_answerer.claimed == 1 ? '500' : '5000'}}
           </span>
-          <span *ngIf="model.achievement_answerer.claimed < model.achievement_answerer.achieved" class="flex-center">
-            <button ion-button color="secondary" (click)="claimAchievementReward(model.achievement_answerer)" class="claim-button">
-              {{model.achievement_answerer.claimed == 0 ? '250' : model.achievement_answerer.claimed == 1 ? '500' : '1000'}} <img src="assets/img/diamond-white.png">
+          <span *ngIf="model.reward_answerer.claimed < model.reward_answerer.achieved" class="flex-center">
+            <button ion-button color="secondary" (click)="claimReward(model.reward_answerer)" class="claim-button">
+              {{model.reward_answerer.claimed == 0 ? '250' : model.reward_answerer.claimed == 1 ? '500' : '1000'}} <img src="assets/img/diamond-white.png">
             </button>
           </span>
-          <span *ngIf="model.achievement_answerer.claimed == 3" class="flex-center">
+          <span *ngIf="model.reward_answerer.claimed == 3" class="flex-center">
             claimed
           </span>
         </div>
       </ion-item>
       <ion-item>
         <div class="flex-left-strech color-white">
-          <img src="assets/img/achievements-{{model.achievement_reliable.claimed}}.png" class="achievement-img">
-          <div class="flex-grow achievement-text">
-            <div class="achievement-title">Reliable Reward</div>
-            <div class="achievement-description">
+          <img src="assets/img/rewards-{{model.reward_reliable.claimed}}.png" class="reward-img">
+          <div class="flex-grow reward-text">
+            <div class="reward-title">Reliable Reward</div>
+            <div class="reward-description">
               Answer ATPs seriously and get a better reliable rating to receive pax rewards.
             </div>
           </div>
-          <span *ngIf="model.achievement_reliable.claimed == model.achievement_reliable.achieved && model.achievement_reliable.claimed < 3" class="flex-center">
+          <span *ngIf="model.reward_reliable.claimed == model.reward_reliable.achieved && model.reward_reliable.claimed < 3" class="flex-center">
             ?? / ??
           </span>
-          <span *ngIf="model.achievement_reliable.claimed < model.achievement_reliable.achieved" class="flex-center">
-            <button ion-button color="secondary" (click)="claimAchievementReward(model.achievement_reliable)" class="claim-button">
-              {{model.achievement_reliable.claimed == 0 ? '250' : model.achievement_reliable.claimed == 1 ? '500' : '1000'}} <img src="assets/img/diamond-white.png">
+          <span *ngIf="model.reward_reliable.claimed < model.reward_reliable.achieved" class="flex-center">
+            <button ion-button color="secondary" (click)="claimReward(model.reward_reliable)" class="claim-button">
+              {{model.reward_reliable.claimed == 0 ? '250' : model.reward_reliable.claimed == 1 ? '500' : '1000'}} <img src="assets/img/diamond-white.png">
             </button>
           </span>
-          <span *ngIf="model.achievement_reliable.claimed == 3" class="flex-center">
+          <span *ngIf="model.reward_reliable.claimed == 3" class="flex-center">
             claimed
           </span>
         </div>

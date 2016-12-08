@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {Model} from "../../components/model.component";
-import {Achievement} from "../../providers/domain/achievement";
-import {AchievementService} from "../../providers/achievement.service";
+import {Reward} from "../../providers/domain/reward";
+import {RewardService} from "../../providers/reward.service";
 import {SettingsPage} from "../settings/settings";
 import {NavController, AlertController} from "ionic-angular";
 import {CouponService} from "../../providers/coupon.service";
@@ -11,15 +11,15 @@ import {CouponService} from "../../providers/coupon.service";
   selector: 'purchase-page'
 })
 export class PurchasePage {
-  selection: string = 'achievements';
+  selection: string = 'rewards';
   couponCode: string;
 
   constructor(public model: Model,
-              public achievementService: AchievementService,
+              public rewardService: RewardService,
               public couponService: CouponService,
               public nav: NavController,
               public alertController: AlertController) {
-    model.claimableAchievements > 0 ? this.selection = 'achievements' : 'shop';
+    model.claimableRewards > 0 ? this.selection = 'rewards' : 'shop';
   }
 
   redeemCoupon() {
@@ -37,8 +37,8 @@ export class PurchasePage {
     );
   }
 
-  claimAchievementReward(achievement: Achievement) {
-    this.achievementService.claimReward(achievement.type);
+  claimReward(reward: Reward) {
+    this.rewardService.claimReward(reward.type);
   }
 
   openSettingsPage() {
