@@ -37,4 +37,36 @@
     </ion-item>
     <ion-item><button ion-button full [disabled]="personalDataUnchanged()" (click)="submitPersonalData()">Save</button></ion-item>
   </ion-list>
+
+  <ion-list *ngIf="!model.user.username">
+    <ion-item no-lines>
+      <div><strong>Choose your username</strong></div>
+      <small class="text-placeholder text-wrap">You cannot change your username, choose wisely. Username is used to be shown in the highscore.</small>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Your Username (4-15 characters)</ion-label>
+      <ion-input type="text" [(ngModel)]="newUsername"></ion-input>
+    </ion-item>
+    <ion-item><button ion-button full [disabled]="newUsername.length < 4 || newUsername.length > 15" (click)="submitUsername()">Save</button></ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="!model.user.email">
+    <ion-item no-lines>
+      <div><strong>Secure your account</strong></div>
+      <small class="text-placeholder text-wrap">Be able to login to your account from multiple devices or when somehow your App-data gets lost. We cannot reactivate your account when you have not secured it.</small>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Email address</ion-label>
+      <ion-input type="email" [(ngModel)]="newEmail"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Password (min 8 characters)</ion-label>
+      <ion-input type="password" [(ngModel)]="newPassword"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Repeat Password</ion-label>
+      <ion-input type="password" [(ngModel)]="newPasswordRepeat"></ion-input>
+    </ion-item>
+    <ion-item><button ion-button full [disabled]="!setEmailValid()" (click)="submitSetEmail()">Save</button></ion-item>
+  </ion-list>
 </ion-content>

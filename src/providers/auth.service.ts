@@ -25,8 +25,12 @@ export class AuthService {
     return this.atpHttp.doGetBackground("/app/user");
   }
 
-  postUsername(username: string, password: string): Observable<User> {
-    return this.atpHttp.doPost("/app/user/username", {username: username, password: password}, "Sending credentials");
+  postUsername(username: string): Observable<User> {
+    return this.atpHttp.doPost("/app/user/username", {username: username}, "Sending username");
+  }
+
+  secureAccount(email: string, password: string): Observable<User> {
+    return this.atpHttp.doPost("/app/user/secure-account", {email: email, password: password}, "Securing your account");
   }
 
   postNotification(enabled: boolean, soundEnabled: boolean, vibrationEnabled: boolean): Observable<User> {

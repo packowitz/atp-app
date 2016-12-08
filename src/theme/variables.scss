@@ -185,6 +185,10 @@ ion-title {
   color: $atp-placeholder-grey !important;
 }
 
+.text-wrap {
+  white-space: normal;
+}
+
 .ion-date-placeholder {
   @extend .text-placeholder;
   position: absolute;

@@ -56,6 +56,6 @@ export class ChooseUsername {
   }
 
   doSubmit() {
-    this.authService.postUsername(this.newUsername, this.newPassword).subscribe(data => this.model.user = data);
+    this.authService.postUsername(this.newUsername).subscribe(data => this.model.user = data);
   }
 }

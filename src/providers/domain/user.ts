@@ -1,5 +1,7 @@
 export class User {
   username: string;
+  email: string;
+  emailConfirmed: boolean;
   yearOfBirth: number;
   country: string;
   male: boolean;

@@ -22,6 +22,7 @@ export class LocalStorage {
     } else {
       this.prefix = "atp-app-dev-";
     }
+    console.log("localstorage prefix is " + this.prefix);
   }
 
   loadData(): Promise<any> {

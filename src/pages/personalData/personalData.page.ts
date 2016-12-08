@@ -5,6 +5,7 @@ import {Country} from "../../providers/domain/country";
 import {CountryService} from "../../providers/country.service";
 import {CountrySelection} from "../../components/countrySelection.component";
 import {AuthService} from "../../providers/auth.service";
+import {NotificationService} from "../../providers/notification.service";
 
 @Component({
   templateUrl: 'personalData.page.html'
@@ -17,10 +18,17 @@ export class PersonalDataPage {
   male: boolean;
   country: Country;
 
+  newUsername: string = '';
+
+  newEmail: string;
+  newPassword: string;
+  newPasswordRepeat: string;
+
   constructor(public nav: NavController,
               public model: Model,
               public countryService: CountryService,
               public authService: AuthService,
+              public notificationService: NotificationService,
               public viewCtrl: ViewController,
               public popoverController: PopoverController) {
     let currentYear: number = new Date().getFullYear();
@@ -52,9 +60,16 @@ export class PersonalDataPage {
   }
 
   personalDataUnchanged(): boolean {
-    return this.model.user.yearOfBirth == this.yearOfBirth &&
-      this.model.user.male == this.male &&
-      this.model.user.country == this.country.alpha3;
+    if(this.model.user.yearOfBirth !== this.yearOfBirth) {
+      return false;
+    }
+    if(this.model.user.male !== this.male) {
+      return false;
+    }
+    if(this.country && this.model.user.country != this.country.alpha3) {
+      return false;
+    }
+    return true;
   }
 
   chooseCountry() {
@@ -67,5 +82,42 @@ export class PersonalDataPage {
 
   submitPersonalData() {
     this.authService.postPersonalData(this.yearOfBirth, this.male, this.country.alpha3).subscribe(data => this.model.user = data);
+  }
+
+  submitUsername() {
+    this.authService.postUsername(this.newUsername).subscribe(
+      data => {
+        this.model.user = data;
+        this.notificationService.showToast({
+          message: 'Username set',
+          duration: 2000,
+          showCloseButton: true,
+          closeButtonText: 'OK'
+        });
+      }
+    );
+  }
+
+  setEmailValid(): boolean {
+    if(this.newPassword && this.newPassword.length >= 8 && this.newPassword === this.newPasswordRepeat) {
+      let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+      return EMAIL_REGEXP.test(this.newEmail);
+    } else {
+      return false;
+    }
+  }
+
+  submitSetEmail() {
+    this.authService.secureAccount(this.newEmail, this.newPassword).subscribe(
+      data => {
+        this.model.user = data;
+        this.notificationService.showToast({
+          message: 'Account secured',
+          duration: 2000,
+          showCloseButton: true,
+          closeButtonText: 'OK'
+        });
+      }
+    );
   }
 }
