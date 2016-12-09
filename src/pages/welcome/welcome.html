@@ -15,8 +15,8 @@
         <ion-slide>
             <ion-list>
                 <ion-item>
-                    <ion-label floating>email or username</ion-label>
-                    <ion-input type="email" [(ngModel)]="username"></ion-input>
+                    <ion-label floating>email address</ion-label>
+                    <ion-input type="email" [(ngModel)]="email"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label floating>password</ion-label>
@@ -24,7 +24,7 @@
                 </ion-item>
             </ion-list>
             <div class="action-items">
-                <button ion-button color="light" class="login-button" [disabled]="!username || !password" (click)="login()">Login</button>
+                <button ion-button color="light" class="login-button" [disabled]="!isEmailValid() || !password" (click)="login()">Login</button>
                 <div (click)="forgotPassword()">Forgot password</div>
                 <div (click)="startATP()">I am new to ATP</div>
             </div>

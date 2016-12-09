@@ -4,6 +4,7 @@ import {Model} from "../../components/model.component";
 import {AuthService} from "../../providers/services/auth.service";
 import {LoadingPage} from "../loading/loading";
 import {LocalStorage} from "../../providers/localStorage.component";
+import {Util} from "../../components/util.component";
 
 /**
  * Welcome page
@@ -15,7 +16,7 @@ import {LocalStorage} from "../../providers/localStorage.component";
 })
 export class WelcomePage {
   sliderOptions = {pager: true};
-  username: string;
+  email: string;
   password: string;
   deviceHeight: number = 100;
 
@@ -39,9 +40,16 @@ export class WelcomePage {
     );
   }
 
+  isEmailValid(): boolean {
+    if(this.email) {
+      return Util.EMAIL_REGEXP.test(this.email);
+    }
+    return false;
+  }
+
   login() {
     this.localStorage.clearStorage();
-    this.authService.login(this.username, this.password).subscribe(data => {
+    this.authService.login(this.email, this.password).subscribe(data => {
       this.model.user = data.user;
       this.localStorage.setToken(data.token);
       this.nav.setRoot(LoadingPage);

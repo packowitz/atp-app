@@ -6,6 +6,7 @@ import {CountryService} from "../../providers/services/country.service";
 import {CountrySelection} from "../../components/countrySelection.component";
 import {AuthService} from "../../providers/services/auth.service";
 import {NotificationService} from "../../providers/services/notification.service";
+import {Util} from "../../components/util.component";
 
 @Component({
   templateUrl: 'personalData.page.html'
@@ -101,8 +102,7 @@ export class PersonalDataPage {
 
   setEmailValid(): boolean {
     if(this.newPassword && this.newPassword.length >= 8 && this.newPassword === this.newPasswordRepeat) {
-      let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
-      return EMAIL_REGEXP.test(this.newEmail);
+      return Util.EMAIL_REGEXP.test(this.newEmail);
     } else {
       return false;
     }
