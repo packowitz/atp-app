@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Platform} from "ionic-angular";
 import {Survey} from "./domain/survey";
-import {SurveyListWithTimestamp} from "./survey.service";
+import {SurveyListWithTimestamp} from "./services/survey.service";
 import {Storage} from "@ionic/storage";
 import {MetaSurvey, SurveyPicture} from "./domain/surveyMeta";
 import {SurveySettings} from "../components/surveySettings";

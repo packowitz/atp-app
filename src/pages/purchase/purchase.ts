@@ -1,10 +1,10 @@
 import {Component} from "@angular/core";
 import {Model} from "../../components/model.component";
 import {Reward} from "../../providers/domain/reward";
-import {RewardService} from "../../providers/reward.service";
+import {RewardService} from "../../providers/services/reward.service";
 import {SettingsPage} from "../settings/settings";
 import {NavController, AlertController} from "ionic-angular";
-import {CouponService} from "../../providers/coupon.service";
+import {CouponService} from "../../providers/services/coupon.service";
 
 @Component({
   templateUrl: 'purchase.html',

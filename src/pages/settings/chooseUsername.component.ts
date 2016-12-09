@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {Model} from "../../components/model.component";
-import {AuthService} from "../../providers/auth.service";
+import {AuthService} from "../../providers/services/auth.service";
 
 @Component({
   selector: 'choose-username',

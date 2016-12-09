@@ -1,11 +1,11 @@
 import {NavController, Tabs, AlertController, ModalController} from "ionic-angular";
 import {Model} from "../../components/model.component";
 import {SurveyPage} from "../survey/survey";
-import {SurveyService} from "../../providers/survey.service";
+import {SurveyService} from "../../providers/services/survey.service";
 import {SettingsPage} from "../settings/settings";
 import {HighscorePage} from "../highscore/highscore";
 import {Component} from "@angular/core";
-import {RewardService} from "../../providers/reward.service";
+import {RewardService} from "../../providers/services/reward.service";
 import {Util} from "../../components/util.component";
 import {LocalStorage} from "../../providers/localStorage.component";
 

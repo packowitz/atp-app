@@ -3,7 +3,7 @@ import {NavController, PopoverController, ViewController} from "ionic-angular/in
 import {ChooseFeedbackType} from "./chooseFeedbackType";
 import {Feedback} from "../../providers/domain/feedback";
 import {Model} from "../../components/model.component";
-import {MessagesService} from "../../providers/messages.service";
+import {MessagesService} from "../../providers/services/messages.service";
 import {Util} from "../../components/util.component";
 import {FeedbackDetailsPage} from "./feedbackDetails";
 

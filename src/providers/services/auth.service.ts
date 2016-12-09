@@ -1,7 +1,7 @@
-import {User} from "./domain/user";
+import {User} from "../domain/user";
 import {Observable} from "rxjs/Observable";
 import {Injectable} from "@angular/core";
-import {Model} from "../components/model.component";
+import {Model} from "../../components/model.component";
 import {AtpHttp} from "./atpHttp.service";
 
 export class TokenResponse {

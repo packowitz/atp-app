@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {HighscoreService} from "../../providers/highscore.service";
+import {HighscoreService} from "../../providers/services/highscore.service";
 import {HighscoreUser} from "../../providers/domain/highscoreUser";
 import {ViewController} from "ionic-angular";
 

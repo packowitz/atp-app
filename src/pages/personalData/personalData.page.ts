@@ -2,10 +2,10 @@ import {Component} from "@angular/core";
 import {NavController, ViewController, PopoverController, AlertController} from "ionic-angular/index";
 import {Model} from "../../components/model.component";
 import {Country} from "../../providers/domain/country";
-import {CountryService} from "../../providers/country.service";
+import {CountryService} from "../../providers/services/country.service";
 import {CountrySelection} from "../../components/countrySelection.component";
-import {AuthService} from "../../providers/auth.service";
-import {NotificationService} from "../../providers/notification.service";
+import {AuthService} from "../../providers/services/auth.service";
+import {NotificationService} from "../../providers/services/notification.service";
 
 @Component({
   templateUrl: 'personalData.page.html'

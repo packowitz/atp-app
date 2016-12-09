@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
-import {Survey} from "./domain/survey";
+import {Survey} from "../domain/survey";
 import {Observable} from "rxjs/Observable";
-import {Messages} from "../components/messages";
+import {Messages} from "../../components/messages";
 import {AtpHttp} from "./atpHttp.service";
-import {LocalStorage} from "./localStorage.component";
-import {MetaSurvey} from "./domain/surveyMeta";
+import {LocalStorage} from "../localStorage.component";
+import {MetaSurvey} from "../domain/surveyMeta";
 
 export class SurveyListWithTimestamp {
   data: Survey[];

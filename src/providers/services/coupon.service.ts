@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {User} from "./domain/user";
+import {User} from "../domain/user";
 import {Observable} from "rxjs";
 import {AtpHttp} from "./atpHttp.service";
 

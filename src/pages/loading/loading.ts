@@ -1,13 +1,13 @@
 import {Component} from "@angular/core";
 import {NavController, Platform} from "ionic-angular/index";
 import {Model} from "../../components/model.component";
-import {MessagesService} from "../../providers/messages.service";
-import {CountryService} from "../../providers/country.service";
-import {SurveyService} from "../../providers/survey.service";
-import {AuthService} from "../../providers/auth.service";
+import {MessagesService} from "../../providers/services/messages.service";
+import {CountryService} from "../../providers/services/country.service";
+import {SurveyService} from "../../providers/services/survey.service";
+import {AuthService} from "../../providers/services/auth.service";
 import {TabsPage} from "../tabs/tabsPage";
 import {WelcomePage} from "../welcome/welcome";
-import {RewardService} from "../../providers/reward.service";
+import {RewardService} from "../../providers/services/reward.service";
 import {LocalStorage} from "../../providers/localStorage.component";
 import {LoadingState} from "./loadingState.component";
 

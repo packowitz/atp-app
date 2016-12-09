@@ -1,5 +1,5 @@
 import {AlertController, Slides} from "ionic-angular";
-import {SurveyService} from "../../providers/survey.service";
+import {SurveyService} from "../../providers/services/survey.service";
 import {Survey} from "../../providers/domain/survey";
 import {Component, trigger, state, style, transition, animate, keyframes, ViewChild} from "@angular/core";
 

@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {Model} from "../../components/model.component";
 import {ViewController} from "ionic-angular";
-import {AuthService} from "../../providers/auth.service";
+import {AuthService} from "../../providers/services/auth.service";
 
 @Component({
   templateUrl: 'settings.html'

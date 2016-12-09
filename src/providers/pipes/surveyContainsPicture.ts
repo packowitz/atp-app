@@ -1,5 +1,5 @@
 import {PipeTransform, Pipe} from "@angular/core";
-import {Survey} from "../providers/domain/survey";
+import {Survey} from "../domain/survey";
 
 @Pipe({name: 'surveyContainsPicture'})
 export class SurveyContainsPicturePipe implements PipeTransform {

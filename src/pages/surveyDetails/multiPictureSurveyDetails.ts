@@ -1,10 +1,10 @@
 import {NavParams, PopoverController, AlertController, NavController} from "ionic-angular/index";
 import {Component} from "@angular/core";
 import {Util} from "../../components/util.component";
-import {SurveyService} from "../../providers/survey.service";
+import {SurveyService} from "../../providers/services/survey.service";
 import {SurveyDetailsMenu} from "../../components/surveyDetailMenu.component";
 import {Model} from "../../components/model.component";
-import {NotificationService} from "../../providers/notification.service";
+import {NotificationService} from "../../providers/services/notification.service";
 import {LocalStorage} from "../../providers/localStorage.component";
 import {MetaSurvey, SurveyPicture} from "../../providers/domain/surveyMeta";
 

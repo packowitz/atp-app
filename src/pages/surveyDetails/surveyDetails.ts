@@ -2,10 +2,10 @@ import {NavParams, PopoverController, AlertController, NavController} from "ioni
 import {Survey} from "../../providers/domain/survey";
 import {Component} from "@angular/core";
 import {Util} from "../../components/util.component";
-import {SurveyService} from "../../providers/survey.service";
+import {SurveyService} from "../../providers/services/survey.service";
 import {SurveyDetailsMenu} from "../../components/surveyDetailMenu.component";
 import {Model} from "../../components/model.component";
-import {NotificationService} from "../../providers/notification.service";
+import {NotificationService} from "../../providers/services/notification.service";
 import {LocalStorage} from "../../providers/localStorage.component";
 
 @Component({

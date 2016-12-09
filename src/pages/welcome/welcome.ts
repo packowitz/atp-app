@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {NavController, MenuController} from "ionic-angular";
 import {Model} from "../../components/model.component";
-import {AuthService} from "../../providers/auth.service";
+import {AuthService} from "../../providers/services/auth.service";
 import {LoadingPage} from "../loading/loading";
 import {LocalStorage} from "../../providers/localStorage.component";
 

@@ -1,11 +1,11 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {Headers, Http} from "@angular/http";
-import {Model} from "../components/model.component";
+import {Model} from "../../components/model.component";
 import {NotificationService} from "./notification.service";
 import {AlertController, Alert} from "ionic-angular";
 import {Storage} from "@ionic/storage";
-import {LocalStorage} from "./localStorage.component";
+import {LocalStorage} from "../localStorage.component";
 
 @Injectable()
 export class AtpHttp {
