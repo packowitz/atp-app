@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, ViewController, PopoverController} from "ionic-angular/index";
+import {NavController, ViewController, PopoverController, AlertController} from "ionic-angular/index";
 import {Model} from "../../components/model.component";
 import {Country} from "../../providers/domain/country";
 import {CountryService} from "../../providers/country.service";
@@ -30,7 +30,8 @@ export class PersonalDataPage {
               public authService: AuthService,
               public notificationService: NotificationService,
               public viewCtrl: ViewController,
-              public popoverController: PopoverController) {
+              public popoverController: PopoverController,
+              public alertController: AlertController) {
     let currentYear: number = new Date().getFullYear();
     this.minYear = String(currentYear - 99);
     this.maxYear = String(currentYear - 5);
@@ -111,12 +112,30 @@ export class PersonalDataPage {
     this.authService.secureAccount(this.newEmail, this.newPassword).subscribe(
       data => {
         this.model.user = data;
-        this.notificationService.showToast({
-          message: 'Account secured',
-          duration: 2000,
-          showCloseButton: true,
-          closeButtonText: 'OK'
-        });
+        this.alertController.create({
+          title: 'Email send',
+          message: 'Please check your inbox for the confirmation email and click the confirmation link.',
+          buttons: [{text: 'OK'}]
+        }).present();
+      }
+    );
+  }
+
+  reloadStatus() {
+    this.authService.getUser("Checking your status").subscribe(
+      data => this.model.user = data
+    );
+  }
+
+  resendConfirmationEmail() {
+    this.authService.postNewEmail(this.model.user.email).subscribe(
+      data => {
+        this.model.user = data;
+        this.alertController.create({
+          title: 'Email send',
+          message: 'Please check your inbox for the confirmation email and click the confirmation link.',
+          buttons: [{text: 'OK'}]
+        }).present();
       }
     );
   }

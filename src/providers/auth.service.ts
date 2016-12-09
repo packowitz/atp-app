@@ -21,8 +21,12 @@ export class AuthService {
     return this.atpHttp.doPost("/auth/login", {username: username, password: password}, "Logging in");
   }
 
-  getUser(): Observable<User> {
-    return this.atpHttp.doGetBackground("/app/user");
+  getUser(message?: string): Observable<User> {
+    if(message) {
+      return this.atpHttp.doGet("/app/user", message);
+    } else {
+      return this.atpHttp.doGetBackground("/app/user");
+    }
   }
 
   postUsername(username: string): Observable<User> {
@@ -31,6 +35,10 @@ export class AuthService {
 
   secureAccount(email: string, password: string): Observable<User> {
     return this.atpHttp.doPost("/app/user/secure-account", {email: email, password: password}, "Securing your account");
+  }
+
+  postNewEmail(email: string): Observable<User> {
+    return this.atpHttp.doPost("/app/user/email", {email: email}, "Sending your email address");
   }
 
   postNotification(enabled: boolean, soundEnabled: boolean, vibrationEnabled: boolean): Observable<User> {

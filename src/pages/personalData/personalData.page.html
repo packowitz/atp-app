@@ -69,4 +69,26 @@
     </ion-item>
     <ion-item><button ion-button full [disabled]="!setEmailValid()" (click)="submitSetEmail()">Save</button></ion-item>
   </ion-list>
+
+  <ion-list *ngIf="model.user.email && !model.user.emailConfirmed">
+    <ion-item no-lines>
+      <div><strong>Confirm your Email address</strong></div>
+      <small class="text-placeholder text-wrap">Please check your emails and confirm that you own {{model.user.email}}.</small>
+    </ion-item>
+    <ion-item>
+      Already confirmed? <button item-right ion-button (click)="reloadStatus()">Reload my status</button>
+    </ion-item>
+    <ion-item>
+      Not received? <button item-right ion-button (click)="resendConfirmationEmail()">Resend Email</button>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="model.user.email && model.user.emailConfirmed">
+    <ion-item no-lines>
+      <strong>Your Email address</strong>
+    </ion-item>
+    <ion-item>
+      <span class="text-wrap">You confirmed your email address: {{model.user.email}}</span>
+    </ion-item>
+  </ion-list>
 </ion-content>
