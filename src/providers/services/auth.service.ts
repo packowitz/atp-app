@@ -21,6 +21,10 @@ export class AuthService {
     return this.atpHttp.doPost("/auth/login", {email: email, password: password}, "Logging in");
   }
 
+  requestNewPassword(email: string): Observable<any> {
+    return this.atpHttp.doPost("/auth/forgot-password", {email: email}, "Resetting password");
+  }
+
   getUser(message?: string): Observable<User> {
     if(message) {
       return this.atpHttp.doGet("/app/user", message);

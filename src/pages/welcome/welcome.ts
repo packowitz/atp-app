@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, MenuController} from "ionic-angular";
+import {NavController, MenuController, AlertController} from "ionic-angular";
 import {Model} from "../../components/model.component";
 import {AuthService} from "../../providers/services/auth.service";
 import {LoadingPage} from "../loading/loading";
@@ -27,6 +27,7 @@ export class WelcomePage {
               public model: Model,
               public authService: AuthService,
               public localStorage: LocalStorage,
+              public alertController: AlertController,
               public fb: FormBuilder) {
     this.deviceHeight = window.innerHeight;
     this.menu.swipeEnable(false);
@@ -59,6 +60,29 @@ export class WelcomePage {
   }
 
   forgotPassword() {
-    window.open("https://atp-pacworx.rhcloud.com/atp.html", "_system");
+    this.alertController.create({
+      title: 'Reset password',
+      message: "Enter your email address you registered with ATP",
+      inputs: [
+        {
+          name: 'email',
+          placeholder: 'Your email address'
+        },
+      ],
+      buttons: [
+        {text: 'Cancel'},
+        {text: 'Send',
+          handler: data => {
+            this.authService.requestNewPassword(data.email).subscribe(() => {
+              this.alertController.create({
+                title: 'Check your email',
+                message: 'Please check your inbox for your new password. Please change that as soon as you are logged in.',
+                buttons: [{text: 'OK'}]
+              }).present();
+            });
+          }
+        }
+      ]
+    }).present();
   }
 }
