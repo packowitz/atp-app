@@ -37,8 +37,12 @@ export class AuthService {
     return this.atpHttp.doPost("/app/user/secure-account", {email: email, password: password}, "Securing your account");
   }
 
-  postNewEmail(email: string): Observable<User> {
-    return this.atpHttp.doPost("/app/user/email", {email: email}, "Sending your email address");
+  resendConfirmationEmail(): Observable<User> {
+    return this.atpHttp.doPost("/app/user/resend-confirmation-email", {}, "Sending confirmation email");
+  }
+
+  postNewEmail(email: string, password: string): Observable<User> {
+    return this.atpHttp.doPost("/app/user/email", {email: email, password: password}, "Sending your email address");
   }
 
   postNotification(enabled: boolean, soundEnabled: boolean, vibrationEnabled: boolean): Observable<User> {

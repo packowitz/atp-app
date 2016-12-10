@@ -82,6 +82,18 @@
     <ion-item>
       Not received? <button item-right ion-button (click)="resendConfirmationEmail()">Resend Email</button>
     </ion-item>
+    <ion-item no-lines>
+      <strong>Wrong email address?</strong>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>New Email</ion-label>
+      <ion-input type="email" [(ngModel)]="changeEmail"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Your Password</ion-label>
+      <ion-input type="password" [(ngModel)]="changeEmailPassword"></ion-input>
+    </ion-item>
+    <ion-item><button ion-button full [disabled]="!changeEmailValid()" (click)="submitChangeEmail()">Change Email</button></ion-item>
   </ion-list>
 
   <ion-list *ngIf="model.user.email && model.user.emailConfirmed">
@@ -89,7 +101,19 @@
       <strong>Your Email address</strong>
     </ion-item>
     <ion-item>
-      <span class="text-wrap">You confirmed your email address: {{model.user.email}}</span>
+      <i class="fa fa-check color-green"></i> {{model.user.email}}
     </ion-item>
+    <ion-item no-lines>
+      <strong>Want to change your Email address?</strong>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>New Email</ion-label>
+      <ion-input type="email" [(ngModel)]="changeEmail"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Your Password</ion-label>
+      <ion-input type="password" [(ngModel)]="changeEmailPassword"></ion-input>
+    </ion-item>
+    <ion-item><button ion-button full [disabled]="!changeEmailValid()" (click)="submitChangeEmail()">Change Email</button></ion-item>
   </ion-list>
 </ion-content>

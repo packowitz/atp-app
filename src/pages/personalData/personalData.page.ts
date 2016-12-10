@@ -25,6 +25,9 @@ export class PersonalDataPage {
   newPassword: string;
   newPasswordRepeat: string;
 
+  changeEmail: string;
+  changeEmailPassword: string;
+
   constructor(public nav: NavController,
               public model: Model,
               public countryService: CountryService,
@@ -110,11 +113,7 @@ export class PersonalDataPage {
     this.authService.secureAccount(this.newEmail, this.newPassword).subscribe(
       data => {
         this.model.user = data;
-        this.alertController.create({
-          title: 'Email send',
-          message: 'Please check your inbox for the confirmation email and click the confirmation link.',
-          buttons: [{text: 'OK'}]
-        }).present();
+        this.showEmailSendAlert();
       }
     );
   }
@@ -126,15 +125,38 @@ export class PersonalDataPage {
   }
 
   resendConfirmationEmail() {
-    this.authService.postNewEmail(this.model.user.email).subscribe(
+    this.authService.resendConfirmationEmail().subscribe(
       data => {
         this.model.user = data;
-        this.alertController.create({
-          title: 'Email send',
-          message: 'Please check your inbox for the confirmation email and click the confirmation link.',
-          buttons: [{text: 'OK'}]
-        }).present();
+        this.showEmailSendAlert();
       }
     );
+  }
+
+  changeEmailValid(): boolean {
+    if(this.changeEmailPassword && this.changeEmailPassword.length >= 8) {
+      return Util.EMAIL_REGEXP.test(this.changeEmail);
+    } else {
+      return false;
+    }
+  }
+
+  submitChangeEmail() {
+    this.authService.postNewEmail(this.changeEmail, this.changeEmailPassword).subscribe(
+      data => {
+        this.model.user = data;
+        this.changeEmail = '';
+        this.changeEmailPassword = '';
+        this.showEmailSendAlert();
+      }
+    );
+  }
+
+  showEmailSendAlert() {
+    this.alertController.create({
+      title: 'Email send',
+      message: 'Please check your inbox for the confirmation email and click the confirmation link.',
+      buttons: [{text: 'OK'}]
+    }).present();
   }
 }
