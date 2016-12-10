@@ -116,4 +116,23 @@
     </ion-item>
     <ion-item><button ion-button full [disabled]="!changeEmailValid()" (click)="submitChangeEmail()">Change Email</button></ion-item>
   </ion-list>
+
+  <ion-list *ngIf="model.user.email">
+    <ion-item no-lines>
+      <strong>Change Password</strong>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Old Password</ion-label>
+      <ion-input type="password" [(ngModel)]="changePasswordOld"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>New Password (min 8 characters)</ion-label>
+      <ion-input type="password" [(ngModel)]="changePasswordNew"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Repeat New Password</ion-label>
+      <ion-input type="password" [(ngModel)]="changePasswordNewRepeat"></ion-input>
+    </ion-item>
+    <ion-item><button ion-button full [disabled]="!changePasswordValid()" (click)="submitChangePassword()">Save</button></ion-item>
+  </ion-list>
 </ion-content>

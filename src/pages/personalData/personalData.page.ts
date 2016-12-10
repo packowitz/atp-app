@@ -28,6 +28,10 @@ export class PersonalDataPage {
   changeEmail: string;
   changeEmailPassword: string;
 
+  changePasswordOld: string;
+  changePasswordNew: string;
+  changePasswordNewRepeat: string;
+
   constructor(public nav: NavController,
               public model: Model,
               public countryService: CountryService,
@@ -148,6 +152,27 @@ export class PersonalDataPage {
         this.changeEmail = '';
         this.changeEmailPassword = '';
         this.showEmailSendAlert();
+      }
+    );
+  }
+
+  changePasswordValid(): boolean {
+    return this.changePasswordOld && this.changePasswordNew && this.changePasswordNew.length >= 8 && this.changePasswordNew === this.changePasswordNewRepeat;
+  }
+
+  submitChangePassword() {
+    this.authService.postNewPassword(this.changePasswordOld, this.changePasswordNew).subscribe(
+      data => {
+        this.model.user = data;
+        this.changePasswordOld = '';
+        this.changePasswordNew = '';
+        this.changePasswordNewRepeat = '';
+        this.notificationService.showToast({
+          message: 'Password changed',
+          duration: 2000,
+          showCloseButton: true,
+          closeButtonText: 'OK'
+        });
       }
     );
   }

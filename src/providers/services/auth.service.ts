@@ -45,6 +45,10 @@ export class AuthService {
     return this.atpHttp.doPost("/app/user/email", {email: email, password: password}, "Sending your email address");
   }
 
+  postNewPassword(oldPw: string, newPw: string): Observable<User> {
+    return this.atpHttp.doPost("/app/user/change-password", {oldPassword: oldPw, newPassword: newPw}, "Changing your password");
+  }
+
   postNotification(enabled: boolean, soundEnabled: boolean, vibrationEnabled: boolean): Observable<User> {
     let data: any = {enabled: enabled, soundEnabled: soundEnabled, vibrationEnabled: vibrationEnabled};
     return this.atpHttp.doPostBackground("/app/user/notifications", data);
