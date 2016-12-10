@@ -13,21 +13,23 @@
             </div>
         </ion-slide>
         <ion-slide>
+          <form [formGroup]="loginForm">
             <ion-list>
-                <ion-item>
-                    <ion-label floating>email address</ion-label>
-                    <ion-input type="email" [(ngModel)]="email"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label floating>password</ion-label>
-                    <ion-input type="password" [(ngModel)]="password"></ion-input>
-                </ion-item>
+              <ion-item>
+                <ion-label floating>email address</ion-label>
+                <ion-input type="email" [(ngModel)]="email" formControlName="email"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label floating>password</ion-label>
+                <ion-input type="password" [(ngModel)]="password" formControlName="password"></ion-input>
+              </ion-item>
             </ion-list>
             <div class="action-items">
-                <button ion-button color="light" class="login-button" [disabled]="!isEmailValid() || !password" (click)="login()">Login</button>
-                <div (click)="forgotPassword()">Forgot password</div>
-                <div (click)="startATP()">I am new to ATP</div>
+              <button ion-button color="light" class="login-button" [disabled]="!loginForm.valid" (click)="login()">Login</button>
+              <div (click)="forgotPassword()">Forgot password</div>
+              <div (click)="startATP()">I am new to ATP</div>
             </div>
+          </form>
         </ion-slide>
     </ion-slides>
     <div class="flex-grow">&nbsp;</div>

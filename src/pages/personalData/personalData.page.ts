@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, ViewController, PopoverController, AlertController} from "ionic-angular/index";
+import {NavController, ViewController, PopoverController, AlertController} from "ionic-angular";
 import {Model} from "../../components/model.component";
 import {Country} from "../../providers/domain/country";
 import {CountryService} from "../../providers/services/country.service";
@@ -62,16 +62,14 @@ export class PersonalDataPage {
   }
 
   personalDataUnchanged(): boolean {
-    if(this.model.user.yearOfBirth !== this.yearOfBirth) {
+    if (this.model.user.yearOfBirth !== this.yearOfBirth) {
       return false;
     }
-    if(this.model.user.male !== this.male) {
+    if (this.model.user.male !== this.male) {
       return false;
     }
-    if(this.country && this.model.user.country != this.country.alpha3) {
-      return false;
-    }
-    return true;
+
+    return !(this.country && this.model.user.country != this.country.alpha3);
   }
 
   chooseCountry() {

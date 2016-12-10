@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {Platform, ModalController} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
-import {Storage} from "@ionic/storage";
 import {LoadingPage} from "../pages/loading/loading";
 import 'rxjs/Rx';
 import {Model} from "../components/model.component";
@@ -25,7 +24,6 @@ export class AtpApp {
   rootPage: any = LoadingPage;
 
   constructor(public platform: Platform,
-              public storage: Storage,
               public modalCtrl: ModalController,
               public model: Model) {
     platform.ready().then(() => {
