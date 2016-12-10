@@ -19,10 +19,16 @@
                 <ion-label floating>email address</ion-label>
                 <ion-input type="email" [(ngModel)]="email" formControlName="email"></ion-input>
               </ion-item>
+              <p *ngIf="loginForm.controls.email.touched && !loginForm.controls.email.valid" color="danger" padding-left>
+                Please enter a valid email.
+              </p>
               <ion-item>
                 <ion-label floating>password</ion-label>
                 <ion-input type="password" [(ngModel)]="password" formControlName="password"></ion-input>
               </ion-item>
+              <p *ngIf="loginForm.controls.password.touched && !loginForm.controls.password.valid" color="danger" padding-left>
+                Please enter a password.
+              </p>
             </ion-list>
             <div class="action-items">
               <button ion-button color="light" class="login-button" [disabled]="!loginForm.valid" (click)="login()">Login</button>
