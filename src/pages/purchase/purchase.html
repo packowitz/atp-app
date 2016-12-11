@@ -59,18 +59,18 @@
       </ion-item>
       <ion-item>
         <div class="flex-left-strech color-white">
-          <img src="assets/img/rewards-{{model.reward_username.claimed}}.png" class="reward-img">
+          <img src="assets/img/rewards-{{model.reward_secured.claimed}}.png" class="reward-img">
           <div class="flex-grow reward-text">
             <div class="reward-title">Security Reward</div>
             <div class="reward-description">Get 750 pax for securing your account with a confirmed email address and password.</div>
           </div>
-          <span *ngIf="model.reward_username.achieved == 0" class="flex-center fake-link" (click)="openPersonalDataPage()">
+          <span *ngIf="model.reward_secured.achieved == 0" class="flex-center fake-link" (click)="openPersonalDataPage()">
             Your Data
           </span>
-          <span *ngIf="model.reward_username.claimed < model.reward_username.achieved" class="flex-center">
-            <button ion-button color="secondary" (click)="claimReward(model.reward_username)" class="claim-button">750 <img src="assets/img/diamond-white.png"></button>
+          <span *ngIf="model.reward_secured.claimed < model.reward_secured.achieved" class="flex-center">
+            <button ion-button color="secondary" (click)="claimReward(model.reward_secured)" class="claim-button">750 <img src="assets/img/diamond-white.png"></button>
           </span>
-          <span *ngIf="model.reward_username.claimed > 0" class="flex-center">
+          <span *ngIf="model.reward_secured.claimed > 0" class="flex-center">
             claimed
           </span>
         </div>
