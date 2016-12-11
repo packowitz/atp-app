@@ -70,7 +70,8 @@ export class LoadingPage {
           this.alertController.create({
             title: "New version available",
             message: "Please update ATP. There is a new version in the App Store available.",
-            buttons: []
+            buttons: [],
+            enableBackdropDismiss: false
           }).present();
         }
       }
