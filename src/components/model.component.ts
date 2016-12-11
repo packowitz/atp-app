@@ -23,6 +23,7 @@ export class Model {
   public claimableRewards: number = 0;
   public reward_active: Reward;
   public reward_username: Reward;
+  public reward_secured: Reward;
   public reward_creator: Reward;
   public reward_answerer: Reward;
   public reward_reliable: Reward;
@@ -86,6 +87,8 @@ export class Model {
       }
       if(a.type == 'ACTIVE_USER') {
         this.reward_active = a;
+      } else if(a.type == 'CONFIRM_EMAIL') {
+        this.reward_secured = a;
       } else if(a.type == 'CHOOSE_USERNAME') {
         this.reward_username = a;
       } else if(a.type == 'ATP_CREATOR') {
@@ -101,6 +104,7 @@ export class Model {
 
   needReloadRewards(): boolean {
     if((this.reward_username.achieved == 0 && this.user.username)
+      || (this.reward_secured.achieved == 0 && this.user.emailConfirmed)
       || (this.reward_creator.achieved == 0 && this.user.surveysStarted >=3)
       || (this.reward_creator.achieved == 1 && this.user.surveysStarted >= 10)
       || (this.reward_creator.achieved == 2 && this.user.surveysStarted >= 50)

@@ -22,6 +22,7 @@
         <button ion-button full small [disabled]="!couponCode || couponCode.length < 8 || couponCode > 25" (click)="redeemCoupon()">Redeem coupon</button>
       </ion-item>
     </ion-list>
+
     <ion-list no-lines *ngSwitchCase="'rewards'" class="atp-list light-blue-background">
       <ion-item>
         <div class="flex-left-strech color-white">
@@ -43,13 +44,31 @@
           <img src="assets/img/rewards-{{model.reward_username.claimed}}.png" class="reward-img">
           <div class="flex-grow reward-text">
             <div class="reward-title">Personalize Reward</div>
-            <div class="reward-description">Get 500 pax for securing your ATP account with a username and password.</div>
+            <div class="reward-description">Get 500 pax for giving your account an username.</div>
           </div>
-          <span *ngIf="model.reward_username.achieved == 0" class="flex-center fake-link" (click)="openSettingsPage()">
-            Settings
+          <span *ngIf="model.reward_username.achieved == 0" class="flex-center fake-link" (click)="openPersonalDataPage()">
+            Your Data
           </span>
           <span *ngIf="model.reward_username.claimed < model.reward_username.achieved" class="flex-center">
             <button ion-button color="secondary" (click)="claimReward(model.reward_username)" class="claim-button">500 <img src="assets/img/diamond-white.png"></button>
+          </span>
+          <span *ngIf="model.reward_username.claimed > 0" class="flex-center">
+            claimed
+          </span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="flex-left-strech color-white">
+          <img src="assets/img/rewards-{{model.reward_username.claimed}}.png" class="reward-img">
+          <div class="flex-grow reward-text">
+            <div class="reward-title">Security Reward</div>
+            <div class="reward-description">Get 750 pax for securing your account with a confirmed email address and password.</div>
+          </div>
+          <span *ngIf="model.reward_username.achieved == 0" class="flex-center fake-link" (click)="openPersonalDataPage()">
+            Your Data
+          </span>
+          <span *ngIf="model.reward_username.claimed < model.reward_username.achieved" class="flex-center">
+            <button ion-button color="secondary" (click)="claimReward(model.reward_username)" class="claim-button">750 <img src="assets/img/diamond-white.png"></button>
           </span>
           <span *ngIf="model.reward_username.claimed > 0" class="flex-center">
             claimed
