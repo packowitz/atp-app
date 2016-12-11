@@ -3,10 +3,15 @@ import {Observable} from "rxjs/Observable";
 import {Injectable} from "@angular/core";
 import {Model} from "../../components/model.component";
 import {AtpHttp} from "./atpHttp.service";
+import {Version} from "../../components/version.component";
 
 export class TokenResponse {
   token: string;
   user: User;
+}
+
+export class SuccessResponse {
+  success: boolean;
 }
 
 @Injectable()
@@ -65,5 +70,10 @@ export class AuthService {
 
   postDeviceBackground(deviceOs: string, regId: string): Observable<User> {
     return this.atpHttp.doPostBackground("/app/user/device", {deviceOs: deviceOs, notificationRegId: regId});
+  }
+
+  checkAppVersion(): Observable<SuccessResponse> {
+    let version: Version = new Version();
+    return this.atpHttp.doPostBackground("/version/check", {major: version.major, minor: version.minor, patch: version.patch});
   }
 }

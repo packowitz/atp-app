@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, Platform} from "ionic-angular/index";
+import {NavController, Platform, AlertController} from "ionic-angular/index";
 import {Model} from "../../components/model.component";
 import {MessagesService} from "../../providers/services/messages.service";
 import {CountryService} from "../../providers/services/country.service";
@@ -31,12 +31,15 @@ export class LoadingPage {
               public rewardService: RewardService,
               public model: Model,
               public platform: Platform,
-              public localStorage: LocalStorage) {
+              public localStorage: LocalStorage,
+              public alertController: AlertController) {
     this.loadDataFromServer();
   }
 
   loadDataFromServer() {
-    if(!this.state.loadedLocalStorage) {
+    if(!this.state.checkedVersion) {
+      this.checkVersion();
+    } else if(!this.state.loadedLocalStorage) {
       this.loadLocalStorage();
     } else if(!this.state.loadedCountries) {
       this.loadCountries();
@@ -57,10 +60,27 @@ export class LoadingPage {
     }
   }
 
+  checkVersion() {
+    this.authService.checkAppVersion().subscribe(
+      data => {
+        if(data.success) {
+          this.state.checkedVersion = true;
+          this.loadDataFromServer();
+        } else {
+          this.alertController.create({
+            title: "New version available",
+            message: "Please update ATP. There is a new version in the App Store available.",
+            buttons: []
+          }).present();
+        }
+      }
+    );
+  }
+
   loadLocalStorage() {
     this.localStorage.loadData().then(() => {
       this.state.loadedLocalStorage = true;
-      this.loadDataFromServer()
+      this.loadDataFromServer();
     });
   }
 

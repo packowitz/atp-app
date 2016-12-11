@@ -2,6 +2,7 @@
 import {Injectable} from "@angular/core";
 @Injectable()
 export class LoadingState {
+  checkedVersion: boolean = false;
   loadedLocalStorage: boolean = false;
   loadedCountries: boolean = false;
   loadedUser: boolean = false;
