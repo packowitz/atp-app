@@ -120,7 +120,7 @@ export class LoadingPage {
       data => {
         this.model.feedback = data;
         this.model.recalcUnreadMessages();
-        console.log("Loaded " + this.model.feedback.length + " feedback");
+        console.log("Loaded " + this.model.feedback.length + " feedback. " + this.model.unreadFeedback + " unread.");
         this.state.loadedUnreadFeedback = true;
         this.loadDataFromServer();
       }

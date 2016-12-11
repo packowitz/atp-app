@@ -16,7 +16,6 @@ import {WelcomePage} from "../pages/welcome/welcome";
 import {CountrySelection} from "../components/countrySelection.component";
 import {Model} from "../components/model.component";
 import {HighscoreEntry} from "../pages/highscore/highscoreEntry";
-import {ChooseFeedbackType} from "../pages/feedback/chooseFeedbackType";
 import {ChooseUsername} from "../pages/settings/chooseUsername.component";
 import {AtpHttp} from "../providers/services/atpHttp.service";
 import {AuthService} from "../providers/services/auth.service";
@@ -42,6 +41,7 @@ import {SurveyContainsPicturePipe} from "../providers/pipes/surveyContainsPictur
 import {AnnouncementsPage} from "../pages/announcements/announcements.page";
 import {PersonalDataPage} from "../pages/personalData/personalData.page";
 import {AboutPage} from "../pages/about/about.page";
+import {GiveFeedbackPage} from "../pages/feedback/giveFeedback.page";
 
 @NgModule({
   declarations: [
@@ -52,6 +52,7 @@ import {AboutPage} from "../pages/about/about.page";
     HomePage,
     FeedbackPage,
     FeedbackDetailsPage,
+    GiveFeedbackPage,
     MultiPictureSurveyDetailsPage,
     MySurveysPage,
     PersonalDataPage,
@@ -68,7 +69,6 @@ import {AboutPage} from "../pages/about/about.page";
     SingleSurveyBar,
     SurveyOverviewBar,
     HighscoreEntry,
-    ChooseFeedbackType,
     ChooseUsername,
     SurveyDetailsMenu,
 
@@ -93,6 +93,7 @@ import {AboutPage} from "../pages/about/about.page";
     HomePage,
     FeedbackPage,
     FeedbackDetailsPage,
+    GiveFeedbackPage,
     MySurveysPage,
     PersonalDataPage,
     PurchasePage,
@@ -106,8 +107,7 @@ import {AboutPage} from "../pages/about/about.page";
     AboutPage,
 
     SurveyDetailsMenu,
-    CountrySelection,
-    ChooseFeedbackType
+    CountrySelection
   ],
   providers: [
     Model,

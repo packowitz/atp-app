@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Give Feedback</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="give-feedback-page grey-background" padding>
+  <ion-list>
+    <ion-item *ngIf="type == 'IMPROVEMENT'">
+      <div><strong>Write an Improvement</strong></div>
+      <small class="text-placeholder text-wrap">Please report your idea of how to improve ATP. Please be precise, tell us where and what you would like to see improved.</small>
+    </ion-item>
+    <ion-item *ngIf="type == 'BUG_REPORT'">
+      <div><strong>Report a Bug</strong></div>
+      <small class="text-placeholder text-wrap">You think that ATP doesn't work as expected. Please be precise, tell us where and what is wrong.</small>
+    </ion-item>
+    <ion-item *ngIf="type == 'MESSAGE_SUGGESTION'">
+      <div><strong>Suggest a (funny) message</strong></div>
+      <small class="text-placeholder text-wrap">There are some places in the app where you see every time a different message. Please write us your suggestion and where you would like to see your message.</small>
+    </ion-item>
+    <ion-item *ngIf="type == 'OTHER'">
+      <div><strong>Give us some feedback</strong></div>
+      <small class="text-placeholder text-wrap">Every feedback is welcome. Please be serious in what you want to tell us.</small>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Subject<span *ngIf="feedback.title">&nbsp;({{50 - feedback.title.length}} character left)</span></ion-label>
+      <ion-input type="text" maxLength="50" [(ngModel)]="feedback.title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Message<span *ngIf="feedback.message">&nbsp;({{255 - feedback.message.length}} character left)</span></ion-label>
+      <ion-textarea [(ngModel)]="feedback.message" maxlength="255"></ion-textarea>
+    </ion-item>
+    <ion-item><button ion-button full [disabled]="!feedback.title || !feedback.message" (click)="sendFeedback()">Send Feedback</button></ion-item>
+  </ion-list>
+</ion-content>

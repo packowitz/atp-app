@@ -123,9 +123,12 @@ ion-title {
 }
 
 .small-headline {
-  color: $atp-grey;
-  font-size: 1.2rem;
+  color: $atp-grey !important;
+  font-size: 1.2rem !important;
   margin-bottom: 8px;
+}
+ion-card-header.small-headline {
+  padding: 8px;
 }
 
 .color-grey {

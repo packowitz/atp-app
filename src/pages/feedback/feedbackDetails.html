@@ -4,10 +4,16 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content class="feedback-details" padding>
+<ion-content class="feedback-details grey-background" padding>
     <ion-card>
         <ion-card-header class="small-headline no-padding-bottom">
-            <span class="float-right">You wrote {{getTimeDiff(feedback.sendDate)}} ago</span>
+            <span class="float-right">
+              You wrote this
+              <span *ngIf="feedback.type == 'IMPROVEMENT'">Improvement idea</span>
+              <span *ngIf="feedback.type == 'BUG_REPORT'">Bug Report</span>
+              <span *ngIf="feedback.type == 'MESSAGE_SUGGESTION'">Message Suggestion</span>
+              <span *ngIf="feedback.type == 'OTHER'">Feedback</span>
+              {{getTimeDiff(feedback.sendDate)}} ago</span>
         </ion-card-header>
         <ion-card-content>
             {{feedback.message}}

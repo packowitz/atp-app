@@ -7,25 +7,32 @@
 
   <ion-content class="outer-content" *ngIf="model.user">
     <ion-list>
-      <ion-list-header>
-        {{model.user.username ? model.user.username : 'Me'}}
-      </ion-list-header>
+      <ion-list-header>{{model.user.username ? model.user.username : 'Me'}}</ion-list-header>
       <ion-item-group>
         <button ion-item menuClose (click)="showPersonalData()" ><ion-icon item-left name="person" color="atp-blue-light"></ion-icon>My info</button>
       </ion-item-group>
     </ion-list>
+
     <ion-list>
-      <ion-list-header>
-        ATP
-      </ion-list-header>
+      <ion-list-header>ATP</ion-list-header>
       <ion-item-group>
         <button ion-item menuClose (click)="showAnnouncements()"><ion-icon item-left name="megaphone"></ion-icon>Announcements</button>
         <button ion-item menuClose (click)="showHighscorePage()"><ion-icon item-left color="atp-gold" name="trophy"></ion-icon>Highscores</button>
-
-        <!-- Feedback portal buttons -->
-        <button ion-item menuClose (click)="showFeedbackPage()"><ion-icon item-left color="atp-blue" name="book"></ion-icon>Feedback portal</button>
         <button ion-item menuClose (click)="showSettings()"><ion-icon item-left name="settings"></ion-icon>Settings</button>
         <button ion-item menuClose (click)="showAboutPage()"><ion-icon item-left name="information-circle" color="atp-placeholder-grey"></ion-icon>About</button>
+      </ion-item-group>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>Feedback</ion-list-header>
+      <ion-item-group>
+        <button ion-item menuClose (click)="showImprovementPage()"><ion-icon item-left color="atp-blue" name="bulb"></ion-icon>Write an imrovement</button>
+        <button ion-item menuClose (click)="showBugReportPage()"><ion-icon item-left name="bug"></ion-icon>Report a Bug</button>
+        <button ion-item menuClose (click)="showMessageSuggestionPage()"><ion-icon item-left name="mail"></ion-icon>Suggest a message</button>
+        <button ion-item menuClose (click)="showOtherFeedbackPage()"><ion-icon item-left name="paper"></ion-icon>Other feedback</button>
+        <button *ngIf="model.feedback.length > 0" ion-item menuClose (click)="showFeedbackPage()"><ion-icon item-left color="atp-blue" name="chatbubbles"></ion-icon>
+          My feedback&nbsp;<ion-badge color="danger" *ngIf="model.unreadFeedback > 0">{{model.unreadFeedback}}</ion-badge>
+        </button>
       </ion-item-group>
     </ion-list>
   </ion-content>
