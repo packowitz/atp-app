@@ -1,0 +1,50 @@
+<ion-content class="welcome-page" [style.height]="deviceHeight + 'px'">
+  <div class="logo">
+    <img src="assets/img/icon-invert.png">
+    <div>ATP beta</div>
+  </div>
+  <ion-slides #welcomeSlider [options]="sliderOptions">
+    <ion-slide>
+      <h1 class="color-dark">Thank you for trying ATP</h1>
+      <div class="welcome-text">
+        ATP stands for "Ask The People" and is a platform where people can ask other people for their opinion.
+        ATP offers the easiest and simplest way to do so.
+        Every question contains two pictures and asks which the user prefers.
+      </div>
+      <ion-toolbar>
+        <ion-buttons end>
+          <button ion-button color="atp-blue" (click)="nextWelcomeSlide()">Next</button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-slide>
+    <ion-slide>
+      <h1 class="color-dark">Ask a question</h1>
+      <div class="welcome-text">
+        Choose two pictures from your gallery or your camera, select your target group and how many answers you want.
+        Asking a question costs some pax (the in-app currency).
+      </div>
+      <ion-toolbar>
+        <ion-buttons class="flex-space-between">
+          <button ion-button color="atp-blue" (click)="previousWelcomeSlide()">Previous</button>
+          <button ion-button color="atp-blue" (click)="nextWelcomeSlide()">Next</button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-slide>
+    <ion-slide>
+      <h1 class="color-dark">Answering questions</h1>
+      <div class="welcome-text">
+        Hit the big blue button on the main screen to start answering questions. Select which picture you prefer and tap on that.
+        If you are unsure hit "I don't know". With every answer you earn some pax that you can spend on starting your own questions.
+      </div>
+      <ion-toolbar>
+        <ion-buttons class="flex-space-between">
+          <button ion-button color="atp-blue" (click)="previousWelcomeSlide()">Previous</button>
+          <button ion-button color="atp-blue" (click)="close()">OK, got it</button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-slide>
+  </ion-slides>
+  <div class="flex-grow">&nbsp;</div>
+  <div class="footer">&copy; 2016 Pacworx</div>
+</ion-content>
+

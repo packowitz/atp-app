@@ -10,6 +10,7 @@ import {WelcomePage} from "../welcome/welcome";
 import {RewardService} from "../../providers/services/reward.service";
 import {LocalStorage} from "../../providers/localStorage.component";
 import {LoadingState} from "./loadingState.component";
+import {WelcomeTourPage} from "../welcome/welcomeTour.page";
 
 
 /**
@@ -56,7 +57,7 @@ export class LoadingPage {
     } else if(!this.state.registeredNotifications) {
       this.registerNotification();
     } else {
-      this.nav.setRoot(TabsPage);
+      this.nav.setRoot(this.localStorage.hintSettings.seenWelcomeHint ? TabsPage : WelcomeTourPage);
     }
   }
 

@@ -5,6 +5,7 @@ import {SurveyListWithTimestamp} from "./services/survey.service";
 import {Storage} from "@ionic/storage";
 import {MetaSurvey, SurveyPicture} from "./domain/surveyMeta";
 import {SurveySettings} from "../components/surveySettings";
+import {HintSettings} from "../components/hintSettings";
 
 @Injectable()
 export class LocalStorage {
@@ -15,6 +16,7 @@ export class LocalStorage {
   surveys: MetaSurvey[];
 
   lastSurveySettings: SurveySettings;
+  hintSettings: HintSettings;
 
   constructor(public platform: Platform, public storage: Storage) {
     if(platform.is("cordova") || platform.is("android") || platform.is("ios")) {
@@ -34,6 +36,9 @@ export class LocalStorage {
           this.surveys = data ? data : [];
           return this.storage.get(this.prefix + 'lastSurveySettings').then(data => {
             this.lastSurveySettings = data;
+            return this.storage.get(this.prefix + 'hintSettings').then(data => {
+              this.hintSettings = data ? data : new HintSettings();
+            });
           });
         });
       });
@@ -63,6 +68,10 @@ export class LocalStorage {
   public setLastSurveySettings(settings: SurveySettings) {
     this.lastSurveySettings = settings;
     this.storage.set(this.prefix + 'lastSurveySettings', this.lastSurveySettings);
+  }
+
+  public saveHintSettings() {
+    this.storage.set(this.prefix + 'hintSettings', this.hintSettings);
   }
 
   public getUpdateTimestamp() {

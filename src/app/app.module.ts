@@ -42,6 +42,7 @@ import {AnnouncementsPage} from "../pages/announcements/announcements.page";
 import {PersonalDataPage} from "../pages/personalData/personalData.page";
 import {AboutPage} from "../pages/about/about.page";
 import {GiveFeedbackPage} from "../pages/feedback/giveFeedback.page";
+import {WelcomeTourPage} from "../pages/welcome/welcomeTour.page";
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import {GiveFeedbackPage} from "../pages/feedback/giveFeedback.page";
     SurveyDetailsPage,
     TabsPage,
     WelcomePage,
+    WelcomeTourPage,
     AboutPage,
 
     CountrySelection,
@@ -104,6 +106,7 @@ import {GiveFeedbackPage} from "../pages/feedback/giveFeedback.page";
     MultiPictureSurveyDetailsPage,
     TabsPage,
     WelcomePage,
+    WelcomeTourPage,
     AboutPage,
 
     SurveyDetailsMenu,
