@@ -17,7 +17,6 @@
     </div>
     <div class="enlarge-icons color-white flex-space-between">
       <i class="fa" [class.fa-search-plus]="!showSlider" [class.fa-search-minus]="showSlider" [@buttonState]="buttonAnimationState" (click)="toggleSlider(1)"></i>
-      <i class="fa" [class.fa-search-plus]="!showSlider" [class.fa-search-minus]="showSlider" [@buttonState]="buttonAnimationState" (click)="toggleSlider(2)"></i>
     </div>
     <div *ngIf="!showSlider">
       <div class="picture-container">
