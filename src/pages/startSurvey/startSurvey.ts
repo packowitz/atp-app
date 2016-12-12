@@ -119,10 +119,8 @@ export class StartSurveyPage {
 
   choosePicture(event: Event) {
     event.preventDefault();
-    this.actionSheetController.create({
-      title: 'Choose action',
-      cssClass: 'action-sheets-basic-page',
-      buttons: [{
+    let buttons = [
+      {
         text: 'Camera',
         icon: this.platform.is('ios') ? null : 'camera',
         handler: () => {
@@ -134,14 +132,21 @@ export class StartSurveyPage {
         handler: () => {
           this.doTakePicture(0);
         }
-      }, {
+      }
+    ];
+    if(!this.platform.is("cordova") && !this.platform.is("android") && !this.platform.is("ios")) {
+      buttons.push({
         text: 'Dummy for Test',
         icon: this.platform.is('ios') ? null : 'bug',
         handler: () => {
           this.chooseDummyPicture();
         }
-      }
-      ]
+      });
+    }
+    this.actionSheetController.create({
+      title: 'Choose action',
+      cssClass: 'action-sheets-basic-page',
+      buttons: buttons
     }).present();
   }
 
