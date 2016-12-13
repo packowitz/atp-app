@@ -16,7 +16,8 @@
   }
 
   .welcome-text {
-    margin: 0 2rem 2rem 2rem;
+    margin: 2rem 4rem 4rem 4rem;
+    font-size: 1.6rem;
   }
 
   .footer {
@@ -62,6 +63,7 @@
       justify-content: flex-start;
       flex-direction: column;
       color: $atp-light;
+      font-size: 1.6rem;
       > * {
         margin-top: 1em;
       }
@@ -70,7 +72,7 @@
         color: $atp-blue-dark;
         font-weight: 600;
         padding-top: 0.25rem;
-        font-size: 1.8rem;
+        font-size: 1.6rem;
       }
     }
   }
