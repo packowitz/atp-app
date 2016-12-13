@@ -32,7 +32,7 @@
             <div class="reward-description">Free pax every day! Log in and get 50 pax reward.</div>
           </div>
           <span *ngIf="model.reward_active.claimed < model.reward_active.achieved" class="flex-center">
-            <button ion-button color="secondary" (click)="claimReward(model.reward_active)" class="claim-button">50 <img src="assets/img/diamond-white.png"></button>
+            <button ion-button color="secondary" (click)="claimReward(model.reward_active)" class="claim-button">50&nbsp;<i class="fa fa-diamond"></i></button>
           </span>
           <span *ngIf="model.reward_active.claimed == 3" class="flex-center">
             claimed
@@ -50,7 +50,7 @@
             Your Data
           </span>
           <span *ngIf="model.reward_username.claimed < model.reward_username.achieved" class="flex-center">
-            <button ion-button color="secondary" (click)="claimReward(model.reward_username)" class="claim-button">500 <img src="assets/img/diamond-white.png"></button>
+            <button ion-button color="secondary" (click)="claimReward(model.reward_username)" class="claim-button">500&nbsp;<i class="fa fa-diamond"></i></button>
           </span>
           <span *ngIf="model.reward_username.claimed > 0" class="flex-center">
             claimed
@@ -68,7 +68,7 @@
             Your Data
           </span>
           <span *ngIf="model.reward_secured.claimed < model.reward_secured.achieved" class="flex-center">
-            <button ion-button color="secondary" (click)="claimReward(model.reward_secured)" class="claim-button">750 <img src="assets/img/diamond-white.png"></button>
+            <button ion-button color="secondary" (click)="claimReward(model.reward_secured)" class="claim-button">&nbsp;<i class="fa fa-diamond"></i></button>
           </span>
           <span *ngIf="model.reward_secured.claimed > 0" class="flex-center">
             claimed
@@ -89,7 +89,7 @@
           </span>
           <span *ngIf="model.reward_creator.claimed < model.reward_creator.achieved" class="flex-center">
             <button ion-button color="secondary" (click)="claimReward(model.reward_creator)" class="claim-button">
-              {{model.reward_creator.claimed == 0 ? '500' : model.reward_creator.claimed == 1 ? '1000' : '2000'}} <img src="assets/img/diamond-white.png">
+              {{model.reward_creator.claimed == 0 ? '500' : model.reward_creator.claimed == 1 ? '1000' : '2000'}}&nbsp;<i class="fa fa-diamond"></i>
             </button>
           </span>
           <span *ngIf="model.reward_creator.claimed == 3" class="flex-center">
@@ -111,7 +111,7 @@
           </span>
           <span *ngIf="model.reward_answerer.claimed < model.reward_answerer.achieved" class="flex-center">
             <button ion-button color="secondary" (click)="claimReward(model.reward_answerer)" class="claim-button">
-              {{model.reward_answerer.claimed == 0 ? '250' : model.reward_answerer.claimed == 1 ? '500' : '1000'}} <img src="assets/img/diamond-white.png">
+              {{model.reward_answerer.claimed == 0 ? '250' : model.reward_answerer.claimed == 1 ? '500' : '1000'}}&nbsp;<i class="fa fa-diamond"></i>
             </button>
           </span>
           <span *ngIf="model.reward_answerer.claimed == 3" class="flex-center">
@@ -133,7 +133,7 @@
           </span>
           <span *ngIf="model.reward_reliable.claimed < model.reward_reliable.achieved" class="flex-center">
             <button ion-button color="secondary" (click)="claimReward(model.reward_reliable)" class="claim-button">
-              {{model.reward_reliable.claimed == 0 ? '250' : model.reward_reliable.claimed == 1 ? '500' : '1000'}} <img src="assets/img/diamond-white.png">
+              {{model.reward_reliable.claimed == 0 ? '250' : model.reward_reliable.claimed == 1 ? '500' : '1000'}}&nbsp;<i class="fa fa-diamond"></i>
             </button>
           </span>
           <span *ngIf="model.reward_reliable.claimed == 3" class="flex-center">

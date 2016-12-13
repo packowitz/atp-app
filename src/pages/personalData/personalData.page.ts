@@ -88,7 +88,7 @@ export class PersonalDataPage {
   }
 
   submitPersonalData() {
-    this.authService.postPersonalData(this.yearOfBirth, this.male, this.country.alpha3).subscribe(data => this.model.user = data);
+    this.authService.postPersonalData(this.yearOfBirth, this.male, this.country ? this.country.alpha3 : null).subscribe(data => this.model.user = data);
   }
 
   submitUsername() {

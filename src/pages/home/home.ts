@@ -36,9 +36,9 @@ export class HomePage {
   showAnonymousAlert() {
     this.alertController.create({
       title: 'Select a username',
-      message: 'Go to settings and choose a username to use your ATP account on multiple devices or to be able to restore your account.',
+      message: 'Please go to \'Personal data\' and choose a username to personalize your account.',
       buttons: [
-        {text: 'Settings', handler: () => {this.openPersonalDataPage();}},
+        {text: 'Personal data', handler: () => {this.openPersonalDataPage();}},
         {text: 'Later'}
       ]
     }).present();
@@ -66,9 +66,9 @@ export class HomePage {
     } else {
       this.alertController.create({
         title: 'Tell us something about you',
-        message: 'To find questions to fit to the right person we need to know something about you. Please go to the settings and fill out the personal data section.',
+        message: 'To find ATPs that fits to your profile we need to know a little bit about you. Please go to \'Personal data\' and fill out the \'My data\' section.',
         buttons: [
-          {text: 'Settings', handler: () => {this.openPersonalDataPage();}}
+          {text: 'Personal data', handler: () => {this.openPersonalDataPage();}}
         ]
       }).present();
     }

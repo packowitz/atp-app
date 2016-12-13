@@ -49,7 +49,7 @@
     <div *ngFor="let announcement of model.announcements">
       <ion-card *ngIf="!announcement.read">
         <ion-card-header class="no-padding-bottom">
-          <div class="small-headline flex-space-between">{{getTimeDiff(announcement.sendDate)}} ago<ion-icon name="close" (click)="model.markAnnouncementAsRead(announcement)"></ion-icon></div>
+          <div class="small-headline flex-space-between">{{getTimeDiff(announcement.sendDate)}} ago<i class="fa fa-times" (click)="model.markAnnouncementAsRead(announcement)"></i></div>
           <div class="text-center">{{announcement.title}}</div>
         </ion-card-header>
         <ion-card-content>
@@ -61,9 +61,7 @@
 
   <!-- Pax section -->
   <div class="blue-background padding-top-middle color-white" (click)="openPurchasePage()">
-    <div class="flex-center text-h2">
-      <span>{{model.user.credits}}</span><img src="assets/img/diamond-white.png" class="diamond-icon">
-    </div>
+    <div class="flex-center text-h2">{{model.user.credits}}&nbsp;<i class="fa fa-diamond"></i></div>
     <div class="text-center text-h4 padding-vertical-small-middle">
       Purchase more
     </div>

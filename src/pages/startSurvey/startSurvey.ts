@@ -59,7 +59,7 @@ export class StartSurveyPage {
     this.countries = lastSettings ? lastSettings.countries : [];
     this.survey.male = lastSettings ? lastSettings.male : true;
     this.survey.female = lastSettings ? lastSettings.female : true;
-    this.ageRange.lower = lastSettings ? lastSettings.minAge : 1;
+    this.ageRange.lower = lastSettings ? lastSettings.minAge : 5;
     this.ageRange.upper = lastSettings ? lastSettings.maxAge : 99;
   }
 

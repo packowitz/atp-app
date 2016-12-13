@@ -24,7 +24,7 @@
     </span>
     </ion-item>
     <ion-item>
-      <ion-range dualKnobs="true" min="1" max="99" [(ngModel)]="ageRange" class="no-padding-top"></ion-range>
+      <ion-range dualKnobs="true" min="5" max="99" [(ngModel)]="ageRange" class="no-padding-top"></ion-range>
     </ion-item>
     <ion-item>
       Countries:
@@ -83,7 +83,7 @@
 
   <div class="submit-row">
     <button ion-button full [disabled]="!surveyComplete()" (click)="startSurvey()" class="start-survey-button">
-      Start ATP ({{numberOfSurveys * surveyType.costs}} <img src="assets/img/diamond-white.png" class="diamond-icon">)
+      Start ATP ({{numberOfSurveys * surveyType.costs}}&nbsp;<i class="fa fa-diamond"></i>)
     </button>
   </div>
 
