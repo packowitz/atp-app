@@ -2,12 +2,12 @@ import {NavController, Tabs, AlertController, ModalController} from "ionic-angul
 import {Model} from "../../components/model.component";
 import {SurveyPage} from "../survey/survey";
 import {SurveyService} from "../../providers/services/survey.service";
-import {SettingsPage} from "../settings/settings";
 import {HighscorePage} from "../highscore/highscore";
 import {Component} from "@angular/core";
 import {RewardService} from "../../providers/services/reward.service";
 import {Util} from "../../components/util.component";
 import {LocalStorage} from "../../providers/localStorage.component";
+import {PersonalDataPage} from "../personalData/personalData.page";
 
 @Component({
   templateUrl: 'home.html'
@@ -38,15 +38,14 @@ export class HomePage {
       title: 'Select a username',
       message: 'Go to settings and choose a username to use your ATP account on multiple devices or to be able to restore your account.',
       buttons: [
-        {text: 'Settings', handler: () => {this.openSettingsPage();}},
+        {text: 'Settings', handler: () => {this.openPersonalDataPage();}},
         {text: 'Later'}
       ]
     }).present();
   }
 
-  openSettingsPage() {
-    let modal = this.modalCtrl.create(SettingsPage);
-    modal.present();
+  openPersonalDataPage() {
+    this.modalCtrl.create(PersonalDataPage).present();
   }
 
   openPurchasePage() {
@@ -54,8 +53,7 @@ export class HomePage {
   }
 
   openHighscorePage() {
-    let modal = this.modalCtrl.create(HighscorePage);
-    modal.present();
+    this.modalCtrl.create(HighscorePage).present();
   }
 
   openMySurveysPage() {
@@ -70,7 +68,7 @@ export class HomePage {
         title: 'Tell us something about you',
         message: 'To find questions to fit to the right person we need to know something about you. Please go to the settings and fill out the personal data section.',
         buttons: [
-          {text: 'Settings', handler: () => {this.openSettingsPage();}}
+          {text: 'Settings', handler: () => {this.openPersonalDataPage();}}
         ]
       }).present();
     }

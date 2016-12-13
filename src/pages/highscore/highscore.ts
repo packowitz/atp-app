@@ -4,6 +4,7 @@ import {HighscoreUser} from "../../providers/domain/highscoreUser";
 import {ViewController} from "ionic-angular";
 
 @Component({
+  selector: 'highscore-page',
   templateUrl: 'highscore.html'
 })
 export class HighscorePage {

@@ -1,40 +1,31 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Highscores</ion-title>
     <ion-buttons left>
       <button ion-button icon-only (click)="close()">
         <ion-icon  name="close"></ion-icon>
       </button>
     </ion-buttons>
+    <ion-segment [(ngModel)]="selection" (ionChange)="ionChange()">
+      <ion-segment-button value="week">Weekly Highscores</ion-segment-button>
+      <ion-segment-button value="total">All-time Highscores</ion-segment-button>
+    </ion-segment>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <div padding class="no-padding-vertical">
-    <ion-segment [(ngModel)]="selection" (ionChange)="ionChange()">
-      <ion-segment-button value="week">This week</ion-segment-button>
-      <ion-segment-button value="total">Total</ion-segment-button>
-    </ion-segment>
-  </div>
+  <ion-item color="white" class="buttongroup" no-lines>
+    <span item-right>
+          <button ion-button small [outline]="showTotalGlobal ? null : ''" (click)="switchTotalGlobalLocal()">Global</button>
+            <button ion-button small [outline]="(showTotalGlobal === false) ? null : ''" (click)="switchTotalGlobalLocal()">Local</button>
+    </span>
+  </ion-item>
   <div [ngSwitch]="selection">
     <ion-list *ngSwitchCase="'week'" padding class="no-padding-vertical">
-      <ion-item class="no-border">
-        <ion-label class="flex-space-around">
-          <button ion-button round small [ngClass]="showWeekGlobal ? '' : 'button-outline light-background'" (click)="switchWeekGlobalLocal()">Global</button>
-          <button ion-button round small [ngClass]="showWeekGlobal ? 'button-outline light-background' : ''" (click)="switchWeekGlobalLocal()">Local</button>
-        </ion-label>
-      </ion-item>
       <ion-item *ngIf="showWeekGlobal && !weekGlobalLoaded" class="text-center"><ion-spinner name="bubbles"></ion-spinner></ion-item>
       <ion-item *ngIf="!showWeekGlobal && !weekLocalLoaded" class="text-center"><ion-spinner name="bubbles"></ion-spinner></ion-item>
       <highscore-entry [highscore]="showWeekGlobal ? highscoreWeekGlobal : highscoreWeekLocal" [showWeek]="true"></highscore-entry>
     </ion-list>
     <ion-list *ngSwitchCase="'total'" padding class="no-padding-vertical">
-      <ion-item class="no-border">
-        <ion-label class="flex-space-around">
-          <button ion-button round small [ngClass]="showTotalGlobal ? '' : 'button-outline light-background'" (click)="switchTotalGlobalLocal()">Global</button>
-          <button ion-button round small [ngClass]="showTotalGlobal ? 'button-outline light-background' : ''" (click)="switchTotalGlobalLocal()">Local</button>
-        </ion-label>
-      </ion-item>
       <ion-item *ngIf="showTotalGlobal && !totalGlobalLoaded" class="text-center"><ion-spinner name="bubbles"></ion-spinner></ion-item>
       <ion-item *ngIf="!showTotalGlobal && !totalLocalLoaded" class="text-center"><ion-spinner name="bubbles"></ion-spinner></ion-item>
       <highscore-entry [highscore]="showTotalGlobal ? highscoreTotalGlobal : highscoreTotalLocal" [showWeek]="false"></highscore-entry>

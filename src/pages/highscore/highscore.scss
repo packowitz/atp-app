@@ -1,0 +1,14 @@
+highscore-page {
+  .header-md::after {
+    background-image: none;
+    bottom: 0;
+  }
+
+  .toolbar-md {
+    padding: 0;
+  }
+
+  .segment-md .segment-button {
+    white-space: normal;
+  }
+}
