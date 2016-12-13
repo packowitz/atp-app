@@ -45,7 +45,8 @@ export class HomePage {
   }
 
   openSettingsPage() {
-    this.nav.push(SettingsPage);
+    let modal = this.modalCtrl.create(SettingsPage);
+    modal.present();
   }
 
   openPurchasePage() {

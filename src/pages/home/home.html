@@ -11,9 +11,13 @@
 </ion-header>
 
 <ion-content class="main-page">
+
   <div class="white-background padding-bottom-middle padding-top-small text-h5">
+    <!-- Not registered -->
+    <div class="text-center margin-top-middle color-grey" *ngIf="!model.user.username" (click)="showAnonymousAlert()">You are not registered <ion-icon name="help-circle"></ion-icon></div>
+
+    <!-- Main info -->
     <div class="flex-space-between padding-horizontal-middle color-dark">
-      <span *ngIf="!model.user.username">You are not registered <ion-icon name="help-circle" (click)="showAnonymousAlert()"></ion-icon></span>
       <span *ngIf="model.user.username">{{model.user.username}}</span>
       <span *ngIf="model.user.male"><ion-icon name="man"></ion-icon></span>
       <span *ngIf="model.user.male === false"><ion-icon name="woman"></ion-icon></span>
@@ -24,12 +28,10 @@
       <img src="assets/img/trophy.png" class="trophy-image" (click)="openHighscorePage()">
     </div>
     <div class="text-center padding-top-middle color-dark">
-      <span *ngIf="model.user.surveysStarted == 0">Start your first ATP <span class="color-blue" (click)="openStartSurveyPage()">here</span></span>
       <span *ngIf="model.user.surveysStarted == 1">You started <strong>1</strong> ATP</span>
       <span *ngIf="model.user.surveysStarted > 1">You started <strong>{{model.user.surveysStarted}}</strong> ATPs</span>
     </div>
     <div class="text-center padding-top-small color-dark">
-      <span *ngIf="model.user.surveysAnswered == 0">Start answering ATPs <span class="color-blue" (click)="openSurveyPage()">here</span></span>
       <span *ngIf="model.user.surveysAnswered == 1">You answered <strong>1</strong> ATP</span>
       <span *ngIf="model.user.surveysAnswered > 1">You answered <strong>{{model.user.surveysAnswered}}</strong> ATPs</span>
     </div>
