@@ -23,8 +23,8 @@ export class StartSurveyPage {
     destinationType: 0,
     sourceType: 1,
     encodingType: 0,
-    quality:50,
-    allowEdit: true,
+    quality:80,
+    allowEdit: false,
     saveToPhotoAlbum: false
   };
   survey: Survey;
