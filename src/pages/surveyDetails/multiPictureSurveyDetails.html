@@ -10,27 +10,29 @@
 </ion-header>
 
 <ion-content class="multi-picture-survey-details" padding>
-    <ion-list>
+  <ion-list>
+    <ion-item>
+      <span class="status-circle {{meta.status}}"></span> {{meta.answered}} votes since {{getTimeDiff()}}
+    </ion-item>
+    <ion-item><strong>Title:</strong> <span [class.text-placeholder]="!meta.title">{{meta.title ? meta.title : 'no title'}}</span></ion-item>
       <ion-item>
-        <span class="status-circle {{meta.status}}"></span> {{meta.answered}} votes since {{getTimeDiff()}}
+        <div class="flex-space-between">
+          <span>
+              <strong>Age:</strong> {{meta.minAge}} - {{meta.maxAge}}
+          </span>
+          <span>
+            <strong>Gender:</strong>
+            <ion-icon name="man" *ngIf="meta.male"></ion-icon>
+            <ion-icon name="woman" *ngIf="meta.female"></ion-icon>
+          </span>
+        </div>
       </ion-item>
-      <ion-item><strong>Title:</strong> <span [class.text-placeholder]="!meta.title">{{meta.title ? meta.title : 'no title'}}</span></ion-item>
-        <ion-item>
-            <div class="flex-space-between">
-                <span>
-                    <strong>Age:</strong> {{meta.minAge}} - {{meta.maxAge}}
-                </span>
-                <span>
-                    <strong>Gender:</strong> <span *ngIf="meta.male">male</span><span *ngIf="meta.male && meta.female"> and </span><span *ngIf="meta.female">female</span>
-                </span>
-            </div>
-        </ion-item>
-        <ion-item>
-            <strong item-left>Countries:</strong>
-            <span class="text-placeholder" *ngIf="countries.length == 0">no restriction</span>
-            <span class="country" *ngFor="let country of countries"><img src="assets/img/flags/{{country}}.png" class="flag"></span>
-        </ion-item>
-    </ion-list>
+      <ion-item>
+        <strong item-left>Countries:</strong>
+        <span class="text-placeholder" *ngIf="countries.length == 0">no restriction</span>
+        <span class="country" *ngFor="let country of countries"><img src="assets/img/flags/{{country}}.png" class="flag"></span>
+      </ion-item>
+  </ion-list>
   <ion-list *ngFor="let picture of meta.pictures" no-lines>
     <ion-item (click)="toggleShowDetails(picture)">
       <single-survey-bar [answered]="picture.votesInvolved"

@@ -36,9 +36,8 @@
         </span>
         <span>
           <strong>Gender:</strong>
-          <span *ngIf="survey.male">male</span>
-          <span *ngIf="survey.male && survey.female"> and </span>
-          <span *ngIf="survey.female">female</span>
+          <ion-icon name="man" *ngIf="survey.male"></ion-icon>
+          <ion-icon name="woman" *ngIf="survey.female"></ion-icon>
         </span>
       </div>
     </ion-item>
