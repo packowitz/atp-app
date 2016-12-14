@@ -24,7 +24,7 @@ export class StartSurveyPage {
     sourceType: 1,
     encodingType: 0,
     quality:50,
-    allowEdit: false,
+    allowEdit: true,
     saveToPhotoAlbum: false
   };
   survey: Survey;
