@@ -1,18 +1,19 @@
 <ion-header>
-  <ion-navbar>
-    <ion-buttons left>
-      <button ion-button icon-only (click)="close()">
-        <ion-icon  name="close"></ion-icon>
-      </button>
+  <ion-navbar color="atp-blue-light">
+    <ion-title>
+      Highscores
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="close()">Close</button>
     </ion-buttons>
-    <ion-segment [(ngModel)]="selection" (ionChange)="ionChange()">
-      <ion-segment-button value="week">Weekly Highscores</ion-segment-button>
-      <ion-segment-button value="total">All-time Highscores</ion-segment-button>
-    </ion-segment>
   </ion-navbar>
+  <ion-segment [(ngModel)]="selection" (ionChange)="ionChange()" color="atp-blue-light">
+    <ion-segment-button value="week">Weekly Highscores</ion-segment-button>
+    <ion-segment-button value="total">All-time Highscores</ion-segment-button>
+  </ion-segment>
 </ion-header>
-
 <ion-content>
+
   <ion-item color="white" class="buttongroup" no-lines>
     <span item-right>
           <button ion-button small [outline]="showTotalGlobal ? null : ''" (click)="switchTotalGlobalLocal()">Global</button>
