@@ -4,7 +4,7 @@ import {ViewController} from "ionic-angular";
 import {AuthService} from "../../providers/services/auth.service";
 
 @Component({
-  templateUrl: 'settings.html'
+  templateUrl: 'settings.page.html'
 })
 export class SettingsPage {
   constructor(public model: Model,

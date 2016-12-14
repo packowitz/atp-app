@@ -8,7 +8,7 @@ import {FeedbackPage} from "../pages/feedback/feedback.page";
 import {FeedbackDetailsPage} from "../pages/feedback/feedbackDetails";
 import {MySurveysPage} from "../pages/mySurveys/mySurveys";
 import {PurchasePage} from "../pages/purchase/purchase";
-import {SettingsPage} from "../pages/settings/settings";
+import {SettingsPage} from "../pages/settings/settings.page";
 import {SurveyPage} from "../pages/survey/survey";
 import {SurveyDetailsPage} from "../pages/surveyDetails/surveyDetails";
 import {TabsPage} from "../pages/tabs/tabsPage";

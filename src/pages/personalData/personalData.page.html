@@ -1,10 +1,8 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="atp-blue-light">
     <ion-title>Personal Data</ion-title>
-    <ion-buttons left>
-      <button ion-button icon-only (click)="close()">
-        <ion-icon name="close"></ion-icon>
-      </button>
+    <ion-buttons start>
+      <button ion-button (click)="close()">Close</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -15,7 +13,7 @@
       <strong>My Data</strong>
     </ion-item>
     <ion-item>
-      <ion-label class="color-black">Year of birth:</ion-label>
+      <ion-label class="color-black">Year of birth:</ion-label>a
       <ion-label *ngIf="!yearOfBirth" class="ion-date-placeholder">(yyyy)</ion-label>
       <ion-datetime displayFormat="YYYY" pickerFormat="YYYY" [min]="minYear" [max]="maxYear" [(ngModel)]="yearString" (ionChange)="yearChanged()" cancelText="" doneText="OK" placeholder="(yyyy)"></ion-datetime>
     </ion-item>

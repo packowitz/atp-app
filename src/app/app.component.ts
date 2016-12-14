@@ -4,7 +4,7 @@ import {StatusBar} from 'ionic-native';
 import {LoadingPage} from "../pages/loading/loading";
 import 'rxjs/Rx';
 import {Model} from "../components/model.component";
-import {SettingsPage} from "../pages/settings/settings";
+import {SettingsPage} from "../pages/settings/settings.page";
 import {FeedbackPage} from "../pages/feedback/feedback.page";
 import {HighscorePage} from "../pages/highscore/highscore";
 import {AnnouncementsPage} from "../pages/announcements/announcements.page";
