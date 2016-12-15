@@ -8,8 +8,8 @@
     </ion-buttons>
   </ion-navbar>
   <ion-segment [(ngModel)]="selection" (ionChange)="ionChange()" color="atp-blue-light">
-    <ion-segment-button value="week">Weekly Highscores</ion-segment-button>
-    <ion-segment-button value="total">All-time Highscores</ion-segment-button>
+    <ion-segment-button value="week">Weekly</ion-segment-button>
+    <ion-segment-button value="total">All-time</ion-segment-button>
   </ion-segment>
 </ion-header>
 <ion-content>
@@ -21,12 +21,12 @@
     </span>
   </ion-item>
   <div [ngSwitch]="selection">
-    <ion-list *ngSwitchCase="'week'" padding class="no-padding-vertical">
+    <ion-list *ngSwitchCase="'week'">
       <ion-item *ngIf="showWeekGlobal && !weekGlobalLoaded" class="text-center"><ion-spinner name="bubbles"></ion-spinner></ion-item>
       <ion-item *ngIf="!showWeekGlobal && !weekLocalLoaded" class="text-center"><ion-spinner name="bubbles"></ion-spinner></ion-item>
       <highscore-entry [highscore]="showWeekGlobal ? highscoreWeekGlobal : highscoreWeekLocal" [showWeek]="true"></highscore-entry>
     </ion-list>
-    <ion-list *ngSwitchCase="'total'" padding class="no-padding-vertical">
+    <ion-list *ngSwitchCase="'total'">
       <ion-item *ngIf="showTotalGlobal && !totalGlobalLoaded" class="text-center"><ion-spinner name="bubbles"></ion-spinner></ion-item>
       <ion-item *ngIf="!showTotalGlobal && !totalLocalLoaded" class="text-center"><ion-spinner name="bubbles"></ion-spinner></ion-item>
       <highscore-entry [highscore]="showTotalGlobal ? highscoreTotalGlobal : highscoreTotalLocal" [showWeek]="false"></highscore-entry>
