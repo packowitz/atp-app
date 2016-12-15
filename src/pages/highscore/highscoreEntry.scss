@@ -1,13 +1,13 @@
 .highscore-row:nth-child(odd) .item-inner {
-  background-color: #cfecf9;
+  background-color: #cef9f7;
 }
 
 .highscore-row:nth-child(even) .item-inner {
-  background-color: #c1dce8;
+  background-color: #91e8e3;
 }
 
 .highscore-row.itsme .item-inner {
-  background-color: #76de94;
+  background-color: #b9ff55;
 }
 
 .highscore-entry {
@@ -25,9 +25,5 @@
   .flag {
     height: 1.2em;
     border: 1px black solid;
-  }
-
-  .trophy {
-    color: $atp-gold;
   }
 }
