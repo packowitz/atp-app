@@ -4,9 +4,9 @@ import {HighscoreUser} from "../../providers/domain/highscoreUser";
   selector: 'highscore-entry',
   template: `<ion-item *ngFor="let hs of highscore; let i = index" class="highscore-row" [class.itsme]="hs.itsme">
                 <ion-label class="highscore-entry">
-                    <ion-note padding-left padding-right>
+                    <span color="atp-dark-grey" padding-left padding-right>
                         {{i + 1}}
-                    </ion-note>
+                    </span>
                     <span class="highscore-name">
                         <img src="assets/img/flags/{{hs.country}}.png" class="flag highscore-name-element">
                         <ion-icon [name]="hs.male ? 'male' : 'female'" class="highscore-name-element"></ion-icon>
