@@ -20,7 +20,7 @@ export class MessagesService {
   }
 
   loadAnnouncements(): Observable<Announcement[]> {
-    return this.atpHttp.doGetBackground("/app/announcements/list");
+    return this.atpHttp.doGetBackground("/app/announcement/list");
   }
 
   loadFeedbackAnswers(id: number): Observable<FeedbackAnswer[]> {
