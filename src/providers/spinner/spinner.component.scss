@@ -1,0 +1,16 @@
+.spinner {
+  color: color($colors, atp-blue-light);
+  font-size: 1.3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: inherit;
+
+  circle {
+    stroke: color($colors, atp-blue-light);;
+  }
+
+  span {
+    margin-bottom: 16px;
+  }
+}

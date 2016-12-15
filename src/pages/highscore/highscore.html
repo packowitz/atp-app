@@ -22,13 +22,11 @@
   </ion-item>
   <div [ngSwitch]="selection">
     <ion-list *ngSwitchCase="'week'">
-      <ion-item *ngIf="showWeekGlobal && !weekGlobalLoaded" class="text-center"><ion-spinner name="bubbles"></ion-spinner></ion-item>
-      <ion-item *ngIf="!showWeekGlobal && !weekLocalLoaded" class="text-center"><ion-spinner name="bubbles"></ion-spinner></ion-item>
+      <spinner *ngIf="(showWeekGlobal && !weekGlobalLoaded) || (!showWeekGlobal && !weekLocalLoaded)" [message]="'Loading highscores'"></spinner>
       <highscore-entry [highscore]="showWeekGlobal ? highscoreWeekGlobal : highscoreWeekLocal" [showWeek]="true"></highscore-entry>
     </ion-list>
     <ion-list *ngSwitchCase="'total'">
-      <ion-item *ngIf="showTotalGlobal && !totalGlobalLoaded" class="text-center"><ion-spinner name="bubbles"></ion-spinner></ion-item>
-      <ion-item *ngIf="!showTotalGlobal && !totalLocalLoaded" class="text-center"><ion-spinner name="bubbles"></ion-spinner></ion-item>
+      <spinner *ngIf="(showTotalGlobal && !totalGlobalLoaded) || (!showTotalGlobal && !totalLocalLoaded)" [message]="'Loading highscores'"></spinner>
       <highscore-entry [highscore]="showTotalGlobal ? highscoreTotalGlobal : highscoreTotalLocal" [showWeek]="false"></highscore-entry>
     </ion-list>
   </div>

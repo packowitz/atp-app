@@ -43,6 +43,7 @@ import {PersonalDataPage} from "../pages/personalData/personalData.page";
 import {AboutPage} from "../pages/about/about.page";
 import {GiveFeedbackPage} from "../pages/feedback/giveFeedback.page";
 import {WelcomeTourPage} from "../pages/welcome/welcomeTour.page";
+import {SpinnerComponent} from "../providers/spinner/spinner.component";
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import {WelcomeTourPage} from "../pages/welcome/welcomeTour.page";
     WelcomePage,
     WelcomeTourPage,
     AboutPage,
+    SpinnerComponent,
 
     CountrySelection,
     SingleSurveyBar,
