@@ -7,9 +7,9 @@ import {ViewController} from "ionic-angular";
  */
 
 @Component({
-  templateUrl: 'about.page.html'
+  templateUrl: 'about.component.html'
 })
-export class AboutPage {
+export class AboutComponent {
 
   aboutExpand: boolean = false;
   legalExpand: boolean = false;

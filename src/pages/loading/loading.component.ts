@@ -1,16 +1,16 @@
 import {Component} from "@angular/core";
 import {NavController, Platform, AlertController} from "ionic-angular/index";
-import {Model} from "../../components/model.component";
+import {Model} from "../../providers/services/model.service";
 import {MessagesService} from "../../providers/services/messages.service";
 import {CountryService} from "../../providers/services/country.service";
 import {SurveyService} from "../../providers/services/survey.service";
 import {AuthService} from "../../providers/services/auth.service";
 import {TabsPage} from "../tabs/tabsPage";
-import {WelcomePage} from "../welcome/welcome";
+import {WelcomeComponent} from "../welcome/welcome.component";
 import {RewardService} from "../../providers/services/reward.service";
-import {LocalStorage} from "../../providers/localStorage.component";
+import {LocalStorage} from "../../providers/services/localStorage.service";
 import {LoadingState} from "./loadingState.component";
-import {WelcomeTourPage} from "../welcome/welcomeTour.page";
+import {WelcomeTourComponent} from "../welcome/welcomeTour.component";
 
 
 /**
@@ -19,9 +19,9 @@ import {WelcomeTourPage} from "../welcome/welcomeTour.page";
  */
 
 @Component({
-  templateUrl: 'loading.html'
+  templateUrl: 'loading.component.html'
 })
-export class LoadingPage {
+export class LoadingComponent {
 
   constructor(public state: LoadingState,
               public nav: NavController,
@@ -57,7 +57,7 @@ export class LoadingPage {
     } else if(!this.state.registeredNotifications) {
       this.registerNotification();
     } else {
-      this.nav.setRoot(this.localStorage.hintSettings.seenWelcomeHint ? TabsPage : WelcomeTourPage);
+      this.nav.setRoot(this.localStorage.hintSettings.seenWelcomeHint ? TabsPage : WelcomeTourComponent);
     }
   }
 
@@ -104,7 +104,7 @@ export class LoadingPage {
       if(this.localStorage.getToken()) {
         this.resolveUser();
       } else {
-        this.nav.setRoot(WelcomePage);
+        this.nav.setRoot(WelcomeComponent);
       }
     }
   }

@@ -1,14 +1,14 @@
 import {Component} from "@angular/core";
-import {NavController, ViewController, NavParams} from "ionic-angular/index";
+import {NavController, ViewController, NavParams} from "ionic-angular";
 import {Feedback} from "../../providers/domain/feedback";
-import {Model} from "../../components/model.component";
+import {Model} from "../../providers/services/model.service";
 import {MessagesService} from "../../providers/services/messages.service";
 import {NotificationService} from "../../providers/services/notification.service";
 
 @Component({
-  templateUrl: 'giveFeedback.page.html'
+  templateUrl: 'giveFeedback.component.html'
 })
-export class GiveFeedbackPage {
+export class GiveFeedbackComponent {
   feedback: Feedback;
   type: string;
 

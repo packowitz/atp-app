@@ -1,14 +1,14 @@
 import {Component} from "@angular/core";
 import {SurveyService} from "../../providers/services/survey.service";
 import {Tabs} from "ionic-angular/index";
-import {Model} from "../../components/model.component";
-import {LocalStorage} from "../../providers/localStorage.component";
+import {Model} from "../../providers/services/model.service";
+import {LocalStorage} from "../../providers/services/localStorage.service";
 
 @Component({
   selector: 'my-surveys-page',
-  templateUrl: 'mySurveys.html'
+  templateUrl: 'mySurveys.component.html'
 })
-export class MySurveysPage {
+export class MySurveyComponent {
 
   constructor(public tabs: Tabs,
               public localStorage: LocalStorage,

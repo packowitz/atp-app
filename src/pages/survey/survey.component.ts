@@ -4,7 +4,7 @@ import {Survey} from "../../providers/domain/survey";
 import {Component, trigger, state, style, transition, animate, keyframes, ViewChild} from "@angular/core";
 
 @Component({
-  templateUrl: 'survey.html',
+  templateUrl: 'survey.component.html',
   selector: 'survey',
   animations: [
     trigger('titleState', [
@@ -66,7 +66,7 @@ import {Component, trigger, state, style, transition, animate, keyframes, ViewCh
     ])
   ]
 })
-export class SurveyPage {
+export class SurveyComponent {
   survey: Survey;
   @ViewChild('pictureSlider') slider: Slides;
 

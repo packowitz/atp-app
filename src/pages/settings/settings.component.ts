@@ -1,12 +1,12 @@
 import {Component} from "@angular/core";
-import {Model} from "../../components/model.component";
+import {Model} from "../../providers/services/model.service";
 import {ViewController} from "ionic-angular";
 import {AuthService} from "../../providers/services/auth.service";
 
 @Component({
-  templateUrl: 'settings.page.html'
+  templateUrl: 'settings.component.html'
 })
-export class SettingsPage {
+export class SettingsComponent {
   constructor(public model: Model,
               public authService: AuthService,
               public viewCtrl: ViewController) {

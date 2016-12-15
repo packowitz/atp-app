@@ -1,12 +1,12 @@
 import {Component, ViewChild} from "@angular/core";
 import {Slides, NavController, MenuController} from "ionic-angular";
 import {TabsPage} from "../tabs/tabsPage";
-import {LocalStorage} from "../../providers/localStorage.component";
+import {LocalStorage} from "../../providers/services/localStorage.service";
 
 @Component({
-  templateUrl: 'welcomeTour.page.html'
+  templateUrl: 'welcomeTour.component.html'
 })
-export class WelcomeTourPage {
+export class WelcomeTourComponent {
   @ViewChild('welcomeSlider') welcomeSlider: Slides;
   sliderOptions = {pager: true};
   deviceHeight: number = 100;

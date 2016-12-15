@@ -1,9 +1,9 @@
 import {Component} from "@angular/core";
 import {NavController, MenuController, AlertController} from "ionic-angular";
-import {Model} from "../../components/model.component";
+import {Model} from "../../providers/services/model.service";
 import {AuthService} from "../../providers/services/auth.service";
-import {LoadingPage} from "../loading/loading";
-import {LocalStorage} from "../../providers/localStorage.component";
+import {LoadingComponent} from "../loading/loading.component";
+import {LocalStorage} from "../../providers/services/localStorage.service";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {EmailValidators} from "../../providers/validators/email.validator";
 
@@ -13,9 +13,9 @@ import {EmailValidators} from "../../providers/validators/email.validator";
  */
 
 @Component({
-  templateUrl: 'welcome.html'
+  templateUrl: 'welcome.component.html'
 })
-export class WelcomePage {
+export class WelcomeComponent {
   sliderOptions = {pager: true};
   email: string;
   password: string;
@@ -44,7 +44,7 @@ export class WelcomePage {
       data => {
         this.model.user = data.user;
         this.localStorage.setToken(data.token);
-        this.nav.setRoot(LoadingPage);
+        this.nav.setRoot(LoadingComponent);
       }
     );
   }
@@ -55,7 +55,7 @@ export class WelcomePage {
     this.authService.login(this.email, this.password).subscribe(data => {
       this.model.user = data.user;
       this.localStorage.setToken(data.token);
-      this.nav.setRoot(LoadingPage);
+      this.nav.setRoot(LoadingComponent);
     });
   }
 

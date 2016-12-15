@@ -2,23 +2,23 @@ import {Platform, Tabs, ActionSheetController, PopoverController, AlertControlle
 import {NgZone} from "@angular/core";
 import {Camera, CameraOptions} from "ionic-native";
 import {Survey} from "../../providers/domain/survey";
-import {Model} from "../../components/model.component";
+import {Model} from "../../providers/services/model.service";
 import {SurveyService} from "../../providers/services/survey.service";
-import {RandomImage} from "../../components/randomImage.component";
+import {RandomImage} from "../../providers/domain/randomImage";
 import {Component} from "@angular/core";
-import {CountrySelection} from "../../components/countrySelection.component";
+import {CountrySelectionComponent} from "../../components/countrySelection.component";
 import {NotificationService} from "../../providers/services/notification.service";
 import {SurveyType} from "../../providers/domain/surveyType";
-import {Messages} from "../../components/messages";
-import {LocalStorage} from "../../providers/localStorage.component";
-import {SurveySettings} from "../../components/surveySettings";
+import {Messages} from "../../providers/domain/messages";
+import {LocalStorage} from "../../providers/services/localStorage.service";
+import {SurveySettings} from "../../providers/domain/surveySettings";
 
 declare var Croppie: any;
 
 @Component({
-  templateUrl: 'startSurvey.html'
+  templateUrl: 'startSurvey.component.html'
 })
-export class StartSurveyPage {
+export class StartSurveyComponent {
   cameraOptions: CameraOptions = {
     destinationType: 0,
     sourceType: 1,
@@ -182,7 +182,7 @@ export class StartSurveyPage {
 
   addCountry(event: Event) {
     event.preventDefault();
-    let countrySelection = this.popoverController.create(CountrySelection, {callback: country => {
+    let countrySelection = this.popoverController.create(CountrySelectionComponent, {callback: country => {
       if(this.countries.indexOf(country.alpha3) == -1) {
         this.countries.push(country.alpha3);
         this.countries.sort();

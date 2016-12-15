@@ -1,11 +1,11 @@
-import {User} from "../providers/domain/user";
+import {User} from "../domain/user";
 import {Platform} from "ionic-angular";
 import {Injectable} from "@angular/core";
-import {Feedback} from "../providers/domain/feedback";
-import {Announcement} from "../providers/domain/annoucement";
+import {Feedback} from "../domain/feedback";
+import {Announcement} from "../domain/annoucement";
 import {Storage} from "@ionic/storage";
-import {Reward} from "../providers/domain/reward";
-import {SurveyType} from "../providers/domain/surveyType";
+import {Reward} from "../domain/reward";
+import {SurveyType} from "../domain/surveyType";
 
 @Injectable()
 export class Model {

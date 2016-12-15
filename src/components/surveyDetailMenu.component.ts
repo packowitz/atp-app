@@ -13,7 +13,7 @@ import {Component} from "@angular/core";
     </ion-list>
   `,
 })
-export class SurveyDetailsMenu {
+export class SurveyDetailsMenuComponent {
   showRefresh: boolean = false;
   showDelete: boolean = false;
   callbacks;

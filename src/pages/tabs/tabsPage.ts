@@ -1,9 +1,9 @@
 import {Component} from "@angular/core";
-import {StartSurveyPage} from "../startSurvey/startSurvey";
-import {MySurveysPage} from "../mySurveys/mySurveys";
-import {HomePage} from "../home/home";
-import {PurchasePage} from "../purchase/purchase";
-import {Model} from "../../components/model.component";
+import {StartSurveyComponent} from "../startSurvey/startSurvey.component";
+import {MySurveyComponent} from "../mySurveys/mySurveys.component";
+import {HomeComponent} from "../home/home.component";
+import {PurchaseComponent} from "../purchase/purchase.component";
+import {Model} from "../../providers/services/model.service";
 
 @Component({
   template: `<ion-tabs selectedIndex="0">
@@ -14,10 +14,10 @@ import {Model} from "../../components/model.component";
 </ion-tabs>`
 })
 export class TabsPage {
-  homePage: any = HomePage;
-  purchasePage: any = PurchasePage;
-  mySurveysPage: any = MySurveysPage;
-  startSurveyPage: any = StartSurveyPage;
+  homePage: any = HomeComponent;
+  purchasePage: any = PurchaseComponent;
+  mySurveysPage: any = MySurveyComponent;
+  startSurveyPage: any = StartSurveyComponent;
 
   constructor(public model: Model) {
   }

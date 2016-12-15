@@ -1,9 +1,9 @@
 import {User} from "../domain/user";
 import {Observable} from "rxjs/Observable";
 import {Injectable} from "@angular/core";
-import {Model} from "../../components/model.component";
+import {Model} from "./model.service";
 import {AtpHttp} from "./atpHttp.service";
-import {Version} from "../../components/version.component";
+import {Version} from "../domain/version";
 
 export class TokenResponse {
   token: string;

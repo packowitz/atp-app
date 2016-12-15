@@ -1,11 +1,11 @@
 import {Component, Input} from "@angular/core";
-import {NavController} from "ionic-angular/index";
-import {SurveyDetailsPage} from "../pages/surveyDetails/surveyDetails";
-import {Util} from "./util.component";
+import {NavController} from "ionic-angular";
+import {SurveyDetailsComponent} from "../../pages/surveyDetails/surveyDetails.component";
+import {Util} from "../../providers/domain/util";
 
 @Component({
   selector: 'single-survey-bar',
-  templateUrl: 'singleSurveyBar.html'
+  templateUrl: 'singleSurveyBar.component.html'
 })
 export class SingleSurveyBar {
   @Input()
@@ -36,7 +36,7 @@ export class SingleSurveyBar {
 
   openSurveyDetails() {
     if(this.surveyId) {
-      this.nav.push(SurveyDetailsPage, {surveyId: this.surveyId});
+      this.nav.push(SurveyDetailsComponent, {surveyId: this.surveyId});
     }
   }
 }

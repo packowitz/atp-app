@@ -1,22 +1,22 @@
 import {NgModule, ErrorHandler} from '@angular/core';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {AtpApp} from './app.component';
-import {HighscorePage} from "../pages/highscore/highscore";
-import {LoadingPage} from "../pages/loading/loading";
-import {HomePage} from "../pages/home/home";
-import {FeedbackPage} from "../pages/feedback/feedback.page";
-import {FeedbackDetailsPage} from "../pages/feedback/feedbackDetails";
-import {MySurveysPage} from "../pages/mySurveys/mySurveys";
-import {PurchasePage} from "../pages/purchase/purchase";
-import {SettingsPage} from "../pages/settings/settings.page";
-import {SurveyPage} from "../pages/survey/survey";
-import {SurveyDetailsPage} from "../pages/surveyDetails/surveyDetails";
+import {HighscoreComponent} from "../pages/highscore/highscore.component";
+import {LoadingComponent} from "../pages/loading/loading.component";
+import {HomeComponent} from "../pages/home/home.component";
+import {FeedbackComponent} from "../pages/feedback/feedback.component";
+import {FeedbackDetailsComponent} from "../pages/feedback/feedbackDetails.component";
+import {MySurveyComponent} from "../pages/mySurveys/mySurveys.component";
+import {PurchaseComponent} from "../pages/purchase/purchase.component";
+import {SettingsComponent} from "../pages/settings/settings.component";
+import {SurveyComponent} from "../pages/survey/survey.component";
+import {SurveyDetailsComponent} from "../pages/surveyDetails/surveyDetails.component";
 import {TabsPage} from "../pages/tabs/tabsPage";
-import {WelcomePage} from "../pages/welcome/welcome";
-import {CountrySelection} from "../components/countrySelection.component";
-import {Model} from "../components/model.component";
-import {HighscoreEntry} from "../pages/highscore/highscoreEntry";
-import {ChooseUsername} from "../pages/settings/chooseUsername.component";
+import {WelcomeComponent} from "../pages/welcome/welcome.component";
+import {CountrySelectionComponent} from "../components/countrySelection.component";
+import {Model} from "../providers/services/model.service";
+import {HighscoreEntryComponent} from "../pages/highscore/highscoreEntry.component";
+import {ChooseUsernameComponent} from "../pages/settings/chooseUsername.component";
 import {AtpHttp} from "../providers/services/atpHttp.service";
 import {AuthService} from "../providers/services/auth.service";
 import {CountryService} from "../providers/services/country.service";
@@ -24,57 +24,57 @@ import {HighscoreService} from "../providers/services/highscore.service";
 import {MessagesService} from "../providers/services/messages.service";
 import {SurveyService} from "../providers/services/survey.service";
 import {Storage} from '@ionic/storage';
-import {StartSurveyPage} from "../pages/startSurvey/startSurvey";
+import {StartSurveyComponent} from "../pages/startSurvey/startSurvey.component";
 import {CountryPipe} from "../providers/pipes/country.pipe";
 import {AgePipe} from "../providers/pipes/age.pipe";
 import {GenderPipe} from "../providers/pipes/gender.pipe";
 import {NotificationService} from "../providers/services/notification.service";
-import {SurveyDetailsMenu} from "../components/surveyDetailMenu.component";
+import {SurveyDetailsMenuComponent} from "../components/surveyDetailMenu.component";
 import {RewardService} from "../providers/services/reward.service";
 import {CouponService} from "../providers/services/coupon.service";
-import {LocalStorage} from "../providers/localStorage.component";
-import {SurveyOverviewBar} from "../components/surveyOverviewBar.component";
+import {LocalStorage} from "../providers/services/localStorage.service";
+import {SurveyOverviewBar} from "../components/survey-overview/surveyOverviewBar.component";
 import {LoadingState} from "../pages/loading/loadingState.component";
-import {MultiPictureSurveyDetailsPage} from "../pages/surveyDetails/multiPictureSurveyDetails";
-import {SingleSurveyBar} from "../components/singleSurveyBar.component";
-import {SurveyContainsPicturePipe} from "../providers/pipes/surveyContainsPicture";
-import {AnnouncementsPage} from "../pages/announcements/announcements.page";
-import {PersonalDataPage} from "../pages/personalData/personalData.page";
-import {AboutPage} from "../pages/about/about.page";
-import {GiveFeedbackPage} from "../pages/feedback/giveFeedback.page";
-import {WelcomeTourPage} from "../pages/welcome/welcomeTour.page";
-import {SpinnerComponent} from "../providers/spinner/spinner.component";
+import {MultiPictureSurveyDetailsComponent} from "../pages/surveyDetails/multiPictureSurveyDetails.component";
+import {SingleSurveyBar} from "../components/single-survey-bar/singleSurveyBar.component";
+import {SurveyContainsPicturePipe} from "../providers/pipes/surveyContainsPicture.pipe";
+import {AnnouncementsComponent} from "../pages/announcements/announcements.component";
+import {PersonalDataComponent} from "../pages/personalData/personalData.component";
+import {AboutComponent} from "../pages/about/about.component";
+import {GiveFeedbackComponent} from "../pages/feedback/giveFeedback.component";
+import {WelcomeTourComponent} from "../pages/welcome/welcomeTour.component";
+import {SpinnerComponent} from "../components/spinner/spinner.component";
 
 @NgModule({
   declarations: [
-    AnnouncementsPage,
+    AnnouncementsComponent,
     AtpApp,
-    HighscorePage,
-    LoadingPage,
-    HomePage,
-    FeedbackPage,
-    FeedbackDetailsPage,
-    GiveFeedbackPage,
-    MultiPictureSurveyDetailsPage,
-    MySurveysPage,
-    PersonalDataPage,
-    PurchasePage,
-    SettingsPage,
-    StartSurveyPage,
-    SurveyPage,
-    SurveyDetailsPage,
+    HighscoreComponent,
+    LoadingComponent,
+    HomeComponent,
+    FeedbackComponent,
+    FeedbackDetailsComponent,
+    GiveFeedbackComponent,
+    MultiPictureSurveyDetailsComponent,
+    MySurveyComponent,
+    PersonalDataComponent,
+    PurchaseComponent,
+    SettingsComponent,
+    StartSurveyComponent,
+    SurveyComponent,
+    SurveyDetailsComponent,
     TabsPage,
-    WelcomePage,
-    WelcomeTourPage,
-    AboutPage,
+    WelcomeComponent,
+    WelcomeTourComponent,
+    AboutComponent,
     SpinnerComponent,
 
-    CountrySelection,
+    CountrySelectionComponent,
     SingleSurveyBar,
     SurveyOverviewBar,
-    HighscoreEntry,
-    ChooseUsername,
-    SurveyDetailsMenu,
+    HighscoreEntryComponent,
+    ChooseUsernameComponent,
+    SurveyDetailsMenuComponent,
 
     AgePipe,
     CountryPipe,
@@ -90,29 +90,29 @@ import {SpinnerComponent} from "../providers/spinner/spinner.component";
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    AnnouncementsPage,
+    AnnouncementsComponent,
     AtpApp,
-    HighscorePage,
-    LoadingPage,
-    HomePage,
-    FeedbackPage,
-    FeedbackDetailsPage,
-    GiveFeedbackPage,
-    MySurveysPage,
-    PersonalDataPage,
-    PurchasePage,
-    SettingsPage,
-    StartSurveyPage,
-    SurveyPage,
-    SurveyDetailsPage,
-    MultiPictureSurveyDetailsPage,
+    HighscoreComponent,
+    LoadingComponent,
+    HomeComponent,
+    FeedbackComponent,
+    FeedbackDetailsComponent,
+    GiveFeedbackComponent,
+    MySurveyComponent,
+    PersonalDataComponent,
+    PurchaseComponent,
+    SettingsComponent,
+    StartSurveyComponent,
+    SurveyComponent,
+    SurveyDetailsComponent,
+    MultiPictureSurveyDetailsComponent,
     TabsPage,
-    WelcomePage,
-    WelcomeTourPage,
-    AboutPage,
+    WelcomeComponent,
+    WelcomeTourComponent,
+    AboutComponent,
 
-    SurveyDetailsMenu,
-    CountrySelection
+    SurveyDetailsMenuComponent,
+    CountrySelectionComponent
   ],
   providers: [
     Model,

@@ -1,13 +1,13 @@
 import {Component} from "@angular/core";
 import {NavController, ViewController} from "ionic-angular/index";
-import {Model} from "../../components/model.component";
-import {Util} from "../../components/util.component";
-import {FeedbackDetailsPage} from "./feedbackDetails";
+import {Model} from "../../providers/services/model.service";
+import {Util} from "../../providers/domain/util";
+import {FeedbackDetailsComponent} from "./feedbackDetails.component";
 
 @Component({
-  templateUrl: 'feedback.page.html'
+  templateUrl: 'feedback.component.html'
 })
-export class FeedbackPage {
+export class FeedbackComponent {
 
   constructor(public nav: NavController,
               public model: Model,
@@ -19,7 +19,7 @@ export class FeedbackPage {
   }
 
   showFeedbackDetails(feedback) {
-    this.nav.push(FeedbackDetailsPage, {feedback: feedback});
+    this.nav.push(FeedbackDetailsComponent, {feedback: feedback});
   }
 
   // Modal close

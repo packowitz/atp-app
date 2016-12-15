@@ -1,16 +1,16 @@
 import {Component} from '@angular/core';
 import {Platform, ModalController} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
-import {LoadingPage} from "../pages/loading/loading";
+import {LoadingComponent} from "../pages/loading/loading.component";
 import 'rxjs/Rx';
-import {Model} from "../components/model.component";
-import {SettingsPage} from "../pages/settings/settings.page";
-import {FeedbackPage} from "../pages/feedback/feedback.page";
-import {HighscorePage} from "../pages/highscore/highscore";
-import {AnnouncementsPage} from "../pages/announcements/announcements.page";
-import {PersonalDataPage} from "../pages/personalData/personalData.page";
-import {AboutPage} from "../pages/about/about.page";
-import {GiveFeedbackPage} from "../pages/feedback/giveFeedback.page";
+import {Model} from "../providers/services/model.service";
+import {SettingsComponent} from "../pages/settings/settings.component";
+import {FeedbackComponent} from "../pages/feedback/feedback.component";
+import {HighscoreComponent} from "../pages/highscore/highscore.component";
+import {AnnouncementsComponent} from "../pages/announcements/announcements.component";
+import {PersonalDataComponent} from "../pages/personalData/personalData.component";
+import {AboutComponent} from "../pages/about/about.component";
+import {GiveFeedbackComponent} from "../pages/feedback/giveFeedback.component";
 
 /**
  * Main app controller.
@@ -22,7 +22,7 @@ import {GiveFeedbackPage} from "../pages/feedback/giveFeedback.page";
   templateUrl: 'app.component.html'
 })
 export class AtpApp {
-  rootPage: any = LoadingPage;
+  rootPage: any = LoadingComponent;
 
   constructor(public platform: Platform,
               public modalCtrl: ModalController,
@@ -33,42 +33,42 @@ export class AtpApp {
   }
 
   showSettings() {
-    this.modalCtrl.create(SettingsPage).present();
+    this.modalCtrl.create(SettingsComponent).present();
   }
 
   showAboutPage() {
-    this.modalCtrl.create(AboutPage).present();
+    this.modalCtrl.create(AboutComponent).present();
   }
 
   showPersonalData() {
-    this.modalCtrl.create(PersonalDataPage).present();
+    this.modalCtrl.create(PersonalDataComponent).present();
   }
 
   showHighscorePage() {
-    this.modalCtrl.create(HighscorePage).present();
+    this.modalCtrl.create(HighscoreComponent).present();
   }
 
   showAnnouncements() {
-    this.modalCtrl.create(AnnouncementsPage).present();
+    this.modalCtrl.create(AnnouncementsComponent).present();
   }
 
   showFeedbackPage() {
-    this.modalCtrl.create(FeedbackPage).present();
+    this.modalCtrl.create(FeedbackComponent).present();
   }
 
   showImprovementPage() {
-    this.modalCtrl.create(GiveFeedbackPage, {type: 'IMPROVEMENT'}).present();
+    this.modalCtrl.create(GiveFeedbackComponent, {type: 'IMPROVEMENT'}).present();
   }
 
   showBugReportPage() {
-    this.modalCtrl.create(GiveFeedbackPage, {type: 'BUG_REPORT'}).present();
+    this.modalCtrl.create(GiveFeedbackComponent, {type: 'BUG_REPORT'}).present();
   }
 
   showMessageSuggestionPage() {
-    this.modalCtrl.create(GiveFeedbackPage, {type: 'MESSAGE_SUGGESTION'}).present();
+    this.modalCtrl.create(GiveFeedbackComponent, {type: 'MESSAGE_SUGGESTION'}).present();
   }
 
   showOtherFeedbackPage() {
-    this.modalCtrl.create(GiveFeedbackPage, {type: 'OTHER'}).present();
+    this.modalCtrl.create(GiveFeedbackComponent, {type: 'OTHER'}).present();
   }
 }

@@ -1,16 +1,16 @@
 import {Component} from "@angular/core";
-import {Model} from "../../components/model.component";
+import {Model} from "../../providers/services/model.service";
 import {Reward} from "../../providers/domain/reward";
 import {RewardService} from "../../providers/services/reward.service";
 import {NavController, AlertController} from "ionic-angular";
 import {CouponService} from "../../providers/services/coupon.service";
-import {PersonalDataPage} from "../personalData/personalData.page";
+import {PersonalDataComponent} from "../personalData/personalData.component";
 
 @Component({
-  templateUrl: 'purchase.html',
+  templateUrl: 'purchase.component.html',
   selector: 'purchase-page'
 })
-export class PurchasePage {
+export class PurchaseComponent {
   selection: string = 'rewards';
   couponCode: string;
 
@@ -42,6 +42,6 @@ export class PurchasePage {
   }
 
   openPersonalDataPage() {
-    this.nav.push(PersonalDataPage);
+    this.nav.push(PersonalDataComponent);
   }
 }

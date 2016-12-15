@@ -19,7 +19,7 @@ import {HighscoreUser} from "../../providers/domain/highscoreUser";
                 </ion-label>
             </ion-item>`
 })
-export class HighscoreEntry {
+export class HighscoreEntryComponent {
   @Input()
   highscore: HighscoreUser[];
   @Input()

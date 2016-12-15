@@ -1,12 +1,12 @@
 import {Component} from "@angular/core";
-import {Model} from "../../components/model.component";
+import {Model} from "../../providers/services/model.service";
 import {AuthService} from "../../providers/services/auth.service";
 
 @Component({
   selector: 'choose-username',
-  templateUrl: 'chooseUsername.html'
+  templateUrl: 'chooseUsername.component.html'
 })
-export class ChooseUsername {
+export class ChooseUsernameComponent {
   // newUsernameForm: ControlGroup;
   // newUsername: AbstractControl;
   // newPassword: AbstractControl;

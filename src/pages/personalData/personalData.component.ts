@@ -1,17 +1,17 @@
 import {Component} from "@angular/core";
 import {NavController, ViewController, PopoverController, AlertController} from "ionic-angular";
-import {Model} from "../../components/model.component";
+import {Model} from "../../providers/services/model.service";
 import {Country} from "../../providers/domain/country";
 import {CountryService} from "../../providers/services/country.service";
-import {CountrySelection} from "../../components/countrySelection.component";
+import {CountrySelectionComponent} from "../../components/countrySelection.component";
 import {AuthService} from "../../providers/services/auth.service";
 import {NotificationService} from "../../providers/services/notification.service";
-import {Util} from "../../components/util.component";
+import {Util} from "../../providers/domain/util";
 
 @Component({
-  templateUrl: 'personalData.page.html'
+  templateUrl: 'personalData.component.html'
 })
-export class PersonalDataPage {
+export class PersonalDataComponent {
   minYear: string;
   maxYear: string;
   yearOfBirth: number;
@@ -80,7 +80,7 @@ export class PersonalDataPage {
   }
 
   chooseCountry() {
-    let countrySelection = this.popoverController.create(CountrySelection, {callback: country => {
+    let countrySelection = this.popoverController.create(CountrySelectionComponent, {callback: country => {
       this.country = country;
       countrySelection.dismiss();
     }});

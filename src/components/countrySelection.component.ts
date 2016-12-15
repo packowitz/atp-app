@@ -26,7 +26,7 @@ import {NavParams, AlertController} from "ionic-angular/index";
     }`]
 })
 
-export class CountrySelection{
+export class CountrySelectionComponent{
   countries: Country[];
   callback;
 

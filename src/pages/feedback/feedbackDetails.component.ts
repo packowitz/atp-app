@@ -1,14 +1,14 @@
 import {Component} from "@angular/core";
-import {NavParams} from "ionic-angular/index";
+import {NavParams} from "ionic-angular";
 import {Feedback} from "../../providers/domain/feedback";
 import {MessagesService} from "../../providers/services/messages.service";
 import {FeedbackAnswer} from "../../providers/domain/feedbackAnswer";
-import {Model} from "../../components/model.component";
-import {Util} from "../../components/util.component";
+import {Model} from "../../providers/services/model.service";
+import {Util} from "../../providers/domain/util";
 @Component({
-  templateUrl: 'feedbackDetails.html'
+  templateUrl: 'feedbackDetails.component.html'
 })
-export class FeedbackDetailsPage {
+export class FeedbackDetailsComponent {
   public feedback: Feedback;
   public answers: FeedbackAnswer[] = [];
   public newAnswer: FeedbackAnswer;

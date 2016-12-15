@@ -1,12 +1,12 @@
 import {Component} from "@angular/core";
-import {NavController, ViewController} from "ionic-angular/index";
-import {Model} from "../../components/model.component";
-import {Util} from "../../components/util.component";
+import {NavController, ViewController} from "ionic-angular";
+import {Model} from "../../providers/services/model.service";
+import {Util} from "../../providers/domain/util";
 
 @Component({
-  templateUrl: 'announcements.page.html'
+  templateUrl: 'announcements.component.html'
 })
-export class AnnouncementsPage {
+export class AnnouncementsComponent {
 
   constructor(public nav: NavController,
               public model: Model,

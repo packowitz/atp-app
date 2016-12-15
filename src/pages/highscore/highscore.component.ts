@@ -5,9 +5,9 @@ import {ViewController} from "ionic-angular";
 
 @Component({
   selector: 'highscore-page',
-  templateUrl: 'highscore.html'
+  templateUrl: 'highscore.component.html'
 })
-export class HighscorePage {
+export class HighscoreComponent {
   selection: string = "week";
   showWeekGlobal: boolean = true;
   showTotalGlobal: boolean = true;

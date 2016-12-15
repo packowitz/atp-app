@@ -1,17 +1,17 @@
 import {NavParams, PopoverController, AlertController, NavController} from "ionic-angular/index";
 import {Component} from "@angular/core";
-import {Util} from "../../components/util.component";
+import {Util} from "../../providers/domain/util";
 import {SurveyService} from "../../providers/services/survey.service";
-import {SurveyDetailsMenu} from "../../components/surveyDetailMenu.component";
-import {Model} from "../../components/model.component";
+import {SurveyDetailsMenuComponent} from "../../components/surveyDetailMenu.component";
+import {Model} from "../../providers/services/model.service";
 import {NotificationService} from "../../providers/services/notification.service";
-import {LocalStorage} from "../../providers/localStorage.component";
+import {LocalStorage} from "../../providers/services/localStorage.service";
 import {MetaSurvey, SurveyPicture} from "../../providers/domain/surveyMeta";
 
 @Component({
-  templateUrl: 'multiPictureSurveyDetails.html'
+  templateUrl: 'multiPictureSurveyDetails.component.html'
 })
-export class MultiPictureSurveyDetailsPage {
+export class MultiPictureSurveyDetailsComponent {
   meta: MetaSurvey;
   countries: string[];
 
@@ -34,7 +34,7 @@ export class MultiPictureSurveyDetailsPage {
   }
 
   showOptions(event: Event) {
-    let popover = this.popoverController.create(SurveyDetailsMenu, {
+    let popover = this.popoverController.create(SurveyDetailsMenuComponent, {
       showRefresh: this.meta.status != 'FINISHED',
       showDelete: true,
       callbacks: {

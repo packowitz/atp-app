@@ -1,20 +1,20 @@
-///<reference path="../about/about.page.ts"/>
+///<reference path="../about/about.component.ts"/>
 import {NavController, Tabs, AlertController, ModalController} from "ionic-angular";
-import {Model} from "../../components/model.component";
-import {SurveyPage} from "../survey/survey";
+import {Model} from "../../providers/services/model.service";
+import {SurveyComponent} from "../survey/survey.component";
 import {SurveyService} from "../../providers/services/survey.service";
-import {HighscorePage} from "../highscore/highscore";
+import {HighscoreComponent} from "../highscore/highscore.component";
 import {Component} from "@angular/core";
 import {RewardService} from "../../providers/services/reward.service";
-import {Util} from "../../components/util.component";
-import {LocalStorage} from "../../providers/localStorage.component";
-import {PersonalDataPage} from "../personalData/personalData.page";
-import {AboutPage} from "../about/about.page";
+import {Util} from "../../providers/domain/util";
+import {LocalStorage} from "../../providers/services/localStorage.service";
+import {PersonalDataComponent} from "../personalData/personalData.component";
+import {AboutComponent} from "../about/about.component";
 
 @Component({
-  templateUrl: 'home.html'
+  templateUrl: 'home.component.html'
 })
-export class HomePage {
+export class HomeComponent {
 
   currentYear: number = new Date().getFullYear();
 
@@ -47,7 +47,7 @@ export class HomePage {
   }
 
   openPersonalDataPage() {
-    this.modalCtrl.create(PersonalDataPage).present();
+    this.modalCtrl.create(PersonalDataComponent).present();
   }
 
   openPurchasePage() {
@@ -55,7 +55,7 @@ export class HomePage {
   }
 
   openHighscorePage() {
-    this.modalCtrl.create(HighscorePage).present();
+    this.modalCtrl.create(HighscoreComponent).present();
   }
 
   openMySurveysPage() {
@@ -64,7 +64,7 @@ export class HomePage {
 
   openSurveyPage() {
     if(this.model.isUserDataCompleteToAnswerATP()) {
-      this.nav.push(SurveyPage);
+      this.nav.push(SurveyComponent);
     } else {
       this.alertController.create({
         title: 'Tell us something about you',
@@ -77,7 +77,7 @@ export class HomePage {
   }
 
   openAboutPage() {
-    this.modalCtrl.create(AboutPage).present();
+    this.modalCtrl.create(AboutComponent).present();
   }
 
   getTimeDiff(date: string) {

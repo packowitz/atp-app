@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {AtpHttp} from "./atpHttp.service";
 import {Observable} from "rxjs";
 import {Reward} from "../domain/reward";
-import {Model} from "../../components/model.component";
+import {Model} from "./model.service";
 
 @Injectable()
 export class RewardService {
