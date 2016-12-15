@@ -1,3 +1,4 @@
+///<reference path="../about/about.page.ts"/>
 import {NavController, Tabs, AlertController, ModalController} from "ionic-angular";
 import {Model} from "../../components/model.component";
 import {SurveyPage} from "../survey/survey";
@@ -8,6 +9,7 @@ import {RewardService} from "../../providers/services/reward.service";
 import {Util} from "../../components/util.component";
 import {LocalStorage} from "../../providers/localStorage.component";
 import {PersonalDataPage} from "../personalData/personalData.page";
+import {AboutPage} from "../about/about.page";
 
 @Component({
   templateUrl: 'home.html'
@@ -72,6 +74,10 @@ export class HomePage {
         ]
       }).present();
     }
+  }
+
+  openAboutPage() {
+    this.modalCtrl.create(AboutPage).present();
   }
 
   getTimeDiff(date: string) {
