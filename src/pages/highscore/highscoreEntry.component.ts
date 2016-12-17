@@ -20,10 +20,8 @@ import {HighscoreUser} from "../../providers/domain/highscoreUser";
             </ion-item>`
 })
 export class HighscoreEntryComponent {
-  @Input()
-  highscore: HighscoreUser[];
-  @Input()
-  showWeek: boolean;
+  @Input() highscore: HighscoreUser[];
+  @Input() showWeek: boolean;
 
   getAge(hs: HighscoreUser) {
     return new Date().getFullYear() - hs.yearOfBirth;

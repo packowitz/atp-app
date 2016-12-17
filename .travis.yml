@@ -14,7 +14,7 @@ before_install:
 
 script:
   - rm -rf www/
-  - npm run ionic:build
+  - npm run ionic:build --prod --aot --minifyJs --minifyCss --optimizeJs
   - docker build -t pacworx/app-test .
 
 after_success:
