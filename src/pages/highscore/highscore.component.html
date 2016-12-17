@@ -15,9 +15,13 @@
 <ion-content>
 
   <ion-item color="white" class="buttongroup" no-lines>
-    <span item-right>
+    <span item-right *ngIf="selection == 'total'">
           <button ion-button small [outline]="showTotalGlobal ? null : ''" (click)="switchTotalGlobalLocal()">Global</button>
             <button ion-button small [outline]="(showTotalGlobal === false) ? null : ''" (click)="switchTotalGlobalLocal()">Local</button>
+    </span>
+    <span item-right *ngIf="selection == 'week'">
+          <button ion-button small [outline]="showWeekGlobal ? null : ''" (click)="switchWeekGlobalLocal()">Global</button>
+            <button ion-button small [outline]="(showWeekGlobal === false) ? null : ''" (click)="switchWeekGlobalLocal()">Local</button>
     </span>
   </ion-item>
   <div [ngSwitch]="selection">
