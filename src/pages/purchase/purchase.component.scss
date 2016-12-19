@@ -1,7 +1,9 @@
 purchase-page {
   .reward-img {
     height: 10vw;
+    min-height: 10vw;
     width: 10vw;
+    min-width: 10vw;
   }
 
   .reward-text {
@@ -22,6 +24,7 @@ purchase-page {
 
   .claim-button {
     width: 70px;
+    min-width: 70px;
     img {
       height: 1.4rem;
       margin-left: 2px;
