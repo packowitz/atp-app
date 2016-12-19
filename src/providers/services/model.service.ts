@@ -6,6 +6,7 @@ import {Announcement} from "../domain/annoucement";
 import {Storage} from "@ionic/storage";
 import {Reward} from "../domain/reward";
 import {SurveyType} from "../domain/surveyType";
+import {InAppProduct} from "../domain/inAppProduct";
 
 @Injectable()
 export class Model {
@@ -16,6 +17,8 @@ export class Model {
   public static MySurveysTab = 3;
   public user: User;
   public surveyTypes: SurveyType[];
+  public inAppProductIds: string[];
+  public inAppProducts: InAppProduct[] = [];
   public feedback: Feedback[] = [];
   public unreadFeedback: number = 0;
   public announcements: Announcement[] = [];
@@ -42,6 +45,8 @@ export class Model {
       {key: 'NUMBER300', name: 'Reliable Check', answers: 300, costs: 2900},
       {key: 'NUMBER1000', name: 'Research Check', answers: 1000, costs: 9000}
     ];
+
+    this.inAppProductIds = ['pax_tiny_bag', 'pax_small_bag', 'pax_medium_bag'];
   }
 
   public recalcUnreadMessages() {

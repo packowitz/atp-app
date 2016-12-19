@@ -11,6 +11,7 @@ import {RewardService} from "../../providers/services/reward.service";
 import {LocalStorage} from "../../providers/services/localStorage.service";
 import {LoadingState} from "./loadingState.component";
 import {WelcomeTourComponent} from "../welcome/welcomeTour.component";
+import {InAppPurchase} from "ionic-native";
 
 
 /**
@@ -54,6 +55,8 @@ export class LoadingComponent {
       this.loadAnnouncements();
     } else if(!this.state.loadedRewards) {
       this.loadRewards();
+    } else if(!this.state.loadedInAppProducts) {
+      this.loadInAppProducts();
     } else if(!this.state.registeredNotifications) {
       this.registerNotification();
     } else {
@@ -169,6 +172,32 @@ export class LoadingComponent {
         this.loadDataFromServer();
       }
     );
+  }
+
+  public loadInAppProducts() {
+    if(this.platform.is("android") || this.platform.is("ios")) {
+      InAppPurchase.getProducts(this.model.inAppProductIds)
+        .then(products => {
+          console.log("Retrieved " + products.length + " in app products");
+          this.model.inAppProducts = products;
+          this.state.loadedInAppProducts = true;
+          this.loadDataFromServer();
+        })
+        .catch(err => {
+          console.log(err);
+          this.state.loadedInAppProducts = true;
+          this.loadDataFromServer();
+        });
+    } else {
+      // dummy data
+      this.model.inAppProducts = [
+        {productId: 'pax_tiny_bag', title: '500 pax', description: 'tiny bag of 500 pax', price: '1.49'},
+        {productId: 'pax_small_bag', title: '1000 pax', description: 'small bag of 1000 pax', price: '2.89'},
+        {productId: 'pax_medium_bag', title: '5000 pax', description: 'bag of 5000 pax', price: '9.99'}
+      ];
+      this.state.loadedInAppProducts = true;
+      this.loadDataFromServer();
+    }
   }
 
   public registerNotification() {

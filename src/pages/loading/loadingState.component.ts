@@ -10,5 +10,6 @@ export class LoadingState {
   loadedUnreadFeedback: boolean = false;
   loadedAnnouncements: boolean = false;
   loadedRewards: boolean = false;
+  loadedInAppProducts: boolean = false;
   registeredNotifications: boolean = false;
 }
