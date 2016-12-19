@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Platform, ModalController} from 'ionic-angular';
-import {StatusBar} from 'ionic-native';
+import {StatusBar, Splashscreen} from 'ionic-native';
 import {LoadingComponent} from "../pages/loading/loading.component";
 import 'rxjs/Rx';
 import {Model} from "../providers/services/model.service";
@@ -29,6 +29,9 @@ export class AtpApp {
               public model: Model) {
     platform.ready().then(() => {
       StatusBar.styleDefault();
+      if(Splashscreen) {
+        setTimeout(() => Splashscreen.hide(), 100);
+      }
     });
   }
 
