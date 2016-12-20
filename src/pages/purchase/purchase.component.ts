@@ -21,6 +21,7 @@ export class PurchaseComponent {
               public couponService: CouponService,
               public nav: NavController,
               public alertController: AlertController) {
+    console.log("User has " + model.claimableRewards + " claimable rewards");
     model.claimableRewards > 0 ? this.selection = 'rewards' : 'shop';
   }
 

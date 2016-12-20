@@ -27,4 +27,18 @@ export class Messages {
   public static getStartAtpExampleMsg(): string {
     return Messages.startAtpExampleMsg[Math.floor(Math.random() * Messages.startAtpExampleMsg.length)];
   }
+
+  public static startupMsg: Array<string> = [
+    "\"I don't know\" is a valid answer and you earn pax with that",
+    "Log in daily and get a free 50 pax reward",
+    "If you see an ATP with illegal content, please report that to us",
+    "Weekly Highsore resets every Monday morning at 0:00 UTC",
+    "Ask the People is still in beta. Please provide feedback",
+    "You can create an ATP that compares up to 5 pictures",
+    "If you create an ATP with more than 2 pictures it will lead to one ATP per combination",
+    "Have you used the magnifying glass on the answer ATP page to enlarge the pictures again?"
+  ];
+  public static getStartupMsg(): string {
+    return Messages.startupMsg[Math.floor(Math.random() * Messages.startupMsg.length)];
+  }
 }

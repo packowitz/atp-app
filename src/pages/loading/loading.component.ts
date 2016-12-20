@@ -12,6 +12,7 @@ import {LocalStorage} from "../../providers/services/localStorage.service";
 import {LoadingState} from "./loadingState.component";
 import {WelcomeTourComponent} from "../welcome/welcomeTour.component";
 import {InAppPurchase} from "ionic-native";
+import {Messages} from "../../providers/domain/messages";
 
 
 /**
@@ -24,6 +25,8 @@ import {InAppPurchase} from "ionic-native";
 })
 export class LoadingComponent {
 
+  startupMessage: string;
+
   constructor(public state: LoadingState,
               public nav: NavController,
               public authService: AuthService,
@@ -35,6 +38,7 @@ export class LoadingComponent {
               public platform: Platform,
               public localStorage: LocalStorage,
               public alertController: AlertController) {
+    this.startupMessage = Messages.getStartupMsg();
     this.loadDataFromServer();
   }
 

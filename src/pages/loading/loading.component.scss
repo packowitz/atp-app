@@ -20,4 +20,17 @@
       margin-bottom: 16px;
     }
   }
+
+  .startup-message {
+    position: fixed;
+    bottom: 15vw;
+    left: 15vw;
+    width: 70vw;
+    background-color: $atp-blue-light;
+    padding: 5vw;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+    color: $atp-light-grey;
+  }
 }
