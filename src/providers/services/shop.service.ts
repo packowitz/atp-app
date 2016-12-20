@@ -41,6 +41,6 @@ export class ShopService {
     }
 
     consumeProduct(productId: string): Observable<User> {
-      return this.atpHttp.doPost("/app/user/iap/consume" + productId, {}, "consuming product");
+      return this.atpHttp.doPost("/app/user/iap/consume/" + productId, {}, "consuming product");
     }
 }
