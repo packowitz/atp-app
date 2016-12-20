@@ -3,7 +3,6 @@ import {AtpHttp} from "./atpHttp.service";
 import {Observable} from "rxjs";
 import {Reward} from "../domain/reward";
 import {Model} from "./model.service";
-import {InAppProduct} from "../domain/inAppProduct";
 import {User} from "../domain/user";
 import {Platform} from "ionic-angular";
 

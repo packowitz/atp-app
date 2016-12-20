@@ -50,7 +50,7 @@ export class PurchaseComponent {
   buyProduct(product: InAppProduct) {
     this.alertController.create({
       title: 'Confirm purchase',
-      message: 'You are going to buy <strong>' + product.atpTitle + '</strong> for <strong>' + product.price + '</strong>. Payment is done via App Store.',
+      message: 'You are going to buy <strong>' + product.title + '</strong> for <strong>' + product.price + '</strong>. Payment is done via App Store.',
       buttons: [
         {text: 'Cancel'},
         {text: 'Check out', handler: () => {
