@@ -107,6 +107,29 @@ export class Model {
     this.claimableRewards = claimable;
   }
 
+  setInAppProducts(products: InAppProduct[]) {
+    if(products && products.length > 0) {
+      products.forEach(
+        product => {
+          if(product.productId == 'pax_tiny_bag') {
+            product.atpTitle = 'Tiny Bag of 500 pax';
+            product.atpMessage = 'Get a tiny bag of 500 pax.';
+            product.atpReward = 500;
+          } else if(product.productId == 'pax_small_bag') {
+            product.atpTitle = 'Small Bag of 1000 pax';
+            product.atpMessage = 'Get a small bag of 1000 pax.';
+            product.atpReward = 1000;
+          } else if(product.productId == 'pax_medium_bag') {
+            product.atpTitle = 'Bag of 500 pax';
+            product.atpMessage = 'Get a bag of 5000 pax.';
+            product.atpReward = 5000;
+          }
+        }
+      );
+      this.inAppProducts = products;
+    }
+  }
+
   needReloadRewards(): boolean {
     if((this.reward_username.achieved == 0 && this.user.username)
       || (this.reward_secured.achieved == 0 && this.user.emailConfirmed)

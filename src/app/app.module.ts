@@ -30,7 +30,7 @@ import {AgePipe} from "../providers/pipes/age.pipe";
 import {GenderPipe} from "../providers/pipes/gender.pipe";
 import {NotificationService} from "../providers/services/notification.service";
 import {SurveyDetailsMenuComponent} from "../components/surveyDetailMenu.component";
-import {RewardService} from "../providers/services/reward.service";
+import {ShopService} from "../providers/services/shop.service";
 import {CouponService} from "../providers/services/coupon.service";
 import {LocalStorage} from "../providers/services/localStorage.service";
 import {SurveyOverviewBar} from "../components/survey-overview/surveyOverviewBar.component";
@@ -116,7 +116,7 @@ import {SpinnerComponent} from "../components/spinner/spinner.component";
   ],
   providers: [
     Model,
-    RewardService,
+    ShopService,
     AtpHttp,
     AuthService,
     CountryService,

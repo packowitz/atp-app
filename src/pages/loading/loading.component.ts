@@ -7,7 +7,7 @@ import {SurveyService} from "../../providers/services/survey.service";
 import {AuthService} from "../../providers/services/auth.service";
 import {TabsPage} from "../tabs/tabsPage";
 import {WelcomeComponent} from "../welcome/welcome.component";
-import {RewardService} from "../../providers/services/reward.service";
+import {ShopService} from "../../providers/services/shop.service";
 import {LocalStorage} from "../../providers/services/localStorage.service";
 import {LoadingState} from "./loadingState.component";
 import {WelcomeTourComponent} from "../welcome/welcomeTour.component";
@@ -30,7 +30,7 @@ export class LoadingComponent {
               public surveyService: SurveyService,
               public countryService: CountryService,
               public feedbackService: MessagesService,
-              public rewardService: RewardService,
+              public shopService: ShopService,
               public model: Model,
               public platform: Platform,
               public localStorage: LocalStorage,
@@ -164,7 +164,7 @@ export class LoadingComponent {
   }
 
   public loadRewards() {
-    this.rewardService.getRewards().subscribe(
+    this.shopService.getRewards().subscribe(
       data => {
         this.model.setRewards(data);
         console.log("Loaded " + this.model.rewards.length + " rewards");
@@ -179,7 +179,7 @@ export class LoadingComponent {
       InAppPurchase.getProducts(this.model.inAppProductIds)
         .then(products => {
           console.log("Retrieved " + products.length + " in app products");
-          this.model.inAppProducts = products;
+          this.model.setInAppProducts(products);
           this.state.loadedInAppProducts = true;
           this.loadDataFromServer();
         })
@@ -190,11 +190,11 @@ export class LoadingComponent {
         });
     } else {
       // dummy data
-      this.model.inAppProducts = [
-        {productId: 'pax_tiny_bag', title: '500 pax', description: 'tiny bag of 500 pax', price: '1.49'},
-        {productId: 'pax_small_bag', title: '1000 pax', description: 'small bag of 1000 pax', price: '2.89'},
-        {productId: 'pax_medium_bag', title: '5000 pax', description: 'bag of 5000 pax', price: '9.99'}
-      ];
+      this.model.setInAppProducts([
+        {productId: 'pax_tiny_bag', title: '500 pax', description: 'tiny bag of 500 pax', price: '$1.49'},
+        {productId: 'pax_small_bag', title: '1000 pax', description: 'small bag of 1000 pax', price: '$2.89'},
+        {productId: 'pax_medium_bag', title: '5000 pax', description: 'bag of 5000 pax', price: '$9.99'}
+      ]);
       this.state.loadedInAppProducts = true;
       this.loadDataFromServer();
     }

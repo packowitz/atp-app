@@ -5,7 +5,7 @@ import {SurveyComponent} from "../survey/survey.component";
 import {SurveyService} from "../../providers/services/survey.service";
 import {HighscoreComponent} from "../highscore/highscore.component";
 import {Component} from "@angular/core";
-import {RewardService} from "../../providers/services/reward.service";
+import {ShopService} from "../../providers/services/shop.service";
 import {Util} from "../../providers/domain/util";
 import {LocalStorage} from "../../providers/services/localStorage.service";
 import {PersonalDataComponent} from "../personalData/personalData.component";
@@ -25,13 +25,13 @@ export class HomeComponent {
               public tabs: Tabs,
               public alertController: AlertController,
               public modalCtrl: ModalController,
-              public rewardService: RewardService) {
+              public shopService: ShopService) {
   }
 
   ionViewDidEnter() {
     this.surveyService.updateMySurveys();
     if(this.model.needReloadRewards()) {
-      this.rewardService.getRewards().subscribe(data => this.model.setRewards(data));
+      this.shopService.getRewards().subscribe(data => this.model.setRewards(data));
     }
   }
 

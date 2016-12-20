@@ -3,4 +3,8 @@ export class InAppProduct {
   title: string;
   description: string;
   price: string;
+
+  atpTitle?: string;
+  atpMessage?: string;
+  atpReward?: number;
 }

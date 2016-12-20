@@ -11,10 +11,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="grey-background">
   <div [ngSwitch]="selection">
     <div *ngSwitchCase="'shop'">
-      <ion-list no-lines>
+      <ion-list no-lines class="margin-top-middle">
         <ion-item>
           <ion-label stacked>Redeem a coupon code</ion-label>
           <ion-input type="text" placeholder="Enter your coupon code" [(ngModel)]="couponCode"></ion-input>
@@ -23,11 +23,29 @@
           <button ion-button full small [disabled]="!couponCode || couponCode.length < 8 || couponCode > 25" (click)="redeemCoupon()">Redeem coupon</button>
         </ion-item>
       </ion-list>
-      <ion-list *ngIf="model.inAppProducts.length > 0">
-        <ion-item *ngFor="let product of model.inAppProducts">
-          Buy {{product.title}} for {{product.price}}
-        </ion-item>
-      </ion-list>
+      <div *ngIf="model.inAppProducts.length > 0">
+        <ion-list *ngFor="let product of model.inAppProducts">
+          <ion-item>
+            <div class="flex-space-between">
+              <div class="product-img padding-bottom-small"><i class="fa fa-diamond"></i></div>
+              <div class="flex-grow reward-text">
+                <div class="reward-title">{{product.atpTitle}}</div>
+                <div class="reward-description">{{product.atpMessage}}</div>
+              </div>
+              <button ion-button color="secondary" class="claim-button" (click)="buyProduct(product)">{{product.price}}</button>
+            </div>
+          </ion-item>
+        </ion-list>
+      </div>
+      <div *ngIf="model.inAppProducts.length == 0">
+        <ion-list>
+          <ion-item>
+            <div class="text-wrap">
+              There are no products to buy provided by the App Store you are using.
+            </div>
+          </ion-item>
+        </ion-list>
+      </div>
     </div>
 
     <ion-list no-lines *ngSwitchCase="'rewards'" class="atp-list light-blue-background">
