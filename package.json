@@ -29,7 +29,7 @@
     "@ionic/app-scripts": "0.0.47",
     "typescript": "2.0.9"
   },
-  "description": "atp-app: An Ionic project",
+  "description": "Want an opinion? Ask the people!",
   "cordovaPlugins": [
     "cordova-plugin-device",
     "cordova-plugin-console",

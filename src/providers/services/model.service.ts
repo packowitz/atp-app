@@ -120,7 +120,7 @@ export class Model {
             product.atpMessage = 'Get a small bag of 1000 pax.';
             product.atpReward = 1000;
           } else if(product.productId == 'pax_medium_bag') {
-            product.atpTitle = 'Bag of 500 pax';
+            product.atpTitle = 'Bag of 5000 pax';
             product.atpMessage = 'Get a bag of 5000 pax.';
             product.atpReward = 5000;
           }
@@ -131,17 +131,13 @@ export class Model {
   }
 
   needReloadRewards(): boolean {
-    if((this.reward_username.achieved == 0 && this.user.username)
-      || (this.reward_secured.achieved == 0 && this.user.emailConfirmed)
-      || (this.reward_creator.achieved == 0 && this.user.surveysStarted >=3)
-      || (this.reward_creator.achieved == 1 && this.user.surveysStarted >= 10)
-      || (this.reward_creator.achieved == 2 && this.user.surveysStarted >= 50)
-      || (this.reward_answerer.achieved == 0 && this.user.surveysAnswered >= 50)
-      || (this.reward_answerer.achieved == 1 && this.user.surveysAnswered >= 500)
-      || (this.reward_answerer.achieved == 2 && this.user.surveysAnswered >= 5000)) {
-      return true;
-    } else {
-      return false;
-    }
+    return !!((this.reward_username.achieved == 0 && this.user.username)
+    || (this.reward_secured.achieved == 0 && this.user.emailConfirmed)
+    || (this.reward_creator.achieved == 0 && this.user.surveysStarted >= 3)
+    || (this.reward_creator.achieved == 1 && this.user.surveysStarted >= 10)
+    || (this.reward_creator.achieved == 2 && this.user.surveysStarted >= 50)
+    || (this.reward_answerer.achieved == 0 && this.user.surveysAnswered >= 50)
+    || (this.reward_answerer.achieved == 1 && this.user.surveysAnswered >= 500)
+    || (this.reward_answerer.achieved == 2 && this.user.surveysAnswered >= 5000));
   }
 }
