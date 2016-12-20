@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, Platform, AlertController} from "ionic-angular/index";
+import {NavController, Platform, AlertController} from "ionic-angular";
 import {Model} from "../../providers/services/model.service";
 import {MessagesService} from "../../providers/services/messages.service";
 import {CountryService} from "../../providers/services/country.service";
