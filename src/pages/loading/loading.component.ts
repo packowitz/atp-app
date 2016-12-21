@@ -13,12 +13,10 @@ import {LoadingState} from "./loadingState.component";
 import {WelcomeTourComponent} from "../welcome/welcomeTour.component";
 import {InAppPurchase} from "ionic-native";
 import {Messages} from "../../providers/domain/messages";
+import {NotificationService} from "../../providers/services/notification.service";
 
 
-/**
- * Loading component
- * Specifies where to navigate to and resolves user
- */
+declare var FirebasePlugin: any;
 
 @Component({
   templateUrl: 'loading.component.html'
@@ -37,7 +35,8 @@ export class LoadingComponent {
               public model: Model,
               public platform: Platform,
               public localStorage: LocalStorage,
-              public alertController: AlertController) {
+              public alertController: AlertController,
+              public notificationService: NotificationService) {
     this.startupMessage = Messages.getStartupMsg();
     this.loadDataFromServer();
   }
@@ -147,8 +146,7 @@ export class LoadingComponent {
   public loadFeedback() {
     this.feedbackService.loadFeedback().subscribe(
       data => {
-        this.model.feedback = data;
-        this.model.recalcUnreadMessages();
+        this.model.setFeedback(data);
         console.log("Loaded " + this.model.feedback.length + " feedback. " + this.model.unreadFeedback + " unread.");
         this.state.loadedUnreadFeedback = true;
         this.loadDataFromServer();
@@ -205,27 +203,71 @@ export class LoadingComponent {
   }
 
   public registerNotification() {
-    // if(FirebasePlugin) {
-    //   try {
-    //     FirebasePlugin.getInstanceId(
-    //       token => {
-    //         let platform = this.platform.is("android") ? "android" : this.platform.is("ios") ? "iOS" : "unknown";
-    //         this.authService.postDeviceBackground(platform, token).subscribe(data => this.model.user = data);
-    //       },
-    //       err => console.log("Error on FirebasePlugin.getInstanceId: " + err)
-    //     );
-    //     FirebasePlugin.onNotificationOpen(
-    //       data => {
-    //         alert("Notification: " + JSON.stringify(data) );
-    //       },
-    //       err => {
-    //         alert('Error registering onNotification callback: ' + err);
-    //       }
-    //     );
-    //   } catch (e) {
-    //     console.error(e);
-    //   }
-    // }
+    if(FirebasePlugin) {
+      try {
+        FirebasePlugin.getToken(
+          token => {
+            let platform = this.platform.is("android") ? "android" : this.platform.is("ios") ? "ios" : "unknown";
+            this.authService.postDeviceBackground(platform, token).subscribe(data => this.model.user = data);
+          },
+          err => console.log("Error on FirebasePlugin.getToken: " + err)
+        );
+
+        FirebasePlugin.onTokenRefresh(
+          token => {
+            let platform = this.platform.is("android") ? "android" : this.platform.is("ios") ? "ios" : "unknown";
+            this.authService.postDeviceBackground(platform, token).subscribe(data => this.model.user = data);
+          },
+          err => console.log("Error on FirebasePlugin.onTokenRefresh: " + err)
+        );
+
+        FirebasePlugin.onNotificationOpen(
+          data => {
+            if(data.tap) {
+              //refresh the data in the background (atp-finish need no handling because it gets refreshed every time on home screen)
+              if(data.type == 'answer') {
+                this.feedbackService.loadFeedback().subscribe(data => this.model.setFeedback(data));
+              } else if(data.type == 'announcement') {
+                this.feedbackService.loadAnnouncements().subscribe(data => this.model.setAnnouncements(data));
+              }
+            } else {
+              if(data.type == 'answer') {
+                this.feedbackService.loadFeedback().subscribe(
+                  data => {
+                    this.model.setFeedback(data);
+                    if(this.model.unreadFeedback > 0) {
+                      this.notificationService.showToast({
+                        message: 'Your feedback was answered',
+                        duration: 3000,
+                        showCloseButton: true,
+                        closeButtonText: 'OK'
+                      });
+                    }
+                  }
+                );
+              } else if(data.type == 'announcement') {
+                this.feedbackService.loadAnnouncements().subscribe(
+                  data => {
+                    this.model.setAnnouncements(data);
+                  }
+                );
+              } else if(data.type == 'atp-finished') {
+                this.surveyService.updateMySurveys();
+                this.notificationService.showToast({
+                  message: 'Your ATP just finished',
+                  duration: 3000,
+                  showCloseButton: true,
+                  closeButtonText: 'OK'
+                });
+              }
+            }
+          },
+          err => console.log('Error registering onNotification callback: ' + err)
+        );
+      } catch (e) {
+        console.log(e);
+      }
+    }
     this.state.registeredNotifications = true;
     this.loadDataFromServer();
   }

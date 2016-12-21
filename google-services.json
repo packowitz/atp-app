@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "531874205743",
+    "firebase_url": "https://ask-the-people.firebaseio.com",
+    "project_id": "ask-the-people",
+    "storage_bucket": "ask-the-people.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531874205743:android:be88f586fd4551c5",
+        "android_client_info": {
+          "package_name": "io.pacworx.atp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531874205743-ih1hvf3jkcs1k3kh9oooop6vkpo0i21f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgVur-wZ-yDHChk40ICXjDJIS-W9jjsQ0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

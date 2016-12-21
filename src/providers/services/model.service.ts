@@ -55,6 +55,13 @@ export class Model {
     this.unreadFeedback = unreadFeedback;
   }
 
+  public setFeedback(feedback: Feedback[]) {
+    if(feedback && feedback.length > 0) {
+      this.feedback = feedback;
+    }
+    this.recalcUnreadMessages();
+  }
+
   public recalcUnreadAnnouncements() {
     let unreadAnnouncements = 0;
     this.announcements.forEach(announcement => unreadAnnouncements += announcement.read ? 0 : 1);
@@ -68,7 +75,7 @@ export class Model {
     this.readAnnouncements += announcement.id + '|';
     announcement.read = true;
     this.recalcUnreadAnnouncements();
-    this.storage.set('readAnnouncements', this.readAnnouncements).then(() => this.recalcUnreadMessages());
+    this.storage.set('readAnnouncements', this.readAnnouncements);
   }
 
   public setAnnouncements(announcements: Announcement[]) {
