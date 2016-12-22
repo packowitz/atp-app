@@ -14,15 +14,6 @@
 <ion-content class="grey-background">
   <div [ngSwitch]="selection">
     <div *ngSwitchCase="'shop'">
-      <ion-list no-lines class="margin-top-middle">
-        <ion-item>
-          <ion-label stacked>Redeem a coupon code</ion-label>
-          <ion-input type="text" placeholder="Enter your coupon code" [(ngModel)]="couponCode"></ion-input>
-        </ion-item>
-        <ion-item>
-          <button ion-button full small [disabled]="!couponCode || couponCode.length < 8 || couponCode > 25" (click)="redeemCoupon()">Redeem coupon</button>
-        </ion-item>
-      </ion-list>
       <div *ngIf="model.inAppProducts.length > 0">
         <ion-list *ngFor="let product of model.inAppProducts">
           <ion-item>
@@ -163,6 +154,23 @@
           </span>
           <span *ngIf="model.reward_reliable.claimed == 3" class="flex-center">
             claimed
+          </span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="flex-left-strech color-white">
+          <img src="assets/img/rewards-{{model.reward_reliable.claimed}}.png" class="reward-img">
+          <div class="flex-grow reward-text">
+            <div class="reward-title">Coupon Code</div>
+            <div class="reward-description">
+              Have a coupon code? Enter it in here to claim your reward!
+            </div>
+          </div>
+
+          <span class="flex-center">
+            <button ion-button color="secondary" (click)="showCouponInput()" class="claim-button">
+              Enter&nbsp;<i class="fa fa-diamond"></i>
+            </button>
           </span>
         </div>
       </ion-item>
