@@ -14,6 +14,7 @@ import {WelcomeTourComponent} from "../welcome/welcomeTour.component";
 import {InAppPurchase} from "ionic-native";
 import {Messages} from "../../providers/domain/messages";
 import {NotificationService} from "../../providers/services/notification.service";
+import {SettingsService} from "../../providers/services/settings.service";
 
 
 declare var FirebasePlugin: any;
@@ -32,6 +33,7 @@ export class LoadingComponent {
               public countryService: CountryService,
               public feedbackService: MessagesService,
               public shopService: ShopService,
+              public settingsService: SettingsService,
               public model: Model,
               public platform: Platform,
               public localStorage: LocalStorage,
@@ -203,21 +205,15 @@ export class LoadingComponent {
   }
 
   public registerNotification() {
-    if(FirebasePlugin) {
+    if(typeof FirebasePlugin != 'undefined') {
       try {
         FirebasePlugin.getToken(
-          token => {
-            let platform = this.platform.is("android") ? "android" : this.platform.is("ios") ? "ios" : "unknown";
-            this.authService.postDeviceBackground(platform, token).subscribe(data => this.model.user = data);
-          },
+          token => this.settingsService.updateNotificationToken(token).subscribe(data => this.model.notificationSettings = data),
           err => console.log("Error on FirebasePlugin.getToken: " + err)
         );
 
         FirebasePlugin.onTokenRefresh(
-          token => {
-            let platform = this.platform.is("android") ? "android" : this.platform.is("ios") ? "ios" : "unknown";
-            this.authService.postDeviceBackground(platform, token).subscribe(data => this.model.user = data);
-          },
+          token => this.settingsService.updateNotificationToken(token).subscribe(data => this.model.notificationSettings = data),
           err => console.log("Error on FirebasePlugin.onTokenRefresh: " + err)
         );
 

@@ -44,6 +44,7 @@ import {AboutComponent} from "../pages/about/about.component";
 import {GiveFeedbackComponent} from "../pages/feedback/giveFeedback.component";
 import {WelcomeTourComponent} from "../pages/welcome/welcomeTour.component";
 import {SpinnerComponent} from "../components/spinner/spinner.component";
+import {SettingsService} from "../providers/services/settings.service";
 
 @NgModule({
   declarations: [
@@ -126,6 +127,7 @@ import {SpinnerComponent} from "../components/spinner/spinner.component";
     LocalStorage,
     MessagesService,
     NotificationService,
+    SettingsService,
     SurveyService,
     Storage,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

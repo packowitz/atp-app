@@ -10,19 +10,29 @@
 <ion-content class="settings-page grey-background" padding>
   <ion-list>
     <ion-item no-lines="">
-      <strong>Notification Settings</strong>
+      <div><strong>Notification Settings</strong></div>
+      <small *ngIf="model.notificationSettings" class="text-placeholder text-wrap">Send a notification on ...</small>
     </ion-item>
-    <ion-item>
-      <ion-label>Push Notifications</ion-label>
-      <ion-toggle [(ngModel)]="model.user.notifications" (ionChange)="submitNotificationSettings()"></ion-toggle>
+    <ion-item *ngIf="!model.notificationSettings">
+      <div class="text-wrap">This device is not enabled for receiving push notifications.</div>
     </ion-item>
-    <ion-item>
-      <ion-label>Sound</ion-label>
-      <ion-toggle [(ngModel)]="model.user.notificationsSound" (ionChange)="submitNotificationSettings()"></ion-toggle>
-    </ion-item>
-    <ion-item>
-      <ion-label>Vibration</ion-label>
-      <ion-toggle [(ngModel)]="model.user.notificationsVibration" (ionChange)="submitNotificationSettings()"></ion-toggle>
-    </ion-item>
+    <div *ngIf="model.notificationSettings">
+      <ion-item>
+        <ion-label>new ATP I can answer</ion-label>
+        <ion-toggle [(ngModel)]="model.notificationSettings.atpAnswerableEnabled" (ionChange)="submitAtpAnswerable()"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>my ATP finished</ion-label>
+        <ion-toggle [(ngModel)]="model.notificationSettings.atpFinishedEnabled" (ionChange)="submitAtpFinished()"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>new Announcement</ion-label>
+        <ion-toggle [(ngModel)]="model.notificationSettings.announcementEnabled" (ionChange)="submitAnnouncement()"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>my Feedback got answered</ion-label>
+        <ion-toggle [(ngModel)]="model.notificationSettings.feedbackEnabled" (ionChange)="submitFeedback()"></ion-toggle>
+      </ion-item>
+    </div>
   </ion-list>
 </ion-content>

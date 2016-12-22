@@ -58,18 +58,9 @@ export class AuthService {
     return this.atpHttp.doPost("/app/user/change-password", {oldPassword: oldPw, newPassword: newPw}, "Changing your password");
   }
 
-  postNotification(enabled: boolean, soundEnabled: boolean, vibrationEnabled: boolean): Observable<User> {
-    let data: any = {enabled: enabled, soundEnabled: soundEnabled, vibrationEnabled: vibrationEnabled};
-    return this.atpHttp.doPostBackground("/app/user/notifications", data);
-  }
-
   postPersonalData(yearOfBirth: number, male: boolean, country: string): Observable<User> {
     let data: any = {'yearOfBirth': yearOfBirth, male: male, country: country};
     return this.atpHttp.doPost("/app/user/personal-data", data, "Sending your data");
-  }
-
-  postDeviceBackground(deviceOs: string, regId: string): Observable<User> {
-    return this.atpHttp.doPostBackground("/app/user/device", {deviceOs: deviceOs, notificationRegId: regId});
   }
 
   checkAppVersion(): Observable<SuccessResponse> {

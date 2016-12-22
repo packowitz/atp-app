@@ -7,6 +7,7 @@ import {Storage} from "@ionic/storage";
 import {Reward} from "../domain/reward";
 import {SurveyType} from "../domain/surveyType";
 import {InAppProduct} from "../domain/inAppProduct";
+import {NotificationSettings} from "../domain/notificationSettings";
 
 @Injectable()
 export class Model {
@@ -16,6 +17,7 @@ export class Model {
   public static StartSurveyTab = 2;
   public static MySurveysTab = 3;
   public user: User;
+  public notificationSettings: NotificationSettings;
   public surveyTypes: SurveyType[];
   public inAppProductIds: string[];
   public inAppProducts: InAppProduct[] = [];
