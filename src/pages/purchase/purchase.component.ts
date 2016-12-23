@@ -63,8 +63,8 @@ export class PurchaseComponent {
     }).present();
   }
 
-  showCouponInput() {
-    this.popoverCtrl.create(CouponInputComponent).present();
+  showCouponInput(event) {
+    this.popoverCtrl.create(CouponInputComponent).present({ev: event});
   }
 
   showPaymentFailed() {
