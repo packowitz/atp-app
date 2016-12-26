@@ -2,11 +2,12 @@ import {Component} from "@angular/core";
 import {Model} from "../../providers/services/model.service";
 import {Reward} from "../../providers/domain/reward";
 import {ShopService} from "../../providers/services/shop.service";
-import {NavController, AlertController} from "ionic-angular";
+import {NavController, AlertController, PopoverController, ViewController} from "ionic-angular";
 import {CouponService} from "../../providers/services/coupon.service";
 import {PersonalDataComponent} from "../personalData/personalData.component";
 import {InAppProduct} from "../../providers/domain/inAppProduct";
 import {InAppPurchase} from "ionic-native";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   templateUrl: 'purchase.component.html',
@@ -14,30 +15,14 @@ import {InAppPurchase} from "ionic-native";
 })
 export class PurchaseComponent {
   selection: string = 'rewards';
-  couponCode: string;
 
   constructor(public model: Model,
               public shopService: ShopService,
-              public couponService: CouponService,
+              public popoverCtrl: PopoverController,
               public nav: NavController,
               public alertController: AlertController) {
     console.log("User has " + model.claimableRewards + " claimable rewards");
     model.claimableRewards > 0 ? this.selection = 'rewards' : 'shop';
-  }
-
-  redeemCoupon() {
-    this.couponService.redeemCoupon(this.couponCode).subscribe(
-      data => {
-        this.couponCode = "";
-        this.model.user = data.user;
-        let reward = data.reward;
-        this.alertController.create({
-          title: 'Coupon redeemed',
-          message: 'You received ' + reward + ' pax.',
-          buttons: [{text: 'OK'}]
-        }).present();
-      }
-    );
   }
 
   claimReward(reward: Reward) {
@@ -78,6 +63,10 @@ export class PurchaseComponent {
     }).present();
   }
 
+  showCouponInput(event) {
+    this.popoverCtrl.create(CouponInputComponent).present({ev: event});
+  }
+
   showPaymentFailed() {
     this.alertController.create({
       title: 'Payment failed',
@@ -92,5 +81,68 @@ export class PurchaseComponent {
       message: 'Thank you for your purchase.',
       buttons: [{text: 'OK'}]
     }).present();
+  }
+}
+
+/**
+ * Coupon input screen
+ */
+@Component({
+  template: `
+    <!-- INPUT --> 
+    <form [formGroup]="couponForm">
+      <ion-item no-lines>
+        <ion-label stacked>Coupon</ion-label>
+        <ion-input type="text" placeholder="Enter your coupon code" formControlName="code" [(ngModel)]="couponCode"></ion-input>
+      </ion-item>
+      <p *ngIf="couponForm.controls['code'].touched && !couponForm.controls['code'].valid" color="danger" padding-left>
+        Please enter a valid coupon code.
+      </p>
+    </form>
+        
+    <!-- FINALIZE BUTTONS --> 
+    <ion-item>
+          <button ion-button clear item-right (click)="dismissPopover()">
+              Exit
+          </button>
+        <button ion-button clear item-right [disabled]="!couponForm.valid" (click)="redeemCode()">
+            Redeem
+        </button>
+    </ion-item>
+`
+})
+export class CouponInputComponent {
+  couponForm: FormGroup;
+  couponCode: string;
+
+  constructor(public viewCtrl: ViewController,
+              public model: Model,
+              public alertCtrl: AlertController,
+              public fb: FormBuilder,
+              public couponService: CouponService) {
+    this.couponForm = fb.group({
+      code: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(25)])]
+    });
+  }
+
+  dismissPopover() {
+    this.viewCtrl.dismiss();
+  }
+
+  redeemCode() {
+    this.couponService.redeemCoupon(this.couponCode).subscribe(
+      data => {
+        this.couponCode = "";
+        this.model.user = data.user;
+        let reward = data.reward;
+        this.alertCtrl.create({
+          title: 'Coupon redeemed',
+          message: 'You received ' + reward + ' pax.',
+          buttons: [{text: 'OK'}]
+        }).present();
+
+        this.dismissPopover();
+      }
+    );
   }
 }
