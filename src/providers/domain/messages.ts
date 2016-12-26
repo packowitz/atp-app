@@ -32,11 +32,15 @@ export class Messages {
     "\"I don't know\" is a valid answer and you earn pax with that",
     "Log in daily and get a free 50 pax reward",
     "If you see an ATP with illegal content, please report that to us",
-    "Weekly Highsore resets every Monday morning at 0:00 UTC",
+    "Weekly Highscore resets every Monday morning at 0:00 UTC",
     "Ask the People is still in beta. Please provide feedback",
     "You can create an ATP that compares up to 5 pictures",
     "If you create an ATP with more than 2 pictures it will lead to one ATP per combination",
-    "Have you used the magnifying glass on the answer ATP page to enlarge the pictures again?"
+    "Have you used the magnifying glass on the answer ATP page to enlarge the pictures again?",
+    "We do not share your data with any 3rd party company",
+    "ATP is completely anonymous",
+    "ATP doesn't ask for more permissions than required",
+    "Your data belongs to you"
   ];
   public static getStartupMsg(): string {
     return Messages.startupMsg[Math.floor(Math.random() * Messages.startupMsg.length)];
