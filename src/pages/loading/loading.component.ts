@@ -255,8 +255,17 @@ export class LoadingComponent {
                   showCloseButton: true,
                   closeButtonText: 'OK'
                 });
+              } else if(data.type == 'atp-abused') {
+                this.surveyService.updateMySurveys();
+                this.notificationService.showToast({
+                  message: 'Your ATP was marked as inaceptable!',
+                  duration: 3000,
+                  showCloseButton: true,
+                  closeButtonText: 'OK'
+                });
               }
             }
+
           },
           err => console.log('Error registering onNotification callback: ' + err)
         );

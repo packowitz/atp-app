@@ -40,7 +40,8 @@ export class Messages {
     "We do not share your data with any 3rd party company",
     "ATP is completely anonymous",
     "ATP doesn't ask for more permissions than required",
-    "Your data belongs to you"
+    "Your data belongs to you",
+    "Answer every ATP seriously. We keep track of your reliability"
   ];
   public static getStartupMsg(): string {
     return Messages.startupMsg[Math.floor(Math.random() * Messages.startupMsg.length)];
