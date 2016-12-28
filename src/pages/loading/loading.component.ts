@@ -15,6 +15,9 @@ import {InAppPurchase} from "ionic-native";
 import {Messages} from "../../providers/domain/messages";
 import {NotificationService} from "../../providers/services/notification.service";
 import {SettingsService} from "../../providers/services/settings.service";
+import {SurveyComponent} from "../survey/survey.component";
+import {FeedbackComponent} from "../feedback/feedback.component";
+import {AnnouncementsComponent} from "../announcements/announcements.component";
 
 
 declare var FirebasePlugin: any;
@@ -223,8 +226,12 @@ export class LoadingComponent {
               //refresh the data in the background (atp-finish need no handling because it gets refreshed every time on home screen)
               if(data.type == 'answer') {
                 this.feedbackService.loadFeedback().subscribe(data => this.model.setFeedback(data));
+                this.nav.push(FeedbackComponent);
               } else if(data.type == 'announcement') {
                 this.feedbackService.loadAnnouncements().subscribe(data => this.model.setAnnouncements(data));
+                this.nav.push(AnnouncementsComponent);
+              } else if(data.type == 'answerable') {
+                this.nav.push(SurveyComponent);
               }
             } else {
               if(data.type == 'answer') {
@@ -265,7 +272,6 @@ export class LoadingComponent {
                 });
               }
             }
-
           },
           err => console.log('Error registering onNotification callback: ' + err)
         );
