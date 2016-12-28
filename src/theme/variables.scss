@@ -100,8 +100,15 @@ ion-title {
 
 }
 
-.border-radius {
-  border-radius: 10px;
+.badge-in-button {
+  position: absolute;
+  font-size: 1rem;
+  right: 0;
+  top: 0;
+}
+
+ion-badge {
+  border-radius: 10px !important;
 }
 
 .text-center {

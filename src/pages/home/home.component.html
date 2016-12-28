@@ -5,6 +5,7 @@
       <span class="toolbar-text">Ask The People</span>
       <button ion-button icon-only menuToggle>
         <ion-icon name="menu"></ion-icon>
+        <ion-badge class="badge-in-button" color="danger" *ngIf="model.unreadFeedback > 0">{{model.unreadFeedback}}</ion-badge>
       </button>
     </ion-title>
   </ion-navbar>
