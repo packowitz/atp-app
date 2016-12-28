@@ -40,6 +40,32 @@
     </div>
 
     <ion-list no-lines *ngSwitchCase="'rewards'" class="atp-list light-blue-background">
+      <div>
+        <ion-item class="flex-left-strech color-white" (click)="couponExpand = !couponExpand">
+          <div class="flex-grow reward-text">
+            <div class="reward-title">Coupon Code</div>
+            <div class="reward-description">
+              Have a coupon code? Enter it in here to claim your reward!
+            </div>
+          </div>
+        </ion-item>
+        <div [ngClass]="couponExpand ? 'item-expand active' : 'item-expand inactive'">
+          <ion-toolbar color="white">
+            <form [formGroup]="couponForm">
+              <ion-input type="text" placeholder="Enter your coupon code" formControlName="code" [(ngModel)]="couponCode"></ion-input>
+              <ion-buttons end>
+                <button ion-button color="secondary" (click)="redeemCode()" class="claim-button">
+                  Claim <i class="fa fa-diamond"></i>
+                </button>
+              </ion-buttons>
+              <p *ngIf="couponForm.controls['code'].touched && !couponForm.controls['code'].valid" color="danger" padding-left class="flex-center">
+                Please enter a valid coupon code.
+              </p>
+            </form>
+          </ion-toolbar>
+        </div>
+      </div>
+
       <ion-item>
         <div class="flex-left-strech color-white">
           <img src="assets/img/rewards-{{model.reward_active.claimed}}.png" class="reward-img">
@@ -157,32 +183,6 @@
           </span>
         </div>
       </ion-item>
-      <ion-item>
-        <div class="flex-left-strech color-white" (click)="couponExpand = !couponExpand">
-          <img src="assets/img/rewards-{{model.reward_reliable.claimed}}.png" class="reward-img">
-          <div class="flex-grow reward-text">
-            <div class="reward-title">Coupon Code</div>
-            <div class="reward-description">
-              Have a coupon code? Enter it in here to claim your reward!
-            </div>
-          </div>
-        </div>
-      </ion-item>
-      <div class="flex-center" [ngClass]="couponExpand ? 'item-expand active' : 'item-expand inactive'">
-        <ion-toolbar color="white">
-          <form [formGroup]="couponForm">
-            <ion-input type="text" placeholder="Enter your coupon code" formControlName="code" [(ngModel)]="couponCode"></ion-input>
-            <ion-buttons end>
-              <button ion-button color="secondary" (click)="redeemCode()" class="claim-button">
-                Claim <i class="fa fa-diamond"></i>
-              </button>
-            </ion-buttons>
-            <p *ngIf="couponForm.controls['code'].touched && !couponForm.controls['code'].valid" color="danger" padding-left class="flex-center">
-              Please enter a valid coupon code.
-            </p>
-          </form>
-        </ion-toolbar>
-      </div>
     </ion-list>
   </div>
 </ion-content>
