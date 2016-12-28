@@ -7,7 +7,7 @@ import {HomeComponent} from "../pages/home/home.component";
 import {FeedbackComponent} from "../pages/feedback/feedback.component";
 import {FeedbackDetailsComponent} from "../pages/feedback/feedbackDetails.component";
 import {MySurveyComponent} from "../pages/mySurveys/mySurveys.component";
-import {PurchaseComponent, CouponInputComponent} from "../pages/purchase/purchase.component";
+import {PurchaseComponent} from "../pages/purchase/purchase.component";
 import {SettingsComponent} from "../pages/settings/settings.component";
 import {SurveyComponent} from "../pages/survey/survey.component";
 import {SurveyDetailsComponent} from "../pages/surveyDetails/surveyDetails.component";
@@ -76,7 +76,6 @@ import {SettingsService} from "../providers/services/settings.service";
     HighscoreEntryComponent,
     ChooseUsernameComponent,
     SurveyDetailsMenuComponent,
-    CouponInputComponent,
 
     AgePipe,
     CountryPipe,
@@ -116,7 +115,6 @@ import {SettingsService} from "../providers/services/settings.service";
 
     SurveyDetailsMenuComponent,
     CountrySelectionComponent,
-    CouponInputComponent
   ],
   providers: [
     Model,

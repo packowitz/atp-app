@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar>
-      <ion-segment [(ngModel)]="selection">
-        <ion-segment-button value="shop">
-          Shop
-        </ion-segment-button>
-        <ion-segment-button value="rewards">
-          Rewards
-        </ion-segment-button>
-      </ion-segment>
+    <ion-segment [(ngModel)]="selection">
+      <ion-segment-button value="shop">
+        Shop
+      </ion-segment-button>
+      <ion-segment-button value="rewards">
+        Rewards
+      </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
@@ -158,7 +158,7 @@
         </div>
       </ion-item>
       <ion-item>
-        <div class="flex-left-strech color-white">
+        <div class="flex-left-strech color-white" (click)="couponExpand = !couponExpand">
           <img src="assets/img/rewards-{{model.reward_reliable.claimed}}.png" class="reward-img">
           <div class="flex-grow reward-text">
             <div class="reward-title">Coupon Code</div>
@@ -166,14 +166,23 @@
               Have a coupon code? Enter it in here to claim your reward!
             </div>
           </div>
-
-          <span class="flex-center">
-            <button ion-button color="secondary" (click)="showCouponInput($event)" class="claim-button">
-              Enter&nbsp;<i class="fa fa-diamond"></i>
-            </button>
-          </span>
         </div>
       </ion-item>
+      <div class="flex-center" [ngClass]="couponExpand ? 'item-expand active' : 'item-expand inactive'">
+        <ion-toolbar color="white">
+          <form [formGroup]="couponForm">
+            <ion-input type="text" placeholder="Enter your coupon code" formControlName="code" [(ngModel)]="couponCode"></ion-input>
+            <ion-buttons end>
+              <button ion-button color="secondary" (click)="redeemCode()" class="claim-button">
+                Claim <i class="fa fa-diamond"></i>
+              </button>
+            </ion-buttons>
+            <p *ngIf="couponForm.controls['code'].touched && !couponForm.controls['code'].valid" color="danger" padding-left class="flex-center">
+              Please enter a valid coupon code.
+            </p>
+          </form>
+        </ion-toolbar>
+      </div>
     </ion-list>
   </div>
 </ion-content>
