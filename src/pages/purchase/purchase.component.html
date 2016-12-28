@@ -54,7 +54,7 @@
             <form [formGroup]="couponForm">
               <ion-input type="text" placeholder="Enter your coupon code" formControlName="code" [(ngModel)]="couponCode"></ion-input>
               <ion-buttons end>
-                <button ion-button color="secondary" (click)="redeemCode()" class="claim-button">
+                <button ion-button color="secondary" [disabled]="!couponForm.valid" (click)="redeemCode()" class="claim-button">
                   Claim <i class="fa fa-diamond"></i>
                 </button>
               </ion-buttons>
