@@ -55,7 +55,7 @@
               <ion-input type="text" placeholder="Enter your coupon code" formControlName="code" [(ngModel)]="couponCode"></ion-input>
               <ion-buttons end>
                 <button ion-button color="secondary" [disabled]="!couponForm.valid" (click)="redeemCode()" class="claim-button">
-                  Claim <i class="fa fa-diamond"></i>
+                  Claim&nbsp;<i class="fa fa-diamond"></i>
                 </button>
               </ion-buttons>
               <p *ngIf="couponForm.controls['code'].touched && !couponForm.controls['code'].valid" color="danger" padding-left class="flex-center">
