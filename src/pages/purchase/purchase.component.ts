@@ -28,9 +28,7 @@ export class PurchaseComponent {
     this.couponForm = fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(25)])]
     });
-
-    console.log("User has " + model.claimableRewards + " claimable rewards");
-    model.claimableRewards > 0 ? this.selection = 'rewards' : 'shop';
+    this.selection = model.claimableRewards > 0 ? 'rewards' : 'shop';
   }
 
   claimReward(reward: Reward) {
