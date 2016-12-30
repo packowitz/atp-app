@@ -26,7 +26,7 @@
     "croppie": "2.3.0"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "0.0.47",
+    "@ionic/app-scripts": "0.0.48",
     "typescript": "2.0.9"
   },
   "description": "Want an opinion? Ask the people!",
