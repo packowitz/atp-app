@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="io.pacworx.atp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.pacworx.atp" version="0.0.9" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Ask the People</name>
   <description>
     Ask the people
@@ -71,11 +71,12 @@
   <preference name="SplashScreen" value="screen"/>
   <preference name="orientation" value="portrait"/>
   <preference name="SplashMaintainAspectRatio" value="true"/>
-  <preference name="FadeSplashScreenDuration" value="300"/>
+  <preference name="FadeSplashScreen" value="false" />
+  <preference name="FadeSplashScreenDuration" value="0"/>
   <preference name="ShowSplashScreenSpinner" value="false"/>
   <preference name="AutoHideSplashScreen" value="false"/>
   <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine"/>
-  <preference name="SplashScreenDelay" value="3000"/>
+  <preference name="SplashScreenDelay" value="30000"/>
   <feature name="StatusBar">
     <param name="ios-package" onload="true" value="CDVStatusBar"/>
   </feature>
@@ -89,13 +90,6 @@
   <plugin name="cordova-plugin-console" spec="1.0.5"/>
   <plugin name="cordova-plugin-statusbar" spec="2.2.1"/>
   <plugin name="cordova-plugin-device" spec="1.1.4"/>
-  <plugin name="cordova-plugin-crosswalk-webview" spec="~2.2.0">
-    <variable name="XWALK_VERSION" value="22+"/>
-    <variable name="XWALK_LITEVERSION" value="xwalk_core_library_canary:17+"/>
-    <variable name="XWALK_COMMANDLINE" value="--disable-pull-to-refresh-effect"/>
-    <variable name="XWALK_MODE" value="embedded"/>
-    <variable name="XWALK_MULTIPLEAPK" value="true"/>
-  </plugin>
   <plugin name="cordova-plugin-firebase" spec="~0.1.18" />
   <plugin name="cordova-plugin-splashscreen" spec="~4.0.1"/>
   <engine name="ios" spec="4.3.1"/>
