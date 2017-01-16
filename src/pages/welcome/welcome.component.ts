@@ -16,7 +16,6 @@ import {EmailValidators} from "../../providers/validators/email.validator";
   templateUrl: 'welcome.component.html'
 })
 export class WelcomeComponent {
-  sliderOptions = {pager: true};
   email: string;
   password: string;
   deviceHeight: number = 100;

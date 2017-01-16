@@ -8,7 +8,6 @@ import {LocalStorage} from "../../providers/services/localStorage.service";
 })
 export class WelcomeTourComponent {
   @ViewChild('welcomeSlider') welcomeSlider: Slides;
-  sliderOptions = {pager: true};
   deviceHeight: number = 100;
 
   constructor(public nav: NavController,

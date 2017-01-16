@@ -76,7 +76,6 @@ export class SurveyComponent {
   buttonAnimationState: string;
   animationOver: boolean;
   showSlider: boolean;
-  sliderOptions = {pager: true, loop: true};
   iDontKnowImageIndex: number;
 
   constructor(public surveyService: SurveyService,

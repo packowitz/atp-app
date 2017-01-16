@@ -30,7 +30,7 @@
       </div>
     </div>
     <div *ngIf="showSlider" class="slider-container">
-      <ion-slides [options]="sliderOptions" #pictureSlider (click)="slideClick()">
+      <ion-slides pager="true" loop="true" #pictureSlider (click)="slideClick()">
         <ion-slide>
           <img [src]="'data:image/jpeg;base64,' + survey.pic1" [@pic1State]="pic1AnimationState" class="pic"/>
         </ion-slide>
