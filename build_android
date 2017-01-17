@@ -1,3 +1,4 @@
+#!/bin/bash
 cordova plugin rm cordova-plugin-console
 ionic build android --release --prod --aot --minifyJs --minifyCss --optimizeJs
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore atp-android-release.keystore platforms/android/build/outputs/apk/android-release-unsigned.apk atp_alias
