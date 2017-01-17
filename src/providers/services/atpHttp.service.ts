@@ -1,18 +1,23 @@
-import {Injectable} from "@angular/core";
+import {Injectable, ViewChild} from "@angular/core";
 import {Observable} from "rxjs";
 import {Headers, Http} from "@angular/http";
 import {Model} from "./model.service";
 import {NotificationService} from "./notification.service";
-import {AlertController, Alert} from "ionic-angular";
+import {AlertController, Alert, NavController} from "ionic-angular";
 import {LocalStorage} from "./localStorage.service";
+import {LoadingState} from "../../pages/loading/loadingState.component";
+import {LoadingComponent} from "../../pages/loading/loading.component";
 
 @Injectable()
 export class AtpHttp {
   public static timeout: number = 15000;
 
+  @ViewChild('content') nav: NavController;
+
   constructor(public http: Http,
               public model: Model,
               public localStorage: LocalStorage,
+              public loadingState: LoadingState,
               public notificationService: NotificationService,
               public alertController: AlertController) {
   }
@@ -111,12 +116,15 @@ export class AtpHttp {
         let resetAccountBtn = {
           text: 'Reset account',
           handler: () => {
-            this.localStorage.clearStorage();
-            window.location.reload();
+            this.localStorage.clearStorage().then(
+            () => {
+            this.loadingState.reset();
+            this.nav.setRoot(LoadingComponent);
+          });
           }
         };
         let closeBtn = {text: 'OK'};
-        let homeBtn = {text: 'home',handler: () => window.location.reload()}
+        let homeBtn = {text: 'home',handler: () => this.nav.setRoot(LoadingComponent)};
 
         let body = JSON.parse(err._body);
         if(body) {

@@ -12,4 +12,17 @@ export class LoadingState {
   loadedRewards: boolean = false;
   loadedInAppProducts: boolean = false;
   registeredNotifications: boolean = false;
+
+  reset() {
+    this.checkedVersion = false;
+    this.loadedLocalStorage = false;
+    this.loadedCountries = false;
+    this.loadedUser = false;
+    this.loadedMySurveys = false;
+    this.loadedUnreadFeedback = false;
+    this.loadedAnnouncements = false;
+    this.loadedRewards = false;
+    this.loadedInAppProducts = false;
+    this.registeredNotifications = false;
+  }
 }

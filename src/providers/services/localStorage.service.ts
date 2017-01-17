@@ -45,11 +45,13 @@ export class LocalStorage {
     });
   }
 
-  clearStorage() {
+  clearStorage(): Promise<any> {
     this.token = null;
     this.updateTimestamp = null;
     this.surveys = [];
-    this.storage.clear();
+    this.lastSurveySettings = null;
+    this.hintSettings = new HintSettings();
+    return this.storage.clear();
   }
 
   public getToken(): string {
