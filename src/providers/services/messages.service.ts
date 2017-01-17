@@ -32,7 +32,7 @@ export class MessagesService {
   }
 
   closeFeedback(feedback: Feedback): Observable<Feedback> {
-    return this.atpHttp.doPut("/app/feedback/close/", null, "Closing Conversation");
+    return this.atpHttp.doPut("/app/feedback/close/" + feedback.id, null, "Closing Conversation");
   }
 
   sendFeedbackAnswer(feedback: Feedback, answer: FeedbackAnswer): Observable<FeedbackAnswerResponse> {
