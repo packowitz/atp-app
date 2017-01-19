@@ -4,6 +4,7 @@
 *~
 *.sw[mnpcod]
 *.log
+*.keystore
 *.tmp
 *.tmp.*
 log.txt

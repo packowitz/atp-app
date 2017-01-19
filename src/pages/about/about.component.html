@@ -14,8 +14,7 @@
   </div>
   <ion-list no-lines>
     <ion-list-header no-lines (click)="aboutExpand = !aboutExpand">
-      <ion-icon name="arrow-dropdown" *ngIf="aboutExpand"></ion-icon>
-      <ion-icon name="arrow-dropright" *ngIf="!aboutExpand"></ion-icon>
+      <ion-icon [ios]="aboutExpand ?  'ios-arrow-down' : 'ios-arrow-forward'" name="arrow-dropright"></ion-icon>
       About ATP
     </ion-list-header>
     <div [ngClass]="aboutExpand ? 'item-expand active' : 'item-expand inactive'">
@@ -32,8 +31,8 @@
 
   <ion-list no-lines>
     <ion-list-header no-lines (click)="legalExpand = !legalExpand">
-      <ion-icon name="arrow-dropdown" *ngIf="legalExpand"></ion-icon>
-      <ion-icon name="arrow-dropright" *ngIf="!legalExpand"></ion-icon>
+      <ion-icon [ios]="legalExpand ?  'ios-arrow-down' : 'ios-arrow-forward'" name="arrow-dropright"></ion-icon>
+
       Legal use
     </ion-list-header>
     <div [ngClass]="legalExpand ? 'item-expand active' : 'item-expand inactive'">
