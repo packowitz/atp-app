@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, ViewController, PopoverController, AlertController} from "ionic-angular";
+import {NavController, ViewController, PopoverController, AlertController, Platform} from "ionic-angular";
 import {Model} from "../../providers/services/model.service";
 import {Country} from "../../providers/domain/country";
 import {CountryService} from "../../providers/services/country.service";
@@ -39,7 +39,8 @@ export class PersonalDataComponent {
               public notificationService: NotificationService,
               public viewCtrl: ViewController,
               public popoverController: PopoverController,
-              public alertController: AlertController) {
+              public alertController: AlertController,
+              public platform: Platform) {
     let currentYear: number = new Date().getFullYear();
     this.minYear = String(currentYear - 99);
     this.maxYear = String(currentYear - 5);

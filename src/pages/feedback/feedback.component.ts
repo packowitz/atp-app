@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, ViewController} from "ionic-angular/index";
+import {NavController, ViewController, Platform} from "ionic-angular";
 import {Model} from "../../providers/services/model.service";
 import {Util} from "../../providers/domain/util";
 import {FeedbackDetailsComponent} from "./feedbackDetails.component";
@@ -11,7 +11,8 @@ export class FeedbackComponent {
 
   constructor(public nav: NavController,
               public model: Model,
-              public viewCtrl: ViewController) {
+              public viewCtrl: ViewController,
+              public platform: Platform) {
   }
 
   getTimeDiff(date: string) {

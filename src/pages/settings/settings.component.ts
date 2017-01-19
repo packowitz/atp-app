@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {Model} from "../../providers/services/model.service";
-import {ViewController} from "ionic-angular";
+import {ViewController, Platform} from "ionic-angular";
 import {SettingsService} from "../../providers/services/settings.service";
 
 @Component({
@@ -9,7 +9,8 @@ import {SettingsService} from "../../providers/services/settings.service";
 export class SettingsComponent {
   constructor(public model: Model,
               public settingsService: SettingsService,
-              public viewCtrl: ViewController) {
+              public viewCtrl: ViewController,
+              public platform: Platform) {
   }
 
   submitAtpAnswerable() {

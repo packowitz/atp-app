@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {ViewController} from "ionic-angular";
+import {ViewController, Platform} from "ionic-angular";
 
 /**
  * About page
@@ -14,7 +14,8 @@ export class AboutComponent {
   aboutExpand: boolean = false;
   legalExpand: boolean = false;
 
-  constructor(public viewCtrl: ViewController) {
+  constructor(public viewCtrl: ViewController,
+              public platform: Platform) {
   }
 
   close() {

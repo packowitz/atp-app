@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, ViewController, NavParams} from "ionic-angular";
+import {NavController, ViewController, NavParams, Platform} from "ionic-angular";
 import {Feedback} from "../../providers/domain/feedback";
 import {Model} from "../../providers/services/model.service";
 import {MessagesService} from "../../providers/services/messages.service";
@@ -17,7 +17,8 @@ export class GiveFeedbackComponent {
               public model: Model,
               public feedbackService: MessagesService,
               public notificationService: NotificationService,
-              public viewCtrl: ViewController) {
+              public viewCtrl: ViewController,
+              public platform: Platform) {
     this.type = navParams.get('type');
     this.feedback = new Feedback();
     this.feedback.type = this.type;

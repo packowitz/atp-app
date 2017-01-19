@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {HighscoreService} from "../../providers/services/highscore.service";
 import {HighscoreUser} from "../../providers/domain/highscoreUser";
-import {ViewController} from "ionic-angular";
+import {ViewController, Platform} from "ionic-angular";
 
 @Component({
   selector: 'highscore-page',
@@ -21,7 +21,8 @@ export class HighscoreComponent {
   totalLocalLoaded: boolean = false;
 
   constructor(public highscoreService: HighscoreService,
-              public viewCtrl: ViewController) {
+              public viewCtrl: ViewController,
+              public platform: Platform) {
   }
 
   // Close modal
