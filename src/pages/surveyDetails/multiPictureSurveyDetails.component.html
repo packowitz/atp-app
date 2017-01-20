@@ -12,7 +12,7 @@
 <ion-content class="multi-picture-survey-details" padding>
   <ion-list>
     <ion-item>
-      <span class="status-circle {{meta.status}}"></span> {{meta.answered}} votes since {{getTimeDiff()}}
+      <span class="status-circle {{meta.status}}"></span> {{meta.answered}} votes in {{getTimeDiff()}}
     </ion-item>
     <ion-item><strong>Title:</strong> <span [class.text-placeholder]="!meta.title">{{meta.title ? meta.title : 'no title'}}</span></ion-item>
       <ion-item>

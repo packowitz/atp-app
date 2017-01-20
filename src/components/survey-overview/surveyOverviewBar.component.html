@@ -13,7 +13,7 @@
 
 <div (click)="openSurveyDetails()" class="multi-picture-item margin-top-middle" *ngIf="survey.multiPicture">
   <div class="flex-center padding-vertical-small">
-    <span class="status-circle {{survey.status}}"></span> {{survey.answered}} votes since {{getTimeDiff()}}
+    <span class="status-circle {{survey.status}}"></span> {{survey.answered}} votes in {{getTimeDiff()}}
   </div>
   <div class="pictures">
     <span *ngFor="let picture of survey.pictures" class="multi-pictures">

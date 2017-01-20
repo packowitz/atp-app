@@ -1,7 +1,7 @@
 <div (click)="openSurveyDetails()" class="survey-list-item">
   <img *ngIf="leftPic" [src]="'data:image/jpeg;base64,' + leftPic" class="survey-list-img">
   <div class="survey-item-data">
-    <div class="survey-item-text"><span *ngIf="status" class="status-circle {{status}}"></span> {{answered}} votes<span *ngIf="startedDate">&nbsp;since {{getTimeDiff()}}</span></div>
+    <div class="survey-item-text"><span *ngIf="status" class="status-circle {{status}}"></span> {{answered}} votes<span *ngIf="startedDate">&nbsp;in {{getTimeDiff()}}</span></div>
     <div class="survey-item-diagram">
       <div class="survey-item-diagram-pic1" *ngIf="leftPicCount > 0" [style.width]="100 * leftPicCount / answered + '%'">
         <span *ngIf="(100 * leftPicCount / answered) >= 10">{{leftPicCount}}</span>
