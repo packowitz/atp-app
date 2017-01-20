@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="atp-blue-light">
+  <ion-navbar [color]="platform.is('android') ? 'atp-blue-light' : 'light'">
     <ion-title>
       Highscores
     </ion-title>
@@ -8,7 +8,7 @@
       <button ion-button icon-only (click)="close()" *ngIf="platform.is('ios')"><ion-icon name="close"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
-  <ion-segment [(ngModel)]="selection" (ionChange)="ionChange()" color="atp-blue-light">
+  <ion-segment [(ngModel)]="selection" (ionChange)="ionChange()" [color]="platform.is('android') ? 'atp-blue-light' : 'primary'">
     <ion-segment-button value="week">Weekly</ion-segment-button>
     <ion-segment-button value="total">All-time</ion-segment-button>
   </ion-segment>
