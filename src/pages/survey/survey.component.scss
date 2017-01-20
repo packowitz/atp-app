@@ -9,7 +9,7 @@ survey {
   }
   .enlarge-icons {
     position: absolute;
-    top: 9vh;
+    top: 15vh;
     height: 5vh;
     width: 88vw;
     margin-left: 6vw;
@@ -22,7 +22,7 @@ survey {
   .picture-container {
     .pic {
       position: absolute;
-      top: 15vh;
+      top: 20vh;
       border: 2px $atp-light-grey2 solid;
       width: 41vw;
       height: 41vw;
@@ -37,8 +37,8 @@ survey {
   }
   .button-container {
     position: absolute;
-    top: 80vw;
-    left:6vw;
+    bottom: 15vw;
+    left: 6vw;
     width: 88vw;
 
     .option-button {
