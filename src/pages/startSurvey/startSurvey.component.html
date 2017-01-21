@@ -113,12 +113,17 @@
     <ion-item *ngIf="pictures.length > 2">
       {{pictures.length}} pictures lead to {{numberOfSurveys}} ATPs. <i class="fa fa-question-circle" (click)="showMultiPictureHint()"></i>
     </ion-item>
-    <ion-item>
-      {{surveyType.name}} ({{surveyType.answers}} people)
-      <a href="" (click)="changeSurveyType($event)" item-right>
-        change
-      </a>
-    </ion-item>
+
+    <ion-toolbar color="white">
+      <ion-item>
+        {{surveyType.name}} ({{surveyType.answers}} people)
+      </ion-item>
+      <ion-buttons right>
+        <button ion-button clear color="atp-blue" (click)="changeSurveyType($event)" item-right>
+          Toggle
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
     <ion-item *ngIf="model.user.credits < surveyType.costs">
       <i item-right class="color-red no-margin-top">You don't have enough pax for this ATP-Range!</i>
     </ion-item>
