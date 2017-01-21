@@ -161,7 +161,7 @@ export class StartSurveyComponent {
   }
 
   recalculateNumberOfSurveys() {
-    if(this.pictures.length <= 2) {
+    if (this.pictures.length <= 2) {
       this.numberOfSurveys = 1;
     } else {
       this.numberOfSurveys = (this.pictures.length * (this.pictures.length - 1)) / 2;
@@ -169,7 +169,7 @@ export class StartSurveyComponent {
   }
 
   changeGender(event: Event) {
-    if(this.survey.male && this.survey.female) {
+    if (this.survey.male && this.survey.female) {
       this.survey.male = false;
     } else if(this.survey.male) {
       this.survey.female = true;

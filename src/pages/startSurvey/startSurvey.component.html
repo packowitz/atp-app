@@ -5,48 +5,89 @@
 </ion-header>
 
 <ion-content class="start-survey" padding>
-  <ion-list>
-    <ion-item class="list-header" no-lines>
-      What is your target audience?
-    </ion-item>
-    <ion-item>
-      Gender:
-      <a href="" (click)="changeGender($event)" item-right>
-        <span *ngIf="survey.male && !survey.female">male only</span>
-        <span *ngIf="!survey.male && survey.female">female only</span>
-        <span *ngIf="survey.male && survey.female">any</span>
-      </a>
-    </ion-item>
-    <ion-item class="item-no-lower-border">
-      Age:
-      <span item-right class="age-range">
-      {{ageRange.lower}} - {{ageRange.upper}} years
-    </span>
-    </ion-item>
+  <ion-card>
+    <ion-toolbar color="white" no-lines>
+      <ion-item class="list-header">
+        Who is your target audience?
+      </ion-item>
+    </ion-toolbar>
+    <ion-toolbar color="white">
+      <ion-item no-lines>
+        Gender:
+      </ion-item>
+      <ion-buttons right>
+        <button ion-button clear icon-right (click)="changeGender($event)"
+                [color]="(survey.male && !survey.female)
+          ? 'atp-blue'
+          : (!survey.male && survey.female)
+          ? 'pink'
+          : 'favorite'">
+          {{
+          (survey.male && !survey.female)
+          ? 'Male only'
+          : (!survey.male && survey.female)
+          ? 'Female only'
+          : 'Any gender'
+          }}
+          <ion-icon [name]="
+          (survey.male && !survey.female)
+          ? 'male'
+          : (!survey.male && survey.female)
+          ? 'female'
+          : 'transgender'">
+          </ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+
+    <ion-toolbar color="white">
+      <ion-item>
+        Age:
+        <span item-right class="age-range">
+          {{ageRange.lower}} - {{ageRange.upper}} years
+        </span>
+      </ion-item>
+    </ion-toolbar>
     <ion-item>
       <ion-range dualKnobs="true" min="5" max="99" [(ngModel)]="ageRange" class="no-padding-top"></ion-range>
     </ion-item>
-    <ion-item>
-      Countries:
-      <span class="text-placeholder" *ngIf="countries.length > 0">(click on flag to remove country)</span>
-      <span class="text-placeholder" *ngIf="countries.length == 0" item-right>no restriction</span>
-      <a href="" *ngIf="countries.length < 20" (click)="addCountry($event)" item-right>
-        Add
-      </a>
-      <div class="countries">
-      <span class="country" *ngFor="let country of countries" (click)="removeCountry(country)"><img
-        src="assets/img/flags/{{country}}.png" class="flag"></span>
-      </div>
-    </ion-item>
-  </ion-list>
+    <ion-toolbar color="white">
+      <ion-item no-lines>
+        Countries:
+      </ion-item>
 
-  <ion-list>
-    <ion-item class="list-header" no-lines>
-      Add 2-5 pictures:
-      <a href="" *ngIf="pictures.length < 5" (click)="choosePicture($event)" item-right>
-         Add picture
-      </a>
-    </ion-item>
+      <ion-buttons right>
+        <button color="atp-blue" ion-button icon-right clear *ngIf="countries.length < 20" (click)="addCountry($event)">
+          Add
+          <ion-icon name="add">
+          </ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+
+    <div class="text-placeholder">
+      {{countries.length > 0 ? '(click on flag to remove country)' : countries.length == 0 ? 'no restriction' : ''}}
+    </div>
+
+    <div class="countries">
+      <span class="country" *ngFor="let country of countries" (click)="removeCountry(country)">
+        <img src="assets/img/flags/{{country}}.png" class="start-survey-flag"></span>
+    </div>
+  </ion-card>
+
+  <ion-card>
+    <ion-toolbar color="white">
+      <ion-item class="list-header">
+        Add 2-5 pictures:
+      </ion-item>
+
+      <ion-buttons right>
+        <button ion-button icon-right clear color="atp-blue" *ngIf="pictures.length < 5" (click)="choosePicture($event)">
+          Add
+          <ion-icon name="image"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
 
     <div class="picture-container">
       <div *ngFor="let pic of pictures; let idx = index" class="pic">
@@ -61,12 +102,14 @@
       <ion-input type="text" maxLength="25" [(ngModel)]="survey.title"
                  placeholder="Example: {{exampleText}}"></ion-input>
     </ion-item>
-  </ion-list>
+  </ion-card>
 
-  <ion-list no-lines>
-    <ion-item class="list-header" no-lines>
-      ATP-Range:
-    </ion-item>
+  <ion-card>
+    <ion-toolbar color="white">
+      <ion-item class="list-header">
+        ATP-Range:
+      </ion-item>
+    </ion-toolbar>
     <ion-item *ngIf="pictures.length > 2">
       {{pictures.length}} pictures lead to {{numberOfSurveys}} ATPs. <i class="fa fa-question-circle" (click)="showMultiPictureHint()"></i>
     </ion-item>
@@ -79,7 +122,7 @@
     <ion-item *ngIf="model.user.credits < surveyType.costs">
       <i item-right class="color-red no-margin-top">You don't have enough pax for this ATP-Range!</i>
     </ion-item>
-  </ion-list>
+  </ion-card>
 
   <div class="submit-row">
     <button ion-button full [disabled]="!surveyComplete()" (click)="startSurvey()" class="start-survey-button">

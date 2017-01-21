@@ -29,6 +29,7 @@ $colors: (
   light:      #f4f4f4,
   dark:       #222,
   favorite:   #69BB7B,
+  pink: #ff87eb,
   atp-blue:   #3e85c7,
   atp-blue-light: #659dd2,
   atp-placeholder-grey: #acacac,
@@ -194,6 +195,7 @@ ion-card-header.small-headline {
 }
 
 .text-placeholder {
+  text-align: center;
   color: $atp-placeholder-grey !important;
 }
 

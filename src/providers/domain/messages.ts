@@ -17,12 +17,12 @@ export class Messages {
   }
 
   public static startAtpExampleMsg: Array<string> = [
-    "haircut",
-    "best looking",
-    "color",
-    "shape",
-    "tastes better?",
-    "funnier"
+    "Best haircut?",
+    "Best looking?",
+    "Color?",
+    "Shape?",
+    "Tastes better?",
+    "Which is funnier?"
   ];
   public static getStartAtpExampleMsg(): string {
     return Messages.startAtpExampleMsg[Math.floor(Math.random() * Messages.startAtpExampleMsg.length)];

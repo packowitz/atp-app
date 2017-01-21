@@ -1,24 +1,17 @@
 .start-survey {
   background-color: $atp-light-grey2;
 
-  ion-item {
-    
+  ion-card {
+    display: block;
+    position: relative;
+    margin: 5px 5px 5px 0;
+    width: 100%;
   }
 
   .list-header {
     font-size: 2rem;
     font-weight: 600;
     color: color($colors, atp-placeholder-grey);
-    a {
-      font-size: 1.6rem;
-      font-weight: normal;
-    }
-  }
-
-  .item-no-lower-border {
-    .item-inner {
-      border-bottom: none;
-    }
   }
 
   .stacked-title {
@@ -64,6 +57,11 @@
       justify-content: center;
       align-items: center;
     }
+  }
+
+  .start-survey-flag {
+    border: 1px black solid;
+    height: 5rem;
   }
 
   .countries {
