@@ -1,9 +1,14 @@
 .start-survey {
   background-color: $atp-light-grey2;
 
+  ion-item {
+    
+  }
+
   .list-header {
     font-size: 2rem;
     font-weight: 600;
+    color: color($colors, atp-placeholder-grey);
     a {
       font-size: 1.6rem;
       font-weight: normal;
