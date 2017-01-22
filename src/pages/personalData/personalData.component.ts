@@ -3,7 +3,7 @@ import {NavController, ViewController, PopoverController, AlertController, Platf
 import {Model} from "../../providers/services/model.service";
 import {Country} from "../../providers/domain/country";
 import {CountryService} from "../../providers/services/country.service";
-import {CountrySelectionComponent} from "../../components/countrySelection.component";
+import {CountrySelectionComponent} from "../countrySelection/countrySelection.component";
 import {AuthService} from "../../providers/services/auth.service";
 import {NotificationService} from "../../providers/services/notification.service";
 import {Util} from "../../providers/domain/util";

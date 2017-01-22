@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
-import {CountryService} from "../providers/services/country.service";
-import {Country} from "../providers/domain/country";
+import {CountryService} from "../../providers/services/country.service";
+import {Country} from "../../providers/domain/country";
 import {NavParams, AlertController} from "ionic-angular/index";
 
 @Component({

@@ -6,7 +6,7 @@ import {Model} from "../../providers/services/model.service";
 import {SurveyService} from "../../providers/services/survey.service";
 import {RandomImage} from "../../providers/domain/randomImage";
 import {Component} from "@angular/core";
-import {CountrySelectionComponent} from "../../components/countrySelection.component";
+import {CountrySelectionComponent} from "../countrySelection/countrySelection.component";
 import {NotificationService} from "../../providers/services/notification.service";
 import {SurveyType} from "../../providers/domain/surveyType";
 import {Messages} from "../../providers/domain/messages";
@@ -183,7 +183,7 @@ export class StartSurveyComponent {
   addCountry(event: Event) {
     event.preventDefault();
     let countrySelection = this.popoverController.create(CountrySelectionComponent, {callback: country => {
-      if(this.countries.indexOf(country.alpha3) == -1) {
+      if (this.countries.indexOf(country.alpha3) == -1) {
         this.countries.push(country.alpha3);
         this.countries.sort();
       }

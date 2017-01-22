@@ -13,7 +13,7 @@ import {SurveyComponent} from "../pages/survey/survey.component";
 import {SurveyDetailsComponent} from "../pages/surveyDetails/surveyDetails.component";
 import {TabsPage} from "../pages/tabs/tabsPage";
 import {WelcomeComponent} from "../pages/welcome/welcome.component";
-import {CountrySelectionComponent} from "../components/countrySelection.component";
+import {CountrySelectionComponent} from "../pages/countrySelection/countrySelection.component";
 import {Model} from "../providers/services/model.service";
 import {HighscoreEntryComponent} from "../pages/highscore/highscoreEntry.component";
 import {ChooseUsernameComponent} from "../pages/settings/chooseUsername.component";
