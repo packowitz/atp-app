@@ -7,13 +7,35 @@
     justify-content: space-between;
   }
 
+  ion-card {
+    display: block;
+    position: relative;
+    margin: 5px 5px 5px 0;
+    width: 100%;
+  }
+
   .pic {
     width: 44vw;
     height: 44vw;
     border: 2px $atp-dark-grey2 solid;
   }
 
+  .summary-title {
+    color: $atp-blue;
+    font-size: x-large;
+    font-weight: 600;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    i {
+      font-size: 1.2rem;
+      width: 4vw;
+    }
+  }
+
   .detail-title {
+    color: $atp-blue;
+    font-size: x-large;
     font-weight: 600;
     display: flex;
     justify-content: flex-start;
@@ -33,10 +55,12 @@
     }
   }
 
-  .flag {
-    height: 1.2em;
+  .survey-details-flag {
     border: 1px black solid;
+    margin: 2px 0 0 0;
+    height: 3em;
   }
+
   .country {
     margin-right: 1vw;
     float: left;

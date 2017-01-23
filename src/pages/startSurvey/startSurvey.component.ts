@@ -65,12 +65,15 @@ export class StartSurveyComponent {
 
   showCroppie(src: string) {
     this.destroyCroppie();
-    let imgWidth = window.innerWidth * 0.8;
+
+    let size = window.innerWidth * 0.8;
+
     this.croppie = new Croppie(document.getElementById('new-croppie'), {
       viewport: {width: 300, height: 300},
-      boundary: {width: imgWidth, height: imgWidth},
+      boundary: {width: size, height: size},
       enableOrientation: true
     });
+
     this.croppie.bind({url: 'data:image/jpeg;base64,' + src});
   }
 
