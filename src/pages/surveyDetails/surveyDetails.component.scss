@@ -60,8 +60,39 @@
     height: 3em;
   }
 
+  .stats-flag {
+    border: 1px black solid;
+    margin: 2px 0 0 0;
+    height: 1.5em;
+    width: 2em;
+  }
+
   .country {
     margin-right: 1vw;
     float: left;
   }
+
+  /* Accordion item expand */
+  .item-expand {
+    position: relative;
+    width: 100%;
+    max-height: 0;
+    transition: max-height 0.1s ease-out;
+    overflow: hidden;
+  }
+
+  .item-expand.inactive:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 15px;
+    width: 100%;
+    display: block;
+  }
+
+  .item-expand.active {
+    max-height: 100vh;
+    transition: max-height 0.3s ease-out;
+  }
+
 }
