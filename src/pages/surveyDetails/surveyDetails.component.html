@@ -16,49 +16,50 @@
   </div>
 
   <ion-card>
-    <ion-list-header class="summary-title" (click)="summaryExpand=!summaryExpand">
+    <ion-list-header class="summary-title" (click)="toggleExpands()">
       <ion-icon [ios]="summaryExpand ?  'ios-arrow-down' : 'ios-arrow-forward'"
                 [name]="summaryExpand ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
       Summary
     </ion-list-header>
-    <ion-item no-lines>
-      <single-survey-bar [startedDate]="survey.startedDate"
-                         [status]="survey.status"
-                         [answered]="survey.answered"
-                         [leftPicCount]="survey.pic1Count"
-                         [rightPicCount]="survey.pic2Count"
-                         [noOpinionCount]="survey.noOpinionCount">
-      </single-survey-bar>
-    </ion-item>
-    <ion-item>Title: <span [class.text-placeholder]="!survey.title">{{survey.title ? survey.title : 'no title'}}</span></ion-item>
-    <ion-item>
-      <div class="flex-space-between">
+    <div [ngClass]="summaryExpand ? 'item-expand active' : 'item-expand inactive'">
+      <ion-item no-lines>
+        <single-survey-bar [startedDate]="survey.startedDate"
+                           [status]="survey.status"
+                           [answered]="survey.answered"
+                           [leftPicCount]="survey.pic1Count"
+                           [rightPicCount]="survey.pic2Count"
+                           [noOpinionCount]="survey.noOpinionCount">
+        </single-survey-bar>
+      </ion-item>
+      <ion-item>Title: <span [class.text-placeholder]="!survey.title">{{survey.title ? survey.title : 'no title'}}</span></ion-item>
+      <ion-item>
+        <div class="flex-space-between">
         <span>
           Age: {{survey.minAge}} - {{survey.maxAge}}
         </span>
-        <span>
+          <span>
           Gender:
           <ion-icon name="male" color="atp-blue" *ngIf="survey.male && !(survey.male && survey.female)"></ion-icon>
           <ion-icon name="female" color="pink" *ngIf="survey.female && !(survey.male && survey.female)"></ion-icon>
           <ion-icon name="transgender" color="favorite" *ngIf="survey.male && survey.female"></ion-icon>
         </span>
-      </div>
-    </ion-item>
-    <ion-item>
-      <span item-left>Countries:</span>
-      <span class="text-placeholder" *ngIf="countries.length == 0">no restriction</span>
-      <span class="country" *ngFor="let country of countries"><img src="assets/img/flags/{{country}}.png" class="survey-details-flag"></span>
-    </ion-item>
+        </div>
+      </ion-item>
+      <ion-item>
+        <span item-left>Countries:</span>
+        <span class="text-placeholder" *ngIf="countries.length == 0">no restriction</span>
+        <span class="country" *ngFor="let country of countries"><img src="assets/img/flags/{{country}}.png" class="survey-details-flag"></span>
+      </ion-item>
+    </div>
   </ion-card>
 
   <ion-card *ngIf="survey.answers && survey.answers.length > 0">
-    <ion-list-header class="detail-title" (click)="showStatistics=!showStatistics">
-      <ion-icon [ios]="showStatistics ?  'ios-arrow-down' : 'ios-arrow-forward'"
-                [name]="showStatistics ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+    <ion-list-header class="detail-title" (click)="toggleExpands()">
+      <ion-icon [ios]="statisticsExpand ?  'ios-arrow-down' : 'ios-arrow-forward'"
+                [name]="statisticsExpand ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
       Detailed Statistics
     </ion-list-header>
-    <div *ngIf="showStatistics">
-
+    <div [ngClass]="statisticsExpand ? 'item-expand active' : 'item-expand inactive'">
       <ion-item *ngFor="let country of survey.answers | country">
         <ion-label class="flex-space-between detail">
           <span class="detail-label"><img src="assets/img/flags/{{country.alpha3}}.png" class="flag"></span>

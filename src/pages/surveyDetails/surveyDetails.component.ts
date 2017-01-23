@@ -1,4 +1,4 @@
-import {NavParams, PopoverController, AlertController, NavController} from "ionic-angular/index";
+import {NavParams, PopoverController, AlertController, NavController} from "ionic-angular";
 import {Survey} from "../../providers/domain/survey";
 import {Component} from "@angular/core";
 import {Util} from "../../providers/domain/util";
@@ -14,7 +14,7 @@ import {LocalStorage} from "../../providers/services/localStorage.service";
 export class SurveyDetailsComponent {
   survey: Survey;
   countries: string[];
-  showStatistics: boolean = false;
+  statisticsExpand: boolean = false;
   summaryExpand: boolean = true;
 
   constructor(public navParams: NavParams,
@@ -35,6 +35,11 @@ export class SurveyDetailsComponent {
     if(!this.survey.answers || this.survey.answered != this.survey.answers.length) {
       surveyService.loadSurveyDetails(this.survey);
     }
+  }
+
+  toggleExpands() {
+    this.summaryExpand = !this.summaryExpand;
+    this.statisticsExpand = !this.statisticsExpand;
   }
 
   showOptions(event: Event) {
