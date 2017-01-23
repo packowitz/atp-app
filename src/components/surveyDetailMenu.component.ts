@@ -5,10 +5,10 @@ import {Component} from "@angular/core";
   template: `
     <ion-list style="margin: 0;">
       <ion-item *ngIf="showRefresh" (click)="refresh()">
-        <ion-icon name="refresh" item-left></ion-icon> Refresh
+        <ion-icon name="refresh" color="atp-placeholder-grey" item-left></ion-icon> Refresh
       </ion-item>
       <ion-item *ngIf="showDelete" class="text-danger" (click)="delete()">
-        <ion-icon name="remove-circle" item-left></ion-icon> Delete
+        <ion-icon name="remove-circle" color="danger" item-left></ion-icon> Delete
       </ion-item>
     </ion-list>
   `,

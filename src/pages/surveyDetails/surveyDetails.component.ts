@@ -15,6 +15,7 @@ export class SurveyDetailsComponent {
   survey: Survey;
   countries: string[];
   showStatistics: boolean = false;
+  summaryExpand: boolean = true;
 
   constructor(public navParams: NavParams,
               public surveyService: SurveyService,

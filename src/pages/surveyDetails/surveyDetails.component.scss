@@ -22,10 +22,9 @@
 
   .summary-title {
     color: $atp-blue;
-    font-size: x-large;
+    font-size: medium;
     font-weight: 600;
     display: flex;
-    justify-content: flex-start;
     align-items: center;
     i {
       font-size: 1.2rem;
@@ -35,7 +34,7 @@
 
   .detail-title {
     color: $atp-blue;
-    font-size: x-large;
+    font-size: medium;
     font-weight: 600;
     display: flex;
     justify-content: flex-start;

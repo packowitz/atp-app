@@ -16,10 +16,11 @@
   </div>
 
   <ion-card>
-    <div class="summary-title" (click)="showStatistics=!showStatistics">
-      <i class="fa fa-chevron-down"></i>
+    <ion-list-header class="summary-title" (click)="summaryExpand=!summaryExpand">
+      <ion-icon [ios]="summaryExpand ?  'ios-arrow-down' : 'ios-arrow-forward'"
+                [name]="summaryExpand ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
       Summary
-    </div>
+    </ion-list-header>
     <ion-item no-lines>
       <single-survey-bar [startedDate]="survey.startedDate"
                          [status]="survey.status"
@@ -50,14 +51,12 @@
     </ion-item>
   </ion-card>
 
-  <ion-list *ngIf="survey.answers && survey.answers.length > 0">
-    <ion-item>
-      <div class="detail-title" (click)="showStatistics=!showStatistics">
-        <i class="fa fa-chevron-down" *ngIf="showStatistics"></i>
-        <i class="fa fa-chevron-right" *ngIf="!showStatistics"></i>
-        Detailed Statistics
-      </div>
-    </ion-item>
+  <ion-card *ngIf="survey.answers && survey.answers.length > 0">
+    <ion-list-header class="detail-title" (click)="showStatistics=!showStatistics">
+      <ion-icon [ios]="showStatistics ?  'ios-arrow-down' : 'ios-arrow-forward'"
+                [name]="showStatistics ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+      Detailed Statistics
+    </ion-list-header>
     <div *ngIf="showStatistics">
 
       <ion-item *ngFor="let country of survey.answers | country">
@@ -91,5 +90,5 @@
         </ion-label>
       </ion-item>
     </div>
-  </ion-list>
+  </ion-card>
 </ion-content>
