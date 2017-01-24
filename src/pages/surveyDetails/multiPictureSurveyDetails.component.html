@@ -14,14 +14,12 @@
     <ion-item>
       <span class="status-circle {{meta.status}}"></span> {{meta.answered}} votes in {{getTimeDiff()}}
     </ion-item>
-    <ion-item><strong>Title:</strong> <span [class.text-placeholder]="!meta.title">{{meta.title ? meta.title : 'no title'}}</span></ion-item>
+    <ion-item><span>Title:</span> <span [class.text-placeholder]="!meta.title">{{meta.title ? meta.title : 'no title'}}</span></ion-item>
     <ion-item>
       <div class="flex-space-between">
-          <span>
-              <strong>Age:</strong> {{meta.minAge}} - {{meta.maxAge}}
-          </span>
+        <span>Age: {{meta.minAge}} - {{meta.maxAge}}</span>
         <span>
-          <strong>Gender:</strong>
+          Gender:
           <ion-icon name="male" color="atp-blue" *ngIf="meta.male && !(meta.male && meta.female)"></ion-icon>
           <ion-icon name="female" color="pink" *ngIf="meta.female && !(meta.male && meta.female)"></ion-icon>
           <ion-icon name="transgender" color="favorite" *ngIf="meta.male && meta.female"></ion-icon>
@@ -29,7 +27,7 @@
       </div>
     </ion-item>
     <ion-item>
-      <strong item-left>Countries:</strong>
+      <span item-left>Countries:</span>
       <span class="text-placeholder" *ngIf="countries.length == 0">no restriction</span>
       <span class="country" *ngFor="let country of countries"><img src="assets/img/flags/{{country}}.png" class="survey-details-flag"></span>
     </ion-item>
