@@ -41,7 +41,7 @@
                          [noOpinionCount]="picture.votesNoOpinion">
       </single-survey-bar>
     </ion-item>
-    <div *ngIf="isShowDetails(picture)">
+    <div [ngClass]="isShowDetails(picture) ? 'item-expand active' : 'item-expand inactive'">
       <div *ngFor="let survey of meta.surveys | surveyContainsPicture: picture.pictureId; let lastItem = last">
         <ion-item class="sub-survey" [class.no-margin]="!lastItem">
           <single-survey-bar [surveyId]="survey.id"
