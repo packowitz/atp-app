@@ -6,14 +6,29 @@
     float: left;
   }
 
+  ion-card {
+    display: block;
+    position: relative;
+    margin: 5px 5px 5px 0;
+    width: 100%;
+  }
+
   .sub-survey {
     &.no-margin {
       ion-label {
         margin-bottom: 0;
       }
     }
+
     ion-label {
       margin-top: 2px;
+    }
+
+    .survey-details-flag {
+      border: 1px black solid;
+      margin: 2px 0 0 0;
+      height: 1.5em;
+      width: 2em;
     }
   }
 }
