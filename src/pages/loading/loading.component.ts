@@ -47,7 +47,7 @@ export class LoadingComponent {
 
     // Check environment
     if (window.location.href.indexOf("test") > -1) {
-      Model.server = "http://api.test.auckland.ac.nz";
+      Model.server = "http://api.test.askthepeople.io";
     } else {
       console.log("Using production API");
     }
