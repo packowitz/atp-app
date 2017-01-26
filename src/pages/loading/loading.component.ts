@@ -44,6 +44,13 @@ export class LoadingComponent {
               public notificationService: NotificationService) {
     this.startupMessage = Messages.getStartupMsg();
     this.loadDataFromServer();
+
+    // Check environment
+    if (window.location.href.indexOf("test") > -1) {
+      Model.server = "http://api.test.auckland.ac.nz";
+    } else {
+      console.log("Using production API");
+    }
   }
 
   loadDataFromServer() {
