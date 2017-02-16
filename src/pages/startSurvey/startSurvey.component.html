@@ -66,14 +66,16 @@
       </ion-buttons>
     </ion-toolbar>
 
-    <div class="text-placeholder">
-      {{countries.length > 0 ? '(click on flag to remove country)' : countries.length == 0 ? 'no restriction' : ''}}
-    </div>
-
-    <div class="countries">
-      <span class="country" *ngFor="let country of countries" (click)="removeCountry(country)">
-        <img src="assets/img/flags/{{country}}.png" class="start-survey-flag"></span>
-    </div>
+    <ion-item>
+      <div class="text-placeholder">
+        {{countries.length > 0 ? '(click on flag to remove country)' : countries.length == 0 ? 'no restriction' : ''}}
+      </div>
+      <div class="countries">
+        <span class="country" *ngFor="let country of countries" (click)="removeCountry(country)">
+          <img src="assets/img/flags/{{country}}.png" class="start-survey-flag">
+        </span>
+      </div>
+    </ion-item>
   </ion-card>
 
   <ion-card>
