@@ -187,6 +187,11 @@ export class StartSurveyComponent {
   showCountrySelection(event: Event) {
     let countrySelection = this.modalCtrl.create(CountrySelectionNewComponent, {selectedCountries: this.selectedCountries});
     countrySelection.present();
+
+    // Update selected countries
+    countrySelection.onDidDismiss(data => {
+      this.selectedCountries = data;
+    });
   }
 
   changeSurveyType(event: Event) {
