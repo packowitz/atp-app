@@ -1,17 +1,17 @@
-import {Platform, Tabs, ActionSheetController, PopoverController, AlertController} from "ionic-angular";
-import {NgZone} from "@angular/core";
+import {Platform, Tabs, ActionSheetController, AlertController, ModalController} from "ionic-angular";
+import {NgZone, Component} from "@angular/core";
 import {Camera, CameraOptions} from "ionic-native";
 import {Survey} from "../../providers/domain/survey";
 import {Model} from "../../providers/services/model.service";
 import {SurveyService} from "../../providers/services/survey.service";
 import {RandomImage} from "../../providers/domain/randomImage";
-import {Component} from "@angular/core";
-import {CountrySelectionComponent} from "../countrySelection/countrySelection.component";
 import {NotificationService} from "../../providers/services/notification.service";
 import {SurveyType} from "../../providers/domain/surveyType";
 import {Messages} from "../../providers/domain/messages";
 import {LocalStorage} from "../../providers/services/localStorage.service";
 import {SurveySettings} from "../../providers/domain/surveySettings";
+import {Country} from "../../providers/domain/country";
+import {CountrySelectionNewComponent} from "../countrySelection/countrySelection-new.component";
 
 declare var Croppie: any;
 
@@ -27,9 +27,10 @@ export class StartSurveyComponent {
     allowEdit: false,
     saveToPhotoAlbum: false
   };
+
   survey: Survey;
   surveyType: SurveyType;
-  countries: string[];
+  selectedCountries: Country[] = [];
   ageRange = {lower: 1, upper: 99};
   exampleText: string;
   pictures: string[];
@@ -43,7 +44,7 @@ export class StartSurveyComponent {
               public surveyService: SurveyService,
               public tabs: Tabs,
               public actionSheetController: ActionSheetController,
-              public popoverController: PopoverController,
+              public modalCtrl: ModalController,
               public notificationService: NotificationService,
               public alertController: AlertController) {
     this.createEmptySurvey();
@@ -56,7 +57,7 @@ export class StartSurveyComponent {
     this.numberOfSurveys = 1;
     this.survey = new Survey();
     let lastSettings: SurveySettings = this.localStorage.getLastSurveySettings();
-    this.countries = lastSettings ? lastSettings.countries : [];
+    this.selectedCountries = lastSettings ? lastSettings.countries : [];
     this.survey.male = lastSettings ? lastSettings.male : true;
     this.survey.female = lastSettings ? lastSettings.female : true;
     this.ageRange.lower = lastSettings ? lastSettings.minAge : 5;
@@ -183,23 +184,9 @@ export class StartSurveyComponent {
     event.preventDefault();
   }
 
-  addCountry(event: Event) {
-    event.preventDefault();
-    let countrySelection = this.popoverController.create(CountrySelectionComponent, {callback: country => {
-      if (this.countries.indexOf(country.alpha3) == -1) {
-        this.countries.push(country.alpha3);
-        this.countries.sort();
-      }
-      countrySelection.dismiss();
-    }});
+  showCountrySelection(event: Event) {
+    let countrySelection = this.modalCtrl.create(CountrySelectionNewComponent, {selectedCountries: this.selectedCountries});
     countrySelection.present();
-  }
-
-  removeCountry(country: string) {
-    let idx = this.countries.indexOf(country);
-    if(idx != -1) {
-      this.countries.splice(idx,1);
-    }
   }
 
   changeSurveyType(event: Event) {
@@ -233,7 +220,8 @@ export class StartSurveyComponent {
   public startSurvey() {
     //store settings in local storage as default for next survey
     let settings: SurveySettings = new SurveySettings();
-    settings.countries = this.countries;
+
+    settings.countries = this.selectedCountries;
     settings.male = this.survey.male;
     settings.female = this.survey.female;
     settings.minAge = this.ageRange.lower;
@@ -243,12 +231,14 @@ export class StartSurveyComponent {
     this.survey.minAge = this.ageRange.lower;
     this.survey.maxAge = this.ageRange.upper;
     this.survey.countries = "";
-    if(this.countries.length > 0) {
-      this.countries.forEach(c => {
-        if(this.survey.countries != "") {
+
+    if (this.selectedCountries.length > 0) {
+      this.selectedCountries.forEach(c => {
+        if (this.survey.countries != "") {
           this.survey.countries += ",";
         }
-        this.survey.countries += c;
+
+        this.survey.countries += c.alpha3;
       });
     } else {
       this.survey.countries = "ALL";
@@ -262,6 +252,7 @@ export class StartSurveyComponent {
         showCloseButton: true,
         closeButtonText: 'OK'
       });
+
       this.createEmptySurvey();
       this.tabs.select(Model.MainTab);
     });

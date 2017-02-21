@@ -27,15 +27,14 @@ import {NavParams, AlertController, ViewController} from "ionic-angular";
     <ion-item *ngFor="let country of countries" (click)="toggleSelected(country)">
         <img src="assets/img/flags/{{country.alpha3}}.png" class="flag">{{country.nameEng}}
         
-        <button ion-button icon-only outline item-right color="isSelected(country) ? 'atp-red-light' : 'favorite'">
-          <ion-icon [name]="isSelected(country) ? 'close' : 'checkmark'"></ion-icon>
+        <button class="add-button" ion-button icon-only outline item-right [color]="isSelected(country) ? 'favorite' : 'atp-red-light'">
+          <ion-icon [name]="isSelected(country) ? 'checkmark' : 'close'"></ion-icon>
         </button>
     </ion-item>
   </ion-list>
 </ion-content>
 <ion-footer>
   <ion-buttons end>
-    <button ion-button clear (click)="viewCtrl.dismiss()">Cancel</button>
     <button ion-button clear (click)="submit()">Save</button>
   </ion-buttons>
 </ion-footer>
@@ -43,6 +42,9 @@ import {NavParams, AlertController, ViewController} from "ionic-angular";
   styles: [`
     .country-selection{
         max-height: 60vh;
+    }
+    .add-button {
+      width: 5rem;
     }
     .button-inner {
         justify-content: flex-start;
@@ -84,15 +86,12 @@ export class CountrySelectionNewComponent {
    */
   toggleSelected(country: Country) {
     if (this.isSelected(country)) {
-      this.selectedCountries.filter(c => {
-        return (country.nameEng != c.nameEng);
-      })
+      this.selectedCountries = this.selectedCountries.filter(c => {
+        return (country.nameEng != c.nameEng)
+      });
     } else {
       this.selectedCountries.push(country);
     }
-  }
-
-  submit() {
   }
 
   /**
@@ -113,5 +112,9 @@ export class CountrySelectionNewComponent {
         }]
       }).present();
     });
+  }
+
+  submit() {
+    this.viewCtrl.dismiss(this.selectedCountries);
   }
 }

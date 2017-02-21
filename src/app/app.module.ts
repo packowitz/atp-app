@@ -1,6 +1,6 @@
-import {NgModule, ErrorHandler} from '@angular/core';
-import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
-import {AtpApp} from './app.component';
+import {NgModule, ErrorHandler} from "@angular/core";
+import {IonicApp, IonicModule, IonicErrorHandler} from "ionic-angular";
+import {AtpApp} from "./app.component";
 import {HighscoreComponent} from "../pages/highscore/highscore.component";
 import {LoadingComponent} from "../pages/loading/loading.component";
 import {HomeComponent} from "../pages/home/home.component";
@@ -23,7 +23,7 @@ import {CountryService} from "../providers/services/country.service";
 import {HighscoreService} from "../providers/services/highscore.service";
 import {MessagesService} from "../providers/services/messages.service";
 import {SurveyService} from "../providers/services/survey.service";
-import {Storage} from '@ionic/storage';
+import {Storage} from "@ionic/storage";
 import {StartSurveyComponent} from "../pages/startSurvey/startSurvey.component";
 import {CountryPipe} from "../providers/pipes/country.pipe";
 import {AgePipe} from "../providers/pipes/age.pipe";
@@ -45,6 +45,7 @@ import {GiveFeedbackComponent} from "../pages/feedback/giveFeedback.component";
 import {WelcomeTourComponent} from "../pages/welcome/welcomeTour.component";
 import {SpinnerComponent} from "../components/spinner/spinner.component";
 import {SettingsService} from "../providers/services/settings.service";
+import {CountrySelectionNewComponent} from "../pages/countrySelection/countrySelection-new.component";
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import {SettingsService} from "../providers/services/settings.service";
     SpinnerComponent,
 
     CountrySelectionComponent,
+    CountrySelectionNewComponent,
     SingleSurveyBar,
     SurveyOverviewBar,
     HighscoreEntryComponent,
@@ -111,10 +113,11 @@ import {SettingsService} from "../providers/services/settings.service";
     WelcomeComponent,
     WelcomeTourComponent,
     AboutComponent,
+    CountrySelectionNewComponent,
 
 
     SurveyDetailsMenuComponent,
-    CountrySelectionComponent,
+    CountrySelectionComponent
   ],
   providers: [
     Model,
