@@ -24,10 +24,10 @@ import {NavParams, AlertController, ViewController} from "ionic-angular";
 
 <ion-content>
   <ion-list class="country-selection">
-    <ion-item *ngFor="let country of countries" (click)="callback(country)">
+    <ion-item *ngFor="let country of countries" (click)="toggleSelected(country)">
         <img src="assets/img/flags/{{country.alpha3}}.png" class="flag">{{country.nameEng}}
         
-        <button ion-button icon-only outline color="isSelected(country) ? 'atp-red-light' : 'favorite'" (click)="toggleSelected(country)">
+        <button ion-button icon-only outline item-right color="isSelected(country) ? 'atp-red-light' : 'favorite'">
           <ion-icon [name]="isSelected(country) ? 'close' : 'checkmark'"></ion-icon>
         </button>
     </ion-item>
@@ -59,17 +59,12 @@ export class CountrySelectionNewComponent {
   countries: Country[];
   selectedCountries: Country[];
 
-  callback;
-
   constructor(public countryService: CountryService,
               public navParams: NavParams,
               public alertController: AlertController,
               public viewCtrl: ViewController) {
-    this.countries = navParams.get('countries');
-
-    if (this.countries.length < 1) {
-      this.loadCountries();
-    }
+    this.loadCountries();
+    this.selectedCountries = navParams.get('selectedCountries');
   }
 
   /**
