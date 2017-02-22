@@ -190,7 +190,9 @@ export class StartSurveyComponent {
 
     // Update selected countries
     countrySelection.onDidDismiss(data => {
-      this.selectedCountries = data;
+      if (data) {
+        this.selectedCountries = data;
+      }
     });
   }
 
