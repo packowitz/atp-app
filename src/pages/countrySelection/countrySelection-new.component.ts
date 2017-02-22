@@ -17,7 +17,7 @@ import {NavParams, AlertController, ViewController} from "ionic-angular";
     <ion-title>Select countries</ion-title>
 
     <ion-buttons start>
-      <button ion-button icon-only (click)="viewCtrl.dismiss()"><ion-icon name="close"></ion-icon></button>
+      <button ion-button icon-only (click)="submit()"><ion-icon name="close"></ion-icon></button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -70,7 +70,7 @@ export class CountrySelectionNewComponent {
               public alertController: AlertController,
               public viewCtrl: ViewController) {
     this.loadCountries();
-    this.selectedCountries = navParams.data;
+    this.selectedCountries = navParams.get('selectedCountries');
   }
 
   /**
