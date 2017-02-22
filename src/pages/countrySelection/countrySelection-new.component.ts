@@ -14,7 +14,7 @@ import {NavParams, AlertController, ViewController} from "ionic-angular";
   template: `
 <ion-header>
   <ion-toolbar color="atp-blue-light">
-    <ion-title>Select countries</ion-title>
+    <ion-title>{{multiSelection ? 'Select countries' : 'Your country'}}</ion-title>
 
     <ion-buttons start>
       <button ion-button icon-only (click)="submit()"><ion-icon name="close"></ion-icon></button>
@@ -63,14 +63,26 @@ import {NavParams, AlertController, ViewController} from "ionic-angular";
 
 export class CountrySelectionNewComponent {
   countries: Country[];
-  selectedCountries: Country[];
+  selectedCountries: Country[] = [];
+
+  multiSelection: boolean;
 
   constructor(public countryService: CountryService,
               public navParams: NavParams,
               public alertController: AlertController,
               public viewCtrl: ViewController) {
     this.loadCountries();
-    this.selectedCountries = navParams.get('selectedCountries');
+
+    // Either push or
+    if (navParams.get('selectedCountries')) {
+      this.selectedCountries = navParams.get('selectedCountries');
+
+      this.multiSelection = true;
+    } else if (navParams.get('country')) {
+      this.selectedCountries.push(navParams.get('country'));
+
+      this.multiSelection = false;
+    }
   }
 
   /**
@@ -94,6 +106,10 @@ export class CountrySelectionNewComponent {
         return (country.nameEng != c.nameEng)
       });
     } else {
+      if (!this.multiSelection) {
+        this.selectedCountries = [];
+      }
+
       this.selectedCountries.push(country);
     }
   }
@@ -133,7 +149,10 @@ export class CountrySelectionNewComponent {
     }
   }
 
+  /**
+   * Submit selected countries if multiple selection is enabled otherwise just submit the first selected country
+   */
   submit() {
-    this.viewCtrl.dismiss(this.selectedCountries);
+    this.viewCtrl.dismiss(this.multiSelection ? this.selectedCountries : this.selectedCountries[0]);
   }
 }

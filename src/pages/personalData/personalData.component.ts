@@ -1,5 +1,12 @@
 import {Component} from "@angular/core";
-import {NavController, ViewController, PopoverController, AlertController, Platform} from "ionic-angular";
+import {
+  NavController,
+  ViewController,
+  PopoverController,
+  AlertController,
+  Platform,
+  ModalController
+} from "ionic-angular";
 import {Model} from "../../providers/services/model.service";
 import {Country} from "../../providers/domain/country";
 import {CountryService} from "../../providers/services/country.service";
@@ -7,6 +14,7 @@ import {CountrySelectionComponent} from "../countrySelection/countrySelection.co
 import {AuthService} from "../../providers/services/auth.service";
 import {NotificationService} from "../../providers/services/notification.service";
 import {Util} from "../../providers/domain/util";
+import {CountrySelectionNewComponent} from "../countrySelection/countrySelection-new.component";
 
 @Component({
   templateUrl: 'personalData.component.html'
@@ -39,6 +47,7 @@ export class PersonalDataComponent {
               public notificationService: NotificationService,
               public viewCtrl: ViewController,
               public popoverController: PopoverController,
+              public modalCtrl: ModalController,
               public alertController: AlertController,
               public platform: Platform) {
     let currentYear: number = new Date().getFullYear();
@@ -78,6 +87,18 @@ export class PersonalDataComponent {
     }
 
     return !(this.country && this.model.user.country != this.country.alpha3);
+  }
+
+  showCountrySelection() {
+    let countrySelection = this.modalCtrl.create(CountrySelectionNewComponent, {country: this.country});
+    countrySelection.present();
+
+    // Update selected countries
+    countrySelection.onDidDismiss(data => {
+      if (data) {
+        this.country = data;
+      }
+    });
   }
 
   chooseCountry() {

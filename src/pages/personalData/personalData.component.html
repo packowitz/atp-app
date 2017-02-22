@@ -27,7 +27,7 @@
         </span>
       </ion-label>
     </ion-item>
-    <ion-item (click)="chooseCountry()">
+    <ion-item (click)="showCountrySelection()">
       <ion-label class="flex-space-between">
         Country:
         <span class="flex-center" *ngIf="country"><img src="assets/img/flags/{{country.alpha3}}.png" class="flag margin-right-small"> {{country.nameEng}}</span>
