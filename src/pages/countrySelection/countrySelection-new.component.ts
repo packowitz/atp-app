@@ -66,7 +66,7 @@ export class CountrySelectionNewComponent {
               public alertController: AlertController,
               public viewCtrl: ViewController) {
     this.loadCountries();
-    this.selectedCountries = navParams.get('selectedCountries');
+    this.selectedCountries = navParams.data;
   }
 
   /**
