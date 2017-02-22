@@ -27,7 +27,7 @@ import {NavParams, AlertController, ViewController} from "ionic-angular";
     <ion-item *ngFor="let country of countries" (click)="toggleSelected(country)">
         <img src="assets/img/flags/{{country.alpha3}}.png" class="flag">{{country.nameEng}}
         
-        <button *ngIf="isSelected(country)" class="add-button" ion-button icon-only outline item-right color="favorite">
+        <button *ngIf="isSelected(country)" class="add-button" ion-button icon-only clear item-right color="favorite">
           <ion-icon name="checkmark"></ion-icon>
         </button>
     </ion-item>
