@@ -23,6 +23,7 @@ import {NavParams, AlertController, ViewController} from "ionic-angular";
 </ion-header>
 
 <ion-content>
+  <ion-searchbar (ionInput)="searchCountries($event)"></ion-searchbar>
   <ion-list class="country-selection">
     <ion-item *ngFor="let country of countries" (click)="toggleSelected(country)">
         <img src="assets/img/flags/{{country.alpha3}}.png" class="flag">{{country.nameEng}}
@@ -42,6 +43,9 @@ import {NavParams, AlertController, ViewController} from "ionic-angular";
   styles: [`
     .country-selection{
         max-height: 60vh;
+    }
+    .searchbar-md {
+      padding: 0;
     }
     .add-button {
       width: 5rem;
@@ -112,6 +116,21 @@ export class CountrySelectionNewComponent {
         }]
       }).present();
     });
+  }
+
+  searchCountries(ev: any) {
+    // Reset items back to all of the items
+    this.loadCountries();
+
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.countries = this.countries.filter((country) => {
+        return (country.nameEng.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
   }
 
   submit() {
