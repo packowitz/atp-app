@@ -60,7 +60,7 @@
       <ion-buttons right>
         <button color="atp-blue" ion-button icon-right clear *ngIf="selectedCountries.length < 20"
                 (click)="showCountrySelection()">
-          Add
+          Edit
           <ion-icon name="add">
           </ion-icon>
         </button>
@@ -68,15 +68,12 @@
     </ion-toolbar>
 
     <ion-item>
-      <div class="text-placeholder">
-        {{selectedCountries.length > 0 ? '(click on flag to remove country)' : selectedCountries.length == 0 ? 'no
-        restriction' : ''}}
+      <div class="text-placeholder" *ngIf="selectedCountries.length == 0">
+        no country restrictions
       </div>
-      <div class="countries">
-        <span class="country" *ngFor="let country of selectedCountries">
-          <img src="assets/img/flags/{{country.alpha3}}.png" class="start-survey-flag">
-        </span>
-      </div>
+      <span class="country" *ngFor="let country of selectedCountries">
+        <img src="assets/img/flags/{{country.alpha3}}.png" class="start-survey-flag">
+      </span>
     </ion-item>
   </ion-card>
 
