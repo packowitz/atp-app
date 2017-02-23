@@ -11,54 +11,7 @@ import {NavParams, AlertController, ViewController} from "ionic-angular";
  */
 
 @Component({
-  template: `
-<ion-header>
-  <ion-toolbar color="atp-blue-light">
-    <ion-title>{{multiSelection ? 'Select countries' : 'Your country'}}</ion-title>
-
-    <ion-buttons start>
-      <button ion-button icon-only (click)="submit()"><ion-icon name="close"></ion-icon></button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <ion-searchbar (ionInput)="searchCountries($event)"></ion-searchbar>
-  <ion-list class="country-selection">
-    <ion-item *ngFor="let country of countries" (click)="toggleSelected(country)">
-        <img src="assets/img/flags/{{country.alpha3}}.png" class="flag">{{country.nameEng}}
-        
-        <button *ngIf="isSelected(country)" class="add-button" ion-button icon-only clear item-right color="favorite">
-          <ion-icon name="checkmark"></ion-icon>
-        </button>
-    </ion-item>
-  </ion-list>
-</ion-content>
-<ion-footer>
-  <ion-buttons end>
-    <button ion-button clear (click)="submit()">Save</button>
-  </ion-buttons>
-</ion-footer>
-`,
-  styles: [`
-    .country-selection{
-        max-height: 60vh;
-    }
-    .searchbar-md {
-      padding: 0;
-    }
-    .add-button {
-      width: 5rem;
-    }
-    .button-inner {
-        justify-content: flex-start;
-    }
-    .flag {
-        height: 1.2em;
-        vertical-align: bottom;
-        margin-right: 3vw;
-        border: 1px black solid;
-    }`]
+  templateUrl: 'countrySelection.component.html'
 })
 
 export class CountrySelectionComponent {
@@ -153,6 +106,9 @@ export class CountrySelectionComponent {
    * Submit selected countries if multiple selection is enabled otherwise just submit the first selected country
    */
   submit() {
-    this.viewCtrl.dismiss(this.multiSelection ? this.selectedCountries : this.selectedCountries[0]);
+    this.viewCtrl.dismiss(this.multiSelection
+      ? this.selectedCountries
+      : this.selectedCountries[0]
+    );
   }
 }

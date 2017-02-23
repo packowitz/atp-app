@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="atp-blue-light">
+    <ion-title>{{multiSelection ? 'Select countries' : 'Your country'}}</ion-title>
+
+    <ion-buttons start>
+      <button ion-button icon-only (click)="submit()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="country-selection">
+  <ion-searchbar (ionInput)="searchCountries($event)"></ion-searchbar>
+  <ion-list class="country-list">
+    <ion-item *ngFor="let country of countries" (click)="toggleSelected(country)">
+      <img src="assets/img/flags/{{country.alpha3}}.png" class="flag">{{country.nameEng}}
+
+      <button *ngIf="isSelected(country)" class="add-button" ion-button icon-only clear item-right color="favorite">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-buttons end>
+    <button ion-button clear (click)="submit()">Save</button>
+  </ion-buttons>
+</ion-footer>

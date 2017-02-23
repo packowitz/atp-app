@@ -1,0 +1,20 @@
+.country-selection {
+  .country-list {
+    max-height: 60vh;
+  }
+  .searchbar-md {
+    padding: 0;
+  }
+  .add-button {
+    width: 5rem;
+  }
+  .button-inner {
+    justify-content: flex-start;
+  }
+  .flag {
+    height: 1.2em;
+    vertical-align: bottom;
+    margin-right: 3vw;
+    border: 1px black solid;
+  }
+}
