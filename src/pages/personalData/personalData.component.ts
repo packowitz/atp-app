@@ -1,16 +1,8 @@
 import {Component} from "@angular/core";
-import {
-  NavController,
-  ViewController,
-  PopoverController,
-  AlertController,
-  Platform,
-  ModalController
-} from "ionic-angular";
+import {NavController, ViewController, AlertController, Platform, ModalController} from "ionic-angular";
 import {Model} from "../../providers/services/model.service";
 import {Country} from "../../providers/domain/country";
 import {CountryService} from "../../providers/services/country.service";
-import {CountrySelectionComponent} from "../countrySelection/countrySelection.component";
 import {AuthService} from "../../providers/services/auth.service";
 import {NotificationService} from "../../providers/services/notification.service";
 import {Util} from "../../providers/domain/util";
@@ -46,7 +38,6 @@ export class PersonalDataComponent {
               public authService: AuthService,
               public notificationService: NotificationService,
               public viewCtrl: ViewController,
-              public popoverController: PopoverController,
               public modalCtrl: ModalController,
               public alertController: AlertController,
               public platform: Platform) {
@@ -99,14 +90,6 @@ export class PersonalDataComponent {
         this.country = data;
       }
     });
-  }
-
-  chooseCountry() {
-    let countrySelection = this.popoverController.create(CountrySelectionComponent, {callback: country => {
-      this.country = country;
-      countrySelection.dismiss();
-    }});
-    countrySelection.present();
   }
 
   submitPersonalData() {

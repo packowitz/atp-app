@@ -2,8 +2,9 @@
   <ion-navbar [color]="platform.is('android') ? 'atp-blue-light' : 'light'">
     <ion-title>Give Feedback</ion-title>
     <ion-buttons start>
-      <button ion-button (click)="close()" *ngIf="platform.is('android')">Close</button>
-      <button ion-button icon-only (click)="close()" *ngIf="platform.is('ios')"><ion-icon name="close"></ion-icon></button>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
