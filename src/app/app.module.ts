@@ -13,7 +13,6 @@ import {SurveyComponent} from "../pages/survey/survey.component";
 import {SurveyDetailsComponent} from "../pages/surveyDetails/surveyDetails.component";
 import {TabsPage} from "../pages/tabs/tabsPage";
 import {WelcomeComponent} from "../pages/welcome/welcome.component";
-import {CountrySelectionComponent} from "../pages/countrySelection/countrySelection.component";
 import {Model} from "../providers/services/model.service";
 import {HighscoreEntryComponent} from "../pages/highscore/highscoreEntry.component";
 import {ChooseUsernameComponent} from "../pages/settings/chooseUsername.component";
@@ -45,7 +44,7 @@ import {GiveFeedbackComponent} from "../pages/feedback/giveFeedback.component";
 import {WelcomeTourComponent} from "../pages/welcome/welcomeTour.component";
 import {SpinnerComponent} from "../components/spinner/spinner.component";
 import {SettingsService} from "../providers/services/settings.service";
-import {CountrySelectionNewComponent} from "../pages/countrySelection/countrySelection-new.component";
+import {CountrySelectionComponent} from "../pages/countrySelection/countrySelection.component";
 
 @NgModule({
   declarations: [
@@ -72,7 +71,6 @@ import {CountrySelectionNewComponent} from "../pages/countrySelection/countrySel
     SpinnerComponent,
 
     CountrySelectionComponent,
-    CountrySelectionNewComponent,
     SingleSurveyBar,
     SurveyOverviewBar,
     HighscoreEntryComponent,
@@ -113,11 +111,10 @@ import {CountrySelectionNewComponent} from "../pages/countrySelection/countrySel
     WelcomeComponent,
     WelcomeTourComponent,
     AboutComponent,
-    CountrySelectionNewComponent,
+    CountrySelectionComponent,
 
 
     SurveyDetailsMenuComponent,
-    CountrySelectionComponent
   ],
   providers: [
     Model,

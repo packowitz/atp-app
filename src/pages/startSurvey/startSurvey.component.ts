@@ -11,7 +11,7 @@ import {Messages} from "../../providers/domain/messages";
 import {LocalStorage} from "../../providers/services/localStorage.service";
 import {SurveySettings} from "../../providers/domain/surveySettings";
 import {Country} from "../../providers/domain/country";
-import {CountrySelectionNewComponent} from "../countrySelection/countrySelection-new.component";
+import {CountrySelectionComponent} from "../countrySelection/countrySelection.component";
 
 declare var Croppie: any;
 
@@ -185,7 +185,7 @@ export class StartSurveyComponent {
   }
 
   showCountrySelection() {
-    let countrySelection = this.modalCtrl.create(CountrySelectionNewComponent, {selectedCountries: this.selectedCountries});
+    let countrySelection = this.modalCtrl.create(CountrySelectionComponent, {selectedCountries: this.selectedCountries});
     countrySelection.present();
 
     // Update selected countries

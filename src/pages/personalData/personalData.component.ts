@@ -6,7 +6,7 @@ import {CountryService} from "../../providers/services/country.service";
 import {AuthService} from "../../providers/services/auth.service";
 import {NotificationService} from "../../providers/services/notification.service";
 import {Util} from "../../providers/domain/util";
-import {CountrySelectionNewComponent} from "../countrySelection/countrySelection-new.component";
+import {CountrySelectionComponent} from "../countrySelection/countrySelection.component";
 
 @Component({
   templateUrl: 'personalData.component.html'
@@ -81,7 +81,7 @@ export class PersonalDataComponent {
   }
 
   showCountrySelection() {
-    let countrySelection = this.modalCtrl.create(CountrySelectionNewComponent, {country: this.country});
+    let countrySelection = this.modalCtrl.create(CountrySelectionComponent, {country: this.country});
     countrySelection.present();
 
     // Update selected countries
