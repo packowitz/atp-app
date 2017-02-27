@@ -45,6 +45,7 @@ import {WelcomeTourComponent} from "../pages/welcome/welcomeTour.component";
 import {SpinnerComponent} from "../components/spinner/spinner.component";
 import {SettingsService} from "../providers/services/settings.service";
 import {CountrySelectionComponent} from "../pages/countrySelection/countrySelection.component";
+import {ConnectivityService} from "../providers/services/connectivity.service";
 
 @NgModule({
   declarations: [
@@ -130,6 +131,7 @@ import {CountrySelectionComponent} from "../pages/countrySelection/countrySelect
     NotificationService,
     SettingsService,
     SurveyService,
+    ConnectivityService,
     Storage,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
