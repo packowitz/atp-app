@@ -1,7 +1,13 @@
 <ion-content class="loading-page">
-    <div class="loading">
-        <span>Loading ATP</span>
-        <ion-spinner name="crescent"></ion-spinner>
+  <div class="logo">
+    <img src="assets/img/icon-invert.png" class="margin-bottom-middle">
+    <span class="margin-bottom-middle"><strong>Ask the People</strong></span>
+  </div>
+  <div class="loading">
+    <div class="startup-progress margin-bottom-small">
+      <div class="startup-progress-bar" [style.width]="(100 * stepsDone / state.numberOfSteps) + '%'"></div>
     </div>
+    <div class="step-message">{{stepMessage}}</div>
+  </div>
   <div class="startup-message">{{startupMessage}}</div>
 </ion-content>

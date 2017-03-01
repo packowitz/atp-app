@@ -80,14 +80,9 @@ export class LocalStorage {
     return this.updateTimestamp;
   }
 
-  public setMySurveys(data: SurveyListWithTimestamp) {
-    this.updateTimestamp = data.timestamp;
-    if(data.data && data.data.length > 0) {
-      data.data.forEach(survey => this.addSurvey(survey));
-    }
-    this.recalculateSurveys();
+  public setTimestamp(timestamp: number) {
+    this.updateTimestamp = timestamp;
     this.storage.set(this.prefix + 'updateTimestamp', this.updateTimestamp);
-    this.storage.set(this.prefix + 'surveys', this.surveys);
   }
 
   public addSurveys(surveys: Survey[]) {

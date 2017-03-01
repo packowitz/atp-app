@@ -28,6 +28,9 @@ declare var FirebasePlugin: any;
 export class LoadingComponent {
 
   startupMessage: string;
+  stepMessage: string = "";
+  stepsDone: number = 0;
+  surveysToLoad: number[] = [];
 
   constructor(public state: LoadingState,
               public nav: NavController,
@@ -57,29 +60,43 @@ export class LoadingComponent {
     if(!this.state.checkedVersion) {
       this.checkVersion();
     } else if(!this.state.loadedLocalStorage) {
+      this.stepsDone = 1;
       this.loadLocalStorage();
     } else if(!this.state.loadedCountries) {
+      this.stepsDone = 2;
       this.loadCountries();
     } else if(!this.state.loadedUser) {
+      this.stepsDone = 3;
       this.loadUser();
+    } else if(!this.state.loadedMySurveyIds) {
+      this.stepsDone = 4;
+      this.loadMySurveyIds();
     } else if(!this.state.loadedMySurveys) {
+      this.stepsDone = 5;
       this.loadOrUpdateMySurveys();
     } else if(!this.state.loadedUnreadFeedback) {
+      this.stepsDone = 6;
       this.loadFeedback();
     } else if(!this.state.loadedAnnouncements) {
+      this.stepsDone = 7;
       this.loadAnnouncements();
     } else if(!this.state.loadedRewards) {
+      this.stepsDone = 8;
       this.loadRewards();
     } else if(!this.state.loadedInAppProducts) {
+      this.stepsDone = 9;
       this.loadInAppProducts();
     } else if(!this.state.registeredNotifications) {
+      this.stepsDone = 10;
       this.registerNotification();
     } else {
+      this.stepsDone = 11;
       this.nav.setRoot(this.localStorage.hintSettings.seenWelcomeHint ? TabsPage : WelcomeTourComponent);
     }
   }
 
   checkVersion() {
+    this.stepMessage = "checking version";
     this.authService.checkAppVersion().subscribe(
       data => {
         if(data.success) {
@@ -98,6 +115,7 @@ export class LoadingComponent {
   }
 
   loadLocalStorage() {
+    this.stepMessage = "Reading cache";
     this.localStorage.loadData().then(() => {
       this.state.loadedLocalStorage = true;
       this.loadDataFromServer();
@@ -105,6 +123,7 @@ export class LoadingComponent {
   }
 
   loadCountries() {
+    this.stepMessage = "Loading countries";
     this.countryService.getCountries().subscribe(
       countries => {
         console.log("loaded " + countries.length + " countries");
@@ -115,6 +134,7 @@ export class LoadingComponent {
   }
 
   loadUser() {
+    this.stepMessage = "Checking your user";
     if(this.model.user && this.localStorage.getToken()) {
       this.state.loadedUser = true;
       this.loadDataFromServer();
@@ -128,6 +148,7 @@ export class LoadingComponent {
   }
 
   public resolveUser() {
+    this.stepMessage = "Loading your user data";
     this.authService.getUser().subscribe(
       data => {
         console.log("Loaded user data");
@@ -138,24 +159,43 @@ export class LoadingComponent {
     );
   }
 
+  public loadMySurveyIds() {
+    this.stepMessage = "Checking your ATPs";
+    this.surveyService.getMySurveyIdsBackground().subscribe(
+      data => {
+        let ids = data.data;
+        if(!this.localStorage.getUpdateTimestamp()) {
+          this.localStorage.setTimestamp(data.timestamp);
+        }
+        ids.forEach(id => {
+          if(this.localStorage.getMetaBySurveyId(id) == null) {
+            this.surveysToLoad.push(id);
+          }
+        });
+        this.state.loadedMySurveyIds = true;
+        this.loadDataFromServer();
+      }
+    );
+  }
+
   public loadOrUpdateMySurveys() {
-    if(this.localStorage.getUpdateTimestamp()) {
-      //update always happen when viewing main-page
-      this.state.loadedMySurveys = true;
-      this.loadDataFromServer();
-    } else {
-      this.surveyService.getMySurveysBackground().subscribe(
+    this.stepMessage = "Updating your ATPs";
+    if(this.surveysToLoad.length > 0) {
+      this.surveyService.getMySurveysByIds(this.surveysToLoad.splice(0,10)).subscribe(
         data => {
-          this.localStorage.setMySurveys(data);
-          console.log("Loaded " + data.data.length + " surveys");
-          this.state.loadedMySurveys = true;
+          this.localStorage.addSurveys(data);
+          console.log("Loaded " + data.length + " surveys");
           this.loadDataFromServer();
         }
       );
+    } else {
+      this.state.loadedMySurveys = true;
+      this.loadDataFromServer();
     }
   }
 
   public loadFeedback() {
+    this.stepMessage = "Loading messages";
     this.feedbackService.loadFeedback().subscribe(
       data => {
         this.model.setFeedback(data);
@@ -167,6 +207,7 @@ export class LoadingComponent {
   }
 
   public loadAnnouncements() {
+    this.stepMessage = "Loading announcements";
     this.feedbackService.loadAnnouncements().subscribe(
       data => {
         this.model.setAnnouncements(data);
@@ -178,6 +219,7 @@ export class LoadingComponent {
   }
 
   public loadRewards() {
+    this.stepMessage = "Loading rewards state";
     this.shopService.getRewards().subscribe(
       data => {
         this.model.setRewards(data);
@@ -189,6 +231,7 @@ export class LoadingComponent {
   }
 
   public loadInAppProducts() {
+    this.stepMessage = "Loading IAPs";
     if(this.platform.is("android") || this.platform.is("ios")) {
       InAppPurchase.getProducts(this.model.inAppProductIds)
         .then(products => {
@@ -215,6 +258,7 @@ export class LoadingComponent {
   }
 
   public registerNotification() {
+    this.stepMessage = "Register notifications";
     if(typeof FirebasePlugin != 'undefined') {
       try {
         FirebasePlugin.getToken(

@@ -6,6 +6,7 @@ export class LoadingState {
   loadedLocalStorage: boolean = false;
   loadedCountries: boolean = false;
   loadedUser: boolean = false;
+  loadedMySurveyIds: boolean = false;
   loadedMySurveys: boolean = false;
   loadedUnreadFeedback: boolean = false;
   loadedAnnouncements: boolean = false;
@@ -13,11 +14,14 @@ export class LoadingState {
   loadedInAppProducts: boolean = false;
   registeredNotifications: boolean = false;
 
+  numberOfSteps = 11;
+
   reset() {
     this.checkedVersion = false;
     this.loadedLocalStorage = false;
     this.loadedCountries = false;
     this.loadedUser = false;
+    this.loadedMySurveyIds = false;
     this.loadedMySurveys = false;
     this.loadedUnreadFeedback = false;
     this.loadedAnnouncements = false;

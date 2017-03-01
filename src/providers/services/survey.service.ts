@@ -11,6 +11,11 @@ export class SurveyListWithTimestamp {
   timestamp: number;
 }
 
+export class IdListWithTimestamp {
+  data: number[];
+  timestamp: number;
+}
+
 @Injectable()
 export class SurveyService {
 
@@ -34,8 +39,8 @@ export class SurveyService {
     return this.atpHttp.doPost("/app/survey/result", resultObj, loadingMessage);
   }
 
-  getMySurveysBackground(): Observable<SurveyListWithTimestamp> {
-    return this.atpHttp.doGetBackground("/app/survey/list");
+  getMySurveyIdsBackground(): Observable<IdListWithTimestamp> {
+    return this.atpHttp.doGetBackground("/app/survey/ids");
   }
 
   getUpdatesForMySurveysSince(timestamp: number, message?: string): Observable<SurveyListWithTimestamp> {
