@@ -4,7 +4,7 @@ import {Network} from "ionic-native";
 
 /**
  * Detects if internet connection is available
- * @author: Max Tuzzoilino
+ * @author: Max Tuzzolino
  */
 @Injectable()
 export class ConnectivityService {

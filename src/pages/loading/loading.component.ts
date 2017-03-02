@@ -18,6 +18,7 @@ import {SettingsService} from "../../providers/services/settings.service";
 import {SurveyComponent} from "../survey/survey.component";
 import {FeedbackComponent} from "../feedback/feedback.component";
 import {AnnouncementsComponent} from "../announcements/announcements.component";
+import {ConnectivityService} from "../../providers/services/connectivity.service";
 
 
 declare var FirebasePlugin: any;
@@ -44,6 +45,7 @@ export class LoadingComponent {
               public platform: Platform,
               public localStorage: LocalStorage,
               public alertController: AlertController,
+              public connectivityService: ConnectivityService,
               public notificationService: NotificationService) {
     this.startupMessage = Messages.getStartupMsg();
     this.loadDataFromServer();
@@ -56,42 +58,60 @@ export class LoadingComponent {
     }
   }
 
+  /**
+   * Load all data from server
+   * Note: This will fail with device does not have an active internet connection
+   */
   loadDataFromServer() {
-    if(!this.state.checkedVersion) {
-      this.checkVersion();
-    } else if(!this.state.loadedLocalStorage) {
-      this.stepsDone = 1;
-      this.loadLocalStorage();
-    } else if(!this.state.loadedCountries) {
-      this.stepsDone = 2;
-      this.loadCountries();
-    } else if(!this.state.loadedUser) {
-      this.stepsDone = 3;
-      this.loadUser();
-    } else if(!this.state.loadedMySurveyIds) {
-      this.stepsDone = 4;
-      this.loadMySurveyIds();
-    } else if(!this.state.loadedMySurveys) {
-      this.stepsDone = 5;
-      this.loadOrUpdateMySurveys();
-    } else if(!this.state.loadedUnreadFeedback) {
-      this.stepsDone = 6;
-      this.loadFeedback();
-    } else if(!this.state.loadedAnnouncements) {
-      this.stepsDone = 7;
-      this.loadAnnouncements();
-    } else if(!this.state.loadedRewards) {
-      this.stepsDone = 8;
-      this.loadRewards();
-    } else if(!this.state.loadedInAppProducts) {
-      this.stepsDone = 9;
-      this.loadInAppProducts();
-    } else if(!this.state.registeredNotifications) {
-      this.stepsDone = 10;
-      this.registerNotification();
+    if (this.connectivityService.isOffline()) {
+      this.alertController.create({
+        title: "Device offline",
+        message: "Your device doesn't appear to have access to the internet. Please make sure your data or WiFi is switched on and try again",
+        buttons: [{
+          text: 'Try again',
+          handler: () => {
+            this.loadDataFromServer();
+          }
+        }],
+        enableBackdropDismiss: false
+      }).present();
     } else {
-      this.stepsDone = 11;
-      this.nav.setRoot(this.localStorage.hintSettings.seenWelcomeHint ? TabsPage : WelcomeTourComponent);
+      if (!this.state.checkedVersion) {
+        this.checkVersion();
+      } else if (!this.state.loadedLocalStorage) {
+        this.stepsDone = 1;
+        this.loadLocalStorage();
+      } else if (!this.state.loadedCountries) {
+        this.stepsDone = 2;
+        this.loadCountries();
+      } else if (!this.state.loadedUser) {
+        this.stepsDone = 3;
+        this.loadUser();
+      } else if (!this.state.loadedMySurveyIds) {
+        this.stepsDone = 4;
+        this.loadMySurveyIds();
+      } else if (!this.state.loadedMySurveys) {
+        this.stepsDone = 5;
+        this.loadOrUpdateMySurveys();
+      } else if (!this.state.loadedUnreadFeedback) {
+        this.stepsDone = 6;
+        this.loadFeedback();
+      } else if (!this.state.loadedAnnouncements) {
+        this.stepsDone = 7;
+        this.loadAnnouncements();
+      } else if (!this.state.loadedRewards) {
+        this.stepsDone = 8;
+        this.loadRewards();
+      } else if (!this.state.loadedInAppProducts) {
+        this.stepsDone = 9;
+        this.loadInAppProducts();
+      } else if (!this.state.registeredNotifications) {
+        this.stepsDone = 10;
+        this.registerNotification();
+      } else {
+        this.stepsDone = 11;
+        this.nav.setRoot(this.localStorage.hintSettings.seenWelcomeHint ? TabsPage : WelcomeTourComponent);
+      }
     }
   }
 
