@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar [color]="platform.is('android') ? 'atp-blue-light' : 'light'">
-    <ion-title>About</ion-title>
+    <ion-title>About ATP</ion-title>
     <ion-buttons start>
       <button ion-button icon-only (click)="close()">
         <ion-icon name="close"></ion-icon>
@@ -10,39 +10,46 @@
 </ion-header>
 
 <ion-content class="about-page">
-  <div class="logo">
-    <img src="assets/img/icon.png">
-    <div>ATP beta</div>
-  </div>
   <ion-list no-lines>
-    <ion-list-header no-lines (click)="aboutExpand = !aboutExpand">
-      <ion-icon [ios]="aboutExpand ?  'ios-arrow-down' : 'ios-arrow-forward'"
-                [name]="aboutExpand ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
-      About ATP
-    </ion-list-header>
-    <div [ngClass]="aboutExpand ? 'item-expand active' : 'item-expand inactive'">
-      <ion-item>
-        Thank you, friends and family for participating in the ATP beta programme! We are so excited to have a wider
-        audience of people try this out and are very eager to hear all your feedback! Remember - we have a feedback feature
-        built in where you can place your thoughts. It is a great way for us to learn what you think will make ATP better.
-      </ion-item>
-      <ion-item>
-        ATP is an open-source project. If you're interested in how it is built or want to contribute, check out our GitHub repo here: <a href="https://github.com/packowitz/atp-app">github.com/packowitz/atp-app</a>
-      </ion-item>
-    </div>
+    <ion-item class="about-headline">
+      SOCIAL MEDIA
+    </ion-item>
+    <ion-item>
+      <i item-left class="fa fa-facebook"></i>
+      Like us on facebook soon
+    </ion-item>
+    <ion-item>
+      <i item-left class="fa fa-twitter"></i>
+      Follow us on twitter soon
+    </ion-item>
+    <ion-item>
+      <i item-left class="fa fa-globe"></i>
+      Visit us on <a class="color-black" href="http://www.askthepeople.io">www.askthepeople.io</a>
+    </ion-item>
   </ion-list>
 
   <ion-list no-lines>
-    <ion-list-header no-lines (click)="legalExpand = !legalExpand">
-      <ion-icon [ios]="legalExpand ?  'ios-arrow-down' : 'ios-arrow-forward'"
-                [name]="legalExpand ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
-      Legal use
-    </ion-list-header>
-    <div [ngClass]="legalExpand ? 'item-expand active' : 'item-expand inactive'">
-      <ion-item>
-        By using ATP you agree to our <a>terms and conditions</a>.
-      </ion-item>
-    </div>
+    <ion-item class="about-headline">
+      LEGAL
+    </ion-item>
+    <ion-item>
+      All rights reserved
+    </ion-item>
+    <ion-item>
+      &copy; PacWorx 2017
+    </ion-item>
+  </ion-list>
+
+  <ion-list no-lines>
+    <ion-item class="about-headline">
+      PACWORX
+    </ion-item>
+    <ion-item>
+      Proudly made in New Zealand
+    </ion-item>
+    <ion-item>
+      info@askthepeople.io
+    </ion-item>
   </ion-list>
 </ion-content>
 
