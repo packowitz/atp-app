@@ -6,6 +6,8 @@ import {ViewController, Platform} from "ionic-angular";
 })
 export class AboutComponent {
 
+  currentYear: number = new Date().getFullYear();
+
   constructor(public viewCtrl: ViewController,
               public platform: Platform) {
   }
