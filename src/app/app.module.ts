@@ -22,7 +22,7 @@ import {CountryService} from "../providers/services/country.service";
 import {HighscoreService} from "../providers/services/highscore.service";
 import {MessagesService} from "../providers/services/messages.service";
 import {SurveyService} from "../providers/services/survey.service";
-import {Storage} from "@ionic/storage";
+import {IonicStorageModule} from "@ionic/storage";
 import {StartSurveyComponent} from "../pages/startSurvey/startSurvey.component";
 import {CountryPipe} from "../providers/pipes/country.pipe";
 import {AgePipe} from "../providers/pipes/age.pipe";
@@ -88,7 +88,8 @@ import {ConnectivityService} from "../providers/services/connectivity.service";
         tabsPlacement: 'bottom',
         tabsHideOnSubPages: true
       }
-    )
+    ),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -132,7 +133,6 @@ import {ConnectivityService} from "../providers/services/connectivity.service";
     SettingsService,
     SurveyService,
     ConnectivityService,
-    Storage,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

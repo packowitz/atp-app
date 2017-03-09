@@ -29,7 +29,7 @@ export class AtpHttp {
       headers.append('Authorization', 'Bearer ' + this.localStorage.getToken());
     }
     return this.http.get(Model.server + uri, {headers: headers})
-      .timeout(AtpHttp.timeout, new Error('timeout exceeded'))
+      .timeout(AtpHttp.timeout)
       .retryWhen(data => this.retryWhen(data, () => this.doGet(uri, loadingMessage)))
       .map(data => this.handleData(data));
   }
@@ -40,7 +40,7 @@ export class AtpHttp {
       headers.append('Authorization', 'Bearer ' + this.localStorage.getToken());
     }
     return this.http.get(Model.server + uri, {headers: headers})
-      .timeout(AtpHttp.timeout, new Error('timeout exceeded'))
+      .timeout(AtpHttp.timeout)
       .retryWhen(data => this.retryWhen(data, () => this.doGetBackground(uri)))
       .map(data => this.handleData(data));
   }
@@ -53,7 +53,7 @@ export class AtpHttp {
     }
     headers.append('Content-Type', 'application/json');
     return this.http.post(Model.server + uri, body ? JSON.stringify(body) : null, {headers: headers})
-      .timeout(AtpHttp.timeout, new Error('timeout exceeded'))
+      .timeout(AtpHttp.timeout)
       .retryWhen(data => this.retryWhen(data, () => this.doPost(uri, body, loadingMessage)))
       .map(data => this.handleData(data));
   }
@@ -65,7 +65,7 @@ export class AtpHttp {
     }
     headers.append('Content-Type', 'application/json');
     return this.http.post(Model.server + uri, body ? JSON.stringify(body) : null, {headers: headers})
-      .timeout(AtpHttp.timeout, new Error('timeout exceeded'))
+      .timeout(AtpHttp.timeout)
       .retryWhen(data => this.retryWhen(data, () => this.doPostBackground(uri, body)))
       .map(data => this.handleData(data));
   }
@@ -78,7 +78,7 @@ export class AtpHttp {
     }
     headers.append('Content-Type', 'application/json');
     return this.http.put(Model.server + uri, body ? JSON.stringify(body) : null, {headers: headers})
-      .timeout(AtpHttp.timeout, new Error('timeout exceeded'))
+      .timeout(AtpHttp.timeout)
       .retryWhen(data => this.retryWhen(data, () => this.doPut(uri, body, loadingMessage)))
       .map(data => this.handleData(data));
   }
@@ -90,7 +90,7 @@ export class AtpHttp {
       headers.append('Authorization', 'Bearer ' + this.localStorage.getToken());
     }
     return this.http.delete(Model.server + uri, {headers: headers})
-      .timeout(AtpHttp.timeout, new Error('timeout exceeded'))
+      .timeout(AtpHttp.timeout)
       .retryWhen(data => this.retryWhen(data, () => this.doDelete(uri, loadingMessage)))
       .map(() => this.notificationService.dismissLoading());
   }
