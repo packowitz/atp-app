@@ -3,7 +3,7 @@
   "author": "Pacworx",
   "homepage": "http://ask-the-people.io/",
   "private": true,
-  "scripts" : {
+  "scripts": {
     "build": "ionic-app-scripts build",
     "clean": "ionic-app-scripts clean",
     "ionic:build": "ionic-app-scripts build",
@@ -30,6 +30,8 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "1.1.4",
+    "@ionic/cli-build-ionic-angular": "0.0.3",
+    "@ionic/cli-plugin-cordova": "0.0.9",
     "typescript": "2.0.9"
   },
   "description": "Want an opinion? Ask the people!",
