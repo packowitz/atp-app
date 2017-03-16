@@ -98,7 +98,7 @@
       </div>
     </div>
     <ion-item>
-      <ion-label stacked primary class="stacked-title">Short description (optional):</ion-label>
+      <ion-label stacked primary class="stacked-title">Title / Question<span *ngIf="survey.title"> ({{25 - survey.title.length}} character left)</span>:</ion-label>
       <ion-input type="text" maxLength="25" [(ngModel)]="survey.title"
                  placeholder="Example: {{exampleText}}"></ion-input>
     </ion-item>
