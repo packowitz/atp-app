@@ -225,6 +225,21 @@ export class StartSurveyComponent {
   }
 
   public startSurvey() {
+    if(!this.survey.title) {
+      this.alertController.create({
+        title: 'This ATP has no title',
+        message: 'A title is helpful to point out what you want to ask the people. Continue without title?',
+        buttons: [
+          {text: 'Cancel'},
+          {text: 'Continue', handler: () => this.submitSurvey()}
+        ]
+      }).present();
+    } else {
+      this.submitSurvey();
+    }
+  }
+
+  public submitSurvey() {
     //store settings in local storage as default for next survey
     let settings: SurveySettings = new SurveySettings();
 
