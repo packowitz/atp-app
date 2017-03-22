@@ -48,7 +48,7 @@
       <ion-item>
         <span item-left>Countries:</span>
         <span class="text-placeholder" *ngIf="countries.length == 0">no restriction</span>
-        <span class="country" *ngFor="let country of countries"><img src="assets/img/flags/{{country}}.png" class="survey-details-flag"></span>
+        <span class="country" *ngFor="let country of countries"><img src="assets/img/flags/{{country}}.png" class="flag larger"></span>
       </ion-item>
     </div>
   </ion-card>
@@ -62,7 +62,7 @@
     <div [ngClass]="statisticsExpand ? 'item-expand active' : 'item-expand inactive'">
       <ion-item *ngFor="let country of survey.answers | country">
         <ion-label class="flex-space-between detail">
-          <span class="detail-label"><img src="assets/img/flags/{{country.alpha3}}.png" class="stats-flag"></span>
+          <span class="detail-label"><img src="assets/img/flags/{{country.alpha3}}.png" class="flag larger"></span>
           <single-survey-bar [answered]="country.pic1 + country.pic2 + country.noOpinion"
                              [leftPicCount]="country.pic1"
                              [rightPicCount]="country.pic2"

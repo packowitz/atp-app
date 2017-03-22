@@ -214,7 +214,11 @@ ion-card-header.small-headline {
 }
 
 .flag {
+  &.larger {
+    height: 1.4em;
+  }
   height: 1.2em;
+  width: auto;
   border: 1px black solid;
 }
 

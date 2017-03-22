@@ -29,7 +29,7 @@
     <ion-item>
       <span item-left>Countries:</span>
       <span class="text-placeholder" *ngIf="countries.length == 0">no restriction</span>
-      <span class="country" *ngFor="let country of countries"><img src="assets/img/flags/{{country}}.png" class="survey-details-flag"></span>
+      <span class="country" *ngFor="let country of countries"><img src="assets/img/flags/{{country}}.png" class="flag larger"></span>
     </ion-item>
   </ion-card>
   <ion-card *ngFor="let picture of meta.pictures">
