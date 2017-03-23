@@ -90,7 +90,7 @@
   <plugin name="cordova-plugin-console" spec="1.0.5"/>
   <plugin name="cordova-plugin-statusbar" spec="2.2.1"/>
   <plugin name="cordova-plugin-device" spec="1.1.4"/>
-  <plugin name="cordova-plugin-firebase" spec="~0.1.18" />
+  <plugin name="cordova-plugin-firebase" spec="0.1.19" />
   <plugin name="cordova-plugin-splashscreen" spec="~4.0.1"/>
   <engine name="ios" spec="4.3.1"/>
   <engine name="android" spec="6.1.0"/>
