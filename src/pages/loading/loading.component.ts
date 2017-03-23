@@ -105,9 +105,9 @@ export class LoadingComponent {
       } else if (!this.state.loadedInAppProducts) {
         this.stepsDone = 9;
         this.loadInAppProducts();
-      } else if (!this.state.registeredNotifications) {
+      } else if (!this.state.configureFirebase) {
         this.stepsDone = 10;
-        this.registerNotification();
+        this.configureFirebase();
       } else {
         this.stepsDone = 11;
         this.nav.setRoot(this.localStorage.hintSettings.seenWelcomeHint ? TabsPage : WelcomeTourComponent);
@@ -277,8 +277,8 @@ export class LoadingComponent {
     }
   }
 
-  public registerNotification() {
-    this.stepMessage = "Register notifications";
+  public configureFirebase() {
+    this.stepMessage = "configure Firebase";
     if(typeof FirebasePlugin != 'undefined') {
       try {
         FirebasePlugin.getToken(
@@ -350,7 +350,7 @@ export class LoadingComponent {
         console.log(e);
       }
     }
-    this.state.registeredNotifications = true;
+    this.state.configureFirebase = true;
     this.loadDataFromServer();
   }
 }

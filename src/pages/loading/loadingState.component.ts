@@ -12,7 +12,7 @@ export class LoadingState {
   loadedAnnouncements: boolean = false;
   loadedRewards: boolean = false;
   loadedInAppProducts: boolean = false;
-  registeredNotifications: boolean = false;
+  configureFirebase: boolean = false;
 
   numberOfSteps = 11;
 
@@ -27,6 +27,6 @@ export class LoadingState {
     this.loadedAnnouncements = false;
     this.loadedRewards = false;
     this.loadedInAppProducts = false;
-    this.registeredNotifications = false;
+    this.configureFirebase = false;
   }
 }
