@@ -11,6 +11,7 @@ import {AnnouncementsComponent} from "../pages/announcements/announcements.compo
 import {PersonalDataComponent} from "../pages/personalData/personalData.component";
 import {AboutComponent} from "../pages/about/about.component";
 import {GiveFeedbackComponent} from "../pages/feedback/giveFeedback.component";
+import {Analytics} from "../providers/services/analytics.service";
 
 /**
  * Main app controller.
@@ -36,42 +37,52 @@ export class AtpApp {
   }
 
   showSettings() {
+    Analytics.event("open_settings", {page: "Menu"});
     this.modalCtrl.create(SettingsComponent).present();
   }
 
   showAboutPage() {
+    Analytics.event("open_about", {page: "Menu"});
     this.modalCtrl.create(AboutComponent).present();
   }
 
   showPersonalData() {
+    Analytics.event("open_personal_data", {page: "Menu"});
     this.modalCtrl.create(PersonalDataComponent).present();
   }
 
   showHighscorePage() {
+    Analytics.event("open_highscore", {page: "Menu"});
     this.modalCtrl.create(HighscoreComponent).present();
   }
 
   showAnnouncements() {
+    Analytics.event("open_announcements", {page: "Menu"});
     this.modalCtrl.create(AnnouncementsComponent).present();
   }
 
   showFeedbackPage() {
+    Analytics.event("open_feedback", {page: "Menu"});
     this.modalCtrl.create(FeedbackComponent).present();
   }
 
   showImprovementPage() {
+    Analytics.event("open_write_feedback_improvement", {page: "Menu"});
     this.modalCtrl.create(GiveFeedbackComponent, {type: 'IMPROVEMENT'}).present();
   }
 
   showBugReportPage() {
+    Analytics.event("open_write_feedback_bug", {page: "Menu"});
     this.modalCtrl.create(GiveFeedbackComponent, {type: 'BUG_REPORT'}).present();
   }
 
   showMessageSuggestionPage() {
+    Analytics.event("open_write_feedback_message", {page: "Menu"});
     this.modalCtrl.create(GiveFeedbackComponent, {type: 'MESSAGE_SUGGESTION'}).present();
   }
 
   showOtherFeedbackPage() {
+    Analytics.event("open_write_feedback_other", {page: "Menu"});
     this.modalCtrl.create(GiveFeedbackComponent, {type: 'OTHER'}).present();
   }
 }

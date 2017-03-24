@@ -346,6 +346,7 @@ export class LoadingComponent {
           },
           err => console.log('Error registering onNotification callback: ' + err)
         );
+
       } catch (e) {
         console.log(e);
       }

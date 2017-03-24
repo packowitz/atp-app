@@ -16,12 +16,10 @@
   </div>
 
   <ion-card>
-    <ion-list-header class="summary-title" (click)="toggleExpands()">
-      <ion-icon [ios]="summaryExpand ?  'ios-arrow-down' : 'ios-arrow-forward'"
-                [name]="summaryExpand ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+    <ion-list-header class="summary-title">
       Summary
     </ion-list-header>
-    <div [ngClass]="summaryExpand ? 'item-expand active' : 'item-expand inactive'">
+    <div>
       <ion-item no-lines>
         <single-survey-bar [startedDate]="survey.startedDate"
                            [status]="survey.status"
@@ -54,7 +52,7 @@
   </ion-card>
 
   <ion-card *ngIf="survey.answers && survey.answers.length > 0">
-    <ion-list-header class="detail-title" (click)="toggleExpands()">
+    <ion-list-header class="detail-title" (click)="toggleStatistics()">
       <ion-icon [ios]="statisticsExpand ?  'ios-arrow-down' : 'ios-arrow-forward'"
                 [name]="statisticsExpand ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
       Detailed Statistics

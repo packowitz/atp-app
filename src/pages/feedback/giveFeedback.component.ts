@@ -4,6 +4,7 @@ import {Feedback} from "../../providers/domain/feedback";
 import {Model} from "../../providers/services/model.service";
 import {MessagesService} from "../../providers/services/messages.service";
 import {NotificationService} from "../../providers/services/notification.service";
+import {Analytics} from "../../providers/services/analytics.service";
 
 @Component({
   templateUrl: 'giveFeedback.component.html'
@@ -24,7 +25,12 @@ export class GiveFeedbackComponent {
     this.feedback.type = this.type;
   }
 
+  ionViewDidEnter() {
+    Analytics.enterPage("GiveFeedback");
+  }
+
   sendFeedback() {
+    Analytics.event("send_feedback", {page: "GiveFeedback"});
     this.feedbackService.sendFeedback(this.feedback).subscribe(
       feedback => {
         this.model.feedback.unshift(feedback);

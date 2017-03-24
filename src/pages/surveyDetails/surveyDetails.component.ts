@@ -7,6 +7,7 @@ import {SurveyDetailsMenuComponent} from "../../components/surveyDetailMenu.comp
 import {Model} from "../../providers/services/model.service";
 import {NotificationService} from "../../providers/services/notification.service";
 import {LocalStorage} from "../../providers/services/localStorage.service";
+import {Analytics} from "../../providers/services/analytics.service";
 
 @Component({
   templateUrl: 'surveyDetails.component.html'
@@ -37,18 +38,27 @@ export class SurveyDetailsComponent {
     }
   }
 
-  toggleExpands() {
-    this.summaryExpand = !this.summaryExpand;
+  ionViewDidEnter() {
+    Analytics.enterPage("AtpDetails");
+  }
+
+  toggleStatistics() {
+    Analytics.event("toggle_statistics", {page: "AtpDetails"});
     this.statisticsExpand = !this.statisticsExpand;
   }
 
   showOptions(event: Event) {
+    Analytics.event("show_options", {page: "AtpDetails"});
     let popover = this.popoverController.create(SurveyDetailsMenuComponent, {
       showRefresh: this.survey.status != 'FINISHED',
       showDelete: !this.survey.multiPicture,
       callbacks: {
-        refresh: () => {this.surveyService.loadSurveyDetails(this.survey)},
+        refresh: () => {
+          Analytics.event("refresh_atp", {page: "AtpDetails"});
+          this.surveyService.loadSurveyDetails(this.survey);
+        },
         delete: () => {
+          Analytics.event("show_delete_atp_alert", {page: "AtpDetails"});
           this.alertController.create({
             title: 'Delete this ATP?',
             message: 'Are you sure to delete this ATP? This action is permanent.',
@@ -57,6 +67,7 @@ export class SurveyDetailsComponent {
               {
                 text: 'Delete',
                 handler: () => {
+                  Analytics.event("delete_atp", {page: "AtpDetails"});
                   this.surveyService.deleteSurvey(this.survey).subscribe(() => {
                     this.localStorage.deleteSurvey(this.survey);
                     this.notificationService.showToast({

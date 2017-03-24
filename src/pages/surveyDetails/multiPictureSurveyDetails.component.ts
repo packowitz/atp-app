@@ -7,6 +7,7 @@ import {Model} from "../../providers/services/model.service";
 import {NotificationService} from "../../providers/services/notification.service";
 import {LocalStorage} from "../../providers/services/localStorage.service";
 import {MetaSurvey, SurveyPicture} from "../../providers/domain/surveyMeta";
+import {Analytics} from "../../providers/services/analytics.service";
 
 @Component({
   templateUrl: 'multiPictureSurveyDetails.component.html'
@@ -33,12 +34,18 @@ export class MultiPictureSurveyDetailsComponent {
     }
   }
 
+  ionViewDidEnter() {
+    Analytics.enterPage("MultiPictureAtpDetails");
+  }
+
   showOptions(event: Event) {
+    Analytics.event("show_options", {page: "MultiPictureAtpDetails"});
     let popover = this.popoverController.create(SurveyDetailsMenuComponent, {
       showRefresh: this.meta.status != 'FINISHED',
       showDelete: true,
       callbacks: {
         refresh: () => {
+          Analytics.event("refresh_atp", {page: "MultiPictureAtpDetails"});
           this.surveyService.updateMySurveys("updating your ATPs");
         },
         delete: () => {
@@ -50,6 +57,7 @@ export class MultiPictureSurveyDetailsComponent {
               {
                 text: 'Delete',
                 handler: () => {
+                  Analytics.event("delete_atp", {page: "MultiPictureAtpDetails"});
                   this.surveyService.deleteSurveyGroup(this.meta).subscribe(() => {
                     this.localStorage.deleteSurveyByGroupId(this.meta.groupId);
                     this.notificationService.showToast({
@@ -74,6 +82,7 @@ export class MultiPictureSurveyDetailsComponent {
   }
 
   toggleShowDetails(picture: SurveyPicture) {
+    Analytics.event("toggle_details", {page: "MultiPictureAtpDetails"});
     let idx = this.pictureDetailIds.indexOf(picture.pictureId);
     if(idx == -1) {
       this.pictureDetailIds.push(picture.pictureId);

@@ -2,6 +2,7 @@ import {AlertController, Slides} from "ionic-angular";
 import {SurveyService} from "../../providers/services/survey.service";
 import {Survey} from "../../providers/domain/survey";
 import {Component, trigger, state, style, transition, animate, keyframes, ViewChild} from "@angular/core";
+import {Analytics} from "../../providers/services/analytics.service";
 
 @Component({
   templateUrl: 'survey.component.html',
@@ -83,13 +84,20 @@ export class SurveyComponent {
     this.loadSurvey();
   }
 
+  ionViewDidEnter() {
+    Analytics.enterPage("AnswerAtp");
+  }
+
   loadSurvey() {
     this.surveyService.getSurveyToAnswer().subscribe(data => this.showSurvey(data));
   }
 
   selectPicture(picNr: number) {
     if(this.animationOver) {
+      Analytics.event("send_selection_" + picNr, {page: "AnswerAtp"});
       this.surveyService.postResult(this.survey, picNr).subscribe(data => this.showSurvey(data));
+    } else {
+      Analytics.event("too_early_click", {page: "AnswerAtp"});
     }
   }
 
@@ -129,17 +137,22 @@ export class SurveyComponent {
   }
 
   toggleSlider(picNumber: number) {
+    Analytics.event("enlarge_picture", {page: "AnswerAtp"});
     //TODO: when showing slider, slide to the pic given in picNumber
     this.showSlider = !this.showSlider;
   }
 
   reportAbuse() {
+    Analytics.event("report_abuse_hint", {page: "AnswerAtp"});
     this.alertController.create({
       title: 'Report Abuse',
       message: "Abuse means that you think that these pictures show <strong>illegal</strong> or <strong>offensive</strong> content.<br/>If you don't think this is illegal or offensive, please tap 'Cancel'.",
       buttons: [
         {text: 'Cancel'},
-        {text: 'Report Abuse', handler: () => this.selectPicture(-1)}
+        {text: 'Report Abuse', handler: () => {
+          Analytics.event("send_report_abuse", {page: "AnswerAtp"});
+          this.selectPicture(-1);
+        }}
       ]
     }).present();
   }

@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 import {HighscoreService} from "../../providers/services/highscore.service";
 import {HighscoreUser} from "../../providers/domain/highscoreUser";
 import {ViewController, Platform} from "ionic-angular";
+import {Analytics} from "../../providers/services/analytics.service";
 
 @Component({
   selector: 'highscore-page',
@@ -25,17 +26,18 @@ export class HighscoreComponent {
               public platform: Platform) {
   }
 
-  // Close modal
+  ionViewDidEnter() {
+    this.loadHighscoreWeekGlobal();
+    Analytics.enterPage("Highscore");
+  }
+
   close() {
     this.viewCtrl.dismiss();
   }
 
-  ionViewDidEnter() {
-    this.loadHighscoreWeekGlobal();
-  }
-
   switchWeekGlobalLocal() {
     this.showWeekGlobal = !this.showWeekGlobal;
+    Analytics.event(this.showTotalGlobal ? "show_weekly_global" : "show_weekly_local", {page: "Highscore"});
     if(!this.showWeekGlobal && !this.weekLocalLoaded) {
       this.loadHighscoreWeekLocal();
     }
@@ -43,6 +45,7 @@ export class HighscoreComponent {
 
   switchTotalGlobalLocal() {
     this.showTotalGlobal = !this.showTotalGlobal;
+    Analytics.event(this.showTotalGlobal ? "show_total_global" : "show_total_local", {page: "Highscore"});
     if(!this.showTotalGlobal && !this.totalLocalLoaded) {
       this.loadHighscoreTotalLocal();
     }
@@ -52,6 +55,7 @@ export class HighscoreComponent {
     if(!this.totalGlobalLoaded) {
       this.loadHighscoreTotalGlobal();
     }
+    Analytics.event("switched_to_" + this.selection, {page: "Highscore"});
   }
 
   loadHighscoreWeekGlobal() {

@@ -119,8 +119,6 @@ import {ConnectivityService} from "../providers/services/connectivity.service";
     SurveyDetailsMenuComponent,
   ],
   providers: [
-    Model,
-    ShopService,
     AtpHttp,
     AuthService,
     CountryService,
@@ -129,8 +127,10 @@ import {ConnectivityService} from "../providers/services/connectivity.service";
     LoadingState,
     LocalStorage,
     MessagesService,
+    Model,
     NotificationService,
     SettingsService,
+    ShopService,
     SurveyService,
     ConnectivityService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

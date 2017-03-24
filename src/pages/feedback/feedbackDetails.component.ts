@@ -5,6 +5,8 @@ import {MessagesService} from "../../providers/services/messages.service";
 import {FeedbackAnswer} from "../../providers/domain/feedbackAnswer";
 import {Model} from "../../providers/services/model.service";
 import {Util} from "../../providers/domain/util";
+import {Analytics} from "../../providers/services/analytics.service";
+
 @Component({
   templateUrl: 'feedbackDetails.component.html'
 })
@@ -18,6 +20,10 @@ export class FeedbackDetailsComponent {
               public feedbackService: MessagesService) {
     this.feedback = navParams.get('feedback');
     this.loadAnswers();
+  }
+
+  ionViewDidEnter() {
+    Analytics.enterPage("FeedbackDetails");
   }
 
   getTimeDiff(date: string) {
@@ -39,16 +45,19 @@ export class FeedbackDetailsComponent {
   }
 
   closeFeedback() {
+    Analytics.event("close_feedback", {page: "FeedbackDetails"});
     this.feedbackService.closeFeedback(this.feedback).subscribe(
       feedback => Feedback.update(this.feedback, feedback)
     );
   }
 
   editResponse() {
+    Analytics.event("edit_response", {page: "FeedbackDetails"});
     this.newAnswer = new FeedbackAnswer();
   }
 
   sendAnswer() {
+    Analytics.event("send_response", {page: "FeedbackDetails"});
     this.feedbackService.sendFeedbackAnswer(this.feedback, this.newAnswer).subscribe(
       response => {
         this.newAnswer = null;

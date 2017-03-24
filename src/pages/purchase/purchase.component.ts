@@ -8,6 +8,7 @@ import {PersonalDataComponent} from "../personalData/personalData.component";
 import {InAppProduct} from "../../providers/domain/inAppProduct";
 import {InAppPurchase} from "ionic-native";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Analytics} from "../../providers/services/analytics.service";
 
 @Component({
   templateUrl: 'purchase.component.html',
@@ -31,15 +32,22 @@ export class PurchaseComponent {
     this.selection = model.claimableRewards > 0 ? 'rewards' : 'shop';
   }
 
+  ionViewDidEnter() {
+    Analytics.enterPage("Purchase");
+  }
+
   claimReward(reward: Reward) {
+    Analytics.event("claim_reward_" + reward.type, {page: "Purchase"});
     this.shopService.claimReward(reward.type);
   }
 
   openPersonalDataPage() {
+    Analytics.event("open_personal_data", {page: "Purchase"});
     this.nav.push(PersonalDataComponent);
   }
 
   buyProduct(product: InAppProduct) {
+    Analytics.event("buy_" + product.title, {page: "Purchase"});
     this.alertCtrl.create({
       title: 'Confirm purchase',
       message: 'You are going to buy <strong>' + product.title + '</strong> for <strong>' + product.price + '</strong>. Payment is done via App Store.',
@@ -47,6 +55,7 @@ export class PurchaseComponent {
         {text: 'Cancel'},
         {text: 'Check out', handler: () => {
           console.log("You are buying " + product.title + " for " + product.price);
+          Analytics.event("buy_confirm_" + product.title, {page: "Purchase"});
           InAppPurchase.buy(product.productId).then(
             data => {
               this.shopService.purchaseProduct(product.productId, data.receipt).subscribe(
@@ -86,6 +95,7 @@ export class PurchaseComponent {
   }
 
   redeemCode() {
+    Analytics.event("coupon_redeem", {page: "Purchase"});
     this.couponService.redeemCoupon(this.couponCode).subscribe(
       data => {
         this.couponCode = "";

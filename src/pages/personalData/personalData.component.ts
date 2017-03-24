@@ -7,6 +7,7 @@ import {AuthService} from "../../providers/services/auth.service";
 import {NotificationService} from "../../providers/services/notification.service";
 import {Util} from "../../providers/domain/util";
 import {CountrySelectionComponent} from "../countrySelection/countrySelection.component";
+import {Analytics} from "../../providers/services/analytics.service";
 
 @Component({
   templateUrl: 'personalData.component.html'
@@ -60,12 +61,17 @@ export class PersonalDataComponent {
     }
   }
 
+  ionViewDidEnter() {
+    Analytics.enterPage("PersonalData");
+  }
+
   // Modal close
   close() {
     this.viewCtrl.dismiss();
   }
 
   yearChanged() {
+    Analytics.event("yob_changed", {page: "PersonalData"});
     this.yearOfBirth = Number(this.yearString);
   }
 
@@ -87,16 +93,21 @@ export class PersonalDataComponent {
     // Update selected countries
     countrySelection.onDidDismiss(data => {
       if (data) {
+        if(data != this.country) {
+          Analytics.event("yob_changed", {page: "PersonalData"});
+        }
         this.country = data;
       }
     });
   }
 
   submitPersonalData() {
+    Analytics.event("send_personal_data", {page: "PersonalData"});
     this.authService.postPersonalData(this.yearOfBirth, this.male, this.country ? this.country.alpha3 : null).subscribe(data => this.model.user = data);
   }
 
   submitUsername() {
+    Analytics.event("send_username", {page: "PersonalData"});
     this.authService.postUsername(this.newUsername).subscribe(
       data => {
         this.model.user = data;
@@ -119,6 +130,7 @@ export class PersonalDataComponent {
   }
 
   submitSetEmail() {
+    Analytics.event("send_email", {page: "PersonalData"});
     this.authService.secureAccount(this.newEmail, this.newPassword).subscribe(
       data => {
         this.model.user = data;
@@ -128,12 +140,14 @@ export class PersonalDataComponent {
   }
 
   reloadStatus() {
+    Analytics.event("reload_user_status", {page: "PersonalData"});
     this.authService.getUser("Checking your status").subscribe(
       data => this.model.user = data
     );
   }
 
   resendConfirmationEmail() {
+    Analytics.event("resend_confirmation_email", {page: "PersonalData"});
     this.authService.resendConfirmationEmail().subscribe(
       data => {
         this.model.user = data;
@@ -151,6 +165,7 @@ export class PersonalDataComponent {
   }
 
   submitChangeEmail() {
+    Analytics.event("send_changed_email", {page: "PersonalData"});
     this.authService.postNewEmail(this.changeEmail, this.changeEmailPassword).subscribe(
       data => {
         this.model.user = data;
@@ -166,6 +181,7 @@ export class PersonalDataComponent {
   }
 
   submitChangePassword() {
+    Analytics.event("send_changed_password", {page: "PersonalData"});
     this.authService.postNewPassword(this.changePasswordOld, this.changePasswordNew).subscribe(
       data => {
         this.model.user = data;
