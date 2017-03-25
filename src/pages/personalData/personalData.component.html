@@ -23,8 +23,8 @@
       <ion-label class="flex-space-between">
         Gender:
         <span class="buttongroup">
-          <button ion-button small [outline]="male ? null : ''" (click)="male = true">Male</button>
-          <button ion-button small [outline]="(male === false) ? null : ''" (click)="male = false">Female</button>
+          <button ion-button small [outline]="male ? null : ''" (click)="genderChanged(true)">Male</button>
+          <button ion-button small [outline]="(male === false) ? null : ''" (click)="genderChanged(false)">Female</button>
         </span>
       </ion-label>
     </ion-item>
@@ -35,7 +35,6 @@
         <span *ngIf="!country" class="text-placeholder">please choose</span>
       </ion-label>
     </ion-item>
-    <ion-item><button ion-button full [disabled]="personalDataUnchanged()" (click)="submitPersonalData()">Save</button></ion-item>
   </ion-list>
 
   <ion-list *ngIf="!model.user.username">

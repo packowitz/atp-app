@@ -63,6 +63,21 @@ export class AuthService {
     return this.atpHttp.doPost("/app/user/personal-data", data, "Sending your data");
   }
 
+  postYearOfBirth(yearOfBirth: number): Observable<User> {
+    let data: any = {'yearOfBirth': yearOfBirth};
+    return this.atpHttp.doPost("/app/user/personal-data/year-of-birth", data, "Sending year of birth");
+  }
+
+  postGender(male: boolean): Observable<User> {
+    let data: any = {male: male};
+    return this.atpHttp.doPost("/app/user/personal-data/gender", data, "Sending your data");
+  }
+
+  postCountry(country: string): Observable<User> {
+    let data: any = {country: country};
+    return this.atpHttp.doPost("/app/user/personal-data/country", data, "Sending your data");
+  }
+
   checkAppVersion(): Observable<SuccessResponse> {
     let version: Version = new Version();
     return this.atpHttp.doPostBackground("/version/check", {major: version.major, minor: version.minor, patch: version.patch});

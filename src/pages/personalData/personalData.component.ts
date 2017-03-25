@@ -73,17 +73,13 @@ export class PersonalDataComponent {
   yearChanged() {
     Analytics.event("yob_changed", {page: "PersonalData"});
     this.yearOfBirth = Number(this.yearString);
+    this.authService.postYearOfBirth(this.yearOfBirth).subscribe(data => this.model.user = data);
   }
 
-  personalDataUnchanged(): boolean {
-    if (this.model.user.yearOfBirth !== this.yearOfBirth) {
-      return false;
-    }
-    if (this.model.user.male !== this.male) {
-      return false;
-    }
-
-    return !(this.country && this.model.user.country != this.country.alpha3);
+  genderChanged(male: boolean) {
+    Analytics.event("gender_changed", {page: "PersonalData"});
+    this.male = male;
+    this.authService.postGender(this.male).subscribe(data => this.model.user = data);
   }
 
   showCountrySelection() {
@@ -92,18 +88,12 @@ export class PersonalDataComponent {
 
     // Update selected countries
     countrySelection.onDidDismiss(data => {
-      if (data) {
-        if(data != this.country) {
-          Analytics.event("yob_changed", {page: "PersonalData"});
-        }
+      if (data && data != this.country) {
+        Analytics.event("country_changed", {page: "PersonalData"});
         this.country = data;
+        this.authService.postCountry(this.country.alpha3).subscribe(data => this.model.user = data);
       }
     });
-  }
-
-  submitPersonalData() {
-    Analytics.event("send_personal_data", {page: "PersonalData"});
-    this.authService.postPersonalData(this.yearOfBirth, this.male, this.country ? this.country.alpha3 : null).subscribe(data => this.model.user = data);
   }
 
   submitUsername() {
