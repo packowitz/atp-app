@@ -22,7 +22,7 @@
     </ion-item>
   </ion-list>
 </ion-content>
-<ion-footer>
+<ion-footer *ngIf="multiSelection">
   <ion-buttons end>
     <button ion-button clear (click)="submit()">Save</button>
   </ion-buttons>
