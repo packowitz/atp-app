@@ -1,6 +1,6 @@
 import {Platform, Tabs, ActionSheetController, AlertController, ModalController} from "ionic-angular";
 import {NgZone, Component} from "@angular/core";
-import {Camera, CameraOptions} from "ionic-native";
+import {Camera, CameraOptions} from "@ionic-native/camera";
 import {Survey} from "../../providers/domain/survey";
 import {Model} from "../../providers/services/model.service";
 import {SurveyService} from "../../providers/services/survey.service";
@@ -47,12 +47,14 @@ export class StartSurveyComponent {
               public actionSheetController: ActionSheetController,
               public modalCtrl: ModalController,
               public notificationService: NotificationService,
-              public alertController: AlertController) {
+              public alertController: AlertController,
+              public analytics: Analytics,
+              public camera: Camera) {
     this.createEmptySurvey();
   }
 
   ionViewDidEnter() {
-    Analytics.enterPage("CreateAtp");
+    this.analytics.enterPage("CreateAtp");
   }
 
   createEmptySurvey() {
@@ -106,14 +108,14 @@ export class StartSurveyComponent {
   }
 
   rotateLeft() {
-    Analytics.event("image_rotate_left", {page: "CreateAtp"});
+    this.analytics.event("image_rotate_left", {page: "CreateAtp"});
     if(this.croppie) {
       this.croppie.rotate(-90);
     }
   }
 
   rotateRight() {
-    Analytics.event("image_rotate_right", {page: "CreateAtp"});
+    this.analytics.event("image_rotate_right", {page: "CreateAtp"});
     if(this.croppie) {
       this.croppie.rotate(90);
     }
@@ -121,7 +123,7 @@ export class StartSurveyComponent {
 
   doTakePicture(source: number) {
     this.cameraOptions.sourceType = source;
-    Camera.getPicture(this.cameraOptions).then(data => {
+    this.camera.getPicture(this.cameraOptions).then(data => {
       this.ngZone.run(() => {
         this.showCroppie(data);
       });
@@ -135,14 +137,14 @@ export class StartSurveyComponent {
         text: 'Camera',
         icon: this.platform.is('ios') ? null : 'camera',
         handler: () => {
-          Analytics.event("image_choose_camera", {page: "CreateAtp"});
+          this.analytics.event("image_choose_camera", {page: "CreateAtp"});
           this.doTakePicture(1);
         }
       }, {
         text: 'Gallery',
         icon: this.platform.is('ios') ? null : 'image',
         handler: () => {
-          Analytics.event("image_choose_gallery", {page: "CreateAtp"});
+          this.analytics.event("image_choose_gallery", {page: "CreateAtp"});
           this.doTakePicture(0);
         }
       }
@@ -168,7 +170,7 @@ export class StartSurveyComponent {
   }
 
   deletePicture(index: number) {
-    Analytics.event("image_remove", {page: "CreateAtp"});
+    this.analytics.event("image_remove", {page: "CreateAtp"});
     console.log("delete " + index);
     this.pictures.splice(index, 1);
     this.recalculateNumberOfSurveys();
@@ -183,7 +185,7 @@ export class StartSurveyComponent {
   }
 
   changeGender(event: Event) {
-    Analytics.event("change_gender", {page: "CreateAtp"});
+    this.analytics.event("change_gender", {page: "CreateAtp"});
     if (this.survey.male && this.survey.female) {
       this.survey.male = false;
     } else if(this.survey.male) {
@@ -196,7 +198,7 @@ export class StartSurveyComponent {
   }
 
   showCountrySelection() {
-    Analytics.event("show_country_selection", {page: "CreateAtp"});
+    this.analytics.event("show_country_selection", {page: "CreateAtp"});
     let countrySelection = this.modalCtrl.create(CountrySelectionComponent, {selectedCountries: this.selectedCountries});
     countrySelection.present();
 
@@ -209,7 +211,7 @@ export class StartSurveyComponent {
   }
 
   changeSurveyType(event: Event) {
-    Analytics.event("change_type", {page: "CreateAtp"});
+    this.analytics.event("change_type", {page: "CreateAtp"});
     event.preventDefault();
     for(let i=0; i < this.model.surveyTypes.length; i++) {
       if(this.model.surveyTypes[i].key == this.surveyType.key) {
@@ -224,7 +226,7 @@ export class StartSurveyComponent {
   }
 
   showMultiPictureHint() {
-    Analytics.event("show_multi_picture_hint", {page: "CreateAtp"});
+    this.analytics.event("show_multi_picture_hint", {page: "CreateAtp"});
     this.alertController.create({
       title: '2+ pictures',
       message: 'If you choose more than 2 pictures then this will lead to an ATP for each combination.',
@@ -240,12 +242,12 @@ export class StartSurveyComponent {
 
   public startSurvey() {
     if(!this.survey.title) {
-      Analytics.event("show_no_title_hint", {page: "CreateAtp"});
+      this.analytics.event("show_no_title_hint", {page: "CreateAtp"});
       this.alertController.create({
         title: 'This ATP has no title',
         message: 'A title is helpful to point out what you want to ask the people. Continue without title?',
         buttons: [
-          {text: 'Cancel', handler: () => Analytics.event("no_title_cancel", {page: "CreateAtp"})},
+          {text: 'Cancel', handler: () => this.analytics.event("no_title_cancel", {page: "CreateAtp"})},
           {text: 'Continue', handler: () => this.submitSurvey()}
         ]
       }).present();
@@ -255,7 +257,7 @@ export class StartSurveyComponent {
   }
 
   public submitSurvey() {
-    Analytics.event("create_new_atp", {page: "CreateAtp"});
+    this.analytics.event("create_new_atp", {page: "CreateAtp"});
     //store settings in local storage as default for next survey
     let settings: SurveySettings = new SurveySettings();
 

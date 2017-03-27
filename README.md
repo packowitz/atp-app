@@ -1,9 +1,9 @@
 ## Installing required plugins: 
 * ionic plugin add cordova-plugin-camera
 
-* cordova plugin add cordova-plugin-inapppurchase
+* ionic plugin add cordova-plugin-inapppurchase
 
-* cordova plugin add cordova-plugin-firebase@0.1.18 --save
+* ionic plugin add cordova-plugin-firebase
 
 ## Developing:
 * Install all node_modules via npm: $ npm install

@@ -25,7 +25,8 @@ export class SurveyDetailsComponent {
               public nav: NavController,
               public model: Model,
               public localStorage: LocalStorage,
-              public notificationService: NotificationService) {
+              public notificationService: NotificationService,
+              public analytics: Analytics) {
     let surveyId = navParams.get('surveyId');
     this.survey = localStorage.getSurveyById(surveyId);
     if(this.survey.countries != 'ALL') {
@@ -39,26 +40,26 @@ export class SurveyDetailsComponent {
   }
 
   ionViewDidEnter() {
-    Analytics.enterPage("AtpDetails");
+    this.analytics.enterPage("AtpDetails");
   }
 
   toggleStatistics() {
-    Analytics.event("toggle_statistics", {page: "AtpDetails"});
+    this.analytics.event("toggle_statistics", {page: "AtpDetails"});
     this.statisticsExpand = !this.statisticsExpand;
   }
 
   showOptions(event: Event) {
-    Analytics.event("show_options", {page: "AtpDetails"});
+    this.analytics.event("show_options", {page: "AtpDetails"});
     let popover = this.popoverController.create(SurveyDetailsMenuComponent, {
       showRefresh: this.survey.status != 'FINISHED',
       showDelete: !this.survey.multiPicture,
       callbacks: {
         refresh: () => {
-          Analytics.event("refresh_atp", {page: "AtpDetails"});
+          this.analytics.event("refresh_atp", {page: "AtpDetails"});
           this.surveyService.loadSurveyDetails(this.survey);
         },
         delete: () => {
-          Analytics.event("show_delete_atp_alert", {page: "AtpDetails"});
+          this.analytics.event("show_delete_atp_alert", {page: "AtpDetails"});
           this.alertController.create({
             title: 'Delete this ATP?',
             message: 'Are you sure to delete this ATP? This action is permanent.',
@@ -67,7 +68,7 @@ export class SurveyDetailsComponent {
               {
                 text: 'Delete',
                 handler: () => {
-                  Analytics.event("delete_atp", {page: "AtpDetails"});
+                  this.analytics.event("delete_atp", {page: "AtpDetails"});
                   this.surveyService.deleteSurvey(this.survey).subscribe(() => {
                     this.localStorage.deleteSurvey(this.survey);
                     this.notificationService.showToast({

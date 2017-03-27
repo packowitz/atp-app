@@ -23,12 +23,13 @@ export class HighscoreComponent {
 
   constructor(public highscoreService: HighscoreService,
               public viewCtrl: ViewController,
-              public platform: Platform) {
+              public platform: Platform,
+              public analytics: Analytics) {
   }
 
   ionViewDidEnter() {
     this.loadHighscoreWeekGlobal();
-    Analytics.enterPage("Highscore");
+    this.analytics.enterPage("Highscore");
   }
 
   close() {
@@ -37,7 +38,7 @@ export class HighscoreComponent {
 
   switchWeekGlobalLocal() {
     this.showWeekGlobal = !this.showWeekGlobal;
-    Analytics.event(this.showTotalGlobal ? "show_weekly_global" : "show_weekly_local", {page: "Highscore"});
+    this.analytics.event(this.showTotalGlobal ? "show_weekly_global" : "show_weekly_local", {page: "Highscore"});
     if(!this.showWeekGlobal && !this.weekLocalLoaded) {
       this.loadHighscoreWeekLocal();
     }
@@ -45,7 +46,7 @@ export class HighscoreComponent {
 
   switchTotalGlobalLocal() {
     this.showTotalGlobal = !this.showTotalGlobal;
-    Analytics.event(this.showTotalGlobal ? "show_total_global" : "show_total_local", {page: "Highscore"});
+    this.analytics.event(this.showTotalGlobal ? "show_total_global" : "show_total_local", {page: "Highscore"});
     if(!this.showTotalGlobal && !this.totalLocalLoaded) {
       this.loadHighscoreTotalLocal();
     }
@@ -55,7 +56,7 @@ export class HighscoreComponent {
     if(!this.totalGlobalLoaded) {
       this.loadHighscoreTotalGlobal();
     }
-    Analytics.event("switched_to_" + this.selection, {page: "Highscore"});
+    this.analytics.event("switched_to_" + this.selection, {page: "Highscore"});
   }
 
   loadHighscoreWeekGlobal() {

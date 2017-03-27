@@ -46,6 +46,12 @@ import {SpinnerComponent} from "../components/spinner/spinner.component";
 import {SettingsService} from "../providers/services/settings.service";
 import {CountrySelectionComponent} from "../pages/countrySelection/countrySelection.component";
 import {ConnectivityService} from "../providers/services/connectivity.service";
+import {Camera} from "@ionic-native/camera";
+import {Firebase} from "@ionic-native/firebase";
+import {InAppPurchase} from "@ionic-native/in-app-purchase";
+import {Analytics} from "../providers/services/analytics.service";
+import {StatusBar} from "@ionic-native/status-bar";
+import {SplashScreen} from "@ionic-native/splash-screen";
 
 @NgModule({
   declarations: [
@@ -119,11 +125,15 @@ import {ConnectivityService} from "../providers/services/connectivity.service";
     SurveyDetailsMenuComponent,
   ],
   providers: [
+    Analytics,
     AtpHttp,
     AuthService,
+    Camera,
     CountryService,
     CouponService,
+    Firebase,
     HighscoreService,
+    InAppPurchase,
     LoadingState,
     LocalStorage,
     MessagesService,
@@ -131,6 +141,8 @@ import {ConnectivityService} from "../providers/services/connectivity.service";
     NotificationService,
     SettingsService,
     ShopService,
+    SplashScreen,
+    StatusBar,
     SurveyService,
     ConnectivityService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

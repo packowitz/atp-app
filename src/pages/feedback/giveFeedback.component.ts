@@ -19,18 +19,19 @@ export class GiveFeedbackComponent {
               public feedbackService: MessagesService,
               public notificationService: NotificationService,
               public viewCtrl: ViewController,
-              public platform: Platform) {
+              public platform: Platform,
+              public analytics: Analytics) {
     this.type = navParams.get('type');
     this.feedback = new Feedback();
     this.feedback.type = this.type;
   }
 
   ionViewDidEnter() {
-    Analytics.enterPage("GiveFeedback");
+    this.analytics.enterPage("GiveFeedback");
   }
 
   sendFeedback() {
-    Analytics.event("send_feedback", {page: "GiveFeedback"});
+    this.analytics.event("send_feedback", {page: "GiveFeedback"});
     this.feedbackService.sendFeedback(this.feedback).subscribe(
       feedback => {
         this.model.feedback.unshift(feedback);

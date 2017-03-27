@@ -6,9 +6,9 @@ import {NavController, AlertController} from "ionic-angular";
 import {CouponService} from "../../providers/services/coupon.service";
 import {PersonalDataComponent} from "../personalData/personalData.component";
 import {InAppProduct} from "../../providers/domain/inAppProduct";
-import {InAppPurchase} from "ionic-native";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Analytics} from "../../providers/services/analytics.service";
+import {InAppPurchase} from "@ionic-native/in-app-purchase";
 
 @Component({
   templateUrl: 'purchase.component.html',
@@ -25,7 +25,8 @@ export class PurchaseComponent {
               public nav: NavController,
               public alertCtrl: AlertController,
               public fb: FormBuilder,
-              public couponService: CouponService) {
+              public couponService: CouponService,
+              public analytics: Analytics, public inAppPurchase: InAppPurchase) {
     this.couponForm = fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(25)])]
     });
@@ -33,21 +34,21 @@ export class PurchaseComponent {
   }
 
   ionViewDidEnter() {
-    Analytics.enterPage("Purchase");
+    this.analytics.enterPage("Purchase");
   }
 
   claimReward(reward: Reward) {
-    Analytics.event("claim_reward_" + reward.type, {page: "Purchase"});
+    this.analytics.event("claim_reward_" + reward.type, {page: "Purchase"});
     this.shopService.claimReward(reward.type);
   }
 
   openPersonalDataPage() {
-    Analytics.event("open_personal_data", {page: "Purchase"});
+    this.analytics.event("open_personal_data", {page: "Purchase"});
     this.nav.push(PersonalDataComponent);
   }
 
   buyProduct(product: InAppProduct) {
-    Analytics.event("buy_" + product.title, {page: "Purchase"});
+    this.analytics.event("buy_" + product.title, {page: "Purchase"});
     this.alertCtrl.create({
       title: 'Confirm purchase',
       message: 'You are going to buy <strong>' + product.title + '</strong> for <strong>' + product.price + '</strong>. Payment is done via App Store.',
@@ -55,12 +56,12 @@ export class PurchaseComponent {
         {text: 'Cancel'},
         {text: 'Check out', handler: () => {
           console.log("You are buying " + product.title + " for " + product.price);
-          Analytics.event("buy_confirm_" + product.title, {page: "Purchase"});
-          InAppPurchase.buy(product.productId).then(
+          this.analytics.event("buy_confirm_" + product.title, {page: "Purchase"});
+          this.inAppPurchase.buy(product.productId).then(
             data => {
               this.shopService.purchaseProduct(product.productId, data.receipt).subscribe(
                 () => {
-                  InAppPurchase.consume(data.productType, data.receipt, data.signature).then(
+                  this.inAppPurchase.consume(data.productType, data.receipt, data.signature).then(
                     () => {
                       this.shopService.consumeProduct(product.productId).subscribe(
                         () => this.showPaymentSuccess(),
@@ -95,7 +96,7 @@ export class PurchaseComponent {
   }
 
   redeemCode() {
-    Analytics.event("coupon_redeem", {page: "Purchase"});
+    this.analytics.event("coupon_redeem", {page: "Purchase"});
     this.couponService.redeemCoupon(this.couponCode).subscribe(
       data => {
         this.couponCode = "";

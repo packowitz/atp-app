@@ -17,13 +17,14 @@ export class FeedbackDetailsComponent {
 
   constructor(public navParams: NavParams,
               public model: Model,
-              public feedbackService: MessagesService) {
+              public feedbackService: MessagesService,
+              public analytics: Analytics) {
     this.feedback = navParams.get('feedback');
     this.loadAnswers();
   }
 
   ionViewDidEnter() {
-    Analytics.enterPage("FeedbackDetails");
+    this.analytics.enterPage("FeedbackDetails");
   }
 
   getTimeDiff(date: string) {
@@ -45,19 +46,19 @@ export class FeedbackDetailsComponent {
   }
 
   closeFeedback() {
-    Analytics.event("close_feedback", {page: "FeedbackDetails"});
+    this.analytics.event("close_feedback", {page: "FeedbackDetails"});
     this.feedbackService.closeFeedback(this.feedback).subscribe(
       feedback => Feedback.update(this.feedback, feedback)
     );
   }
 
   editResponse() {
-    Analytics.event("edit_response", {page: "FeedbackDetails"});
+    this.analytics.event("edit_response", {page: "FeedbackDetails"});
     this.newAnswer = new FeedbackAnswer();
   }
 
   sendAnswer() {
-    Analytics.event("send_response", {page: "FeedbackDetails"});
+    this.analytics.event("send_response", {page: "FeedbackDetails"});
     this.feedbackService.sendFeedbackAnswer(this.feedback, this.newAnswer).subscribe(
       response => {
         this.newAnswer = null;

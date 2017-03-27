@@ -13,15 +13,16 @@ export class MySurveyComponent {
 
   constructor(public tabs: Tabs,
               public localStorage: LocalStorage,
-              public surveyService: SurveyService) {}
+              public surveyService: SurveyService,
+              public analytics: Analytics) {}
 
   ionViewDidEnter() {
     this.surveyService.updateMySurveys();
-    Analytics.enterPage("MyAtps");
+    this.analytics.enterPage("MyAtps");
   }
 
   gotoStartSurvey() {
-    Analytics.event("open_create_atp", {page: "MyAtps"});
+    this.analytics.event("open_create_atp", {page: "MyAtps"});
     this.tabs.select(Model.StartSurveyTab);
   }
 }

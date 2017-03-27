@@ -41,7 +41,8 @@ export class PersonalDataComponent {
               public viewCtrl: ViewController,
               public modalCtrl: ModalController,
               public alertController: AlertController,
-              public platform: Platform) {
+              public platform: Platform,
+              public analytics: Analytics) {
     let currentYear: number = new Date().getFullYear();
     this.minYear = String(currentYear - 99);
     this.maxYear = String(currentYear - 5);
@@ -62,7 +63,7 @@ export class PersonalDataComponent {
   }
 
   ionViewDidEnter() {
-    Analytics.enterPage("PersonalData");
+    this.analytics.enterPage("PersonalData");
   }
 
   // Modal close
@@ -71,13 +72,13 @@ export class PersonalDataComponent {
   }
 
   yearChanged() {
-    Analytics.event("yob_changed", {page: "PersonalData"});
+    this.analytics.event("yob_changed", {page: "PersonalData"});
     this.yearOfBirth = Number(this.yearString);
     this.authService.postYearOfBirth(this.yearOfBirth).subscribe(data => this.model.user = data);
   }
 
   genderChanged(male: boolean) {
-    Analytics.event("gender_changed", {page: "PersonalData"});
+    this.analytics.event("gender_changed", {page: "PersonalData"});
     this.male = male;
     this.authService.postGender(this.male).subscribe(data => this.model.user = data);
   }
@@ -89,7 +90,7 @@ export class PersonalDataComponent {
     // Update selected countries
     countrySelection.onDidDismiss(data => {
       if (data && data != this.country) {
-        Analytics.event("country_changed", {page: "PersonalData"});
+        this.analytics.event("country_changed", {page: "PersonalData"});
         this.country = data;
         this.authService.postCountry(this.country.alpha3).subscribe(data => this.model.user = data);
       }
@@ -97,7 +98,7 @@ export class PersonalDataComponent {
   }
 
   submitUsername() {
-    Analytics.event("send_username", {page: "PersonalData"});
+    this.analytics.event("send_username", {page: "PersonalData"});
     this.authService.postUsername(this.newUsername).subscribe(
       data => {
         this.model.user = data;
@@ -120,7 +121,7 @@ export class PersonalDataComponent {
   }
 
   submitSetEmail() {
-    Analytics.event("send_email", {page: "PersonalData"});
+    this.analytics.event("send_email", {page: "PersonalData"});
     this.authService.secureAccount(this.newEmail, this.newPassword).subscribe(
       data => {
         this.model.user = data;
@@ -130,14 +131,14 @@ export class PersonalDataComponent {
   }
 
   reloadStatus() {
-    Analytics.event("reload_user_status", {page: "PersonalData"});
+    this.analytics.event("reload_user_status", {page: "PersonalData"});
     this.authService.getUser("Checking your status").subscribe(
       data => this.model.user = data
     );
   }
 
   resendConfirmationEmail() {
-    Analytics.event("resend_confirmation_email", {page: "PersonalData"});
+    this.analytics.event("resend_confirmation_email", {page: "PersonalData"});
     this.authService.resendConfirmationEmail().subscribe(
       data => {
         this.model.user = data;
@@ -155,7 +156,7 @@ export class PersonalDataComponent {
   }
 
   submitChangeEmail() {
-    Analytics.event("send_changed_email", {page: "PersonalData"});
+    this.analytics.event("send_changed_email", {page: "PersonalData"});
     this.authService.postNewEmail(this.changeEmail, this.changeEmailPassword).subscribe(
       data => {
         this.model.user = data;
@@ -171,7 +172,7 @@ export class PersonalDataComponent {
   }
 
   submitChangePassword() {
-    Analytics.event("send_changed_password", {page: "PersonalData"});
+    this.analytics.event("send_changed_password", {page: "PersonalData"});
     this.authService.postNewPassword(this.changePasswordOld, this.changePasswordNew).subscribe(
       data => {
         this.model.user = data;

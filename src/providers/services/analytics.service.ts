@@ -1,17 +1,16 @@
-declare var FirebasePlugin: any;
+import {Injectable} from "@angular/core";
+import {Firebase} from "@ionic-native/firebase";
 
+@Injectable()
 export class Analytics {
 
-  public static enterPage(name: string) {
-    if(typeof FirebasePlugin != 'undefined') {
-      FirebasePlugin.setScreenName(name);
-    }
+  constructor(public firebase: Firebase) {
   }
 
-  public static event(name: string, event: any) {
-    if(typeof FirebasePlugin != 'undefined') {
-      FirebasePlugin.logEvent(name, event);
-    }
+  public enterPage(name: string) {
+    this.firebase.setScreenName(name);
   }
-
+  public event(name: string, event: any) {
+    this.firebase.logEvent(name, event);
+  }
 }

@@ -25,7 +25,8 @@ export class MultiPictureSurveyDetailsComponent {
               public nav: NavController,
               public model: Model,
               public localStorage: LocalStorage,
-              public notificationService: NotificationService) {
+              public notificationService: NotificationService,
+              public analytics: Analytics) {
     this.meta = navParams.get('multiPictureSurvey');
     if(this.meta.countries != 'ALL') {
       this.countries = this.meta.countries.split(",");
@@ -35,17 +36,17 @@ export class MultiPictureSurveyDetailsComponent {
   }
 
   ionViewDidEnter() {
-    Analytics.enterPage("MultiPictureAtpDetails");
+    this.analytics.enterPage("MultiPictureAtpDetails");
   }
 
   showOptions(event: Event) {
-    Analytics.event("show_options", {page: "MultiPictureAtpDetails"});
+    this.analytics.event("show_options", {page: "MultiPictureAtpDetails"});
     let popover = this.popoverController.create(SurveyDetailsMenuComponent, {
       showRefresh: this.meta.status != 'FINISHED',
       showDelete: true,
       callbacks: {
         refresh: () => {
-          Analytics.event("refresh_atp", {page: "MultiPictureAtpDetails"});
+          this.analytics.event("refresh_atp", {page: "MultiPictureAtpDetails"});
           this.surveyService.updateMySurveys("updating your ATPs");
         },
         delete: () => {
@@ -57,7 +58,7 @@ export class MultiPictureSurveyDetailsComponent {
               {
                 text: 'Delete',
                 handler: () => {
-                  Analytics.event("delete_atp", {page: "MultiPictureAtpDetails"});
+                  this.analytics.event("delete_atp", {page: "MultiPictureAtpDetails"});
                   this.surveyService.deleteSurveyGroup(this.meta).subscribe(() => {
                     this.localStorage.deleteSurveyByGroupId(this.meta.groupId);
                     this.notificationService.showToast({
@@ -82,7 +83,7 @@ export class MultiPictureSurveyDetailsComponent {
   }
 
   toggleShowDetails(picture: SurveyPicture) {
-    Analytics.event("toggle_details", {page: "MultiPictureAtpDetails"});
+    this.analytics.event("toggle_details", {page: "MultiPictureAtpDetails"});
     let idx = this.pictureDetailIds.indexOf(picture.pictureId);
     if(idx == -1) {
       this.pictureDetailIds.push(picture.pictureId);

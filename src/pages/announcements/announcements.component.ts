@@ -12,11 +12,12 @@ export class AnnouncementsComponent {
   constructor(public nav: NavController,
               public model: Model,
               public viewCtrl: ViewController,
-              public platform: Platform) {
+              public platform: Platform,
+              public analytics: Analytics) {
   }
 
   ionViewDidEnter() {
-    Analytics.enterPage("Announcements");
+    this.analytics.enterPage("Announcements");
   }
 
   getTimeDiff(date: string) {

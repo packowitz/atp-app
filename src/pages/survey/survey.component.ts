@@ -80,12 +80,13 @@ export class SurveyComponent {
   iDontKnowImageIndex: number;
 
   constructor(public surveyService: SurveyService,
-              public alertController: AlertController) {
+              public alertController: AlertController,
+              public analytics: Analytics) {
     this.loadSurvey();
   }
 
   ionViewDidEnter() {
-    Analytics.enterPage("AnswerAtp");
+    this.analytics.enterPage("AnswerAtp");
   }
 
   loadSurvey() {
@@ -94,10 +95,10 @@ export class SurveyComponent {
 
   selectPicture(picNr: number) {
     if(this.animationOver) {
-      Analytics.event("send_selection_" + picNr, {page: "AnswerAtp"});
+      this.analytics.event("send_selection_" + picNr, {page: "AnswerAtp"});
       this.surveyService.postResult(this.survey, picNr).subscribe(data => this.showSurvey(data));
     } else {
-      Analytics.event("too_early_click", {page: "AnswerAtp"});
+      this.analytics.event("too_early_click", {page: "AnswerAtp"});
     }
   }
 
@@ -137,20 +138,20 @@ export class SurveyComponent {
   }
 
   toggleSlider(picNumber: number) {
-    Analytics.event("enlarge_picture", {page: "AnswerAtp"});
+    this.analytics.event("enlarge_picture", {page: "AnswerAtp"});
     //TODO: when showing slider, slide to the pic given in picNumber
     this.showSlider = !this.showSlider;
   }
 
   reportAbuse() {
-    Analytics.event("report_abuse_hint", {page: "AnswerAtp"});
+    this.analytics.event("report_abuse_hint", {page: "AnswerAtp"});
     this.alertController.create({
       title: 'Report Abuse',
       message: "Abuse means that you think that these pictures show <strong>illegal</strong> or <strong>offensive</strong> content.<br/>If you don't think this is illegal or offensive, please tap 'Cancel'.",
       buttons: [
         {text: 'Cancel'},
         {text: 'Report Abuse', handler: () => {
-          Analytics.event("send_report_abuse", {page: "AnswerAtp"});
+          this.analytics.event("send_report_abuse", {page: "AnswerAtp"});
           this.selectPicture(-1);
         }}
       ]

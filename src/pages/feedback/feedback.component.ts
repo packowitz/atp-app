@@ -13,11 +13,12 @@ export class FeedbackComponent {
   constructor(public nav: NavController,
               public model: Model,
               public viewCtrl: ViewController,
-              public platform: Platform) {
+              public platform: Platform,
+              public analytics: Analytics) {
   }
 
   ionViewDidEnter() {
-    Analytics.enterPage("MyFeedback");
+    this.analytics.enterPage("MyFeedback");
   }
 
   getTimeDiff(date: string) {

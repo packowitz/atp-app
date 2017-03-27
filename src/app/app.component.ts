@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {Platform, ModalController} from 'ionic-angular';
-import {StatusBar, Splashscreen} from 'ionic-native';
 import {LoadingComponent} from "../pages/loading/loading.component";
 import 'rxjs/Rx';
 import {Model} from "../providers/services/model.service";
@@ -12,6 +11,8 @@ import {PersonalDataComponent} from "../pages/personalData/personalData.componen
 import {AboutComponent} from "../pages/about/about.component";
 import {GiveFeedbackComponent} from "../pages/feedback/giveFeedback.component";
 import {Analytics} from "../providers/services/analytics.service";
+import {SplashScreen} from "@ionic-native/splash-screen";
+import {StatusBar} from "@ionic-native/status-bar";
 
 /**
  * Main app controller.
@@ -27,62 +28,62 @@ export class AtpApp {
 
   constructor(public platform: Platform,
               public modalCtrl: ModalController,
-              public model: Model) {
+              public model: Model,
+              public analytics: Analytics,
+              public statusBar: StatusBar,
+              public splashScreen: SplashScreen) {
     platform.ready().then(() => {
-      StatusBar.styleDefault();
-      if(Splashscreen) {
-        setTimeout(() => Splashscreen.hide(), 100);
-      }
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
     });
   }
-
   showSettings() {
-    Analytics.event("open_settings", {page: "Menu"});
+    this.analytics.event("open_settings", {page: "Menu"});
     this.modalCtrl.create(SettingsComponent).present();
   }
 
   showAboutPage() {
-    Analytics.event("open_about", {page: "Menu"});
+    this.analytics.event("open_about", {page: "Menu"});
     this.modalCtrl.create(AboutComponent).present();
   }
 
   showPersonalData() {
-    Analytics.event("open_personal_data", {page: "Menu"});
+    this.analytics.event("open_personal_data", {page: "Menu"});
     this.modalCtrl.create(PersonalDataComponent).present();
   }
 
   showHighscorePage() {
-    Analytics.event("open_highscore", {page: "Menu"});
+    this.analytics.event("open_highscore", {page: "Menu"});
     this.modalCtrl.create(HighscoreComponent).present();
   }
 
   showAnnouncements() {
-    Analytics.event("open_announcements", {page: "Menu"});
+    this.analytics.event("open_announcements", {page: "Menu"});
     this.modalCtrl.create(AnnouncementsComponent).present();
   }
 
   showFeedbackPage() {
-    Analytics.event("open_feedback", {page: "Menu"});
+    this.analytics.event("open_feedback", {page: "Menu"});
     this.modalCtrl.create(FeedbackComponent).present();
   }
 
   showImprovementPage() {
-    Analytics.event("open_write_feedback_improvement", {page: "Menu"});
+    this.analytics.event("open_write_feedback_improvement", {page: "Menu"});
     this.modalCtrl.create(GiveFeedbackComponent, {type: 'IMPROVEMENT'}).present();
   }
 
   showBugReportPage() {
-    Analytics.event("open_write_feedback_bug", {page: "Menu"});
+    this.analytics.event("open_write_feedback_bug", {page: "Menu"});
     this.modalCtrl.create(GiveFeedbackComponent, {type: 'BUG_REPORT'}).present();
   }
 
   showMessageSuggestionPage() {
-    Analytics.event("open_write_feedback_message", {page: "Menu"});
+    this.analytics.event("open_write_feedback_message", {page: "Menu"});
     this.modalCtrl.create(GiveFeedbackComponent, {type: 'MESSAGE_SUGGESTION'}).present();
   }
 
   showOtherFeedbackPage() {
-    Analytics.event("open_write_feedback_other", {page: "Menu"});
+    this.analytics.event("open_write_feedback_other", {page: "Menu"});
     this.modalCtrl.create(GiveFeedbackComponent, {type: 'OTHER'}).present();
   }
 }
