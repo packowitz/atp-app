@@ -65,6 +65,10 @@ export class CountrySelectionComponent {
 
       this.selectedCountries.push(country);
     }
+
+    // Dismiss popover if we only want a single selection
+    if (!this.multiSelection)
+      this.submit();
   }
 
   /**
