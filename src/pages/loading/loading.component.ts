@@ -252,7 +252,7 @@ export class LoadingComponent {
 
   public loadInAppProducts() {
     this.stepMessage = "Loading IAPs";
-    if(this.platform.is("android") || this.platform.is("ios")) {
+    if(this.platform.is('cordova')) {
       this.inAppPurchase.getProducts(this.model.inAppProductIds)
         .then(products => {
           console.log("Retrieved " + products.length + " in app products");
@@ -279,68 +279,70 @@ export class LoadingComponent {
 
   public configureFirebase() {
     this.stepMessage = "configure Firebase";
-    try {
-      this.firebase.getToken()
-        .then(token => this.settingsService.updateNotificationToken(token).subscribe(data => this.model.notificationSettings = data))
-        .catch(err => console.log("Error on FirebasePlugin.getToken: " + err));
-      this.firebase.onTokenRefresh()
-        .subscribe(token => this.settingsService.updateNotificationToken(token).subscribe(data => this.model.notificationSettings = data));
-      this.firebase.onNotificationOpen().subscribe(
-        data => {
-          if (data.tap) {
-            //refresh the data in the background (atp-finish need no handling because it gets refreshed every time on home screen)
-            if (data.type == 'answer') {
-              this.feedbackService.loadFeedback().subscribe(data => this.model.setFeedback(data));
-              this.nav.push(FeedbackComponent);
-            } else if (data.type == 'announcement') {
-              this.feedbackService.loadAnnouncements().subscribe(data => this.model.setAnnouncements(data));
-              this.nav.push(AnnouncementsComponent);
-            } else if (data.type == 'answerable') {
-              this.nav.push(SurveyComponent);
-            }
-          } else {
-            if (data.type == 'answer') {
-              this.feedbackService.loadFeedback().subscribe(
-                data => {
-                  this.model.setFeedback(data);
-                  if (this.model.unreadFeedback > 0) {
-                    this.notificationService.showToast({
-                      message: 'Your feedback was answered',
-                      duration: 3000,
-                      showCloseButton: true,
-                      closeButtonText: 'OK'
-                    });
+    if(this.platform.is('cordova')) {
+      try {
+        this.firebase.getToken()
+          .then(token => this.settingsService.updateNotificationToken(token).subscribe(data => this.model.notificationSettings = data))
+          .catch(err => console.log("Error on FirebasePlugin.getToken: " + err));
+        this.firebase.onTokenRefresh()
+          .subscribe(token => this.settingsService.updateNotificationToken(token).subscribe(data => this.model.notificationSettings = data));
+        this.firebase.onNotificationOpen().subscribe(
+          data => {
+            if (data.tap) {
+              //refresh the data in the background (atp-finish need no handling because it gets refreshed every time on home screen)
+              if (data.type == 'answer') {
+                this.feedbackService.loadFeedback().subscribe(data => this.model.setFeedback(data));
+                this.nav.push(FeedbackComponent);
+              } else if (data.type == 'announcement') {
+                this.feedbackService.loadAnnouncements().subscribe(data => this.model.setAnnouncements(data));
+                this.nav.push(AnnouncementsComponent);
+              } else if (data.type == 'answerable') {
+                this.nav.push(SurveyComponent);
+              }
+            } else {
+              if (data.type == 'answer') {
+                this.feedbackService.loadFeedback().subscribe(
+                  data => {
+                    this.model.setFeedback(data);
+                    if (this.model.unreadFeedback > 0) {
+                      this.notificationService.showToast({
+                        message: 'Your feedback was answered',
+                        duration: 3000,
+                        showCloseButton: true,
+                        closeButtonText: 'OK'
+                      });
+                    }
                   }
-                }
-              );
-            } else if (data.type == 'announcement') {
-              this.feedbackService.loadAnnouncements().subscribe(
-                data => {
-                  this.model.setAnnouncements(data);
-                }
-              );
-            } else if (data.type == 'atp-finished') {
-              this.surveyService.updateMySurveys();
-              this.notificationService.showToast({
-                message: 'Your ATP just finished',
-                duration: 3000,
-                showCloseButton: true,
-                closeButtonText: 'OK'
-              });
-            } else if (data.type == 'atp-abused') {
-              this.surveyService.updateMySurveys();
-              this.notificationService.showToast({
-                message: 'Your ATP was marked as inaceptable!',
-                duration: 3000,
-                showCloseButton: true,
-                closeButtonText: 'OK'
-              });
+                );
+              } else if (data.type == 'announcement') {
+                this.feedbackService.loadAnnouncements().subscribe(
+                  data => {
+                    this.model.setAnnouncements(data);
+                  }
+                );
+              } else if (data.type == 'atp-finished') {
+                this.surveyService.updateMySurveys();
+                this.notificationService.showToast({
+                  message: 'Your ATP just finished',
+                  duration: 3000,
+                  showCloseButton: true,
+                  closeButtonText: 'OK'
+                });
+              } else if (data.type == 'atp-abused') {
+                this.surveyService.updateMySurveys();
+                this.notificationService.showToast({
+                  message: 'Your ATP was marked as inaceptable!',
+                  duration: 3000,
+                  showCloseButton: true,
+                  closeButtonText: 'OK'
+                });
+              }
             }
           }
-        }
-      );
-    } catch (e) {
-      console.log(e);
+        );
+      } catch (e) {
+        console.log(e);
+      }
     }
     this.state.configureFirebase = true;
     this.loadDataFromServer();
