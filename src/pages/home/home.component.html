@@ -15,11 +15,11 @@
 
   <div class="white-background padding-bottom-middle padding-top-small text-h5">
     <!-- Not registered -->
-    <div class="text-center margin-top-middle color-grey" *ngIf="!model.user.username" (click)="showAnonymousAlert()">You are not registered <ion-icon name="help-circle"></ion-icon></div>
+    <div class="text-center margin-top-middle color-grey" *ngIf="!model.user.username" (click)="showAnonymousAlert()">Account is not personalized <ion-icon name="help-circle"></ion-icon></div>
 
     <!-- Main info -->
     <div class="flex-space-between padding-horizontal-middle color-dark">
-      <span *ngIf="model.user.username">{{model.user.username}}</span>
+      <span *ngIf="model.user.username">{{model.user.username}} <i class="fa fa-unlock color-orange" *ngIf="!model.user.email" (click)="showSecureAlert()"></i></span>
       <span *ngIf="model.user.male"><ion-icon name="man"></ion-icon></span>
       <span *ngIf="model.user.male === false"><ion-icon name="woman"></ion-icon></span>
       <span *ngIf="model.user.yearOfBirth">{{currentYear - model.user.yearOfBirth}} years</span>

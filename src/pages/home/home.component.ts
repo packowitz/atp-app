@@ -51,6 +51,18 @@ export class HomeComponent {
     }).present();
   }
 
+  showSecureAlert() {
+    this.analytics.event("show_secure_alert", {page: "Home"});
+    this.alertController.create({
+      title: 'Secure your account',
+      message: 'Please go to \'Personal data\' and secure your account with an email address and a password.',
+      buttons: [
+        {text: 'Personal data', handler: () => {this.openPersonalDataPage();}},
+        {text: 'Later'}
+      ]
+    }).present();
+  }
+
   openPersonalDataPage() {
     this.analytics.event("open_personal_data", {page: "Home"});
     this.modalCtrl.create(PersonalDataComponent).present();
