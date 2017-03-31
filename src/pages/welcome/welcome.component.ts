@@ -1,5 +1,5 @@
-import {Component} from "@angular/core";
-import {NavController, MenuController, AlertController} from "ionic-angular";
+import {Component, ViewChild} from "@angular/core";
+import {NavController, MenuController, AlertController, Slides} from "ionic-angular";
 import {Model} from "../../providers/services/model.service";
 import {AuthService} from "../../providers/services/auth.service";
 import {LoadingComponent} from "../loading/loading.component";
@@ -16,6 +16,7 @@ import {EmailValidators} from "../../providers/validators/email.validator";
   templateUrl: 'welcome.component.html'
 })
 export class WelcomeComponent {
+  @ViewChild(Slides) slides: Slides;
   email: string;
   password: string;
   deviceHeight: number = 100;
@@ -48,6 +49,9 @@ export class WelcomeComponent {
     );
   }
 
+  slideNext() {
+    this.slides.slideNext();
+  }
 
   login() {
     this.localStorage.clearStorage();

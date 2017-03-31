@@ -16,8 +16,15 @@
   }
 
   .welcome-text {
-    margin: 2rem 4rem 4rem 4rem;
+    margin: 2rem 4rem;
     font-size: 1.6rem;
+  }
+
+  .welcome-links {
+    text-decoration: underline;
+    margin: 1.4rem;
+    font-size: 1.6rem;
+    color: $atp-blue;
   }
 
   .footer {

@@ -1,43 +1,48 @@
 <ion-content class="welcome-page" [style.height]="deviceHeight + 'px'">
-    <div class="logo">
-        <img src="assets/img/icon-invert.png">
-        <div>ATP beta</div>
-    </div>
-    <ion-slides pager="true">
-        <ion-slide>
-            <h1 class="color-dark padding-top-small">Welcome to ATP</h1>
-            <div class="welcome-text">
-                Ask The People (ATP) is a community driven decision helper.
-                By uploading two pictures you ask the people to vote on which one they like more.<br/>
-                Earn credits by helping other people on their decisions.
-            </div>
-        </ion-slide>
-        <ion-slide>
-          <form [formGroup]="loginForm">
-            <ion-list>
-              <ion-item>
-                <ion-label floating>email address</ion-label>
-                <ion-input type="email" [(ngModel)]="email" formControlName="email"></ion-input>
-              </ion-item>
-              <p *ngIf="loginForm.controls['email'].touched && !loginForm.controls['email'].valid" color="danger" padding-left>
-                Please enter a valid email.
-              </p>
-              <ion-item>
-                <ion-label floating>password</ion-label>
-                <ion-input type="password" [(ngModel)]="password" formControlName="password"></ion-input>
-              </ion-item>
-              <p *ngIf="loginForm.controls['password'].touched && !loginForm.controls['password'].valid" color="danger" padding-left>
-                Please enter a password.
-              </p>
-            </ion-list>
-            <div class="action-items">
-              <button ion-button color="light" class="login-button" [disabled]="!loginForm.valid" (click)="login()">Login</button>
-              <div (click)="forgotPassword()">Forgot password</div>
-              <div (click)="startATP()">I am new to ATP</div>
-            </div>
-          </form>
-        </ion-slide>
-    </ion-slides>
-    <div class="flex-grow">&nbsp;</div>
-    <div class="footer">&copy; 2016 Pacworx</div>
+  <div class="logo">
+    <img src="assets/img/icon-invert.png">
+    <div>ATP beta</div>
+  </div>
+  <ion-slides pager="true">
+    <ion-slide>
+      <h1 class="color-dark padding-top-small">Welcome to ATP</h1>
+      <div class="welcome-text">
+        ATP stands for Ask the People and is a picture based community driven decision helper
+      </div>
+      <div class="flex-space-between welcome-links">
+        <span (click)="startATP()">I am new to ATP</span>
+        <span (click)="slideNext()">Login</span>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <form [formGroup]="loginForm">
+        <ion-list>
+          <ion-item>
+            <ion-label floating>email address</ion-label>
+            <ion-input type="email" [(ngModel)]="email" formControlName="email"></ion-input>
+          </ion-item>
+          <p *ngIf="loginForm.controls['email'].touched && !loginForm.controls['email'].valid" color="danger"
+             padding-left>
+            Please enter a valid email.
+          </p>
+          <ion-item>
+            <ion-label floating>password</ion-label>
+            <ion-input type="password" [(ngModel)]="password" formControlName="password"></ion-input>
+          </ion-item>
+          <p *ngIf="loginForm.controls['password'].touched && !loginForm.controls['password'].valid" color="danger"
+             padding-left>
+            Please enter a password.
+          </p>
+        </ion-list>
+        <div class="action-items">
+          <button ion-button color="light" class="login-button" [disabled]="!loginForm.valid" (click)="login()">Login
+          </button>
+          <div (click)="forgotPassword()">Forgot password</div>
+          <div (click)="startATP()">I am new to ATP</div>
+        </div>
+      </form>
+    </ion-slide>
+  </ion-slides>
+  <div class="flex-grow">&nbsp;</div>
+  <div class="footer">&copy; 2016 Pacworx</div>
 </ion-content>
