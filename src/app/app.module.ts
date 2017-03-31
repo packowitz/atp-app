@@ -52,6 +52,7 @@ import {InAppPurchase} from "@ionic-native/in-app-purchase";
 import {Analytics} from "../providers/services/analytics.service";
 import {StatusBar} from "@ionic-native/status-bar";
 import {SplashScreen} from "@ionic-native/splash-screen";
+import {UserdataPopover} from "../pages/home/userdata.popover";
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import {SplashScreen} from "@ionic-native/splash-screen";
     HighscoreEntryComponent,
     ChooseUsernameComponent,
     SurveyDetailsMenuComponent,
+    UserdataPopover,
 
     AgePipe,
     CountryPipe,
@@ -121,7 +123,7 @@ import {SplashScreen} from "@ionic-native/splash-screen";
     AboutComponent,
     CountrySelectionComponent,
 
-
+    UserdataPopover,
     SurveyDetailsMenuComponent,
   ],
   providers: [

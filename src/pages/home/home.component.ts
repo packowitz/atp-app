@@ -1,5 +1,4 @@
-///<reference path="../about/about.component.ts"/>
-import {NavController, Tabs, AlertController, ModalController} from "ionic-angular";
+import {NavController, Tabs, AlertController, ModalController, PopoverController} from "ionic-angular";
 import {Model} from "../../providers/services/model.service";
 import {SurveyComponent} from "../survey/survey.component";
 import {SurveyService} from "../../providers/services/survey.service";
@@ -11,6 +10,7 @@ import {LocalStorage} from "../../providers/services/localStorage.service";
 import {PersonalDataComponent} from "../personalData/personalData.component";
 import {AboutComponent} from "../about/about.component";
 import {Analytics} from "../../providers/services/analytics.service";
+import {UserdataPopover} from "./userdata.popover";
 
 @Component({
   templateUrl: 'home.component.html'
@@ -27,7 +27,8 @@ export class HomeComponent {
               public alertController: AlertController,
               public modalCtrl: ModalController,
               public shopService: ShopService,
-              public analytics: Analytics) {
+              public analytics: Analytics,
+              public popoverCtrl: PopoverController) {
   }
 
   ionViewDidEnter() {
@@ -75,14 +76,14 @@ export class HomeComponent {
       this.analytics.event("open_answer_atp", {page: "Home"});
       this.nav.push(SurveyComponent);
     } else {
-      this.analytics.event("show_incomplete_data_alert", {page: "Home"});
-      this.alertController.create({
-        title: 'Tell us something about you',
-        message: 'To find ATPs that fits to your profile we need to know a little bit about you. Please go to \'Personal data\' and fill out the \'My data\' section.',
-        buttons: [
-          {text: 'Personal data', handler: () => {this.openPersonalDataPage();}}
-        ]
-      }).present();
+      let popover = this.popoverCtrl.create(UserdataPopover);
+      popover.onDidDismiss(() => {
+        if(this.model.isUserDataCompleteToAnswerATP()) {
+          this.analytics.event("open_answer_atp", {page: "Home"});
+          this.nav.push(SurveyComponent);
+        }
+      });
+      popover.present();
     }
   }
 
