@@ -3,7 +3,7 @@ import {Model} from "./model.service";
 import {Injectable} from "@angular/core";
 import {NotificationSettings} from "../domain/notificationSettings";
 import {Observable} from "rxjs";
-import {Device} from "ionic-native";
+import {Device} from "@ionic-native/device";
 
 export class EnabledResponse {
   enabled: boolean;
@@ -11,12 +11,12 @@ export class EnabledResponse {
 
 @Injectable()
 export class SettingsService {
-  constructor(public model: Model, public atpHttp: AtpHttp) {
+  constructor(public model: Model, public atpHttp: AtpHttp, public device: Device) {
   }
 
   updateNotificationAtpAnswerable(enabled: boolean): Observable<EnabledResponse> {
     let settings = {
-      uuid: Device.uuid,
+      uuid: this.device.uuid,
       enabled: enabled
     };
     return this.atpHttp.doPostBackground("/app/notification/settings/atp-answerable", settings);
@@ -24,7 +24,7 @@ export class SettingsService {
 
   updateNotificationAtpFinished(enabled: boolean): Observable<EnabledResponse> {
     let settings = {
-      uuid: Device.uuid,
+      uuid: this.device.uuid,
       enabled: enabled
     };
     return this.atpHttp.doPostBackground("/app/notification/settings/atp-finished", settings);
@@ -32,7 +32,7 @@ export class SettingsService {
 
   updateNotificationAnnouncement(enabled: boolean): Observable<EnabledResponse> {
     let settings = {
-      uuid: Device.uuid,
+      uuid: this.device.uuid,
       enabled: enabled
     };
     return this.atpHttp.doPostBackground("/app/notification/settings/announcement", settings);
@@ -40,7 +40,7 @@ export class SettingsService {
 
   updateNotificationFeedback(enabled: boolean): Observable<EnabledResponse> {
     let settings = {
-      uuid: Device.uuid,
+      uuid: this.device.uuid,
       enabled: enabled
     };
     return this.atpHttp.doPostBackground("/app/notification/settings/feedback", settings);
@@ -48,8 +48,8 @@ export class SettingsService {
 
   updateNotificationToken(token: string): Observable<NotificationSettings> {
     let settings = {
-      uuid: Device.uuid,
-      os: Device.platform,
+      uuid: this.device.uuid,
+      os: this.device.platform,
       token: token
     };
     return this.atpHttp.doPostBackground("/app/notification/token", settings);

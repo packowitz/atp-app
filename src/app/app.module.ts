@@ -1,5 +1,5 @@
-import {NgModule, ErrorHandler} from "@angular/core";
-import {IonicApp, IonicModule, IonicErrorHandler} from "ionic-angular";
+import {ErrorHandler, NgModule} from "@angular/core";
+import {IonicApp, IonicErrorHandler, IonicModule} from "ionic-angular";
 import {AtpApp} from "./app.component";
 import {HighscoreComponent} from "../pages/highscore/highscore.component";
 import {LoadingComponent} from "../pages/loading/loading.component";
@@ -53,6 +53,8 @@ import {Analytics} from "../providers/services/analytics.service";
 import {StatusBar} from "@ionic-native/status-bar";
 import {SplashScreen} from "@ionic-native/splash-screen";
 import {UserdataPopover} from "../pages/home/userdata.popover";
+import {Network} from "@ionic-native/network";
+import {Device} from "@ionic-native/device";
 
 @NgModule({
   declarations: [
@@ -147,6 +149,8 @@ import {UserdataPopover} from "../pages/home/userdata.popover";
     StatusBar,
     SurveyService,
     ConnectivityService,
+    Network,
+    Device,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
