@@ -1,4 +1,4 @@
-import {NavController, Tabs, AlertController, ModalController, PopoverController} from "ionic-angular";
+import {AlertController, ModalController, NavController, PopoverController, Tabs} from "ionic-angular";
 import {Model} from "../../providers/services/model.service";
 import {SurveyComponent} from "../survey/survey.component";
 import {SurveyService} from "../../providers/services/survey.service";
@@ -33,7 +33,7 @@ export class HomeComponent {
     if(this.localStorage.hintSettings.seenHomeHint !== true) {
       let hintAlert = this.alertController.create({
         title: 'Welcome to ATP',
-        message: 'This is the main screen of ATP. From here you can start answering ATPs, see your last created ATPs and how many pax (the inapp currency) you have.',
+        message: "This is your very own homepage for Ask the People. Start answering some ATPs, and see how your latest ATPs are doing!",
         buttons: [{text: 'OK'}]
       });
       hintAlert.onDidDismiss(() => {

@@ -1,7 +1,7 @@
 import {AlertController, Slides} from "ionic-angular";
 import {SurveyService} from "../../providers/services/survey.service";
 import {Survey} from "../../providers/domain/survey";
-import {Component, trigger, state, style, transition, animate, keyframes, ViewChild} from "@angular/core";
+import {animate, Component, keyframes, state, style, transition, trigger, ViewChild} from "@angular/core";
 import {Analytics} from "../../providers/services/analytics.service";
 import {LocalStorage} from "../../providers/services/localStorage.service";
 
@@ -84,10 +84,10 @@ export class SurveyComponent {
               public alertController: AlertController,
               public analytics: Analytics,
               public localStorage: LocalStorage) {
-    if(this.localStorage.hintSettings.seenAnswerHint !== true) {
+    if (this.localStorage.hintSettings.seenAnswerHint !== true) {
       let hintAlert = this.alertController.create({
         title: 'Answer ATPs',
-        message: 'On this page you will see two pictures. Tapping on a picture means that you like that more and you move on to the next ATP. If you don\'t know which picture is better than hit the I don\'t know button at the buttom.',
+        message: "On this page you will see two pictures. Tap on the one you prefer or tap 'I don't know' if you aren't sure. You'll then preceed to answer the next ATP; simple!",
         buttons: [{text: 'OK'}]
       });
       hintAlert.onDidDismiss(() => {
