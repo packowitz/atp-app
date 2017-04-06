@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {SurveyService} from "../../providers/services/survey.service";
-import {AlertController, Tabs} from "ionic-angular/index";
+import {AlertController, Tabs} from "ionic-angular";
 import {Model} from "../../providers/services/model.service";
 import {LocalStorage} from "../../providers/services/localStorage.service";
 import {Analytics} from "../../providers/services/analytics.service";
