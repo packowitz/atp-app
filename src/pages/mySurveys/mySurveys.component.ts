@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {SurveyService} from "../../providers/services/survey.service";
-import {Tabs, AlertController} from "ionic-angular/index";
+import {AlertController, Tabs} from "ionic-angular";
 import {Model} from "../../providers/services/model.service";
 import {LocalStorage} from "../../providers/services/localStorage.service";
 import {Analytics} from "../../providers/services/analytics.service";
@@ -19,7 +19,7 @@ export class MySurveyComponent {
     if(this.localStorage.hintSettings.seenAtpListHint !== true) {
       let hintAlert = this.alertCtrl.create({
         title: 'List of your ATPs',
-        message: 'On this page your ATPs will are listed. Tap on them will show you more details.',
+        message: 'This is the page where your in-progress ATPs will be listed. Select one to expand with more details!',
         buttons: [{text: 'OK'}]
       });
       hintAlert.onDidDismiss(() => {

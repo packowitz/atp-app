@@ -1,5 +1,5 @@
-import {Platform, Tabs, ActionSheetController, AlertController, ModalController} from "ionic-angular";
-import {NgZone, Component} from "@angular/core";
+import {ActionSheetController, AlertController, ModalController, Platform, Tabs} from "ionic-angular";
+import {Component, NgZone} from "@angular/core";
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import {Survey} from "../../providers/domain/survey";
 import {Model} from "../../providers/services/model.service";
@@ -53,7 +53,7 @@ export class StartSurveyComponent {
     if(this.localStorage.hintSettings.seenCreateAtpHint !== true) {
       let hintAlert = this.alertController.create({
         title: 'Create your ATP',
-        message: 'On this page you can create your own ATP. Choose your audience by age, gender and countries and upload at least 2 pictures.',
+        message: 'This is where you will create your own ATPs. Choose your audience by age, gender and countries and upload two pictures or more!',
         buttons: [{text: 'OK'}]
       });
       hintAlert.onDidDismiss(() => {

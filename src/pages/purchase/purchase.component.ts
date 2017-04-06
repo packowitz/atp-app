@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 import {Model} from "../../providers/services/model.service";
 import {Reward} from "../../providers/domain/reward";
 import {ShopService} from "../../providers/services/shop.service";
-import {NavController, AlertController} from "ionic-angular";
+import {AlertController, NavController} from "ionic-angular";
 import {CouponService} from "../../providers/services/coupon.service";
 import {PersonalDataComponent} from "../personalData/personalData.component";
 import {InAppProduct} from "../../providers/domain/inAppProduct";
@@ -38,7 +38,7 @@ export class PurchaseComponent {
     if(this.localStorage.hintSettings.seenPurchaseHint !== true) {
       let hintAlert = this.alertCtrl.create({
         title: 'Shop',
-        message: 'In this shopping area you can stock up your pax by redeem coupons, claim rewards or buy them for real money.',
+        message: 'Here you can review and redeem rewards or coupons, and stock up on extra PAX to create ATPs!',
         buttons: [{text: 'OK'}]
       });
       hintAlert.onDidDismiss(() => {
