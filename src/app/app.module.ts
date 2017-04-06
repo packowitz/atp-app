@@ -41,7 +41,6 @@ import {AnnouncementsComponent} from "../pages/announcements/announcements.compo
 import {PersonalDataComponent} from "../pages/personalData/personalData.component";
 import {AboutComponent} from "../pages/about/about.component";
 import {GiveFeedbackComponent} from "../pages/feedback/giveFeedback.component";
-import {WelcomeTourComponent} from "../pages/welcome/welcomeTour.component";
 import {SpinnerComponent} from "../components/spinner/spinner.component";
 import {SettingsService} from "../providers/services/settings.service";
 import {CountrySelectionComponent} from "../pages/countrySelection/countrySelection.component";
@@ -76,7 +75,6 @@ import {Device} from "@ionic-native/device";
     SurveyDetailsComponent,
     TabsPage,
     WelcomeComponent,
-    WelcomeTourComponent,
     AboutComponent,
     SpinnerComponent,
 
@@ -121,7 +119,6 @@ import {Device} from "@ionic-native/device";
     MultiPictureSurveyDetailsComponent,
     TabsPage,
     WelcomeComponent,
-    WelcomeTourComponent,
     AboutComponent,
     CountrySelectionComponent,
 

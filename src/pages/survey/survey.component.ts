@@ -3,6 +3,7 @@ import {SurveyService} from "../../providers/services/survey.service";
 import {Survey} from "../../providers/domain/survey";
 import {Component, trigger, state, style, transition, animate, keyframes, ViewChild} from "@angular/core";
 import {Analytics} from "../../providers/services/analytics.service";
+import {LocalStorage} from "../../providers/services/localStorage.service";
 
 @Component({
   templateUrl: 'survey.component.html',
@@ -81,7 +82,21 @@ export class SurveyComponent {
 
   constructor(public surveyService: SurveyService,
               public alertController: AlertController,
-              public analytics: Analytics) {
+              public analytics: Analytics,
+              public localStorage: LocalStorage) {
+    if(this.localStorage.hintSettings.seenAnswerHint !== true) {
+      let hintAlert = this.alertController.create({
+        title: 'Answer ATPs',
+        message: 'On this page you will see two pictures. Tapping on a picture means that you like that more and you move on to the next ATP. If you don\'t know which picture is better than hit the I don\'t know button at the buttom.',
+        buttons: [{text: 'OK'}]
+      });
+      hintAlert.onDidDismiss(() => {
+        this.localStorage.hintSettings.seenAnswerHint = true;
+        this.localStorage.saveHintSettings();
+      });
+      hintAlert.present();
+    }
+
     this.loadSurvey();
   }
 

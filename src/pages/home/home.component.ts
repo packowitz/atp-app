@@ -29,6 +29,19 @@ export class HomeComponent {
               public shopService: ShopService,
               public analytics: Analytics,
               public popoverCtrl: PopoverController) {
+
+    if(this.localStorage.hintSettings.seenHomeHint !== true) {
+      let hintAlert = this.alertController.create({
+        title: 'Welcome to ATP',
+        message: 'This is the main screen of ATP. From here you can start answering ATPs, see your last created ATPs and how many pax (the inapp currency) you have.',
+        buttons: [{text: 'OK'}]
+      });
+      hintAlert.onDidDismiss(() => {
+        this.localStorage.hintSettings.seenHomeHint = true;
+        this.localStorage.saveHintSettings();
+      });
+      hintAlert.present();
+    }
   }
 
   ionViewDidEnter() {

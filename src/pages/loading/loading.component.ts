@@ -10,7 +10,6 @@ import {WelcomeComponent} from "../welcome/welcome.component";
 import {ShopService} from "../../providers/services/shop.service";
 import {LocalStorage} from "../../providers/services/localStorage.service";
 import {LoadingState} from "./loadingState.component";
-import {WelcomeTourComponent} from "../welcome/welcomeTour.component";
 import {Messages} from "../../providers/domain/messages";
 import {NotificationService} from "../../providers/services/notification.service";
 import {SettingsService} from "../../providers/services/settings.service";
@@ -110,7 +109,7 @@ export class LoadingComponent {
         this.configureFirebase();
       } else {
         this.stepsDone = 11;
-        this.nav.setRoot(this.localStorage.hintSettings.seenWelcomeHint ? TabsPage : WelcomeTourComponent);
+        this.nav.setRoot(TabsPage);
       }
     }
   }

@@ -1,3 +1,7 @@
 export class HintSettings {
-  seenWelcomeHint: boolean;
+  seenHomeHint: boolean;
+  seenAnswerHint: boolean;
+  seenCreateAtpHint: boolean;
+  seenAtpListHint: boolean;
+  seenPurchaseHint: boolean;
 }

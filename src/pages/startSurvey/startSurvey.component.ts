@@ -50,6 +50,18 @@ export class StartSurveyComponent {
               public alertController: AlertController,
               public analytics: Analytics,
               public camera: Camera) {
+    if(this.localStorage.hintSettings.seenCreateAtpHint !== true) {
+      let hintAlert = this.alertController.create({
+        title: 'Create your ATP',
+        message: 'On this page you can create your own ATP. Choose your audience by age, gender and countries and upload at least 2 pictures.',
+        buttons: [{text: 'OK'}]
+      });
+      hintAlert.onDidDismiss(() => {
+        this.localStorage.hintSettings.seenCreateAtpHint = true;
+        this.localStorage.saveHintSettings();
+      });
+      hintAlert.present();
+    }
     this.createEmptySurvey();
   }
 

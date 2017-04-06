@@ -9,6 +9,7 @@ import {InAppProduct} from "../../providers/domain/inAppProduct";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Analytics} from "../../providers/services/analytics.service";
 import {InAppPurchase} from "@ionic-native/in-app-purchase";
+import {LocalStorage} from "../../providers/services/localStorage.service";
 
 @Component({
   templateUrl: 'purchase.component.html',
@@ -26,11 +27,26 @@ export class PurchaseComponent {
               public alertCtrl: AlertController,
               public fb: FormBuilder,
               public couponService: CouponService,
-              public analytics: Analytics, public inAppPurchase: InAppPurchase) {
+              public analytics: Analytics,
+              public inAppPurchase: InAppPurchase,
+              public localStorage: LocalStorage) {
     this.couponForm = fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(25)])]
     });
     this.selection = model.claimableRewards > 0 ? 'rewards' : 'shop';
+
+    if(this.localStorage.hintSettings.seenPurchaseHint !== true) {
+      let hintAlert = this.alertCtrl.create({
+        title: 'Shop',
+        message: 'In this shopping area you can stock up your pax by redeem coupons, claim rewards or buy them for real money.',
+        buttons: [{text: 'OK'}]
+      });
+      hintAlert.onDidDismiss(() => {
+        this.localStorage.hintSettings.seenPurchaseHint = true;
+        this.localStorage.saveHintSettings();
+      });
+      hintAlert.present();
+    }
   }
 
   ionViewDidEnter() {
