@@ -24,4 +24,14 @@
       <ion-icon item-right ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
     </ion-item>
   </ion-list>
+
+  <ion-fab right bottom #fab>
+    <button ion-fab color="atp-green"><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab (click)="showOtherFeedbackPage(fab)"><div class="label">Other</div><ion-icon color="atp-green" name="paper"></ion-icon></button>
+      <button ion-fab (click)="showMessageSuggestionPage(fab)"><div class="label">Message</div><ion-icon color="atp-green" name="mail"></ion-icon></button>
+      <button ion-fab (click)="showBugReportPage(fab)"><div class="label">Bug</div><ion-icon color="atp-green" name="bug"></ion-icon></button>
+      <button ion-fab (click)="showImprovementPage(fab)"><div class="label">Improvement</div><ion-icon color="atp-green" name="bulb"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>

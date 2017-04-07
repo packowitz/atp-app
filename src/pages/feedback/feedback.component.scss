@@ -2,4 +2,34 @@
   .unread {
     font-weight: 600;
   }
+
+  .fab {
+    contain: initial;
+  }
+  ion-fab {
+    button {
+      box-shadow: 0 4px 10px #6b6b6b;
+    }
+
+    ion-fab-list button[ion-fab] {
+      text-align: center;
+      overflow: visible;
+
+      div.label {
+        color: black;
+        position: absolute;
+        right: 60px;
+        background: rgba(248, 248, 248, 1);
+        height: 24px;
+        line-height: 14px;
+        padding: 5px 10px 2px;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.14), 0 4px 5px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .button-inner {
+      overflow: visible;
+    }
+  }
 }
