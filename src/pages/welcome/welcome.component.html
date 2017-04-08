@@ -10,8 +10,8 @@
         ATP stands for Ask the People and is a picture based community driven decision helper
       </div>
       <div class="flex-space-between welcome-links">
-        <button ion-button clear color="atp-blue" (click)="startATP()"><strong>I am new</strong></button>
-        <button ion-button clear color="atp-blue" (click)="slideNext()"><strong>Login</strong></button>
+        <button ion-button clear color="atp-blue" (click)="startATP()">I am new</button>
+        <button ion-button clear color="atp-blue" (click)="slideNext()">Login</button>
       </div>
     </ion-slide>
     <ion-slide>
@@ -37,8 +37,8 @@
         <div class="action-items">
           <button ion-button color="light" class="login-button" [disabled]="!loginForm.valid" (click)="login()">Login
           </button>
-          <div (click)="forgotPassword()">Forgot password</div>
-          <div (click)="startATP()">I am new to ATP</div>
+          <div (click)="forgotPassword()" class="welcome-links">Forgot password</div>
+          <div (click)="startATP()" class="welcome-links">I am new to ATP</div>
         </div>
       </form>
     </ion-slide>
