@@ -1,7 +1,8 @@
 import {AlertController, Slides} from "ionic-angular";
 import {SurveyService} from "../../providers/services/survey.service";
 import {Survey} from "../../providers/domain/survey";
-import {animate, Component, keyframes, state, style, transition, trigger, ViewChild} from "@angular/core";
+import {Component, ViewChild} from "@angular/core";
+import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 import {Analytics} from "../../providers/services/analytics.service";
 import {LocalStorage} from "../../providers/services/localStorage.service";
 
@@ -22,6 +23,7 @@ import {LocalStorage} from "../../providers/services/localStorage.service";
     ]),
     trigger('pic1State', [
       transition('* => incomingWithTitle', [
+        style({opacity: 0}),
         animate("1.7s 1.5s ease-in-out", keyframes([
           style({opacity: 0, top: '50vh', left: '50vw', width: '0', height: '0', offset: 0}),
           style({opacity: 1, top: '20vh', left: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
@@ -30,6 +32,7 @@ import {LocalStorage} from "../../providers/services/localStorage.service";
         ]))
       ]),
       transition('* => incoming', [
+        style({opacity: 0}),
         animate("1.7s 0.2s ease-in-out", keyframes([
           style({opacity: 0, top: '50vh', left: '50vw', width: '0', height: '0', offset: 0}),
           style({opacity: 1, top: '20vh', left: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
@@ -40,6 +43,7 @@ import {LocalStorage} from "../../providers/services/localStorage.service";
     ]),
     trigger('pic2State', [
       transition('* => incomingWithTitle', [
+        style({opacity: 0}),
         animate("1.7s 3.4s ease-in-out", keyframes([
           style({opacity: 0, top: '50vh', right: '50vw', width: '0', height: '0', offset: 0}),
           style({opacity: 1, top: '20vh', right: '6vw', width: '88vw', height: '88vw', offset: 0.1}),
@@ -48,6 +52,7 @@ import {LocalStorage} from "../../providers/services/localStorage.service";
         ]))
       ]),
       transition('* => incoming', [
+        style({opacity: 0}),
         animate("1.7s 2.1s ease-in-out", keyframes([
           style({opacity: 0, top: '50vh', right: '50vw', width: '0', height: '0', offset: 0}),
           style({opacity: 1, top: '20vh', right: '6vw', width: '88vw', height: '88vw', offset: 0.1}),

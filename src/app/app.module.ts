@@ -54,6 +54,9 @@ import {SplashScreen} from "@ionic-native/splash-screen";
 import {UserdataPopover} from "../pages/home/userdata.popover";
 import {Network} from "@ionic-native/network";
 import {Device} from "@ionic-native/device";
+import {BrowserModule} from "@angular/platform-browser";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {HttpModule} from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -92,6 +95,9 @@ import {Device} from "@ionic-native/device";
     SurveyContainsPicturePipe
   ],
   imports: [
+    BrowserModule,
+    HttpModule,
+    BrowserAnimationsModule,
     IonicModule.forRoot(AtpApp, {
         tabsPlacement: 'bottom',
         tabsHideOnSubPages: true
