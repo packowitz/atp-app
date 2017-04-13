@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core";
-import {NavController} from "ionic-angular/index";
+import {NavController} from "ionic-angular";
 import {SurveyDetailsComponent} from "../../pages/surveyDetails/surveyDetails.component";
 import {Util} from "../../providers/domain/util";
 import {MetaSurvey} from "../../providers/domain/surveyMeta";

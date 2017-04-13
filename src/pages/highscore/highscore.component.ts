@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {HighscoreService} from "../../providers/services/highscore.service";
 import {HighscoreUser} from "../../providers/domain/highscoreUser";
-import {ViewController, Platform} from "ionic-angular";
+import {Platform, ViewController} from "ionic-angular";
 import {Analytics} from "../../providers/services/analytics.service";
 
 @Component({
@@ -36,19 +36,20 @@ export class HighscoreComponent {
     this.viewCtrl.dismiss();
   }
 
-  switchWeekGlobalLocal() {
-    this.showWeekGlobal = !this.showWeekGlobal;
-    this.analytics.event(this.showTotalGlobal ? "show_weekly_global" : "show_weekly_local", {page: "Highscore"});
-    if(!this.showWeekGlobal && !this.weekLocalLoaded) {
-      this.loadHighscoreWeekLocal();
-    }
-  }
+  toggleGlobal() {
+    if (this.selection == "week") {
+      this.showWeekGlobal = !this.showWeekGlobal;
+      this.analytics.event(this.showTotalGlobal ? "show_weekly_global" : "show_weekly_local", {page: "Highscore"});
 
-  switchTotalGlobalLocal() {
-    this.showTotalGlobal = !this.showTotalGlobal;
-    this.analytics.event(this.showTotalGlobal ? "show_total_global" : "show_total_local", {page: "Highscore"});
-    if(!this.showTotalGlobal && !this.totalLocalLoaded) {
-      this.loadHighscoreTotalLocal();
+      if (!this.showWeekGlobal && !this.weekLocalLoaded) {
+        this.loadHighscoreWeekLocal();
+      }
+    } else {
+      this.showTotalGlobal = !this.showTotalGlobal;
+      this.analytics.event(this.showTotalGlobal ? "show_total_global" : "show_total_local", {page: "Highscore"});
+      if (!this.showTotalGlobal && !this.totalLocalLoaded) {
+        this.loadHighscoreTotalLocal();
+      }
     }
   }
 
