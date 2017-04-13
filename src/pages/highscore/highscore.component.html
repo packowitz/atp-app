@@ -8,6 +8,13 @@
         <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
+    <ion-buttons right>
+      <button ion-button clear icon-right (click)="toggleGlobal()">
+        {{(!showWeekGlobal || !showTotalGlobal) ? 'Local' : 'Global'}}
+
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
   <ion-segment [(ngModel)]="selection" (ionChange)="ionChange()" [color]="platform.is('android') ? 'atp-blue-light' : 'primary'">
     <ion-segment-button value="week">Weekly</ion-segment-button>
@@ -15,26 +22,15 @@
   </ion-segment>
 </ion-header>
 <ion-content>
-
-  <ion-item color="white" class="buttongroup" no-lines>
-    <span item-right *ngIf="selection == 'total'">
-          <button ion-button small [outline]="showTotalGlobal ? null : ''" (click)="toggleGlobal()">Global</button>
-          <button ion-button small [outline]="(showTotalGlobal === false) ? null : ''"
-                  (click)="toggleGlobal()">Local</button>
-    </span>
-    <span item-right *ngIf="selection == 'week'">
-          <button ion-button small [outline]="showWeekGlobal ? null : ''" (click)="toggleGlobal()">Global</button>
-          <button ion-button small [outline]="(showWeekGlobal === false) ? null : ''"
-                  (click)="toggleGlobal()">Local</button>
-    </span>
-  </ion-item>
   <div [ngSwitch]="selection">
     <ion-list *ngSwitchCase="'week'">
-      <spinner *ngIf="(showWeekGlobal && !weekGlobalLoaded) || (!showWeekGlobal && !weekLocalLoaded)" [message]="'Loading highscores'"></spinner>
+      <spinner padding *ngIf="(showWeekGlobal && !weekGlobalLoaded) || (!showWeekGlobal && !weekLocalLoaded)"
+               [message]="'Loading highscores'"></spinner>
       <highscore-entry [highscore]="showWeekGlobal ? highscoreWeekGlobal : highscoreWeekLocal" [showWeek]="true"></highscore-entry>
     </ion-list>
     <ion-list *ngSwitchCase="'total'">
-      <spinner *ngIf="(showTotalGlobal && !totalGlobalLoaded) || (!showTotalGlobal && !totalLocalLoaded)" [message]="'Loading highscores'"></spinner>
+      <spinner padding *ngIf="(showTotalGlobal && !totalGlobalLoaded) || (!showTotalGlobal && !totalLocalLoaded)"
+               [message]="'Loading highscores'"></spinner>
       <highscore-entry [highscore]="showTotalGlobal ? highscoreTotalGlobal : highscoreTotalLocal" [showWeek]="false"></highscore-entry>
     </ion-list>
   </div>
