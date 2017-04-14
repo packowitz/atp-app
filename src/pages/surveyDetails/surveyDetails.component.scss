@@ -35,6 +35,7 @@
 
   .detail-title {
     color: $atp-blue;
+    margin-bottom: 0;
     font-size: medium;
     font-weight: 600;
     display: flex;
@@ -85,7 +86,7 @@
   }
 
   .item-expand.active {
-    max-height: 100vh;
+    max-height: 500vh;
     transition: max-height 0.3s ease-out;
   }
 }
