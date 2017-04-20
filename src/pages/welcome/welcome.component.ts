@@ -16,6 +16,7 @@ import {EmailValidators} from "../../providers/validators/email.validator";
   templateUrl: 'welcome.component.html'
 })
 export class WelcomeComponent {
+  currentYear: number = new Date().getFullYear();
   @ViewChild(Slides) slides: Slides;
   email: string;
   password: string;
