@@ -92,7 +92,7 @@ export class SurveyComponent {
     if (this.localStorage.hintSettings.seenAnswerHint !== true) {
       let hintAlert = this.alertController.create({
         title: 'Answer ATPs',
-        message: "On this page you will see two pictures. Tap on the one you prefer or tap 'I don't know' if you aren't sure. You'll then preceed to answer the next ATP; simple!",
+        message: "On this page you will see two pictures. Tap on the one you prefer or tap 'I don't know' if you aren't sure. You'll then proceed to answer the next ATP; simple!",
         buttons: [{text: 'OK'}]
       });
       hintAlert.onDidDismiss(() => {
