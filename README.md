@@ -1,5 +1,5 @@
 ## Installing required plugins: 
-* ionic plugin add cordova-plugin-camera
+* ionic plugin add cordova-plugin-camera --variable PHOTOLIBRARY_USAGE_DESCRIPTION="ATP uses photos" --variable CAMERA_USAGE_DESCRIPTION="ATP uses camera"
 
 * ionic plugin add cordova-plugin-inapppurchase
 
