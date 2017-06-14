@@ -10,7 +10,7 @@ services:
   - docker
 
 before_install:
-  - npm install -g ionic cordova
+  - npm install -g ionic@latest @ionic/cli-plugin-ionic-angular cordova
 
 script:
   - rm -rf www/
