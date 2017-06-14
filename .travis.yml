@@ -19,8 +19,7 @@ script:
   - docker build -t pacworx/app-test .
 
 after_success:
-  - ionic login --email $IONIC_EMAIL --password $IONIC_PASS
-  - ionic upload
+  - ionic upload -e $IONIC_EMAIL -p $IONIC_PASS
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USER" -p="$DOCKER_PASS"
   - docker push pacworx/app-test
 
