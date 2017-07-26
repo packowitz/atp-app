@@ -37,6 +37,14 @@
     flex-direction: column;
   }
 
+  .login-form-error {
+    margin: 0;
+    font-size: 0.8em;
+    color: $atp-danger;
+    text-align: start;
+    font-weight: 500;
+  }
+
   ion-slides {
     height: inherit;
 
