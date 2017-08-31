@@ -1,5 +1,6 @@
 {
   "name": "ATP",
   "app_id": "62638589",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {}
 }
