@@ -22,7 +22,7 @@
       <span *ngIf="model.user.username">{{model.user.username}} <i class="fa fa-unlock color-orange" *ngIf="!model.user.email" (click)="showSecureAlert()"></i></span>
       <span *ngIf="model.user.male"><ion-icon name="man"></ion-icon></span>
       <span *ngIf="model.user.male === false"><ion-icon name="woman"></ion-icon></span>
-      <span *ngIf="model.user.yearOfBirth">{{currentYear - model.user.yearOfBirth}} years</span>
+      <span *ngIf="model.user.ageRange">{{model.getAgeRange(model.user.ageRange).name}}</span>
       <span *ngIf="model.user.country"><img src="assets/img/flags/{{model.user.country}}.png" class="flag"></span>
     </div>
     <div class="flex-space-around padding-top-middle">

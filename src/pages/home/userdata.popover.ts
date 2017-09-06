@@ -12,6 +12,7 @@ import {CountrySelectionComponent} from "../countrySelection/countrySelection.co
 export class UserdataPopover {
 
   showYOB: boolean = false;
+  showAge: boolean = false;
   showGender: boolean = false;
   showCountry: boolean = false;
 
@@ -36,12 +37,12 @@ export class UserdataPopover {
   }
 
   setInputToShow() {
-    if (!this.model.user.yearOfBirth) {
-      this.showYOB = true;
+    if (!this.model.user.ageRange) {
+      this.showAge = true;
       this.showGender = false;
       this.showCountry = false;
     } else {
-      this.showYOB = false;
+      this.showAge = false;
       if (this.model.user.male !== true && this.model.user.male !== false) {
         this.showGender = true;
         this.showCountry = false;
@@ -59,6 +60,16 @@ export class UserdataPopover {
   yearChanged() {
     this.analytics.event("yob_changed", {page: "UserdataPopup"});
     this.authService.postYearOfBirth(Number(this.yearString)).subscribe(
+      data => {
+        this.model.user = data;
+        this.setInputToShow();
+      }
+    );
+  }
+
+  ageRangeChanged(ageRange: number) {
+    this.analytics.event("ageRange_changed", {page: "UserdataPopup"});
+    this.authService.postAgeRange(ageRange).subscribe(
       data => {
         this.model.user = data;
         this.setInputToShow();

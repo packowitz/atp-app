@@ -8,6 +8,7 @@ import {Reward} from "../domain/reward";
 import {SurveyType} from "../domain/surveyType";
 import {InAppProduct} from "../domain/inAppProduct";
 import {NotificationSettings} from "../domain/notificationSettings";
+import {AgeRange} from "../domain/ageRange";
 
 @Injectable()
 export class Model {
@@ -17,6 +18,7 @@ export class Model {
   public static StartSurveyTab = 2;
   public static MySurveysTab = 3;
   public user: User;
+  public ageRanges: AgeRange[];
   public notificationSettings: NotificationSettings;
   public surveyTypes: SurveyType[];
   public inAppProductIds: string[];
@@ -46,6 +48,18 @@ export class Model {
       {key: 'NUMBER100', name: 'Quick Check', answers: 100, costs: 1000},
       {key: 'NUMBER300', name: 'Reliable Check', answers: 300, costs: 2900},
       {key: 'NUMBER1000', name: 'Research Check', answers: 1000, costs: 9000}
+    ];
+
+    this.ageRanges = [
+      {id: 1, name: 'Child', description: '9 yrs and under'},
+      {id: 2, name: 'Pre teen', description: 'between 10 and 12'},
+      {id: 3, name: 'Young teen', description: 'between 13 and 15'},
+      {id: 4, name: 'Teenager', description: 'between 16 and 17'},
+      {id: 5, name: 'Senior teen', description: 'between 18 and 21'},
+      {id: 6, name: 'Young adult', description: 'between 22 and 29'},
+      {id: 7, name: 'Adult', description: 'between 30 and 39'},
+      {id: 8, name: 'Senior adult', description: 'between 40 and 55'},
+      {id: 9, name: 'Elderly', description: '56 yrs and older'}
     ];
 
     this.inAppProductIds = ['pax_tiny_bag', 'pax_small_bag', 'pax_medium_bag'];
@@ -89,7 +103,7 @@ export class Model {
   }
 
   isUserDataCompleteToAnswerATP(): boolean {
-    return this.user.male != null && this.user.country != null && this.user.yearOfBirth != null;
+    return this.user.male != null && this.user.country != null && this.user.ageRange != null;
   }
 
   setRewards(rewards: Reward[]) {
@@ -129,5 +143,9 @@ export class Model {
     || (this.reward_answerer.achieved == 0 && this.user.surveysAnswered >= 50)
     || (this.reward_answerer.achieved == 1 && this.user.surveysAnswered >= 500)
     || (this.reward_answerer.achieved == 2 && this.user.surveysAnswered >= 5000));
+  }
+
+  getAgeRange(id: number) : AgeRange {
+    return this.ageRanges.find(range => range.id == id);
   }
 }

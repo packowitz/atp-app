@@ -13,10 +13,7 @@ import {Analytics} from "../../providers/services/analytics.service";
   templateUrl: 'personalData.component.html'
 })
 export class PersonalDataComponent {
-  minYear: string;
-  maxYear: string;
-  yearOfBirth: number;
-  yearString: string;
+  ageRange: number;
   male: boolean;
   country: Country;
 
@@ -43,13 +40,7 @@ export class PersonalDataComponent {
               public alertController: AlertController,
               public platform: Platform,
               public analytics: Analytics) {
-    let currentYear: number = new Date().getFullYear();
-    this.minYear = String(currentYear - 99);
-    this.maxYear = String(currentYear - 5);
-    this.yearOfBirth = model.user.yearOfBirth;
-    if(this.yearOfBirth) {
-      this.yearString = String(this.yearOfBirth);
-    }
+    this.ageRange = model.user.ageRange;
     this.male = model.user.male;
     if(model.user.country) {
       countryService.getCountries().subscribe(countries => {
@@ -71,10 +62,9 @@ export class PersonalDataComponent {
     this.viewCtrl.dismiss();
   }
 
-  yearChanged() {
-    this.analytics.event("yob_changed", {page: "PersonalData"});
-    this.yearOfBirth = Number(this.yearString);
-    this.authService.postYearOfBirth(this.yearOfBirth).subscribe(data => this.model.user = data);
+  ageRangeChanged() {
+    this.analytics.event("ageRange_changed", {page: "PersonalData"});
+    this.authService.postAgeRange(this.ageRange).subscribe(data => this.model.user = data);
   }
 
   genderChanged(male: boolean) {

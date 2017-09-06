@@ -2,7 +2,7 @@ export class User {
   username: string;
   email: string;
   emailConfirmed: boolean;
-  yearOfBirth: number;
+  ageRange: number;
   country: string;
   male: boolean;
   credits: number;

@@ -1,8 +1,10 @@
 <ion-list>
   <ion-item><span class="text-wrap color-dark">Before you start we need to know a little bit about you to find fitting ATPs</span></ion-item>
-  <ion-item *ngIf="showYOB">
-    <ion-label class="color-dark">Year of birth:</ion-label>
-    <ion-datetime displayFormat="YYYY" pickerFormat="YYYY" [min]="minYear" [max]="maxYear" [(ngModel)]="yearString" (ionChange)="yearChanged()" cancelText="" doneText="OK" placeholder="(yyyy)"></ion-datetime>
+  <ion-item *ngIf="showAge">
+    <ion-label class="color-dark">Your age:</ion-label>
+    <ion-select #val (ionChange)="ageRangeChanged(val.value)">
+      <ion-option *ngFor="let range of model.ageRanges" [value]="range.id">{{range.description}}</ion-option>
+    </ion-select>
   </ion-item>
   <ion-item *ngIf="showGender">
     <ion-label class="flex-space-between color-dark">

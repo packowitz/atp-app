@@ -15,8 +15,10 @@
       <strong>My Data</strong>
     </ion-item>
     <ion-item>
-      <ion-label class="color-black">Year of birth:</ion-label>
-      <ion-datetime displayFormat="YYYY" pickerFormat="YYYY" [min]="minYear" [max]="maxYear" [(ngModel)]="yearString" (ionChange)="yearChanged()" cancelText="" doneText="OK" placeholder="(yyyy)"></ion-datetime>
+      <ion-label class="color-black">Your age:</ion-label>
+      <ion-select [(ngModel)]="ageRange" (ionChange)="ageRangeChanged()" [placeholder]="select" [selectedText]="model.user.ageRange ? model.getAgeRange(model.user.ageRange).name : ''">
+        <ion-option *ngFor="let range of model.ageRanges" [value]="range.id">{{range.description}}</ion-option>
+      </ion-select>
     </ion-item>
     <ion-item>
       <ion-label class="flex-space-between">

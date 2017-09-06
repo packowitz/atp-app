@@ -68,6 +68,10 @@ export class AuthService {
     return this.atpHttp.doPost("/app/user/personal-data/year-of-birth", data, "Sending year of birth");
   }
 
+  postAgeRange(ageRange: number): Observable<User> {
+    return this.atpHttp.doPost("/app/user/personal-data/age-range/" + ageRange, {}, "Sending your age");
+  }
+
   postGender(male: boolean): Observable<User> {
     let data: any = {male: male};
     return this.atpHttp.doPost("/app/user/personal-data/gender", data, "Sending your data");
