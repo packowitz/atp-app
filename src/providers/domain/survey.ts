@@ -12,6 +12,15 @@ export class Survey {
   pic2_id: number;
   minAge: number;
   maxAge: number;
+  age_1: boolean;
+  age_2: boolean;
+  age_3: boolean;
+  age_4: boolean;
+  age_5: boolean;
+  age_6: boolean;
+  age_7: boolean;
+  age_8: boolean;
+  age_9: boolean;
   countries: string;
   male: boolean;
   female: boolean;

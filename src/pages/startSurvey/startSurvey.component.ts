@@ -13,6 +13,7 @@ import {SurveySettings} from "../../providers/domain/surveySettings";
 import {Country} from "../../providers/domain/country";
 import {CountrySelectionComponent} from "../countrySelection/countrySelection.component";
 import {Analytics} from "../../providers/services/analytics.service";
+import {AgeRange} from "../../providers/domain/ageRange";
 
 declare var Croppie: any;
 
@@ -32,7 +33,7 @@ export class StartSurveyComponent {
   survey: Survey;
   surveyType: SurveyType;
   selectedCountries: Country[] = [];
-  ageRange = {lower: 1, upper: 99};
+  selectedAgeRanges: AgeRange[] = [];
   exampleText: string;
   pictures: string[];
   croppie: any;
@@ -77,10 +78,9 @@ export class StartSurveyComponent {
     this.survey = new Survey();
     let lastSettings: SurveySettings = this.localStorage.getLastSurveySettings();
     this.selectedCountries = lastSettings ? lastSettings.countries : [];
+    this.selectedAgeRanges = lastSettings ? lastSettings.ageRanges : [];
     this.survey.male = lastSettings ? lastSettings.male : true;
     this.survey.female = lastSettings ? lastSettings.female : true;
-    this.ageRange.lower = lastSettings ? lastSettings.minAge : 5;
-    this.ageRange.upper = lastSettings ? lastSettings.maxAge : 99;
   }
 
   showCroppie(src: string) {
@@ -209,6 +209,14 @@ export class StartSurveyComponent {
     event.preventDefault();
   }
 
+  ageSelectedText(): string {
+    if(!this.selectedAgeRanges ||
+      this.selectedAgeRanges.length == 0 ||
+      this.selectedAgeRanges.length == this.model.ageRanges.length) return 'no restriction';
+    if(this.selectedAgeRanges.length == 1) return this.selectedAgeRanges[0].name;
+    return this.selectedAgeRanges.length + ' groups';
+  }
+
   showCountrySelection() {
     this.analytics.event("show_country_selection", {page: "CreateAtp"});
     let countrySelection = this.modalCtrl.create(CountrySelectionComponent, {selectedCountries: this.selectedCountries});
@@ -276,14 +284,17 @@ export class StartSurveyComponent {
     settings.countries = this.selectedCountries;
     settings.male = this.survey.male;
     settings.female = this.survey.female;
-    settings.minAge = this.ageRange.lower;
-    settings.maxAge = this.ageRange.upper;
+    settings.ageRanges = this.selectedAgeRanges;
     this.localStorage.setLastSurveySettings(settings);
 
-    this.survey.minAge = this.ageRange.lower;
-    this.survey.maxAge = this.ageRange.upper;
-    this.survey.countries = "";
+    if(!this.selectedAgeRanges || this.selectedAgeRanges.length == 0) {
+      this.selectedAgeRanges = this.model.ageRanges;
+    }
+    this.selectedAgeRanges.forEach(r => {
+      this.survey['age_' + r.id] = true;
+    });
 
+    this.survey.countries = "";
     if (this.selectedCountries.length > 0) {
       this.selectedCountries.forEach(c => {
         if (this.survey.countries != "") {

@@ -51,15 +51,15 @@ export class Model {
     ];
 
     this.ageRanges = [
-      {id: 1, name: 'Child', description: '9 yrs and under'},
-      {id: 2, name: 'Pre teen', description: 'between 10 and 12'},
-      {id: 3, name: 'Young teen', description: 'between 13 and 15'},
-      {id: 4, name: 'Teenager', description: 'between 16 and 17'},
-      {id: 5, name: 'Senior teen', description: 'between 18 and 21'},
-      {id: 6, name: 'Young adult', description: 'between 22 and 29'},
-      {id: 7, name: 'Adult', description: 'between 30 and 39'},
-      {id: 8, name: 'Senior adult', description: 'between 40 and 55'},
-      {id: 9, name: 'Elderly', description: '56 yrs and older'}
+      {id: 1, name: 'Child', description: 'Children under 10'},
+      {id: 2, name: 'Pre teen', description: 'Pre teens (10-12)'},
+      {id: 3, name: 'Young teen', description: 'Young teens (13-15)'},
+      {id: 4, name: 'Teenager', description: 'Teenager (16-17)'},
+      {id: 5, name: 'Senior teen', description: 'Senior teens (18-21)'},
+      {id: 6, name: 'Young adult', description: 'Young adults (22-29)'},
+      {id: 7, name: 'Adult', description: 'Adults (30-39)'},
+      {id: 8, name: 'Senior adult', description: 'Senior adults (40-55)'},
+      {id: 9, name: 'Elderly', description: 'Elderly 56+'}
     ];
 
     this.inAppProductIds = ['pax_tiny_bag', 'pax_small_bag', 'pax_medium_bag'];
