@@ -10,8 +10,6 @@ export class Survey {
   pic1_id: number;
   pic2: string;
   pic2_id: number;
-  minAge: number;
-  maxAge: number;
   age_1: boolean;
   age_2: boolean;
   age_3: boolean;

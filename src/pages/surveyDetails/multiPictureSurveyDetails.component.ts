@@ -15,6 +15,8 @@ import {Analytics} from "../../providers/services/analytics.service";
 export class MultiPictureSurveyDetailsComponent {
   meta: MetaSurvey;
   countries: string[];
+  noAgeRestriction: boolean = true;
+  ageDescription: string;
 
   pictureDetailIds: number[] = [];
 
@@ -28,6 +30,10 @@ export class MultiPictureSurveyDetailsComponent {
               public notificationService: NotificationService,
               public analytics: Analytics) {
     this.meta = navParams.get('multiPictureSurvey');
+    this.noAgeRestriction = this.meta.age_1 && this.meta.age_2 && this.meta.age_3 && this.meta.age_4 && this.meta.age_5 && this.meta.age_6 && this.meta.age_7 && this.meta.age_8 && this.meta.age_9;
+    if(!this.noAgeRestriction) {
+      this.ageDescription = this.getAgeDescription();
+    }
     if(this.meta.countries != 'ALL') {
       this.countries = this.meta.countries.split(",");
     } else {
@@ -80,6 +86,22 @@ export class MultiPictureSurveyDetailsComponent {
     popover.present({
       ev: event
     });
+  }
+
+  getAgeDescription(): string {
+    let first: boolean = true;
+    let desc = '';
+    this.model.ageRanges.forEach(r => {
+      if(this.meta['age_' + r.id]) {
+        if(first) {
+          first = false;
+        } else {
+          desc += ', ';
+        }
+        desc += r.name_plural;
+      }
+    });
+    return desc;
   }
 
   toggleShowDetails(picture: SurveyPicture) {

@@ -15,6 +15,8 @@ import {Analytics} from "../../providers/services/analytics.service";
 export class SurveyDetailsComponent {
   survey: Survey;
   countries: string[];
+  noAgeRestriction: boolean = true;
+  ageDescription: string;
   statisticsExpand: boolean = false;
   summaryExpand: boolean = true;
 
@@ -29,6 +31,10 @@ export class SurveyDetailsComponent {
               public analytics: Analytics) {
     let surveyId = navParams.get('surveyId');
     this.survey = localStorage.getSurveyById(surveyId);
+    this.noAgeRestriction = this.survey.age_1 && this.survey.age_2 && this.survey.age_3 && this.survey.age_4 && this.survey.age_5 && this.survey.age_6 && this.survey.age_7 && this.survey.age_8 && this.survey.age_9;
+    if(!this.noAgeRestriction) {
+      this.ageDescription = this.getAgeDescription();
+    }
     if(this.survey.countries != 'ALL') {
       this.countries = this.survey.countries.split(",");
     } else {
@@ -94,6 +100,34 @@ export class SurveyDetailsComponent {
 
   getTimeDiff() {
     return Util.getTimeDiff(this.survey.startedDate);
+  }
+
+  getAgeDescription(): string {
+    let first: boolean = true;
+    let desc = '';
+    this.model.ageRanges.forEach(r => {
+      if(this.survey['age_' + r.id]) {
+        if(first) {
+          first = false;
+        } else {
+          desc += ', ';
+        }
+        desc += r.name_plural;
+      }
+    });
+    return desc;
+  }
+
+  getAgeName(ageRange: number): string {
+    return '<span class="bold">' + this.model.ageRanges.find(r => r.id == ageRange).description + '</span>';
+  }
+
+  getCountryFlag(alpha3: string): string {
+    return '<img src="assets/img/flags/' + alpha3 + '.png" class="flag larger">';
+  }
+
+  getGenderIcon(gender: string): string {
+    return '<i class="bold fa fa-' + (gender == 'male' ? 'mars' : 'venus') + '"></i>';
   }
 
   hasAnswerOfCountry(country: string): boolean {

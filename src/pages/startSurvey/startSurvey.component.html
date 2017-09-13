@@ -42,9 +42,9 @@
 
     <ion-toolbar color="white">
       <ion-item>
-        <ion-label>Age:</ion-label>
+        <ion-label class="color-black">Age:</ion-label>
         <ion-select [(ngModel)]="selectedAgeRanges" multiple="true" [selectedText]="ageSelectedText()" placeholder="no restriction">
-          <ion-option *ngFor="let range of model.ageRanges" [value]="range">{{range.name}}</ion-option>
+          <ion-option *ngFor="let range of model.ageRanges" [value]="range">{{range.name_plural}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-toolbar>

@@ -130,6 +130,10 @@ ion-badge {
   font-size: 2em;
 }
 
+.bold {
+  font-weight: 600 !important;
+}
+
 .small-headline {
   color: $atp-grey !important;
   font-size: 1.2rem !important;
@@ -260,6 +264,10 @@ ion-card-header.small-headline {
   }
 }
 
+.flex {
+  display: flex;
+}
+
 .flex-space-between {
   display: flex;
   justify-content: space-between;
@@ -318,6 +326,10 @@ ion-card-header.small-headline {
 
 .margin-bottom-middle {
   margin-bottom: 16px;
+}
+
+.margin-left-small {
+  margin-left: 8px;
 }
 
 .margin-right-small {

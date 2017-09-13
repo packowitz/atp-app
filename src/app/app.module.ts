@@ -57,6 +57,7 @@ import {Device} from "@ionic-native/device";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpModule} from "@angular/http";
+import {SafeHtmlPipe} from "../providers/pipes/safeHtml.pipe";
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import {HttpModule} from "@angular/http";
     AgePipe,
     CountryPipe,
     GenderPipe,
+    SafeHtmlPipe,
     SurveyContainsPicturePipe
   ],
   imports: [

@@ -16,6 +16,14 @@
       justify-content: center;
       align-items: center;
     }
+    .survey-item-text-with-title {
+      flex-grow: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 4px;
+      padding-right: 4px;
+    }
     .survey-item-diagram {
       height: 3rem;
       background-color: white;

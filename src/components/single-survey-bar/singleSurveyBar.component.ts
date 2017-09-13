@@ -26,6 +26,8 @@ export class SingleSurveyBar {
   answered: number;
   @Input()
   status: string;
+  @Input()
+  title: string;
 
   constructor(public nav: NavController) {
   }

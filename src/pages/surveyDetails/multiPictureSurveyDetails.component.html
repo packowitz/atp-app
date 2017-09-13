@@ -16,15 +16,17 @@
     </ion-item>
     <ion-item><span>Title:</span> <span [class.text-placeholder]="!meta.title">{{meta.title ? meta.title : 'no title'}}</span></ion-item>
     <ion-item>
-      <div class="flex-space-between">
-        <span>Age: {{meta.minAge}} - {{meta.maxAge}}</span>
-        <span>
-          Gender:
-          <ion-icon name="male" color="atp-blue" *ngIf="meta.male && !(meta.male && meta.female)"></ion-icon>
-          <ion-icon name="female" color="pink" *ngIf="meta.female && !(meta.male && meta.female)"></ion-icon>
-          <ion-icon name="transgender" color="favorite" *ngIf="meta.male && meta.female"></ion-icon>
-        </span>
+      <div class="flex">
+        Age:
+        <span class="margin-left-small text-wrap text-placeholder" *ngIf="noAgeRestriction">no restriction</span>
+        <span class="margin-left-small text-wrap" *ngIf="!noAgeRestriction">{{getAgeDescription()}}</span>
       </div>
+    </ion-item>
+    <ion-item>
+      Gender:
+      <ion-icon name="male" color="atp-blue" *ngIf="meta.male && !(meta.male && meta.female)"></ion-icon>
+      <ion-icon name="female" color="pink" *ngIf="meta.female && !(meta.male && meta.female)"></ion-icon>
+      <ion-icon name="transgender" color="favorite" *ngIf="meta.male && meta.female"></ion-icon>
     </ion-item>
     <ion-item>
       <span item-left>Countries:</span>
