@@ -19,21 +19,37 @@
       <div class="text-wrap">This device is not enabled for receiving push notifications.</div>
     </ion-item>
     <div *ngIf="model.notificationSettings">
-      <ion-item>
+      <ion-item no-lines>
         <ion-label>new ATP I can answer</ion-label>
-        <ion-toggle [(ngModel)]="model.notificationSettings.atpAnswerableEnabled" (ionChange)="submitAtpAnswerable()"></ion-toggle>
+        <ion-toggle [ngModel]="model.notificationSettings.atpAnswerableEnabled" (ionChange)="submitAtpAnswerable()"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label class="color-black">Hours between answer notifications:</ion-label>
+        <ion-select [ngModel]="model.notificationSettings.hoursBetweenAnswerable" (ionChange)="submitTimeBetweenAnswerable()">
+          <ion-option value="0">immediately</ion-option>
+          <ion-option value="1">1 hour</ion-option>
+          <ion-option value="2">2 hours</ion-option>
+          <ion-option value="3">3 hours</ion-option>
+          <ion-option value="4">4 hours</ion-option>
+          <ion-option value="6">6 hours</ion-option>
+          <ion-option value="8">8 hours</ion-option>
+          <ion-option value="10">10 hours</ion-option>
+          <ion-option value="12">12 hours</ion-option>
+          <ion-option value="18">18 hours</ion-option>
+          <ion-option value="24">24 hours</ion-option>
+        </ion-select>
       </ion-item>
       <ion-item>
         <ion-label>my ATP finished</ion-label>
-        <ion-toggle [(ngModel)]="model.notificationSettings.atpFinishedEnabled" (ionChange)="submitAtpFinished()"></ion-toggle>
+        <ion-toggle [ngModel]="model.notificationSettings.atpFinishedEnabled" (ionChange)="submitAtpFinished()"></ion-toggle>
       </ion-item>
       <ion-item>
         <ion-label>new Announcement</ion-label>
-        <ion-toggle [(ngModel)]="model.notificationSettings.announcementEnabled" (ionChange)="submitAnnouncement()"></ion-toggle>
+        <ion-toggle [ngModel]="model.notificationSettings.announcementEnabled" (ionChange)="submitAnnouncement()"></ion-toggle>
       </ion-item>
       <ion-item>
         <ion-label>my Feedback got answered</ion-label>
-        <ion-toggle [(ngModel)]="model.notificationSettings.feedbackEnabled" (ionChange)="submitFeedback()"></ion-toggle>
+        <ion-toggle [ngModel]="model.notificationSettings.feedbackEnabled" (ionChange)="submitFeedback()"></ion-toggle>
       </ion-item>
     </div>
   </ion-list>

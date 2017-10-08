@@ -9,6 +9,10 @@ export class EnabledResponse {
   enabled: boolean;
 }
 
+export class HoursResponse {
+  hours: number;
+}
+
 @Injectable()
 export class SettingsService {
   constructor(public model: Model, public atpHttp: AtpHttp, public device: Device) {
@@ -20,6 +24,14 @@ export class SettingsService {
       enabled: enabled
     };
     return this.atpHttp.doPostBackground("/app/notification/settings/atp-answerable", settings);
+  }
+
+  updateAnswerableBetweenTime(hours: number): Observable<HoursResponse> {
+    let settings = {
+      uuid: this.device.uuid,
+      hours: hours
+    };
+    return this.atpHttp.doPostBackground("/app/notification/settings/atp-answerable/time-between", settings);
   }
 
   updateNotificationAtpFinished(enabled: boolean): Observable<EnabledResponse> {

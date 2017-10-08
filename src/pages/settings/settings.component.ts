@@ -26,6 +26,13 @@ export class SettingsComponent {
     );
   }
 
+  submitTimeBetweenAnswerable() {
+    this.analytics.event("notification_answerable_time_" + this.model.notificationSettings.hoursBetweenAnswerable, {page: "Settings"});
+    this.settingsService.updateAnswerableBetweenTime(this.model.notificationSettings.hoursBetweenAnswerable).subscribe(
+      data => this.model.notificationSettings.hoursBetweenAnswerable = data.hours
+    );
+  }
+
   submitAtpFinished() {
     this.analytics.event("notification_finished_" + this.model.notificationSettings.atpFinishedEnabled ? "enabled" : "disabled", {page: "Settings"});
     this.settingsService.updateNotificationAtpFinished(this.model.notificationSettings.atpFinishedEnabled).subscribe(
