@@ -2,5 +2,7 @@
   "name": "ATP",
   "app_id": "62638589",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }

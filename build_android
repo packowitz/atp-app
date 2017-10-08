@@ -1,5 +1,6 @@
 #!/bin/bash
+rm ATP.apk
 cordova plugin rm cordova-plugin-console
-ionic build android --release --prod --aot --minifyJs --minifyCss --optimizeJs
+ionic cordova build android --release --prod --aot --minifyJs --minifyCss --optimizeJs
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore atp-android-release.keystore platforms/android/build/outputs/apk/android-release-unsigned.apk atp_alias
 ~/Library/Android/sdk/build-tools/25.0.2/zipalign -v 4 platforms/android/build/outputs/apk/android-release-unsigned.apk ATP.apk
