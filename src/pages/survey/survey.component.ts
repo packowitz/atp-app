@@ -84,6 +84,7 @@ export class SurveyComponent {
   animationOver: boolean;
   showSlider: boolean;
   iDontKnowImageIndex: number;
+  rating: number = 0;
 
   constructor(public surveyService: SurveyService,
               public alertController: AlertController,
@@ -116,7 +117,7 @@ export class SurveyComponent {
   selectPicture(picNr: number) {
     if(this.animationOver) {
       this.analytics.event("send_selection_" + picNr, {page: "AnswerAtp"});
-      this.surveyService.postResult(this.survey, picNr).subscribe(data => this.showSurvey(data));
+      this.surveyService.postResult(this.survey, picNr, this.rating).subscribe(data => this.showSurvey(data));
     } else {
       this.analytics.event("too_early_click", {page: "AnswerAtp"});
     }
@@ -134,6 +135,7 @@ export class SurveyComponent {
     this.iDontKnowImageIndex = Math.floor(Math.random() * 3);
 
     this.survey = survey;
+    this.rating = 0;
     if(this.survey.title) {
       this.titleAnimationState = "active";
       this.pic1AnimationState = "incomingWithTitle";

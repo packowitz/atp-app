@@ -30,10 +30,11 @@ export class SurveyService {
     return this.atpHttp.doGet("/app/survey/answerable", "Loading ATP");
   }
 
-  postResult(survey: Survey, result: number): Observable<Survey> {
+  postResult(survey: Survey, result: number, rating: number): Observable<Survey> {
     let resultObj = {
       surveyId: survey.id,
-      answer: result
+      answer: result,
+      rating: rating
     };
     let loadingMessage: string = result == 3 ? "reporting abuse" : Messages.getAnsweredMsg();
     return this.atpHttp.doPost("/app/survey/result", resultObj, loadingMessage);

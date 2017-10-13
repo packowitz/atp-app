@@ -11,17 +11,22 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="light-blue-background">
-  <div *ngIf="survey">
-    <div class="survey-title color-white flex-space-between">
+  <div *ngIf="survey" class="color-white">
+    <div class="survey-title flex-space-between">
       <div [@titleState]="titleAnimationState" class="text-h4 text-center flex-grow">{{survey.title ? survey.title : '&nbsp;'}}</div>
     </div>
-    <div class="enlarge-icons color-white flex-space-between" *ngIf="!showSlider">
-      <i class="fa fa-search-plus" [@buttonState]="buttonAnimationState" (click)="toggleSlider(1)"></i>
+    <div class="enlarge-icons flex-space-between">
+      <i class="fa" [class.fa-search-plus]="!showSlider" [class.fa-search-minus]="showSlider" [@buttonState]="buttonAnimationState" (click)="toggleSlider(1)"></i>
     </div>
     <div *ngIf="!showSlider">
       <div class="picture-container">
         <img [src]="'data:image/jpeg;base64,' + survey.pic1" [@pic1State]="pic1AnimationState" (click)="selectPicture(1)" class="pic"/>
         <img [src]="'data:image/jpeg;base64,' + survey.pic2" [@pic2State]="pic2AnimationState" (click)="selectPicture(2)" class="pic"/>
+      </div>
+      <div class="rating-container text-h4"[@buttonState]="buttonAnimationState">
+        <span>Do you like this ATP?</span>
+        <i class="fa margin-left-middle" [class.fa-thumbs-up]="rating == 1" [class.fa-thumbs-o-up]="rating != 1" (click)="rating = 1"></i>
+        <i class="fa margin-left-middle" [class.fa-thumbs-down]="rating == 2" [class.fa-thumbs-o-down]="rating != 2" (click)="rating = 2"></i>
       </div>
       <div class="button-container" [@buttonState]="buttonAnimationState" (@buttonState.done)="animationDone()">
         <div class="flex-center">
