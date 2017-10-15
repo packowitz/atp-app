@@ -124,7 +124,7 @@ export class AtpHttp {
           }
         };
         let closeBtn = {text: 'OK'};
-        let homeBtn = {text: 'home',handler: () => this.nav.setRoot(LoadingComponent)};
+        let homeBtn = {text: 'home',handler: () => this.nav ? this.nav.setRoot(LoadingComponent) : window.location.reload()};
 
         let body;
         if(err.status != 0) {
