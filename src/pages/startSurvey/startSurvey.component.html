@@ -44,7 +44,7 @@
       <ion-item>
         <ion-label class="color-black">Age:</ion-label>
         <ion-select [(ngModel)]="selectedAgeRanges" multiple="true" [selectedText]="ageSelectedText()" placeholder="no restriction">
-          <ion-option *ngFor="let range of model.ageRanges" [value]="range">{{range.name_plural}}</ion-option>
+          <ion-option *ngFor="let range of model.ageRanges" [value]="range">{{range.description}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-toolbar>
@@ -130,21 +130,5 @@
     <button ion-button full [disabled]="!surveyComplete()" (click)="startSurvey()" class="start-survey-button">
       Start ATP ({{numberOfSurveys * surveyType.costs}}&nbsp;<i class="fa fa-diamond"></i>)
     </button>
-  </div>
-
-  <div [class.modal-background]="croppie" [class.hidden]="!croppie" (click)="destroyCroppie()">
-    <div class="croppie-modal" (click)="$event.stopPropagation()">
-      <div id="new-croppie"></div>
-      <div class="modal-buttons">
-        <button ion-button small outline (click)="destroyCroppie()">Cancel</button>
-        <button ion-button small outline color="dark" icon-only (click)="rotateLeft()">
-          <ion-icon name="undo"></ion-icon>
-        </button>
-        <button ion-button small outline color="dark" icon-only (click)="rotateRight()">
-          <ion-icon name="redo"></ion-icon>
-        </button>
-        <button ion-button small (click)="saveCroppedPicture()">Take it</button>
-      </div>
-    </div>
   </div>
 </ion-content>

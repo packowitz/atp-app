@@ -15,8 +15,6 @@ import {CountrySelectionComponent} from "../countrySelection/countrySelection.co
 import {Analytics} from "../../providers/services/analytics.service";
 import {AgeRange} from "../../providers/domain/ageRange";
 
-declare var Croppie: any;
-
 @Component({
   templateUrl: 'startSurvey.component.html'
 })
@@ -26,7 +24,9 @@ export class StartSurveyComponent {
     sourceType: 1,
     encodingType: 0,
     quality:80,
-    allowEdit: false,
+    allowEdit: true,
+    targetWidth: 300,
+    targetHeight: 300,
     saveToPhotoAlbum: false
   };
 
@@ -36,7 +36,6 @@ export class StartSurveyComponent {
   selectedAgeRanges: AgeRange[] = [];
   exampleText: string;
   pictures: string[];
-  croppie: any;
   numberOfSurveys: number;
 
   constructor(public platform: Platform,
@@ -83,61 +82,12 @@ export class StartSurveyComponent {
     this.survey.female = lastSettings ? lastSettings.female : true;
   }
 
-  showCroppie(src: string) {
-    this.destroyCroppie();
-
-    let size = window.innerWidth * 0.8;
-
-    this.croppie = new Croppie(document.getElementById('new-croppie'), {
-      viewport: {width: 300, height: 300},
-      boundary: {width: size, height: size},
-      enableOrientation: true
-    });
-
-    this.croppie.bind({url: 'data:image/jpeg;base64,' + src});
-  }
-
-  destroyCroppie() {
-    if(this.croppie) {
-      this.croppie.destroy();
-      this.croppie = null;
-    }
-  }
-
-  saveCroppedPicture() {
-    if(this.croppie) {
-      this.croppie.result({
-        type: 'canvas',
-        size: 'viewport',
-        format: 'jpeg',
-        quality: 0.5
-      }).then(data => {
-        this.pictures.push(data.substring(data.indexOf(",") + 1));
-        this.recalculateNumberOfSurveys();
-        this.destroyCroppie();
-      });
-    }
-  }
-
-  rotateLeft() {
-    this.analytics.event("image_rotate_left", {page: "CreateAtp"});
-    if(this.croppie) {
-      this.croppie.rotate(-90);
-    }
-  }
-
-  rotateRight() {
-    this.analytics.event("image_rotate_right", {page: "CreateAtp"});
-    if(this.croppie) {
-      this.croppie.rotate(90);
-    }
-  }
-
   doTakePicture(source: number) {
     this.cameraOptions.sourceType = source;
     this.camera.getPicture(this.cameraOptions).then(data => {
       this.ngZone.run(() => {
-        this.showCroppie(data);
+        this.pictures.push(data.substring(data.indexOf(",") + 1));
+        this.recalculateNumberOfSurveys();
       });
     }, error => {alert(error);});
   }
@@ -178,7 +128,7 @@ export class StartSurveyComponent {
   }
 
   chooseDummyPicture() {
-    this.showCroppie(RandomImage.getRandomImage());
+    this.pictures.push(RandomImage.getRandomImage());
   }
 
   deletePicture(index: number) {
