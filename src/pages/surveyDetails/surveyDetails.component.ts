@@ -98,6 +98,14 @@ export class SurveyDetailsComponent {
     });
   }
 
+  getPositiveRating():number {
+    return this.survey.answers ? this.survey.answers.filter(a => a.rating == 1).length : 0;
+  }
+
+  getNegativeRating():number {
+    return this.survey.answers ? this.survey.answers.filter(a => a.rating == 2).length : 0;
+  }
+
   getTimeDiff() {
     return Util.getTimeDiff(this.survey.startedDate);
   }

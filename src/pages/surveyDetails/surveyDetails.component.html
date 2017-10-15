@@ -48,6 +48,13 @@
         <span class="text-placeholder" *ngIf="countries.length == 0">no restriction</span>
         <span class="country" *ngFor="let country of countries"><img src="assets/img/flags/{{country}}.png" class="flag larger"></span>
       </ion-item>
+      <ion-item>
+        <div class="flex">
+          <span>User rating of <span class="bold">{{getPositiveRating() - getNegativeRating()}}</span>:</span>
+          <span class="padding-left-middle">{{getPositiveRating()}}&nbsp;<i class="fa fa-thumbs-up color-green"></i></span>
+          <span class="padding-left-middle">{{getNegativeRating()}}&nbsp;<i class="fa fa-thumbs-down color-red"></i></span>
+        </div>
+      </ion-item>
     </div>
   </ion-card>
 

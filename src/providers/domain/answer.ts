@@ -5,4 +5,5 @@ export class Answer {
   ageRange: number;
   country: string;
   male: boolean;
+  rating: number;
 }
