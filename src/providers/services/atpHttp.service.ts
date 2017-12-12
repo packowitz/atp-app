@@ -1,20 +1,20 @@
 import {Injectable, ViewChild} from "@angular/core";
 import {Observable} from "rxjs";
-import {Headers, Http} from "@angular/http";
 import {Model} from "./model.service";
 import {NotificationService} from "./notification.service";
 import {AlertController, Alert, NavController} from "ionic-angular";
 import {LocalStorage} from "./localStorage.service";
 import {LoadingState} from "../../pages/loading/loadingState.component";
 import {LoadingComponent} from "../../pages/loading/loading.component";
+import {HttpClient} from "@angular/common/http";
+import {retryWhen, map, switchMap} from "rxjs/operators";
 
 @Injectable()
 export class AtpHttp {
-  public static timeout: number = 15000;
 
   @ViewChild('content') nav: NavController;
 
-  constructor(public http: Http,
+  constructor(public http: HttpClient,
               public model: Model,
               public localStorage: LocalStorage,
               public loadingState: LoadingState,
@@ -22,129 +22,84 @@ export class AtpHttp {
               public alertController: AlertController) {
   }
 
-  doGet(uri: string, loadingMessage: string): Observable<any> {
+  doGet<T>(uri: string, loadingMessage: string): Observable<T> {
     this.notificationService.showLoading(loadingMessage);
-    let headers: Headers = new Headers();
-    if(this.localStorage.getToken()) {
-      headers.append('Authorization', 'Bearer ' + this.localStorage.getToken());
-    }
-    return this.http.get(Model.server + uri, {headers: headers})
-      .timeout(AtpHttp.timeout)
-      .retryWhen(data => this.retryWhen(data, () => this.doGet(uri, loadingMessage)))
-      .map(data => this.handleData(data));
+    return this.http.get<T>(Model.server + uri).pipe(
+      map(data => this.dismissLoading(data)),
+      retryWhen(error => this.retryWhen(error))
+    );
   }
 
-  doGetBackground(uri: string): Observable<any> {
-    let headers: Headers = new Headers();
-    if(this.localStorage.getToken()) {
-      headers.append('Authorization', 'Bearer ' + this.localStorage.getToken());
-    }
-    return this.http.get(Model.server + uri, {headers: headers})
-      .timeout(AtpHttp.timeout)
-      .retryWhen(data => this.retryWhen(data, () => this.doGetBackground(uri)))
-      .map(data => this.handleData(data));
+  doGetBackground<T>(uri: string): Observable<T> {
+    return this.http.get<T>(Model.server + uri).pipe(
+      retryWhen(error => this.retryWhen(error))
+    );
   }
 
-  doPost(uri: string, body: any, loadingMessage: string): Observable<any> {
+  doPost<T>(uri: string, body: any, loadingMessage: string): Observable<T> {
     this.notificationService.showLoading(loadingMessage);
-    let headers: Headers = new Headers();
-    if(this.localStorage.getToken()) {
-      headers.append('Authorization', 'Bearer ' + this.localStorage.getToken());
-    }
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(Model.server + uri, body ? JSON.stringify(body) : null, {headers: headers})
-      .timeout(AtpHttp.timeout)
-      .retryWhen(data => this.retryWhen(data, () => this.doPost(uri, body, loadingMessage)))
-      .map(data => this.handleData(data));
+    return this.http.post<T>(Model.server + uri, body).pipe(
+      map(data => this.dismissLoading(data)),
+      retryWhen(error => this.retryWhen(error))
+    );
   }
 
-  doPostBackground(uri: string, body: any): Observable<any> {
-    let headers: Headers = new Headers();
-    if(this.localStorage.getToken()) {
-      headers.append('Authorization', 'Bearer ' + this.localStorage.getToken());
-    }
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(Model.server + uri, body ? JSON.stringify(body) : null, {headers: headers})
-      .timeout(AtpHttp.timeout)
-      .retryWhen(data => this.retryWhen(data, () => this.doPostBackground(uri, body)))
-      .map(data => this.handleData(data));
+  doPostBackground<T>(uri: string, body: any): Observable<T> {
+    return this.http.post<T>(Model.server + uri, body).pipe(
+      retryWhen(error => this.retryWhen(error))
+    );
   }
 
-  doPut(uri: string, body: any, loadingMessage: string): Observable<any> {
+  doPut<T>(uri: string, body: any, loadingMessage: string): Observable<T> {
     this.notificationService.showLoading(loadingMessage);
-    let headers: Headers = new Headers();
-    if(this.localStorage.getToken()) {
-      headers.append('Authorization', 'Bearer ' + this.localStorage.getToken());
-    }
-    headers.append('Content-Type', 'application/json');
-    return this.http.put(Model.server + uri, body ? JSON.stringify(body) : null, {headers: headers})
-      .timeout(AtpHttp.timeout)
-      .retryWhen(data => this.retryWhen(data, () => this.doPut(uri, body, loadingMessage)))
-      .map(data => this.handleData(data));
+    return this.http.put<T>(Model.server + uri, body).pipe(
+      map(data => this.dismissLoading(data)),
+      retryWhen(error => this.retryWhen(error))
+    );
   }
 
-  doDelete(uri: string, loadingMessage: string): Observable<any> {
+  doDelete<T>(uri: string, loadingMessage: string): Observable<T> {
     this.notificationService.showLoading(loadingMessage);
-    let headers: Headers = new Headers();
-    if(this.localStorage.getToken()) {
-      headers.append('Authorization', 'Bearer ' + this.localStorage.getToken());
-    }
-    return this.http.delete(Model.server + uri, {headers: headers})
-      .timeout(AtpHttp.timeout)
-      .retryWhen(data => this.retryWhen(data, () => this.doDelete(uri, loadingMessage)))
-      .map(() => this.notificationService.dismissLoading());
+    return this.http.delete<T>(Model.server + uri, {responseType: 'text' as 'json'}).pipe(
+      map(data => this.dismissLoading(data)),
+      retryWhen(error => this.retryWhen(error))
+    );
   }
 
-  public handleData(data): Observable<any> {
+  private dismissLoading(data) {
+    console.log(data);
     this.notificationService.dismissLoading();
-    let response = data.json();
-    if(response.user && response.data) {
-      this.model.user = response.user;
-      return response.data;
-    } else {
-      return response;
-    }
+    return data ? data : {};
   }
 
-  public retryWhen(error, retry: Function) {
-    return error.switchMap(err => Observable.create(observer => {
-      //noinspection TypeScriptUnresolvedFunction
+  private retryWhen(error): Observable<any> {
+    return error.pipe(switchMap((err:any) => Observable.create(observer => {
       this.notificationService.dismissLoading().then(() => {
         let title: string, message: string, buttons: any[] = [];
 
-        let retryBtn = {text: 'Retry', handler: () => observer.next(retry())};
+        let retryBtn = {text: 'Retry', handler: () => observer.next()};
         let resetAccountBtn = {
           text: 'Reset account',
           handler: () => {
-            this.localStorage.clearStorage().then(
-            () => {
+            this.localStorage.clearStorage();
             this.loadingState.reset();
             this.nav.setRoot(LoadingComponent);
-          });
           }
         };
         let closeBtn = {text: 'OK'};
-        let homeBtn = {text: 'home',handler: () => this.nav ? this.nav.setRoot(LoadingComponent) : window.location.reload()};
+        let homeBtn = {text: 'home', handler: () => this.nav.setRoot(LoadingComponent)};
 
-        let body;
-        if(err.status != 0) {
-          try {
-            body = JSON.parse(err._body);
-          } catch(e) {
-            console.error(e);
-          }
-        }
-        if(!body) {
-          body = {title: 'Network error', message: 'Please check that you are connected to the internet', showRetryBtn: true}
-        }
-
-        if(body) {
-          title = body.title;
-          message = body.message;
-          if(body.showRetryBtn) {buttons.push(retryBtn)}
-          if(body.showResetAccountBtn) {buttons.push(resetAccountBtn)}
-          if(body.showCloseBtn) {buttons.push(closeBtn)}
-          if(body.showHomeBtn) {buttons.push(homeBtn)}
+        if(err.status == 0) {
+          title = 'Network error';
+          message = 'Please check that you are connected to the internet';
+          buttons.push(retryBtn);
+        } else {
+          title = err.error.title;
+          message = err.error.message;
+          if(err.error.showRetryBtn) {buttons.push(retryBtn)}
+          if(err.error.showResetAccountBtn) {buttons.push(resetAccountBtn)}
+          if(err.error.showCloseBtn) {buttons.push(closeBtn)}
+          if(err.error.showHomeBtn) {buttons.push(homeBtn)}
         }
 
         let alert: Alert = this.alertController.create({
@@ -156,6 +111,6 @@ export class AtpHttp {
 
         alert.present();
       });
-    }));
+    })));
   }
 }

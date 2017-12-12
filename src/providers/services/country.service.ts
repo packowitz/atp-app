@@ -18,7 +18,7 @@ export class CountryService {
     //   return Observable.create(obs => obs.next(JSON.parse(window.localStorage.getItem("countries"))));
     // }
 
-    return this.atpHttp.doGetBackground("/country/list").map(data => {
+    return this.atpHttp.doGetBackground<Country[]>("/country/list").map(data => {
       this.countries = data;
       // window.localStorage.setItem("countries", JSON.stringify(countries));
       return this.countries;

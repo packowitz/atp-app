@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HighscoreUser} from "../domain/highscoreUser";
-import {Observable} from "rxjs/Rx";
+import {Observable} from "rxjs/Observable";
 import {AtpHttp} from "./atpHttp.service";
 
 @Injectable()

@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {AtpHttp} from "./atpHttp.service";
-import {Observable} from "rxjs";
+import {Observable} from "rxjs/Observable";
 import {Reward} from "../domain/reward";
 import {Model} from "./model.service";
 import {User} from "../domain/user";
@@ -16,7 +16,7 @@ export class ShopService {
     }
 
     claimReward(type: string) {
-      this.atpHttp.doPost("/app/reward/claim/" + type, {}, "claiming reward").subscribe(
+      this.atpHttp.doPost<any>("/app/reward/claim/" + type, {}, "claiming reward").subscribe(
         data => {
           this.model.user = data.user;
           this.model.setRewards(data.rewards);

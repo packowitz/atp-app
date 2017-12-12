@@ -23,7 +23,7 @@ export class SurveyService {
 
   postSurvey(survey: Survey, type: string, pictures: string[]): Observable<Survey[]> {
     let request = {survey: survey, type: type, pictures: pictures};
-    return this.atpHttp.doPost("/app/survey/private", request, "Starting ATP");
+    return this.atpHttp.doPost<Survey[]>("/app/survey/private", request, "Starting ATP");
   }
 
   getSurveyToAnswer(): Observable<Survey> {
@@ -37,18 +37,18 @@ export class SurveyService {
       rating: rating
     };
     let loadingMessage: string = result == 3 ? "reporting abuse" : Messages.getAnsweredMsg();
-    return this.atpHttp.doPost("/app/survey/result", resultObj, loadingMessage);
+    return this.atpHttp.doPost<Survey>("/app/survey/result", resultObj, loadingMessage);
   }
 
   getMySurveyIdsBackground(): Observable<IdListWithTimestamp> {
-    return this.atpHttp.doGetBackground("/app/survey/ids");
+    return this.atpHttp.doGetBackground<IdListWithTimestamp>("/app/survey/ids");
   }
 
   getUpdatesForMySurveysSince(timestamp: number, message?: string): Observable<SurveyListWithTimestamp> {
     if(message) {
-      return this.atpHttp.doGet("/app/survey/updates/since/" + timestamp, message);
+      return this.atpHttp.doGet<SurveyListWithTimestamp>("/app/survey/updates/since/" + timestamp, message);
     } else {
-      return this.atpHttp.doGetBackground("/app/survey/updates/since/" + timestamp);
+      return this.atpHttp.doGetBackground<SurveyListWithTimestamp>("/app/survey/updates/since/" + timestamp);
     }
   }
 
@@ -71,11 +71,11 @@ export class SurveyService {
 
   getMySurveysByIds(ids: number[]): Observable<Survey[]> {
     let idString = ids.join(',');
-    return this.atpHttp.doGetBackground("/app/survey/list/byids/" + idString);
+    return this.atpHttp.doGetBackground<Survey[]>("/app/survey/list/byids/" + idString);
   }
 
   loadSurveyDetails(survey: Survey) {
-    this.atpHttp.doGet("/app/survey/details/" + survey.id, "Loading ATP details").subscribe(data => {
+    this.atpHttp.doGet<Survey>("/app/survey/details/" + survey.id, "Loading ATP details").subscribe(data => {
       survey.status = data.status;
       survey.answered = data.answered;
       survey.noOpinionCount = data.noOpinionCount;
@@ -86,10 +86,10 @@ export class SurveyService {
   }
 
   deleteSurvey(survey: Survey): Observable<any> {
-    return this.atpHttp.doDelete("/app/survey/" + survey.id, "Deleting ATP");
+    return this.atpHttp.doDelete<any>("/app/survey/" + survey.id, "Deleting ATP");
   }
 
   deleteSurveyGroup(meta: MetaSurvey): Observable<any> {
-    return this.atpHttp.doDelete("/app/survey/group/" + meta.groupId, "Deleting ATP");
+    return this.atpHttp.doDelete<any>("/app/survey/group/" + meta.groupId, "Deleting ATP");
   }
 }

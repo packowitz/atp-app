@@ -2,7 +2,7 @@ import {AtpHttp} from "./atpHttp.service";
 import {Model} from "./model.service";
 import {Injectable} from "@angular/core";
 import {NotificationSettings} from "../domain/notificationSettings";
-import {Observable} from "rxjs";
+import {Observable} from "rxjs/Observable";
 import {Device} from "@ionic-native/device";
 
 export class EnabledResponse {

@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {User} from "../domain/user";
-import {Observable} from "rxjs";
+import {Observable} from "rxjs/Observable";
 import {AtpHttp} from "./atpHttp.service";
 
 export class RedeemResponse {

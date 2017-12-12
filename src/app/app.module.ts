@@ -56,8 +56,9 @@ import {Network} from "@ionic-native/network";
 import {Device} from "@ionic-native/device";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {HttpModule} from "@angular/http";
 import {SafeHtmlPipe} from "../providers/pipes/safeHtml.pipe";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {JwtTokenInterceptor} from "../providers/interceptors/jwt_token.interceptor";
 
 @NgModule({
   declarations: [
@@ -98,7 +99,7 @@ import {SafeHtmlPipe} from "../providers/pipes/safeHtml.pipe";
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(AtpApp, {
         tabsPlacement: 'bottom',
@@ -156,6 +157,7 @@ import {SafeHtmlPipe} from "../providers/pipes/safeHtml.pipe";
     ConnectivityService,
     Network,
     Device,
+    {provide: HTTP_INTERCEPTORS, useClass: JwtTokenInterceptor, multi: true},
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

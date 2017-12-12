@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Observable} from "rxjs/Rx";
+import {Observable} from "rxjs/Observable";
 import {Feedback} from "../domain/feedback";
 import {FeedbackAnswer} from "../domain/feedbackAnswer";
 import {Announcement} from "../domain/annoucement";
