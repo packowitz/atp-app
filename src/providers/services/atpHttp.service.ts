@@ -25,6 +25,7 @@ export class AtpHttp {
   doGet<T>(uri: string, loadingMessage: string): Observable<T> {
     this.notificationService.showLoading(loadingMessage);
     return this.http.get<T>(Model.server + uri).pipe(
+      map(data => this.extractUser(data)),
       map(data => this.dismissLoading(data)),
       retryWhen(error => this.retryWhen(error))
     );
@@ -32,6 +33,7 @@ export class AtpHttp {
 
   doGetBackground<T>(uri: string): Observable<T> {
     return this.http.get<T>(Model.server + uri).pipe(
+      map(data => this.extractUser(data)),
       retryWhen(error => this.retryWhen(error))
     );
   }
@@ -39,6 +41,7 @@ export class AtpHttp {
   doPost<T>(uri: string, body: any, loadingMessage: string): Observable<T> {
     this.notificationService.showLoading(loadingMessage);
     return this.http.post<T>(Model.server + uri, body).pipe(
+      map(data => this.extractUser(data)),
       map(data => this.dismissLoading(data)),
       retryWhen(error => this.retryWhen(error))
     );
@@ -46,6 +49,7 @@ export class AtpHttp {
 
   doPostBackground<T>(uri: string, body: any): Observable<T> {
     return this.http.post<T>(Model.server + uri, body).pipe(
+      map(data => this.extractUser(data)),
       retryWhen(error => this.retryWhen(error))
     );
   }
@@ -53,6 +57,7 @@ export class AtpHttp {
   doPut<T>(uri: string, body: any, loadingMessage: string): Observable<T> {
     this.notificationService.showLoading(loadingMessage);
     return this.http.put<T>(Model.server + uri, body).pipe(
+      map(data => this.extractUser(data)),
       map(data => this.dismissLoading(data)),
       retryWhen(error => this.retryWhen(error))
     );
@@ -61,9 +66,19 @@ export class AtpHttp {
   doDelete<T>(uri: string, loadingMessage: string): Observable<T> {
     this.notificationService.showLoading(loadingMessage);
     return this.http.delete<T>(Model.server + uri, {responseType: 'text' as 'json'}).pipe(
+      map(data => this.extractUser(data)),
       map(data => this.dismissLoading(data)),
       retryWhen(error => this.retryWhen(error))
     );
+  }
+
+  private extractUser(data) {
+    if(data.user && data.data) {
+      this.model.user = data.user;
+      return data.data;
+    } else {
+      return data;
+    }
   }
 
   private dismissLoading(data) {
